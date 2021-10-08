@@ -1,0 +1,51 @@
+/* component/stepper/stepper.wxss */
+/* @import '../../style/main';
+@import '../../style/checkbox.wxss'; */
+
+.custom-pop-spec {
+    z-index: 99999 !important;
+    /* border-radius: 30rpx 30rpx 0px 0px; */
+}
+
+.spec {
+    position: relative;
+    padding-top: 152rpx;
+    width: 100%;
+    height: calc(100vh - 152rpx);
+    background: var(--background-color);
+}
+.spec .icon-fanhuiiblack {
+    position: absolute;
+    top: 66rpx;
+    left: 30rpx;
+}
+
+.spec .new-form-item-upload-wrap {
+    background-color: #fff;
+}
+.spec .field {
+    width: 100%;
+}
+
+.spec .van-cell {
+    padding: 0;
+}
+.placeholder {
+    color: var(--tip-color-text-88);
+    font-size: 28rpx;
+}
+.text {
+    min-height: 400rpx;
+}
+
+.big-btn {
+    width: 690rpx !important;
+}
+.btn {
+    position: absolute;
+    right: 0;
+    bottom: calc(40rpx + env(safe-area-inset-bottom));
+    left: 0;
+    margin: auto;
+    width: 690rpx !important;
+}

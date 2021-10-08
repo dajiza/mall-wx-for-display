@@ -1,0 +1,514 @@
+/**index.wxss**/
+.home-page {
+    padding-bottom: 0;
+}
+.top-box {
+    position: relative;
+    width: 100%;
+    height: 448rpx;
+    background: var(--primary-gradual-color);
+}
+.top-background {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 276rpx;
+}
+.top-background-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.user-info-box {
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 0;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
+    /*-webkit-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+    /*padding-top: 20rpx;*/
+    /*width: 100%;*/
+    /*height: 232rpx;*/
+    /*transform: translateY(-50%);*/
+    position: absolute;
+    bottom: 190rpx;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 120rpx;
+}
+
+.user-head-img {
+    display: inline-block;
+    margin: 0 20rpx 0 40rpx;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 100%;
+    background: #9a6e3a;
+    vertical-align: bottom;
+}
+
+.user-nick-name {
+    width: 516rpx;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 40rpx;
+    line-height: 56rpx;
+}
+
+/**/
+.content-box {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-top: 40rpx;
+    min-height: calc(100vh - 468rpx);
+    width: 100%;
+    border-radius: 30rpx 30rpx 0px 0px;
+    /*height: 100%;*/
+    background: #ffffff;
+    transform: translateY(-48rpx);
+}
+
+.content-box-radius {
+    position: absolute;
+    top: 2rpx;
+    left: 0;
+    width: 100%;
+    height: 40rpx;
+    border-radius: 30rpx 30rpx 0px 0px;
+    background: #ffffff;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+.my-order-box {
+    position: absolute;
+    bottom: -50rpx;
+    left: 30rpx;
+    box-sizing: border-box;
+    padding: 0 10rpx 0 6rpx;
+    /*padding: 0 40rpx;*/
+    width: 690rpx;
+    height: 188rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+.order-box-wrap {
+    display: flex;
+    /*justify-content: space-between;*/
+    -webkit-box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+.order-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 25%;
+    height: 100%;
+}
+.order-item .img-wrap {
+    position: relative;
+    width: 76rpx;
+    height: 76rpx;
+}
+.order-item .img-wrap .count-box {
+    position: absolute;
+    top: -18rpx;
+    right: -18rpx;
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 100%;
+    background: #fb6060;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20rpx;
+    line-height: 32rpx;
+}
+.order-item .img-wrap .lineHeight22 {
+    /*line-height: 22rpx;*/
+}
+.order-img {
+    display: inline-block;
+    width: 76rpx;
+    height: 76rpx;
+    vertical-align: bottom;
+}
+.order-status-name {
+    margin-top: 10rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.features-list {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 74rpx auto 0;
+    padding: 40rpx;
+    /*padding: 0 40rpx;*/
+    width: 690rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+.features-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60rpx;
+    width: 100%;
+    height: 50rpx;
+}
+.features-item:last-child {
+    margin-bottom: 0;
+}
+
+.features-icon {
+    display: inline-block;
+    width: 50rpx;
+    height: 50rpx;
+    vertical-align: bottom;
+}
+.features-name {
+    margin-left: 16rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 30rpx;
+    line-height: 50rpx;
+}
+
+.features-left {
+    display: flex;
+}
+
+.features-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 20rpx;
+    height: 100%;
+    color: var(--secondary-color-text);
+}
+.features-right .icon-youjiantou {
+    font-size: 24rpx;
+    /*padding-bottom: 20rpx;*/
+}
+
+/*客服按钮*/
+.contact-btn {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+}
+
+/*代理商端页面*/
+.agent-page {
+    box-sizing: border-box;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--background-color);
+}
+.agent-top {
+    position: relative;
+    width: 100%;
+    height: 498rpx;
+}
+.income-box {
+    position: absolute;
+    bottom: 120rpx;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    width: 100%;
+    height: 160rpx;
+}
+.income-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 160rpx;
+    height: 160rpx;
+}
+.income-amount {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 40rpx;
+    font-family: DINAlternate-Bold, DINAlternate;
+    line-height: 48rpx;
+}
+.income-title {
+    margin-top: 12rpx;
+    color: #ffffff;
+    font-weight: 300;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.agent-user-info-box {
+    position: absolute;
+    bottom: 290rpx;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100rpx;
+}
+.head-img {
+    display: inline-block;
+    margin: 0 20rpx 0 40rpx;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+    vertical-align: bottom;
+}
+.user-store-name {
+    width: 516rpx;
+}
+.user-name {
+    height: 56rpx;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 40rpx;
+    line-height: 56rpx;
+}
+.discount-box {
+    display: inline-block;
+    margin-top: 16rpx;
+    padding: 0 10rpx 0 4rpx;
+    height: 36rpx;
+    border-radius: 18rpx;
+    /*background: #FFDEDF;*/
+    background: var(--secondary-color);
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 22rpx;
+    line-height: 36rpx;
+}
+.discount-info {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.discount-text {
+    font-size: 22rpx;
+}
+.member-icon {
+    display: inline-block;
+    margin-right: 8rpx;
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+}
+.store-name {
+    margin-top: 8rpx;
+    height: 36rpx;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.arrow-right {
+    display: flex;
+    align-items: center;
+    padding-left: 8rpx;
+    width: 60rpx;
+    height: 100%;
+    /*justify-content: flex-end;*/
+    color: #ffffff;
+}
+.arrow-right .iconfont {
+    font-weight: 600;
+}
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.agent-features-box {
+    position: absolute;
+    bottom: -80rpx;
+    left: 30rpx;
+    display: flex;
+    justify-content: space-between;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    width: 690rpx;
+    height: 200rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+.agent-features-box .agent-features-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 104rpx;
+    height: 100%;
+}
+.agent-features-box .features-icon {
+    position: relative;
+    width: 92rpx;
+    height: 92rpx;
+    border-radius: 100%;
+}
+.agent-features-box .features-icon .count-box {
+    position: absolute;
+    top: -16rpx;
+    right: -16rpx;
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 100%;
+    background: #fb6060;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20rpx;
+    line-height: 32rpx;
+}
+.agent-features-box .features-icon image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+.agent-features-box .features-title {
+    margin-top: 12rpx;
+    height: 36rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.my-tools {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 104rpx auto 0;
+    padding: 0 40rpx;
+    width: 690rpx;
+    /*height: 482rpx;*/
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+.margin-top12 {
+    margin-top: 24rpx;
+}
+.my-tools-text-box {
+    height: 80rpx;
+    border-bottom: 1rpx solid var(--divider-background-color);
+    color: var(--primary-color-text);
+    text-align: left;
+    font-weight: 600;
+    font-size: 28rpx;
+    line-height: 80rpx;
+}
+.my-tools-lists {
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    padding: 40rpx 0 48rpx;
+    width: 100%;
+}
+.my-service {
+    margin: 24rpx auto 0 !important;
+}
+.tool-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 46rpx;
+    width: 118rpx;
+}
+.tool-item:nth-child(4n) {
+    margin-right: 0;
+}
+.tool-item:nth-child(n + 5) {
+    margin-top: 60rpx;
+}
+.tool-icon {
+    position: relative;
+    width: 68rpx;
+    height: 68rpx;
+}
+.tool-icon image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+.tool-icon .count-value {
+    position: absolute;
+    top: -18rpx;
+    right: -18rpx;
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 100%;
+    background: #fb6060;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20rpx;
+    line-height: 32rpx;
+}
+.tool-title {
+    margin-top: 12rpx;
+    height: 36rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.agent-top-background {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.agent-top-background-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.arc-mask {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 102rpx;
+    font-size: 0;
+}
+.arc-mask image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+.bottom-count {
+    bottom: -30rpx;
+}
+.bottomCount50 {
+    bottom: -50rpx;
+}
+.margin-top74 {
+    margin-top: 74rpx;
+}

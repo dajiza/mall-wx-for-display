@@ -1,0 +1,13 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-radio": "@vant/weapp/radio/index",
+        "van-radio-group": "@vant/weapp/radio-group/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-stepper": "@vant/weapp/stepper/index",
+        "img-preview": "../imgPreview/imgPreview"
+    }
+}

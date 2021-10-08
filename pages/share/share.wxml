@@ -1,0 +1,72 @@
+<!--pages/share/share.wxml-->
+<view class="container">
+    <van-nav-bar placeholder fixed border="{{false}}" z-index="{{11}}" bind:click-left="onPop" custom-style="--padding-md: 0px;">
+        <view slot="left">
+            <icon class="iconfont icon-fanhui" style="font-size: 36rpx; padding: 0 30rpx;" />
+        </view>
+        <view slot="title">
+            <view class="van-nav-bar__title title-class van-ellipsis custom-nav-bat-title">
+                <block>{{type==0?'生成商品海报':'生成店铺海报'}}</block>
+            </view>
+        </view>
+    </van-nav-bar>
+
+    <view class="poster-wrap-box" style="--poster-bottom--:{{166+safeAreaInsetBottom}}rpx; --poster-top--:{{navigateBarHeight}}px">
+        <view class="poster" wx:if="{{type==0}}">
+            <view class="goods-poster-content">
+                <view class="goods-poster-content-image-box" wx:if="{{selectedImg.img.length>0 && selectedImg.index>=0}}">
+                    <image class="poster-content-image" mode="aspectFill" src="{{selectedImg.img}}" wx:if="{{selectedImg.isNative}}" />
+                    <van-image wx:else width="670rpx" height="904rpx" radius="30rpx" lazy-load src="{{selectedImg.img}}" custom-class="goods-poster-content-image-box" />
+                </view>
+            </view>
+        </view>
+        <view class="poster" wx:else>
+            <view class="shop-poster-content">
+                <view class="shop-poster-content-image-box" wx:if="{{selectedImg.img.length>0 && selectedImg.index>=0}}">
+                    <image class="poster-content-image" mode="aspectFill" src="{{selectedImg.img}}" wx:if="{{selectedImg.isNative}}" />
+                    <van-image wx:else width="670rpx" height="800rpx" radius="30rpx" lazy-load src="{{selectedImg.img}}" custom-class="goods-poster-content-image-box" />
+                </view>
+            </view>
+            <view class="scroll-wrap-box" wx:if="{{imgList.length>0}}">
+                <scroll-view scroll-x="true" style="width: {{screenWith-40}}rpx; height: 184rpx;">
+                    <block wx:for="{{imgList}}" wx:key="*this">
+                        <view class="scroll-item" style="width: {{index==imgList.length-1? 192:168}}rpx;">
+                            <image class="item-img {{selectedImg.index==index?'checked':'unchecked'}}" mode="aspectFill" src="{{item.img+'!upyun520/fw/152'}}" catchtap="selectProItem" data-index="{{index}}" wx:if="{{item.isNative}}" />
+                            <van-image
+                                wx:else
+                                width="152rpx"
+                                height="180rpx"
+                                radius="14rpx"
+                                lazy-load
+                                bind:click="selectProItem"
+                                data-index="{{index}}"
+                                src="{{item.img+'!upyun520/fw/152'}}"
+                                custom-class="{{selectedImg.index==index?'checked':'unchecked'}}"
+                            />
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+    <view class="bottom-button-container" style="bottom: {{safeAreaInsetBottom}}rpx;">
+        <button class="bottom-button" hover-class="botton-hover" bindtap="save">
+            <text class="bottom-button-container-label">保存</text>
+        </button>
+    </view>
+</view>
+<van-dialog
+    message="保存海报需要相册访问权限"
+    show="{{ showDeleteConfirmDialog }}"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    confirm-button-open-type="openSetting"
+    bindopensetting="onOpenSetting"
+    confirm-button-text="去授权"
+    show="{{ showSaveImageToPhotosAlbumDialog }}"
+    bind:close="onClose"
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+/>

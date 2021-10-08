@@ -1,0 +1,4 @@
+<!--components/pointsGoodsList/pointsGoodsList.wxml-->
+<view class="list">
+    <points-coupon-item detail="{{item}}" wx:for="{{list}}"></points-coupon-item>
+</view>

@@ -1,0 +1,168 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/cart/cart",
+        "pages/my/my",
+        "pages/category/category",
+        "pages/orderCheck/orderCheck",
+        "pages/goodsDetail/goodsDetail",
+        "pages/refundSubmit/refundSubmit",
+        "pages/refundResult/refundResult",
+        "pages/goodsSearch/goodsSearch",
+        "pages/goodsSearchResult/goodsSearchResult",
+        "pages/address/address",
+        "pages/address/address-edit/address-edit",
+        "pages/login/login",
+        "pages/myOrder/myOrder",
+        "pages/orderDetail/orderDetail",
+        "pages/logisticsInfo/logisticsInfo",
+        "pages/share/share",
+        "pages/paySuccess/paySuccess",
+        "pages/loginPhone/loginPhone",
+        "pages/shopBlank/shopBlank",
+        "pages/mySetting/mySetting",
+        "pages/couponsList/couponsList",
+        "pages/makeUp/makeUp",
+        "pages/inviteReceive/inviteReceive",
+        "pages/freightFree/freightFree",
+        "pages/codeOrder/codeOrder",
+        "pages/imgSearchResult/imgSearchResult",
+        "pages/setName/setName",
+        "pages/teamworkIndex/teamworkIndex",
+        "pages/kankanIndex/kankanIndex"
+    ],
+    "subpackages": [
+        {
+            "root": "packagePoints",
+            "pages": [
+                "blank-page/blank-page",
+                "pointsShopAgent/pointsShopAgent",
+                "addCoupon/addCoupon",
+                "addGoods/addGoods",
+                "couponList/CouponList",
+                "pointsIndex/pointsIndex",
+                "pointsGoodsDetail/pointsGoodsDetail",
+                "pointsGoodsOrderCheck/pointsGoodsOrderCheck",
+                "pointsCouponOrderCheck/pointsCouponOrderCheck",
+                "pointsDetails/pointsDetails",
+                "pointsExchangeRecord/pointsExchangeRecord",
+                "pointsMakeup/pointsMakeup",
+                "redeemOrderDetail/redeemOrderDetail"
+            ]
+        },
+        {
+            "root": "packageAgent",
+            "pages": [
+                "zoom/zoom",
+                "shopInfo/shopInfo",
+                "customerManagement/customerManagement",
+                "statistics/statistics",
+                "incomeDetails/incomeDetails",
+                "goodsManager/goodsManager",
+                "goodsManagerDetail/goodsManagerDetail",
+                "putGoodsOnSale/putGoodsOnSale",
+                "wallet/wallet",
+                "withdraw/withdraw",
+                "article/article",
+                "tool/tool"
+            ]
+        },
+        {
+            "root": "packageTeamwork",
+            "pages": [
+                "createTeamwork/createTeamwork",
+                "introduction/introduction",
+                "signUp/signUp",
+                "signUpSucess/signUpSucess",
+                "teamworkDetail/teamworkDetail",
+                "courseDetail/courseDetail",
+                "coursePublish/coursePublish",
+                "contactCardEdit/contactCardEdit",
+                "contactCardView/contactCardView",
+                "student/student",
+                "circle/circle",
+                "circleDetail/circleDetail",
+                "circleNews/circleNews",
+                "circlePublish/circlePublish",
+                "coursePoster/coursePoster",
+                "txv/txv",
+                "recommend/recommend",
+                "recommendPickout/recommendPickout",
+                "audit/audit",
+                "invite/invite",
+                "signUpSucessInvite/signUpSucessInvite",
+                "signUpSucessUnchecked/signUpSucessUnchecked"
+            ],
+            "plugins": {
+                "tencentvideo": {
+                    "version": "1.4.9",
+                    "provider": "wxa75efa648b60994b"
+                }
+            }
+        },
+        {
+            "root": "packageMainSecondary",
+            "pages": [
+                "test/test",
+                "couponReceive/couponReceive",
+                "favorites/favorites",
+                "commentDetail/commentDetail",
+                "comment/commentList",
+                "shopComment/shopComment",
+                "reviewPublish/reviewPublish",
+                "inviteSend/inviteSend",
+                "drag/drag",
+                "promotionMakeUp/promotionMakeUp",
+                "series/series",
+                "walletPersonal/walletPersonal",
+                "withdrawPersonal/withdrawPersonal"
+            ]
+        },
+        {
+            "root": "packageKanKan",
+            "pages": ["mine/mine", "publish/publish", "material/material", "course/course", "audit/audit", "introduce/introduce", "detail/detail"]
+        }
+    ],
+    "plugins": {
+        "live-player-plugin": {
+            "version": "1.3.1",
+            "provider": "wx2b03c6e691cd7370"
+        }
+    },
+    "tabBar": {
+        "custom": true,
+        "color": "#000000",
+        "selectedColor": "#000000",
+        "backgroundColor": "#000000",
+        "list": [
+            {
+                "pagePath": "pages/index/index"
+            },
+            {
+                "pagePath": "pages/cart/cart"
+            },
+            {
+                "pagePath": "pages/my/my"
+            },
+            {
+                "pagePath": "pages/teamworkIndex/teamworkIndex"
+            },
+            {
+                "pagePath": "pages/kankanIndex/kankanIndex"
+            }
+        ]
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json",
+    "usingComponents": {
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-popup": "@vant/weapp/popup/index"
+    }
+}

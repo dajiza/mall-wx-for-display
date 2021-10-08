@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="49px" viewBox="0 0 49 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>代评价icon</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="19.4222677%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#AACFFF" offset="0%"></stop>
+            <stop stop-color="#49A6FF" offset="99.9890734%"></stop>
+        </linearGradient>
+        <filter x="-48.0%" y="-54.5%" width="196.0%" height="209.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.265834604   0 0 0 0 0.632917302   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="代评价icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="代付款icon">
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="24.5" cy="24.5" r="24.5"></circle>
+            <g id="评价@2x" filter="url(#filter-2)" transform="translate(12.000000, 15.000000)" fill-rule="nonzero">
+                <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="22" height="22"></rect>
+                <path d="M0,1.91304347 C0,0.857618356 0.854749983,0.0015831351 1.91017391,0 L22.9593913,0 C24.0144348,0 24.8695652,0.857043473 24.8695652,1.90730435 L24.8695652,16.9036522 C24.8685117,17.9562173 24.0157818,18.809375 22.9632174,18.8109565 L7.81765218,18.8109565 L1.79347826,21.1008696 C0.803478264,21.4767826 0,20.9286956 0,19.867913 L0,1.91304347 Z" id="形状" fill="#FFFFFF"></path>
+                <path d="M4.7826087,6.2173913 C4.7826087,7.01513044 5.42730435,7.65217391 6.22217391,7.65217391 L18.6473913,7.65217391 C19.4397998,7.65217391 20.0821739,7.00979986 20.0821739,6.21739131 C20.0821739,5.42498276 19.4397998,4.7826087 18.6473913,4.7826087 L6.22217391,4.7826087 C5.4206087,4.7826087 4.7826087,5.4253913 4.7826087,6.2173913 Z" id="路径" fill="#9FCFFF"></path>
+                <path d="M4.7826087,11.9565217 C4.7826087,12.7542609 5.42347826,13.3913044 6.21356521,13.3913044 L14.829913,13.3913044 C15.6104348,13.3913044 16.2608696,12.7485217 16.2608696,11.9565217 C16.2608696,11.1587826 15.62,10.5217391 14.829913,10.5217391 L6.21356521,10.5217391 C5.43304347,10.5217391 4.7826087,11.1645217 4.7826087,11.9565217 Z" id="路径" fill="#9FCFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

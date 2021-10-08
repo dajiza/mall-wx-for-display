@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>删掉</title>
+    <g id="删掉" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <circle id="椭圆形" stroke="#FFFFFF" fill="#F46161" cx="9" cy="9" r="8.5"></circle>
+            <path d="M9,5 C9.55228475,5 10,5.44771525 10,6 L10,8 L12,8 C12.5522847,8 13,8.44771525 13,9 C13,9.55228475 12.5522847,10 12,10 L10,10 L10,12 C10,12.5522847 9.55228475,13 9,13 C8.44771525,13 8,12.5522847 8,12 L8,10 L6,10 C5.44771525,10 5,9.55228475 5,9 C5,8.44771525 5.44771525,8 6,8 L8,8 L8,6 C8,5.44771525 8.44771525,5 9,5 Z" id="合并形状" fill="#FFFFFF" transform="translate(9.000000, 9.000000) rotate(45.000000) translate(-9.000000, -9.000000) "></path>
+        </g>
+    </g>
+</svg>

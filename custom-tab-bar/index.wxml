@@ -1,0 +1,7 @@
+<van-tabbar active="{{ active }}" bind:change="onChange" border="{{false}}" wx:key="tabKay">
+    <van-tabbar-item wx:for="{{ list }}" wx:key="index" dot="{{item.text=='团作'&&noticeShow}}" bind:click="click" data-index="{{index}}">
+        <image slot="icon" src="{{ item.icon }}" mode="aspectFit" style="width: 52rpx; height: 52rpx;" />
+        <image slot="icon-active" src="{{ item.icon_h }}" mode="aspectFit" style="width: 52rpx; height: 52rpx;" />
+        {{item.text}}
+    </van-tabbar-item>
+</van-tabbar>

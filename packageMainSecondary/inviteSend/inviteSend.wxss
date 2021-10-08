@@ -1,0 +1,128 @@
+/* pages/invite/invite.wxss */
+.container {
+    position: relative;
+    /* min-height:auto; */
+    /* padding-bottom: 200rpx; */
+    /* height: calc(100vh - 200rpx); */
+    background-color: #fff;
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+.bg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.bg .bg-img {
+    position: absolute;
+    width: 100%;
+    height: 1952rpx;
+}
+.bg .title-img {
+    position: relative;
+    z-index: 1;
+    margin-top: 100rpx;
+    width: 640rpx;
+    height: 336rpx;
+}
+
+.btn-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 38rpx;
+    width: 100%;
+    height: 580rpx;
+}
+.btn-wrap .btn-img {
+    position: absolute;
+    width: 100%;
+    height: 580rpx;
+}
+.btn-wrap .btn-left {
+    margin-right: 24rpx;
+}
+.btn-wrap .btn {
+    margin-top: 438rpx;
+    width: 240rpx !important;
+    height: 76rpx !important;
+    border-radius: 38rpx !important;
+    background: linear-gradient(180deg, #ff9dc1 0%, #fe648e 100%) !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    font-weight: 400 !important;
+    font-size: 32rpx !important;
+    line-height: 76rpx !important;
+}
+
+.text-wrap {
+    position: relative;
+    margin-top: 46rpx;
+    width: 100%;
+    height: 750rpx;
+}
+.text-wrap .text-img {
+    position: absolute;
+    width: 100%;
+    height: 750rpx;
+}
+.text-wrap .content {
+    position: relative;
+    z-index: 1;
+    margin: 172rpx 0 0 92rpx;
+    width: 556rpx;
+}
+.text-wrap .item {
+    display: flex;
+    margin-bottom: 28rpx;
+}
+.text-wrap .point {
+    flex-shrink: 0;
+    margin-top: 12rpx;
+    margin-right: 16rpx;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 16rpx;
+    background: #fe6992;
+}
+.text-wrap .value {
+    color: #666666;
+    font-size: 28rpx;
+}
+.text-wrap .title {
+    color: #333333;
+    font-weight: 500;
+    font-size: 28rpx;
+}
+
+.pop-custom {
+    background: transparent !important;
+}
+.poster-img {
+    width: 570rpx;
+    height: 800rpx;
+    border-radius: 20rpx;
+}
+.big-btn {
+    /* margin-top: 22rpx !important; */
+    margin-top: 118rpx !important;
+    width: 100% !important;
+}

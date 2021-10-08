@@ -1,0 +1,14 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "订单详情",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#FFFFFF",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "order-goods": "../../components/orderGoodsCopy/orderGoods",
+        "van-button": "@vant/weapp/button/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-count-down": "@vant/weapp/count-down/index"
+    }
+}

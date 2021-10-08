@@ -1,0 +1,65 @@
+<!--components/orderGoods/agentGoods.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="goods-wrap" style="padding: {{paddingStr}}">
+    <view class="goods-box">
+        <slot name="title" class="slot-title"></slot>
+        <view class="goods-info" data-id="{{goods.id}}" catch:tap="handleGoGoodsDetail" data-is-distribution="{{goodsInstance.isDistribution}}">
+            <slot name="checkBox"></slot>
+            <view class="timg" catch:tap="handleGoGoodsDetail" data-is-distribution="{{goodsInstance.isDistribution}}">
+                <image class="fullimg img-radius" mode="aspectFill" src="{{ fn.limitImgSize(goodsInstance.img) }}"></image>
+            </view>
+            <view class="info" catch:tap="handleGoGoodsDetail" data-is-distribution="{{goodsInstance.isDistribution}}">
+                <view class="title {{goodsInstance.isDistribution?'':'stop-distribution'}}">{{ goodsInstance.title }}</view>
+                <view class="price-earnings-sales" wx:if="{{goodsInstance.isDistribution}}">
+                    <view class="price-earnings" wx:if="{{showPrice}}">
+                        <view class="price">
+                            <text class="font-size-12">¥</text>
+                            <text class="font-size-15">{{fn.formatMoney(goodsInstance.price)}}</text>
+                        </view>
+                        <view class="earnings">预估收益￥{{fn.formatMoney(goodsInstance.commission)}}</view>
+                    </view>
+                    <view class="sales" wx:if="{{showSales}}">销量：{{goodsInstance.displaySales}}</view>
+                    <view class="sales" wx:if="{{showInventory}}">库存：{{stockAvailable}}</view>
+                </view>
+                <!--商家已停止分销该商品-->
+                <view class="stop-distribution-tip" wx:if="{{!goodsInstance.isDistribution}}">商家已停止分销该商品</view>
+            </view>
+            <slot name="delete"></slot>
+        </view>
+        <view
+            class="goods-attr"
+            data-id="{{goodsInstance.id}}"
+            wx:if="{{showAttr && goodsInstance.isDistribution}}"
+            catch:tap="handleGoGoodsDetail"
+            data-is-distribution="{{goodsInstance.isDistribution}}"
+        >
+            <view class="attr-item {{goodsInstance.type === 2?'w100':''}}">
+                <text>品牌：{{goodsInstance.attrBrand}}</text>
+            </view>
+            <block wx:if="{{goodsInstance.type === 1}}">
+                <view class="attr-item">
+                    <text>材质：{{goodsInstance.attrMaterial}}</text>
+                </view>
+                <view class="attr-item">
+                    <text>颜色：{{goodsInstance.attrColor}}</text>
+                </view>
+                <view class="attr-item">
+                    <text>产地：{{goodsInstance.attrOrigin}}</text>
+                </view>
+                <view class="attr-item">
+                    <text>花纹：{{goodsInstance.attrPattern}}</text>
+                </view>
+            </block>
+            <block wx:if="{{goodsInstance.type === 3}}">
+                <view class="attr-item">
+                    <text>尺寸：{{goodsInstance.attrSize}}</text>
+                </view>
+                <view class="attr-item">
+                    <text>片数：{{goodsInstance.attrPiece}}</text>
+                </view>
+            </block>
+        </view>
+        <slot name="bottom"></slot>
+    </view>
+</view>

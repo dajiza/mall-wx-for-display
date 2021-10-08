@@ -1,0 +1,316 @@
+<!--pages/my/my.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container home-page">
+    <block wx:if="{{ !isAdmin }}">
+        <view class="agent-page" style="padding-bottom:{{ safeAreaInsetBottom + 120 }}rpx;">
+            <view class="top-box" style="height: {{ topHeight }}">
+                <view class="agent-top-background">
+                    <!-- <image class="agent-top-background-img" src="../../assets/images/myTopBg.png"></image> -->
+                    <!--                    <view style="width: 100%; height: 100%;background: var(&#45;&#45;primary-gradual-color);"></view>-->
+                    <view class="top-background">
+                        <image class="top-background-img" src="../../assets/images/my-background.png"></image>
+                    </view>
+                    <view class="arc-mask">
+                        <image src="../../assets/images/arc-mask.png"></image>
+                    </view>
+                </view>
+                <navigator url="/pages/mySetting/mySetting">
+                    <view class="user-info-box">
+                        <image class="user-head-img" mode="aspectFill" src="{{ userInfo.avatar_url }}"></image>
+                        <view class="user-nick-name">
+                            <view class="user-name text-ellipsis">{{ userInfo.nick_name }}</view>
+                            <view class="discount-box text-ellipsis">
+                                <view class="discount-info">
+                                    <image class="member-icon" src="../../assets/images/memberIcon.png"></image>
+                                    <text class="discount-text" wx:if="{{userInfo.discount_value > 0}}">享{{ userInfo.discount_value / 10 }}折权益</text>
+                                    <text class="discount-text" wx:else>普通用户</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="arrow-right">
+                            <text class="iconfont icon-youjiantou"></text>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="my-order-box">
+                    <view class="order-box-wrap">
+                        <block wx:for="{{ orderStatus }}" wx:for-item="item" wx:key="*this">
+                            <view class="order-item" data-status="{{ item.status }}" bind:tap="goMyOrder">
+                                <view class="img-wrap">
+                                    <image class="order-img" src="{{ item.img_url }}"></image>
+                                    <view class="count-box" wx:if="{{item.count > 0}}">{{item.count > 99 ? '⋯': item.count}}</view>
+                                </view>
+                                <text class="order-status-name">{{ item.name }}</text>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view class="features-list">
+                <view class="features-item" bind:tap="handleFavorites">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/myCollectionIcon.png"></image>
+                        <text class="features-name">我的收藏</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+                <view class="features-item" bind:tap="gotoCoupon">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/coupon.png"></image>
+                        <text class="features-name">优惠券包</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+                <view class="features-item" bind:tap="goPointMall" wx:if="{{shopInfo.tool_points==2}}">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/ic_point.png"></image>
+                        <text class="features-name">积分商城</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+                <view class="features-item" bind:tap="gotoWalletCustomer">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/wallet.png"></image>
+                        <text class="features-name">我的钱包</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="features-list" style="margin-top: 24rpx">
+                <view class="features-item" bind:tap="handleGoAddress">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/shipping-address.png"></image>
+                        <text class="features-name">收货地址</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+                <view class="features-item">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/customer-service.png"></image>
+                        <text class="features-name">客服服务</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                    <button class="contact-btn" type="primary" open-type="contact"></button>
+                </view>
+                <view class="features-item" bind:tap="handleGoSetting">
+                    <view class="features-left">
+                        <image class="features-icon" src="../../assets/images/setting.png"></image>
+                        <text class="features-name">设置中心</text>
+                    </view>
+                    <view class="features-right">
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="agent-page" style="padding-bottom:{{ safeAreaInsetBottom + 120 }}rpx;">
+            <view class="agent-top" style="height: {{ agentTopHeight }}">
+                <view class="agent-top-background">
+                    <!-- <image class="agent-top-background-img" src="../../assets/images/myTopBg.png"></image> -->
+                    <view style="width: 100%; height: 100%;background: var(--primary-gradual-color);"></view>
+                    <view class="arc-mask">
+                        <image src="../../assets/images/arc-mask.png"></image>
+                    </view>
+                </view>
+                <view class="income-box">
+                    <view class="income-item">
+                        <view class="income-amount">{{ ThisMonthMoneyExpected ? fn.formatMoney(ThisMonthMoneyExpected) : "0.00" }}</view>
+                        <view class="income-title">本月收益</view>
+                    </view>
+                    <view class="income-item">
+                        <view class="income-amount">{{ TodayMoneyExpected ? fn.formatMoney(TodayMoneyExpected) : "0.00" }}</view>
+                        <view class="income-title">今日收益</view>
+                    </view>
+                    <view class="income-item">
+                        <view class="income-amount">{{ TodayPaidNum || 0 }}</view>
+                        <view class="income-title">今日订单</view>
+                    </view>
+                    <view class="income-item">
+                        <view class="income-amount">{{ TotalMoney ? fn.formatMoney(TotalMoney) : "0.00" }}</view>
+                        <view class="income-title">累计收益</view>
+                    </view>
+                </view>
+                <navigator url="/packageAgent/shopInfo/shopInfo">
+                    <view class="agent-user-info-box">
+                        <image class="head-img" mode="aspectFill" src="{{ userInfo.avatar_url }}"></image>
+                        <view class="user-store-name">
+                            <view class="user-name text-ellipsis">{{ userInfo.nick_name }}</view>
+                            <view class="store-name text-ellipsis">店铺名称：{{ shopInfo.shop_name }}</view>
+                        </view>
+                        <view class="arrow-right">
+                            <text class="iconfont icon-youjiantou"></text>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="agent-features-box">
+                    <view class="agent-features-item" data-status="{{ 0 }}" bind:tap="goMyOrder">
+                        <view class="features-icon">
+                            <image src="../../assets/images/agentOrderManagement.png"></image>
+                            <view class="count-box" wx:if="{{false}}">{{agentOrderCount > 99 ? '⋯':agentOrderCount}}</view>
+                        </view>
+                        <view class="features-title">订单管理</view>
+                    </view>
+                    <view class="agent-features-item" bind:tap="goGoodsManagement">
+                        <view class="features-icon">
+                            <image src="../../assets/images/agentGoodsManagement.png"></image>
+                        </view>
+                        <view class="features-title">商品管理</view>
+                    </view>
+                    <view class="agent-features-item" bind:tap="handleCommentDetail">
+                        <view class="features-icon">
+                            <image src="../../assets/images/myComment.png"></image>
+                        </view>
+                        <view class="features-title">我的评价</view>
+                    </view>
+                    <view class="agent-features-item" bind:tap="handleFavorites">
+                        <view class="features-icon">
+                            <image src="../../assets/images/myCollection.png"></image>
+                        </view>
+                        <view class="features-title">我的收藏</view>
+                    </view>
+                    <view class="agent-features-item" bind:tap="goIncomeDetails" wx:if="{{false}}">
+                        <view class="features-icon">
+                            <image src="../../assets/images/myComment.png"></image>
+                        </view>
+                        <view class="features-title">我的评价</view>
+                    </view>
+                    <view class="agent-features-item" bind:tap="handleGoMyCollection" wx:if="{{false}}">
+                        <view class="features-icon">
+                            <image src="../../assets/images/myCollection.png"></image>
+                        </view>
+                        <view class="features-title">我的收藏</view>
+                    </view>
+                </view>
+            </view>
+            <view class="my-tools">
+                <view class="my-tools-text-box">我的工具</view>
+                <view class="my-tools-lists">
+                    <view class="tool-item">
+                        <view class="tool-icon" bind:tap="gotoWallet">
+                            <image src="../../assets/images/myPurse.svg"></image>
+                        </view>
+                        <view class="tool-title">我的钱包</view>
+                    </view>
+                    <view class="tool-item" bind:tap="goIncomeDetails">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/agentIncomeBreakdown.svg"></image>
+                        </view>
+                        <view class="tool-title">收益明细</view>
+                    </view>
+                    <view class="tool-item">
+                        <view class="tool-icon" bind:tap="goCustomerManagement">
+                            <image src="../../assets/images/clientManagementIcon.svg"></image>
+                        </view>
+                        <view class="tool-title">客户管理</view>
+                    </view>
+                    <view class="tool-item" bind:tap="shopInfoBtn">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/shopInfo.svg"></image>
+                        </view>
+                        <view class="tool-title">店铺信息</view>
+                    </view>
+                    <view class="tool-item" bind:tap="handlePerformanceRanking">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/performanceRanking.svg"></image>
+                        </view>
+                        <view class="tool-title">业绩排行</view>
+                    </view>
+                    <view class="tool-item" bind:tap="handleSalesStatistics">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/sales_statistics.svg"></image>
+                        </view>
+                        <view class="tool-title">销售统计</view>
+                    </view>
+                    <view class="tool-item" bind:tap="handleTool">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/tool.svg"></image>
+                        </view>
+                        <view class="tool-title">工具管理</view>
+                    </view>
+                    <view class="tool-item" bind:tap="goPointMall" wx:if="{{shopInfo.tool_points==2}}">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/ic_point_mall.png"></image>
+                            <view class="count-value" wx:if="{{pointsNotSandCount > 0}}">{{pointsNotSandCount}}</view>
+                        </view>
+                        <view class="tool-title">积分商城</view>
+                    </view>
+                    <!-- <view class="tool-item" bind:tap="clickUnfinishedBtn">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/verifiedIcon.svg"></image>
+                        </view>
+                        <view class="tool-title">实名认证</view>
+                    </view> -->
+                    <view class="tool-item" wx:if="{{false}}" bind:tap="clickUnfinishedBtn">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/commonProblem.svg"></image>
+                        </view>
+                        <view class="tool-title">常见问题</view>
+                    </view>
+                    <view class="tool-item" wx:if="{{false}}" bind:tap="clickUnfinishedBtn">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/changeSkin.svg"></image>
+                        </view>
+                        <view class="tool-title">更换皮肤</view>
+                    </view>
+                </view>
+            </view>
+            <view class="my-tools margin-top12">
+                <view class="my-tools-text-box">我的服务</view>
+                <view class="my-tools-lists">
+                    <view class="tool-item" bind:tap="handleGoAddress">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/addressManagementIcon.svg"></image>
+                        </view>
+                        <view class="tool-title">地址管理</view>
+                    </view>
+                    <view class="tool-item" bind:tap="shareShop">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/shareShop.svg"></image>
+                        </view>
+                        <view class="tool-title">分享店铺</view>
+                    </view>
+                    <view class="tool-item" bind:tap="gotoCoupon">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/coupon.svg"></image>
+                        </view>
+                        <view class="tool-title">优惠券包</view>
+                    </view>
+                    <view class="tool-item">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/customerService.svg"></image>
+                        </view>
+                        <view class="tool-title">客服服务</view>
+                        <button class="contact-btn" type="primary" open-type="contact"></button>
+                    </view>
+                    <view class="tool-item" wx:if="{{false}}" bind:tap="clickUnfinishedBtn">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/commonProblem.svg"></image>
+                        </view>
+                        <view class="tool-title">常见问题</view>
+                    </view>
+                    <view class="tool-item" wx:if="{{false}}" bind:tap="clickUnfinishedBtn">
+                        <view class="tool-icon">
+                            <image src="../../assets/images/changeSkin.svg"></image>
+                        </view>
+                        <view class="tool-title">更换皮肤</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<authorize-popup id="authorize" />

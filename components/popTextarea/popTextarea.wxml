@@ -1,0 +1,28 @@
+<!-- component/stepper/stepper.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<!-- 主容器 -->
+<van-popup
+    bind:after-enter="onAfterEnter"
+    bind:before-enter="onBeforeEnter"
+    bind:close="close"
+    bind:enter="onEnter"
+    custom-class="custom-pop-spec"
+    custom-style="padding-bottom: {{safeAreaInsetBottom}}px;"
+    position="bottom"
+    show="{{ isShow }}"
+>
+    <view class="spec">
+        <text class="iconfont icon-fanhuiiblack" bindtap="close"></text>
+        <view class="wrap">
+            <view class="new-form-item-upload-wrap">
+                <view class="name">{{title}}</view>
+                <view class="wrap-value">
+                    <textarea value="{{content}}" class="text" bindinput="onChangeValue" auto-height placeholder="{{placeholder}}" placeholder-class="placeholder" />
+                </view>
+            </view>
+        </view>
+        <van-button class="btn" custom-class="big-btn" bind:click="save" round type="primary" size="large">
+            保存
+        </van-button>
+    </view>
+</van-popup>

@@ -1,0 +1,103 @@
+/* components/couponItem/couponItem.wxss */
+.custom-pop-spec {
+    border-radius: 30rpx 30rpx 0px 0px;
+}
+.coupon-pop {
+    position: relative;
+    /* margin-bottom: 24rpx; */
+    max-height: 90vh;
+    width: 100%;
+    height: 1120rpx;
+    /* background: var(--background-color); */
+}
+.coupon-pop .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 30rpx 30rpx 40rpx;
+    width: 100%;
+}
+.coupon-pop .title {
+    display: flex;
+    align-items: baseline;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+.coupon-pop .title .tips {
+    color: var(--tip-color-text-a2);
+    font-weight: 400;
+    font-size: 24rpx;
+}
+.coupon-pop .close {
+    display: flex;
+    justify-content: center;
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 24rpx;
+    background: var(--background-color);
+    line-height: 48rpx;
+}
+.coupon-pop .icon-guanbi {
+    color: var(--tip-color-text-a2);
+    font-size: 20rpx;
+}
+.coupon-pop .van-tabs__line {
+    width: 60rpx !important;
+    height: 8rpx !important;
+    border-radius: 0 !important;
+    background: var(--primary-gradual-color);
+}
+.coupon-pop .van-tab {
+    color: var(--primary-color-text) !important;
+    font-size: 28rpx !important;
+}
+.coupon-pop .van-tab--active {
+    font-weight: 600 !important;
+}
+
+.coupon-pop .empty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.coupon-pop .empty .empty-img {
+    margin-top: 240rpx;
+    margin-bottom: 30rpx;
+    width: 194rpx;
+    height: 200rpx;
+}
+.coupon-pop .empty .text {
+    color: var(--primary-color);
+    font-weight: 400;
+    font-size: 28rpx;
+}
+
+.coupon-pop .scroll {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 22rpx;
+    max-height: calc(90vh - 208rpx - 148rpx);
+    width: 100%;
+    height: 764rpx;
+    background-color: #f3f3f3;
+}
+.coupon-pop .scroll .item {
+    display: flex;
+    justify-content: center;
+}
+.coupon-pop .btn-wrap {
+    width: 100%;
+    height: 148rpx;
+    /* background: #000; */
+    text-align: center;
+}
+.coupon-pop .big-btn {
+    margin-top: 20rpx;
+    width: 90% !important;
+}
+/* .coupon-pop .list {
+    height: 912rpx;
+} */

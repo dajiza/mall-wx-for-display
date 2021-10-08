@@ -1,0 +1,129 @@
+.page {
+    background: #fff;
+}
+
+.container {
+    background: #fff;
+}
+
+.nav {
+    background: #fff;
+    color: #fff;
+}
+
+.title {
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.leftIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+    color: #000;
+    transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+
+.circle-news-page .content-box {
+    box-sizing: border-box;
+    padding: 0 30rpx calc(40rpx + env(safe-area-inset-bottom));
+    width: 100%;
+}
+.circle-news-page .news-item {
+    display: flex;
+    padding: 20rpx 0;
+    width: 100%;
+    border-bottom: 1rpx solid var(--divider-background-color);
+}
+.news-item .news-left {
+    width: 100rpx;
+}
+.news-item .news-left .head-img {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 10rpx;
+}
+.news-item .news-center {
+    margin-left: 16rpx;
+    width: 404rpx;
+}
+.reply-nick-name {
+    width: 100%;
+    height: 40rpx;
+}
+.news-item .news-right {
+    margin-left: auto;
+    width: 130rpx;
+}
+.news-item .news-center .comment-text {
+    margin-top: 10rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.news-item .news-center .fontWeight500 {
+    font-weight: 500;
+    /*font-family: PingFangSC-Medium, PingFang SC;*/
+}
+.ic-zan-wrap {
+    margin-top: 10rpx;
+    width: 36rpx;
+    height: 36rpx;
+}
+.ic-zan-wrap .icon-zan {
+    font-size: 36rpx;
+}
+.news-item .news-center .time-box {
+    height: 34rpx;
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.news-item .news-center .marginTop10 {
+    margin-top: 10rpx;
+}
+.news-item .news-center .marginTop6 {
+    margin-top: 6rpx;
+}
+.news-item .news-right .text-box {
+    width: 130rpx;
+    color: #564b4e;
+    font-weight: 400;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    line-height: 34rpx;
+}
+.news-item .news-right .img {
+    display: block;
+    width: 130rpx;
+    height: 130rpx;
+    vertical-align: bottom;
+}
+
+.video-wrap {
+    position: relative;
+    width: 130rpx;
+    height: 130rpx;
+    background-color: #000;
+}
+.video {
+    position: absolute;
+    z-index: 9;
+    width: 130rpx !important;
+    height: 130rpx !important;
+}
+
+.no-more {
+    padding: 20rpx 0 10rpx;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}

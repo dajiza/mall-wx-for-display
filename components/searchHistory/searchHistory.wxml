@@ -1,0 +1,36 @@
+<!--components/searchHistory/searchHistory.wxml-->
+<view class="content-box">
+    <view class="search-history" wx:if="{{ historyList.length > 0 }}">
+        <view class="search-history-text-delete">
+            <view class="search-history-text">搜索历史</view>
+            <text class="iconfont icon-ashbin" style="color: var(--tip-color-text);" bind:tap="handleDeleteAllSearch"></text>
+        </view>
+        <view class="search-history-list {{ unfoldBtnFlag ? 'searchList-content-unfold' : ''}} {{historyVisible==0?'search-history-list-invisible':''}} {{historyVisible==1?'search-history-list-visible':''}}">
+            <block wx:for="{{ historyList }}" wx:key="index">
+                <view class="search-item" data-value="{{ item }}" bind:tap="handleClickHistory">{{ item }}</view>
+            </block>
+            <!--展开全部-->
+            <view wx:if="{{unfoldBtnFlag && !showAllSearchHistory}}" class="open-close" bind:tap="unfoldList">
+                <text class="iconfont icon-xia"></text>
+            </view>
+            <!--收起-->
+            <view wx:if="{{unfoldBtnFlag && showAllSearchHistory}}" class="open-close" bind:tap="handlePackUp">
+                <text class="iconfont icon-shang"></text>
+            </view>
+        </view>
+    </view>
+</view>
+<van-dialog id="van-dialog" className="delete-dialog" />
+<van-dialog
+    message="确认删除全部历史记录？"
+    show="{{ showDeleteConfirmDialog }}"
+    width="600rpx"
+    z-index="{{1000}}"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+    catchtouchmove="preventTouchMove"
+    bind:close="onDeleteConfirmDialogClose"
+    bind:confirm="onDeleteConfirm"
+/>

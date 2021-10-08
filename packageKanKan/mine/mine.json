@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": false,
+  "backgroundColor": "#f5f5f5",
+  "onReachBottomDistance":100,
+  "usingComponents": {
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

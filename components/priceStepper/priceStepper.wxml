@@ -1,0 +1,35 @@
+<!--components/priceStepper/priceStepper.wxml-->
+<view class="price-stepper {{customClass}}">
+  <view
+  data-type="minus"
+  class="minus-class {{ (disabled || currentValue <= min)?'minus-class-disabled':'' }} stepper--minus"
+  hover-class="{{ (disabled || currentValue <= min)?'':'stepper--minus--hover' }}"
+  hover-stay-time="70"
+  bind:tap="onTap"
+/>
+<view class="input-box"  style="width: {{ inputWidth }};">
+  <view wx:if="{{percentage}}" class="input-suffix">
+    %
+  </view>
+  <view wx:else class="input-prefix">
+    ￥
+  </view>
+  <input
+  type="{{ integer ? 'number' : 'digit' }}"
+  class="input-class {{ (disabled || disableInput)?'input-class-disabled':''}} {{inputCustomClass}}"
+  value="{{ currentValue }}"
+  focus="{{ focus }}"
+  disabled="{{ disabled || disableInput }}"
+  bindinput="onInput"
+  bind:focus="onFocus"
+  bind:blur="onBlur"
+/>
+</view>
+  <view
+    data-type="plus"
+    class="plus-class {{ (disabled || currentValue >= max)?'plus-class-disabled':'' }} stepper--plus"
+    hover-class="{{ (disabled || currentValue >= max)?'':'stepper--plus--hover' }}"
+    hover-stay-time="70"
+    bind:tap="onTap"
+  />
+</view>

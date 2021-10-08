@@ -1,0 +1,196 @@
+page {
+    background: var(--background-color);
+}
+
+.container {
+    background: var(--background-color);
+}
+
+.nav {
+    background: #fff;
+}
+
+.title {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.leftIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+    color: #333333;
+    transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+
+.header-fixed {
+    position: fixed;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+}
+
+.van-tabs--line .van-tabs__wrap,
+.van-tabs__nav {
+    height: 86rpx !important;
+}
+
+.van-tabs__line {
+    width: 52rpx !important;
+    height: 8rpx !important;
+    border-radius: 0 !important;
+    background: var(--primary-gradual-color);
+}
+
+.tabs-rwap {
+}
+
+.van-tab {
+    padding-top: 30rpx !important;
+    color: var(--primary-color-text) !important;
+    font-size: 28rpx !important;
+    line-height: 40rpx !important;
+}
+
+.van-tab--active {
+    font-weight: 600 !important;
+}
+
+.van-tabs--line .van-tabs__wrap {
+    padding-bottom: 14rpx !important;
+}
+
+.van-tabs__scroll--line {
+    height: calc(100% + 14rpx) !important;
+}
+
+.content-wrap {
+    width: 100%;
+}
+
+.list-wrap {
+    box-sizing: border-box;
+    padding: 0 30rpx;
+}
+
+.points-detail-list-wrap {
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+
+.points-detail-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 160rpx;
+}
+
+.points-detail-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.points-detail-label-desc {
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 20px;
+}
+
+.points-detail-label-time {
+    margin-top: 8rpx;
+    color: #b2b2b2;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+
+.coupon-points {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ic-points {
+    width: 36rpx;
+    height: 36rpx;
+}
+
+.points-goods-points {
+    margin-left: 10rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.income {
+    color: #fab001;
+    font-weight: 500;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.points-detail-item .div {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 1rpx;
+    background: var(--divider-background-color);
+}
+
+.empty-list-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--scan-btn-background);
+}
+
+.empty-list-tip {
+    color: var(--scan-btn-background);
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.empty-image-wrap {
+    margin: 0 auto;
+    margin-top: 170rpx;
+    width: 234rpx;
+    height: 254rpx;
+}
+
+.empty-image {
+    margin-left: 32rpx;
+    width: 202rpx;
+    height: 224rpx;
+}
+
+.bottom-loading {
+    width: 100%;
+}
+
+.van-loading {
+    padding: 24rpx 10rpx;
+    width: 100%;
+}
+
+.no-more {
+    box-sizing: border-box;
+    padding: 24rpx 10rpx;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}

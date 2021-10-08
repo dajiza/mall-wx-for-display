@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "授权手机",
+
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-icon": "@vant/weapp/icon/index"
+    }
+}

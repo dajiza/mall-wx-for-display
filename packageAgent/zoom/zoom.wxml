@@ -1,0 +1,46 @@
+<view class="container">
+    <!-- <view class="info1"> <text>x: {{stv.offsetX}}</text>, <text>y: {{stv.offsetY}}</text>, <text>d: {{stv.distance}}</text>, <text>s: {{stv.scale}}</text>, </view>
+    <view class="info2"> <text>left: {{left}}</text>, <text>right: {{right}}</text>, <text>top: {{top}}</text>, <text>width: {{width}}</text>, </view> -->
+
+    <van-icon class="arrow right" name="arrow" bindtap="right" />
+    <van-icon class="arrow left" name="arrow-left" bindtap="left" />
+    <swiper catchtouchmove="{{ true }}" class="swiper" indicator-dots="{{true}}" current="{{ swiperCurrent }}" bindchange="onChangeSwiper">
+        <block wx:for="{{[1,2,3,4,5]}}" wx:key="*this">
+            <swiper-item>
+                <view class="img-wrap" bindtap="imgtap">
+                    <image
+                        id="img{{index}}"
+                        data-index="{{index}}"
+                        class="img"
+                        mode="widthFix"
+                        catchtouchstart="touchstartCallback"
+                        catchtouchmove="touchmoveCallback"
+                        catchtouchend="touchendCallback"
+                        style="transform:translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}});"
+                        src="../../assets/images/share-img.png"
+                    ></image>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+<!--scale.wxml-->
+<!-- <view class="container">
+    <view class="tip">
+        <text>scroll-view子元素缩放</text>
+        <text>说明：双指缩放开发工具上并不支持，需要在真机上进行。 </text>
+    </view>
+    <view class="page-section page-section-spacing swiper">
+        <swiper catchtouchmove="{{ true }}" class="swiper">
+            <block wx:for="[1,2,3,4,5]" wx:key="*this" indicator-dots="{{true}}">
+                <swiper-item>
+                    <scroll-view class="img" bindtouchstart="touchstartCallback" bindtouchmove="touchmoveCallback" bindtouchend="touchendCallback" scroll-x="true" scroll-y="true">
+                        <image style="zoom:{{stv.scale}};" src="https://www.w3school.com.cn/i/eg_tulip.jpg"></image>
+                    </scroll-view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+
+    <view> <text>x: {{stv.offsetX}}</text>, <text>y: {{stv.offsetY}}</text>, <text>d: {{stv.distance}}</text>, <text>s: {{stv.scale}}</text>, </view>
+</view> -->

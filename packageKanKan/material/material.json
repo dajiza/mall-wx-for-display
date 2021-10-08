@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll":true,
+  "onReachBottomDistance": 100,
+  "usingComponents": {
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

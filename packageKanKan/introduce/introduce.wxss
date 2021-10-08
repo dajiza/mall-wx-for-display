@@ -1,0 +1,72 @@
+page {
+  overflow: hidde;
+  box-sizing: border-box;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+.introduce-input-box{
+  width: 690rpx;
+  min-height: 560rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  margin: 20rpx auto;
+  box-sizing: border-box;
+  padding: 40rpx;
+}
+
+.introduce-input-label{
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 36rpx;
+  box-sizing: border-box;
+}
+
+.introduce-content{
+  width: 100%;
+  height: 392rpx;
+  box-sizing: border-box;
+  margin-top: 50rpx;
+  color: var(--primary-color-text);
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+
+.bottom-button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: fixed;
+  background: #F5F5F5;
+  padding-top: 100rpx;
+  bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.botton-hover {
+  opacity: 0.8;
+}
+
+.bottom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 690rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: var(--primary-color-btn);
+  color: #ffffff;
+  line-height: 88rpx;
+  margin-bottom: 40rpx;
+}
+
+.bottom-button-container-label {
+  height: 40rpx;
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}

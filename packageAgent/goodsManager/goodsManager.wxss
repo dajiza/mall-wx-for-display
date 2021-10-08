@@ -1,0 +1,335 @@
+/* pages/goodsManager/goodsManager.wxss */
+page {
+    overflow: hidde;
+    height: 100%;
+}
+
+.nav {
+    background: #fff;
+}
+
+.title {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.container {
+    padding-bottom: 0;
+    /* height: 100%; */
+    background: var(--background-color);
+}
+
+.container-white {
+    background: #ffffff;
+}
+
+.content-header-box {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+}
+
+/*搜索框*/
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 16rpx 30rpx;
+    width: 100%;
+    height: 88rpx;
+    background: #fff;
+}
+
+.search-box .search-bar {
+    position: relative;
+    width: 576rpx;
+    height: 72rpx;
+}
+
+.search-box .search-bar-activity {
+    width: 610rpx;
+}
+
+.search-box .search-bar .search-input-box {
+    width: 100%;
+    height: 100%;
+}
+
+.search-box .search-bar .search-input-box .search-input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 72rpx;
+    width: 100%;
+    height: 100%;
+    border-radius: 36rpx;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--primary-color-text);
+    font-size: 26rpx;
+}
+
+.search-box .icon-glass {
+    position: absolute;
+    top: 16rpx;
+    left: 28rpx;
+    color: var(--secondary-color-text);
+    font-size: 36rpx;
+}
+
+.search-box .close-icon {
+    position: absolute;
+    top: 6rpx;
+    right: 18rpx;
+    padding: 10rpx;
+}
+
+.search-input-placeholder {
+    color: var(--secondary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+}
+
+.filter-nav {
+    position: sticky;
+    z-index: 10;
+    display: flex;
+    margin-top: 20rpx;
+    width: 100%;
+    height: 100rpx;
+    border-radius: 40rpx 40rpx 0 0;
+    background: #fff;
+    box-shadow: 0 -10rpx 20rpx 0 rgba(0, 0, 0, 0.06);
+}
+
+.filter-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20rpx;
+    width: 96rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 28rpx;
+}
+
+.filter-nav-selected {
+    color: var(--features-color-text);
+    font-weight: 500;
+}
+
+.no-selected {
+    color: var(--primary-color-text);
+    font-weight: 400;
+}
+
+/*筛选*/
+.filter-nav-text {
+    width: 66rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.filter-nav-icon {
+    /*height: 74rpx;*/
+    font-size: 30rpx;
+}
+
+.tab-shelves-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0px 0px 30rpx 30rpx;
+    background: #ffffff;
+}
+
+.tab-container {
+    width: 332rpx;
+
+    --border-width-base: 0;
+    --border-radius-sm: 0;
+    --tabs-nav-background-color: transparent;
+}
+
+.van-tabs--line .van-tabs__wrap,
+.van-tabs__nav {
+    height: 94rpx !important;
+}
+
+.van-tabs__line {
+    width: 48rpx !important;
+    height: 8rpx !important;
+    border-radius: 0 !important;
+    background: var(--primary-gradual-color);
+}
+
+.van-tab {
+    color: var(--primary-color-text) !important;
+    font-size: 28rpx !important;
+    line-height: 116rpx !important;
+}
+
+.van-tab--active {
+    font-weight: 600 !important;
+}
+
+.van-tabs--line .van-tabs__wrap {
+    padding-bottom: 22rpx !important;
+}
+
+.van-tabs__scroll--line {
+    height: calc(100% + 22rpx) !important;
+}
+
+.tab-shelves-box .van-button--danger {
+    background: var(--primary-gradual-color) !important;
+}
+
+.custom-btn-shelves {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30rpx;
+    margin-left: 0;
+    width: 216rpx !important;
+    height: 64rpx !important;
+    border-radius: 32rpx !important;
+    background: var(--primary-gradual-color) !important;
+    box-shadow: 0px 4rpx 8rpx 0px rgba(251, 96, 144, 0.4) !important;
+}
+
+.custom-btn-shelves-label {
+    margin-left: 4rpx;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.botton-hover {
+    opacity: 0.8;
+}
+
+.content-body-box {
+    width: 100%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.search-cancel {
+    margin-left: 20rpx;
+    width: 60rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 30rpx;
+    line-height: 42rpx;
+}
+
+/*空列表*/
+.empty-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 160rpx;
+    width: 100%;
+}
+
+.empty-img {
+    display: inline-block;
+    width: 202rpx;
+    height: 224rpx;
+    vertical-align: bottom;
+}
+
+.empty-text {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 40rpx;
+    padding-right: 36rpx;
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 30rpx;
+}
+
+/* agentGoods组件 bottom插槽 */
+.goods-btn-box {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 56rpx;
+    /*padding-bottom: 30rpx;*/
+}
+
+.goods-btn-box .operation-btn {
+    height: 56rpx !important;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 26rpx !important;
+}
+
+.w160 {
+    width: 160rpx !important;
+}
+
+.w128 {
+    width: 128rpx !important;
+}
+
+.goods-btn-box button {
+    margin-left: 24rpx;
+    padding: 0 !important;
+}
+
+.goods-btn-box .van-button--round.van-button--normal {
+    height: 56rpx !important;
+    line-height: 56rpx !important;
+}
+
+.goods-btn-box van-button {
+    display: flex;
+    align-items: center;
+    height: 56rpx !important;
+}
+
+.van-loading {
+    padding: 0 0 24rpx 10rpx;
+    width: 100%;
+}
+
+.no-more {
+    box-sizing: border-box;
+    padding: 0 0 24rpx 10rpx;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}
+
+.dialog-index--van-dialog__cancel {
+    width: 100% !important;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.dialog-index--van-dialog__confirm {
+    width: 100% !important;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.van-dialog__message {
+    color: var(--primary-color-text);
+    font-weight: 500;
+
+    --dialog-message-font-size: 32rpx;
+    --dialog-message-line-height: 44rpx;
+}

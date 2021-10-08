@@ -1,0 +1,10 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "川小布，什么布都有",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-button": "@vant/weapp/button/index"
+    }
+}

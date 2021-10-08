@@ -1,0 +1,92 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="学员管理" border="{{false}}" custom-class="nav" title-class="title">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <view class="header-fixed" style="top: {{navHeight}}">
+    <view class="search-box">
+      <view class="search-bar">
+        <input class="search-input" value="{{ searchValue }}" placeholder-class="search-input-placeholder"
+          placeholder="真实姓名、微信名、手机号" confirm-type="search" bindinput="bindSearchInput" bindconfirm="handleOnSearch" />
+        <text class="iconfont icon-glass"></text>
+        <van-icon class="close-icon" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch"
+          wx:if="{{searchValue}}" />
+      </view>
+    </view>
+    <view>
+      <van-tabs swipe-threshold="{{7}}" bind:change="onTabChange">
+        <van-tab title="全部"></van-tab>
+        <van-tab title="禁言"></van-tab>
+      </van-tabs>
+    </view>
+  </view>
+  <view class="student-list">
+    <view style="height:240rpx;background:var(--background-color);"></view>
+    <view wx:for="{{list}}" wx:key="id" class="student-item-box">
+      <view class="student-item">
+        <view class="student-avatar-box">
+          <van-image fit="cover" width="120rpx" height="120rpx" lazy-load radius="60rpx" src="{{item.avatar}}" />
+        </view>
+        <view class="student-content-box">
+          <view class="student-name-box">
+            <view class="student-name-and-status">
+              <view class="student-name text-ellipsis">{{item.name}}</view>
+              <view class="student-status-task" wx:if="{{item.submit_task==2}}">作业</view>
+              <view class="student-status-money" wx:if="{{item.deposit_state==3 || item.deposit_state==5}}">已退押金</view>
+            </view>
+            <view class="student-nickName text-ellipsis">{{item.nickName}}</view>
+            <view class="phone-box">
+              <view>{{item.phone}}</view>
+              <button class="contact-way-item-button" hover-class="botton-hover" bindtap="handlePhoneCopy" data-index="{{index}}">
+                <text>复制</text>
+              </button>
+            </view>
+          </view>
+          <view class="right-content-wrap {{hideMoney?'justify-content-center':''}}">
+            <button class="mute-btn" hover-class="botton-hover" bindtap="showMutePopup" data-index="{{index}}">
+              <text>{{item.is_banned==1?'禁言':'取消禁言'}}</text>
+            </button>
+            <view class="really-pay-amount" wx:if="{{!hideMoney}}">实付：￥{{fn.formatMoney(item.money)}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="dividing"></view>
+    </view>
+    <van-loading class="bottom-loading" size="36rpx" text-size="24rpx" wx:if="{{list.length > 0 && bottomLoadingShow}}">
+      加载中...</van-loading>
+    <view class="no-more" wx:if="{{list.length > 10 && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～</view>
+
+    <view class="empty-list-box" wx:if="{{list.length==0 && initialize}}"
+      style="height: calc(100vh - {{statusBarHeight+46}}px - 240rpx);">
+      <view class="empty-list-tip" wx:if="{{showShare}}">还没有学员报名哦</view>
+      <view class="empty-list-tip" wx:if="{{showShare}}">分享团作让更多人看到吧~</view>
+      <van-button round type="primary" custom-class="share-button" bindtap="handleShare" wx:if="{{showShare}}">分享团作
+      </van-button>
+      <view class="empty-list-tip" style="padding-top: 200rpx;" wx:if="{{!showShare}}">还没有学员被禁言哦</view>
+    </view>
+  </view>
+</view>
+<van-dialog use-slot show="{{ showMuteDialog }}" show-cancel-button custom-style="--dialog-border-radius: 16rpx;"
+  confirm-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+  cancel-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+  close-on-click-overlay="{{false}}" bind:confirm="handleOnMuteConfirm" bind:cancel="handleOnMuteCancel"
+  asyncClose="{{true}}">
+  <view class="dialog-content-box">
+    <view class="content-label">类型</view>
+    <view class="mute-type-box">
+      <view class="{{muteType==1?'mute-type-active':'mute-type-normal'}}" bindtap="changeMuteType" data-type="1"
+        style="margin-right: 40rpx;">永久禁言</view>
+      <view class="{{muteType==1?'mute-type-normal':'mute-type-active'}}" bindtap="changeMuteType" data-type="2">择期禁言
+      </view>
+    </view>
+    <view class="content-label">时间</view>
+    <view class="mute-expire-input-box">
+      <input class="mute-expire-input" placeholder-class="mute-expire-input-placeholder"
+        value="{{muteType==1?'永久':muteDay}}" placeholder="{{muteType==1?'':'请输入天数'}}" bindinput="handleOnMuteDayInput"
+        disabled="{{muteType==1}}" type="number" />
+      <view class="content-label" style="margin-top:0px;margin-right:20rpx;" wx:if="{{muteType!=1}}">天</view>
+    </view>
+  </view>
+</van-dialog>

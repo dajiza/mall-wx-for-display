@@ -1,0 +1,148 @@
+/* pages/orderCheck/orderCheck.wxss */
+.container {
+    padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+    background-color: var(--background-color);
+}
+.wrap {
+    width: 100%;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+.column {
+    box-sizing: border-box;
+    margin-top: 30rpx;
+    padding: 0 30rpx;
+    width: 100%;
+    background: #ffffff;
+}
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 130rpx;
+    font-size: 30rpx;
+    line-height: 130rpx;
+}
+
+.container .btn-wrap {
+    position: fixed;
+    right: 0;
+    bottom: calc(40rpx + env(safe-area-inset-bottom));
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 690rpx;
+}
+.container .big-btn {
+    width: 690rpx !important;
+}
+
+/* upload */
+/* .van-uploader {
+    margin-top: -20rpx;
+}
+.van-uploader .van-uploader__upload {
+    overflow: hidden;
+    margin-top: 20rpx;
+    width: 216rpx !important;
+    height: 216rpx !important;
+    border: 2rpx solid var(--tip-color-text-d8);
+    background-color: #fff;
+}
+.van-uploader .van-uploader__upload-text {
+    color: var(--tip-color-text);
+    font-size: 20rpx;
+}
+.van-uploader .van-uploader__preview .van-uploader__preview-delete {
+    padding: 0;
+    width: 40rpx;
+    height: 40rpx;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAADhUlEQVRYR82YTWhUVxTHf2feZF4SpxChwY0pJG4MFIRCDLSaVbViVy4qLd2okKSFVGcjbkwWiRtxM9iATQLqoqXFLlxVbO1KqxClRaGQLopC40ZSMFBN5mU+TjmT96aTcWZeRlK4d/Vm3nnn/u7/nHvuh9BiU9Ve4ANgH9APvAW8Ebr5B/gLWAB+AX4UkSetdCGbMVZVD/gIGAPeBTb1HaDAPWAa+F5EinH9xTpW1feBL4Hd5kxzOQqPHlFaWKC0uEhpaQlWV9f76egg0d1NoqeHRH8/yT17kPb2iOEP4AsR+bkZVEMgVTVPWWDEFCk9e0b+xg0K8/OwthY30PX3qRTJwUHaDh8msWNHeTzALJARkVw9J3WBVLUb+AEY0HyetevXKdy6BcVYxeuDeh7JAwdIHTmCtLWZzQPgQxFZqv3gFaAQ5raFqLS8TDA9Tenx480pEmOV6OvDHxsj0dVllhbCoVqoDUBhmAxmoLi4SJDNos+fbwlM5ES2b8fPZPB6eiKlDKoSvlqgr4BRUyY3NbXlMNVQ7ePjkVIzIvJZ5V30EM6mnzSfl9z581sWpkbyWvjaz5yxnLJEPxjNvrJCYZ353fImuHaNws2bWxqmRs6Shw7hHz0a5dPbVqcioI+Bb21qr549+/qzqdVheB4d585FJeETEfkuArIy/15w5QqFO3di3crOnejyMrx4Ud82nUa6utCnT2N9Jffvxz9+3Ozuisg+UdU+4E/N5WQlk4ktev6pU+UKrEFAcPkyxQdWUv5r3sAA/okTiO9TePiQ4OLF5lCpFJ3ZrFV0y6VdBmQZfik/P8/azEzTj02ZzsnJio0WiwRzcxTv3y//5+3diz88jHi29K23lYmJWKVSo6O0DQ6a+ecG9DXwaXD1KoXbVoKatHSazgsXyqOvzM4Qyn7XwpiKK6dPNw5t6CQ5NIR/7Jj9+saAfgXeWZ2aovQkfqdQDsnIyAYVTClr1cqU1ZudfSWk9Yab6O2lY3zcXv1mQLaevPny5MnYkUTO6oWmuqPaUDaXHUin2baea38bkJVt/+XwcEvTvRFUyzDl5PPYNjdnT4GTQM6FzLmkdm7aO1cY3Vo6bK6pqjuLawjk3PbDVkN3NmihSnYgdGMLW1m5Vd3Z5Icq2WnVnWNQCGWnVjcOilWhc+coXQXlzmXDhs2WK9cxNVDuXFjVbj/DY9PB/+tK71/HN3nZ4RzkQgAAAABJRU5ErkJggg==);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.van-uploader .van-uploader__preview .van-uploader__preview-delete:after {
+    background-color: transparent;
+}
+.van-uploader .van-uploader__preview .van-uploader__preview-delete .van-uploader__preview-delete-icon {
+    display: none;
+}
+.van-uploader .van-uploader__preview {
+    overflow: hidden;
+    margin: 0 2rpx 0 0;
+    padding: 20rpx 20rpx 0 0;
+}
+.van-uploader .van-uploader__preview image {
+    width: 216rpx !important;
+    height: 216rpx !important;
+}
+.van-uploader .van-uploader__preview:last-child {
+    margin-right: 0rpx;
+} */
+.tips {
+    margin: 30rpx 30rpx 0rpx 0;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.check {
+    margin-left: 40rpx;
+    width: 76rpx;
+    height: 48rpx;
+    border-radius: 8rpx;
+    background: #ffffff;
+    box-shadow: 0px 0px 8rpx 0px rgba(0, 0, 0, 0.15);
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 26rpx;
+    line-height: 48rpx;
+}
+.input-invite {
+    margin-left: auto;
+}
+.check-status {
+    margin-left: 20rpx;
+    width: 28rpx;
+    height: 28rpx;
+}
+.check-name {
+    display: flex;
+    align-items: center;
+}
+
+.pay-tips {
+    margin: 20rpx 0 0 66rpx;
+    color: var(--tip-color-text);
+    font-size: 24rpx;
+    line-height: 38rpx;
+}
+/* .upload-slot {
+    margin-top: 20rpx;
+    width: 216rpx;
+    height: 216rpx;
+    border-radius: 4rpx;
+    background: rgba(0, 0, 0, 0.04);
+    text-align: center;
+    line-height: 216rpx;
+}
+.upload-slot .icon-plus {
+    color: #968f91;
+    font-size: 54rpx;
+} */

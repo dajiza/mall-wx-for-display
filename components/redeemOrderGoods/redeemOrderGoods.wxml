@@ -1,0 +1,17 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="goods-info">
+  <view class="img-box">
+    <van-image custom-class="goods-img" fit="cover" width="128rpx" height="128rpx" radius="16rpx" lazy-load src="{{img}}" />
+    <!--<image class="goods-img" mode="aspectFill" src="{{ sku_img }}"></image>-->
+  </view>
+  <view class="text-box">
+    <view class="goods-title text-overflow-2">{{title}}</view>
+    <view class="text-box-bottom-wrap">
+      <view class="point-box">
+        <image class="point-icon" mode="aspectFill" src="/packagePoints/static/icon_point.png"></image>
+        <text class="point-value">{{point}}</text>
+      </view>
+      <view class="count-box">X{{count}}</view>
+    </view>
+  </view>
+</view>

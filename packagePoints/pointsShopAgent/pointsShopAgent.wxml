@@ -1,0 +1,210 @@
+<view class="container" style="padding-bottom: 0px;">
+    <van-nav-bar fixed placeholder title="积分商城" border="{{false}}" custom-class="nav" title-class="title" z-index="{{ 21 }}">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="header-fixed" style="top: {{navHeight}}">
+        <!--<van-tabs swipe-threshold="{{7}}" bind:change="onTabChange">
+      <van-tab title="商品">
+        <view class="list-tab-wrap">
+          <view class="{{subActiveIndexs[0]==1?'list-tab-normal':'list-tab-active'}}" catchtap="onGoodsTabChange"
+            data-index="{{0}}">
+            <view>{{tabGoodsSubType[0] == 0?'商品(已上架)':'商品(已下架)'}}</view>
+            <text class="iconfont icon-xia tab-drop-down" bindtap="showGoodsDropdown" data-index="{{0}}"></text>
+          </view>
+          <view class="{{subActiveIndexs[0]==0?'list-tab-normal':'list-tab-active'}}" style="margin-left: 20rpx;"
+            catchtap="onGoodsTabChange" data-index="{{1}}">
+            <view>{{tabGoodsSubType[1] == 0?'优惠券(已上架)':'优惠券(已下架)'}}</view>
+            <text class="iconfont icon-xia tab-drop-down" bindtap="showGoodsDropdown" data-index="{{1}}"></text>
+          </view>
+        </view>
+      </van-tab>
+      <van-tab title="兑换订单">
+        <view class="list-tab-wrap">
+          <view class="{{subActiveIndexs[1]==1?'list-tab-normal':'list-tab-active'}}" catchtap="onOrderTabChange"
+            data-index="{{0}}">
+            <view>未发货{{notShippedCount>0?'('+notShippedCount+')':''}}</view>
+          </view>
+          <view class="{{subActiveIndexs[1]==0?'list-tab-normal':'list-tab-active'}}" style="margin-left: 20rpx;"
+            catchtap="onOrderTabChange" data-index="{{1}}">
+            <view>已发货</view>
+          </view>
+        </view>
+      </van-tab>
+    </van-tabs>-->
+        <view class="tabs-wrap">
+            <text class="tabs-item tabs-goods {{activeIndex==0?'tabs-active':''}}">商品</text>
+            <text class="tabs-item tabs-orders {{activeIndex==1?'tabs-active':''}}">兑换订单</text>
+            <view class="order-num" wx:if="{{notShippedCount > 0}}">{{notShippedCount}}</view>
+            <view class="line {{activeIndex==1?'order-active':''}}"></view>
+            <view class="click-wrap">
+                <view class="click-item" data-index="{{0}}" catch:tap="tabsChange"></view>
+                <view class="click-item" data-index="{{1}}" catch:tap="tabsChange"></view>
+            </view>
+        </view>
+        <view class="list-tab-wrap">
+            <block wx:if="{{activeIndex==0}}">
+                <view class="{{subActiveIndexs[0]==1?'list-tab-normal':'list-tab-active'}}" catchtap="onGoodsTabChange" data-index="{{0}}">
+                    <view>{{tabGoodsSubType[0] == 0?'商品(已上架)':'商品(已下架)'}}</view>
+                    <text class="iconfont icon-xia tab-drop-down" bindtap="showGoodsDropdown" data-index="{{0}}"></text>
+                </view>
+                <view class="{{subActiveIndexs[0]==0?'list-tab-normal':'list-tab-active'}}" style="margin-left: 20rpx;" catchtap="onGoodsTabChange" data-index="{{1}}">
+                    <view>{{tabGoodsSubType[1] == 0?'优惠券(已上架)':'优惠券(已下架)'}}</view>
+                    <text class="iconfont icon-xia tab-drop-down" bindtap="showGoodsDropdown" data-index="{{1}}"></text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="{{subActiveIndexs[1]==1?'list-tab-normal':'list-tab-active'}}" catchtap="onOrderTabChange" data-index="{{0}}">
+                    <view>未发货{{notShippedCount>0?'('+notShippedCount+')':''}}</view>
+                </view>
+                <view class="{{subActiveIndexs[1]==0?'list-tab-normal':'list-tab-active'}}" style="margin-left: 20rpx;" catchtap="onOrderTabChange" data-index="{{1}}">
+                    <view>已发货</view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="content-wrap" style="min-height: calc(100vh - {{navHeight}});">
+        <!-- 商品分页 -->
+        <view class="tab-goods-page {{activeIndex==1?'list-tab-page-hide':''}}" style="min-height: calc(100% - {{160+safeAreaInsetBottom}}rpx);">
+            <view style="width: 100%;height: 228rpx"></view>
+            <view style="width: 100%;">
+                <!-- 列表(商品/优惠券) -->
+                <view
+                    class="list-wrap {{subActiveIndexs[0]==0?'list-wrap-grid':'list-wrap-column'}}"
+                    wx:if="{{tabGoodsList!=null && tabGoodsList.length >0}}"
+                    style="padding-bottom:{{160+safeAreaInsetBottom}}rpx;"
+                >
+                    <view wx:key="id" wx:for="{{tabGoodsList}}">
+                        <view wx:if="{{subActiveIndexs[0]==0}}" class="list-item-grid" catchtap="HandleClickItem" data-index="{{index}}">
+                            <view style="width: 330rpx; height: 330rpx;">
+                                <van-image image-class="points-goods-img" fit="cover" width="330rpx" height="330rpx" lazy-load src="{{item.imgUrl}}" />
+                            </view>
+                            <view class="points-goods-name">{{item.goodsName}}</view>
+                            <view class="points-goods-price-wrap">
+                                <view class="points-goods-price">{{item.price}}</view>
+                                <view class="points-goods-points-wrap">
+                                    <image class="ic-points" src="../static/ic_points.svg"></image>
+                                    <view class="points-goods-points">{{item.points}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view wx:else class="coupon-item" catchtap="HandleClickItem" data-index="{{index}}">
+                            <image class="coupon-item-bg" src="../static/coupon-points.png" />
+                            <view style=" z-index: 1;position: relative;display: flex;align-items: center;">
+                                <view class="coupon-label">
+                                    <view class="coupon-label-price-wrap">
+                                        <view class="coupon-label-price-unit" wx:if="{{item.type==1}}">￥</view>
+                                        <view class="coupon-label-price" wx:if="{{item.type==1}}">{{item.couponAmount}}</view>
+                                        <view class="coupon-label-price" wx:if="{{item.type!=1}}">{{item.couponAmount}}</view>
+                                        <view class="coupon-label-price-unit" style="font-size:32rpx" wx:if="{{item.type!=1}}">折</view>
+                                    </view>
+                                    <view class="coupon-label-limit" wx:if="{{item.withAmount.length>0 && item.withAmount!='0'}}"> 满{{item.withAmount}}元可用</view>
+                                    <view class="coupon-label-limit" wx:else>无门槛</view>
+                                </view>
+                                <view class="coupon-content">
+                                    <view class="coupon-content-tip">{{item.type ==1?'满减优惠券':'折扣优惠券'}}</view>
+                                    <view class="coupon-content-second-tip" style="margin-top:20rpx;" wx:if="{{item.useGoodsTypeStr.length>0}}">{{item.useGoodsTypeStr}}</view>
+                                    <view class="coupon-content-second-tip" style="margin-top:8rpx;">{{item.valid}}</view>
+                                </view>
+                                <view class="coupon-points">
+                                    <image class="ic-points" src="../static/ic_points.svg"></image>
+                                    <view class="points-goods-points">{{item.couponPoints}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <van-loading class="bottom-loading" size="36rpx" text-size="24rpx" wx:if="{{tabGoodsList.length > 0 && bottomLoadingShow[0]}}"> 加载中...</van-loading>
+                    <view class="no-more" wx:if="{{tabGoodsList.length > 10 && isAllLoaded[0] && !bottomLoadingShow[0]}}">人家也是有底线的～</view>
+                </view>
+                <!-- 缺省 -->
+                <view class="empty-list-box" wx:if="{{(tabGoodsList!=null && tabGoodsList.length==0) && loaded}}">
+                    <view class="empty-image-wrap">
+                        <image class="empty-image" src="/assets/images/icon_list_empty.png" wx:if="{{subActiveIndexs[activeIndex]==0}}"></image>
+                        <image class="empty-image" style="margin-left:0px;" src="/assets/images/coupon-empty.png" wx:else></image>
+                    </view>
+                    <view class="empty-list-tip"> {{subActiveIndexs[activeIndex]==0?'暂无商品，快去新增吧~':'暂无优惠券，快去新增吧~'}}</view>
+                </view>
+                <!-- 新增 -->
+                <view
+                    class="bottom-button-container"
+                    style="padding-bottom:{{(40+safeAreaInsetBottom)+''}}rpx;padding-top: 32rpx;background: {{tabGoodsList.length>0?'#ffffff':'var(--divider-border-color)'}};"
+                >
+                    <button class="bottom-button" hover-class="botton-hover" bindtap="handleAdd">
+                        <text class="bottom-button-container-label">新增</text>
+                    </button>
+                </view>
+            </view>
+        </view>
+        <!-- 兑换订单分页 -->
+        <view class="tab-order-page {{activeIndex==0?'list-tab-page-hide':''}}" style="min-height: calc(100% - {{safeAreaInsetBottom}}rpx);">
+            <view style="width: 100%;height: 228rpx"></view>
+            <view style="width: 100%;">
+                <!-- 列表 -->
+                <view
+                    class="list-wrap list-wrap-column"
+                    style="padding-bottom:{{safeAreaInsetBottom}}rpx;padding-left: 0rpx;padding-right: 0rpx;"
+                    wx:if="{{tabOrderList!=null && tabOrderList.length>0}}"
+                >
+                    <view class="order-list-item" wx:for="{{tabOrderList}}" wx:key="id" catchtap="HandleClickItem" data-index="{{index}}">
+                        <view class="order-list-user" wx:if="{{subActiveIndexs[activeIndex]==0}}">客户名：{{item.userName}}</view>
+                        <view class="order-list-div" wx:if="{{subActiveIndexs[activeIndex]==0}}"></view>
+                        <view class="order-detail-wrap">
+                            <view class="order-detail" wx:for="{{item.detail}}" wx:for-item="detailItem" wx:key="detailId">
+                                <view style="width: 128rpx; height: 128rpx;">
+                                    <van-image fit="cover" width="128rpx" height="128rpx" lazy-load src="{{detailItem.imgUrl}}" radius="16rpx" />
+                                </view>
+                                <view class="order-detail-content">
+                                    <view class="order-detail-goods-name">{{detailItem.goodsName}}</view>
+                                    <view class="order-detail-info">
+                                        <view class="order-detail-points">
+                                            <image class="ic-points" src="../static/ic_points_gray.svg" style="margin-bottom: auto;"></image>
+                                            <view style="line-height: 28rpx;margin-top: 13rpx;margin-left: 10rpx;">{{detailItem.points}} </view>
+                                        </view>
+                                        <view class="order-detail-goods-num">X{{detailItem.num}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <van-loading class="bottom-loading" size="36rpx" text-size="24rpx" wx:if="{{tabOrderList.length > 0 && bottomLoadingShow[1]}}"> 加载中...</van-loading>
+                    <view class="no-more" wx:if="{{tabOrderList.length > 10 && isAllLoaded[1] && !bottomLoadingShow[1]}}">人家也是有底线的～</view>
+                </view>
+                <!-- 缺省 -->
+                <view class="empty-list-box" wx:if="{{(tabOrderList!=null && tabOrderList.length==0) && loaded}}">
+                    <view class="empty-image-wrap">
+                        <image class="empty-image" src="/assets/images/icon_list_empty.png"></image>
+                    </view>
+                    <view class="empty-list-tip">还没有兑换订单哦~</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<van-popup
+    show="{{ showGoodsDropdown }}"
+    bind:close="onGoodsDropdownClose"
+    custom-style="top: {{dropdownTop-10}}rpx;left: 30rpx;-webkit-transform: translate3d(0,0,0);transform: translate3d(0,0,0);"
+    custom-class="drop-down-menu"
+    overlay-style="background:#00000000;"
+>
+    <view class="goods-drop-down">
+        <view class="drop-down-item" bindtap="handleClickDropdownMenu" data-index="{{0}}" data-type="{{'goods'}}">商品(已上架) </view>
+        <view class="div-line"></view>
+        <view class="drop-down-item" bindtap="handleClickDropdownMenu" data-index="{{1}}" data-type="{{'goods'}}">商品(已下架) </view>
+    </view>
+</van-popup>
+<van-popup
+    show="{{ showCouponDropdown }}"
+    bind:close="onCouponDropdownClose"
+    custom-style="top: {{dropdownTop-10}}rpx;left: 306rpx;-webkit-transform: translate3d(0,0,0);transform: translate3d(0,0,0);"
+    custom-class="drop-down-menu"
+    overlay-style="background:#00000000;"
+>
+    <view class="coupon-drop-down">
+        <view class="drop-down-item" bindtap="handleClickDropdownMenu" data-index="{{0}}" data-type="{{'coupon'}}">优惠券(已上架) </view>
+        <view class="div-line"></view>
+        <view class="drop-down-item" bindtap="handleClickDropdownMenu" data-index="{{1}}" data-type="{{'coupon'}}">优惠券(已下架) </view>
+    </view>
+</van-popup>

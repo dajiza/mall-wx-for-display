@@ -1,0 +1,14 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "详情",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "order-goods": "../../components/orderGoods/orderGoods",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-uploader": "@vant/weapp/uploader/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-dialog": "@vant/weapp/dialog/index"
+    }
+}

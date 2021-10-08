@@ -1,0 +1,39 @@
+<!--components/orderGoods/orderGoods.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="order-goods">
+    <view class="list">
+        <view class="product">
+            <view class="goods-info" data-id="{{goods.goods_id}}" bind:tap="handleGoGoodsDetail">
+                <view class="timg">
+                    <image class="fullimg img-radius" mode="aspectFill" src="{{ fn.limitImgSize(goods.goods_img) }}"></image>
+                </view>
+                <view class="info">
+                    <view class="title">{{ goods.goods_name }}</view>
+                    <view class="specification">{{ fn.orderGoodsAttr(goods.goods_attr) }}</view>
+                </view>
+                <view class="digital">
+                    <view class="price">
+                        <span class="symbol" style="margin-right: 4rpx;">实付</span>
+                        <span class="symbol">¥</span>
+                        <span class="price-num"> {{ isApply? fn.formatMoney(goods.order_detail_money):fn.formatMoney(goods.price_real) }}</span>
+                    </view>
+                    <view class="price" style="color: #B2B2B2;" wx:if="{{goods.detail_type==0}}">
+                        <span class="symbol">¥</span>
+                        <span class="price-num">
+                            {{ isApply? fn.formatMoney(goods.order_detail_money):fn.formatMoney(goods.price) }}
+                        </span>
+                    </view>
+                    <view class="num">X {{ isApply ? goods.order_detail_num : goods.num }}</view>
+                    <view class="goods-status" wx:if="{{showStatus && (goods.status === 5 || goods.status === 6 || goods.status === 11)}}">{{fn.goodsStatus(goods.status)}}</view>
+                    <!--<view class="expected-revenue-box" wx:if="{{isSellOrder && !(goods.status === 4|| goods.status === 5 || goods.status === 6 || goods.status === 11)}}"></view>-->
+                    <text class="expected-revenue" wx:if="{{isSellOrder && !(goods.status === 4|| goods.status === 5 || goods.status === 6 || goods.status === 11)}}">赚￥{{fn.formatMoney(goods.commission)}}</text>
+                </view>
+                <!--<text
+                    class="expected-revenue"
+                    wx:if="{{isSellOrder && !(goods.status === 4|| goods.status === 5 || goods.status === 6 || goods.status === 11)}}"
+                >赚￥23.6</text>-->
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+<view class="money">
+	<span class="{{size}} dollar" wx:if="{{showDollar}}">￥</span>
+	<span class="{{size}} integer">{{integer}}</span>
+	<!--<span class="point">.</span>-->
+	<span class="{{size}} decimal">{{decimal}}</span>
+</view>
+

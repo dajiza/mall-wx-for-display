@@ -1,0 +1,128 @@
+/* components/shelves/scanCodeGoods.wxss */
+.shelves-popup {
+    width: 690rpx;
+    height: 1080rpx;
+    border-radius: 30rpx;
+    background: #ffffff;
+}
+
+.shelves-container {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.shelves-goods-wrap {
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 50rpx;
+    height: 818rpx;
+}
+
+.shelves-goods {
+    box-sizing: border-box;
+    padding: 0 60rpx;
+    height: 298rpx;
+}
+
+.shelves-goods-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 30rpx;
+    height: 136rpx;
+}
+
+.shelves-goods-img {
+}
+
+.shelves-goods-label {
+    position: relative;
+    flex: 1;
+    box-sizing: border-box;
+    margin-left: 20rpx;
+    height: 100%;
+}
+
+.shelves-goods-name {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    height: 80rpx;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    word-break: break-all;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+
+    -webkit-line-clamp: 2;
+}
+
+.shelves-goods-profit {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+    padding: 0 12rpx;
+    height: 42rpx;
+    border-radius: 22rpx;
+    background: var(--secondary-background);
+    color: var(--features-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 42rpx;
+}
+
+.shelves-bottom-box {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 212rpx;
+    box-shadow: 0px -6rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+}
+
+.shelves-bottom-tip {
+    box-sizing: border-box;
+    margin-top: 20rpx;
+    height: 34rpx;
+    color: var(--tip-color-text);
+    text-align: center;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+
+.shelves-bottom-button-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 46rpx 44rpx;
+    font-weight: 400 !important;
+    font-size: 28rpx !important;
+    line-height: 40rpx !important;
+}
+
+.shelves-btn-reset {
+    width: 160rpx !important;
+    height: 80rpx !important;
+}
+
+.shelves-bottom-button-box .shelves-btn-cancel {
+    width: 160rpx !important;
+    height: 80rpx !important;
+    border: 0px solid #ebedf0 !important;
+    border-radius: 40rpx !important;
+    background: linear-gradient(90deg, #d6dee9 0%, #b3bac1 100%) !important;
+    box-shadow: 0px 6rpx 12rpx 0px rgba(185, 185, 185, 0.5);
+    color: #ffffff !important;
+}
+
+.shelves-btn-confirm {
+    width: 200rpx !important;
+    height: 80rpx !important;
+    border: 0px solid #ebedf0 !important;
+    border-radius: 40rpx !important;
+    box-shadow: 0px 6rpx 12rpx 0px rgba(185, 185, 185, 0.5);
+    color: #ffffff !important;
+}

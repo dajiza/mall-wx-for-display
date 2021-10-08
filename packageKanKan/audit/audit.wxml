@@ -1,0 +1,17 @@
+<view class="container">
+  <van-nav-bar fixed placeholder title="审核中" border="{{false}}" custom-class="nav" title-class="title">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+
+  <view class="verify-content">
+    <image class="verify-img" src="/packageKanKan/static/ic_verify.png"></image>
+    <view class="verify-status">提交成功，正在审核中…</view>
+    <button class="bottom-button" hover-class="botton-hover"
+      bindtap="handlePublish">
+      <text class="bottom-button-container-label">继续发布</text>
+    </button>
+    <view class="btn-second" bindtap="handleBackToList">返回看看列表</view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+<!--packageTeamwork/transition/transition.wxml-->
+
+<view class="list">
+    <view class="item" wx:for="{{list}}" wx:key="{{item.value}}">{{item.value}}</view>
+</view>
+<view class="btn" bindtap="changeList">change</view>

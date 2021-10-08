@@ -1,0 +1,274 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed title="{{title}}" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav {{tabShow?'nav-show':''}}" title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <van-tabs class="tabs" active="{{ activeTab }}" style="top: {{navHeight}}" wx:if="{{tabShow}}" bind:click="onClickTab">
+        <van-tab title="商品"></van-tab>
+        <van-tab title="评价"></van-tab>
+        <van-tab title="详情"></van-tab>
+        <!-- <van-tab title="推荐"></van-tab> -->
+    </van-tabs>
+    <view class="swiper-wrap">
+        <swiper indicator-dots="{{ false }}" class="swiper" bindchange="swiperChange" circular="{{true}}" autoplay="{{autoplay}}" interval="{{2500}}">
+            <block wx:for="{{ goods.goods_img_list }}" wx:for-item="img">
+                <swiper-item>
+                    <image class="fullimg" bindtap="previewImage" data-src="{{img.img_url}}" mode="aspectFill" src="{{ img.img_url + '!upyun520/fw/500' }}" wx:if="{{img.type==1}}"></image>
+                    <view class="vedio-wrap" wx:if="{{img.type==2}}">
+                        <video
+                            class="vedio"
+                            bindplay="onPlay"
+                            bindpause="onPause"
+                            src="{{ img.img_url }}"
+                            binderror="videoErrorCallback"
+                            show-play-btn="{{true}}"
+                            controls="{{true}}"
+                            play-btn-position="center"
+                            enable-play-gesture="{{true}}"
+                            show-progress="{{true}}"
+                        ></video>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="dots" wx:if="{{ goods.goods_img_list.length > 1 && goods.goods_img_list[current].type==1}}">
+            <block wx:for="{{ goods.goods_img_list }}" wx:key="*this">
+                <view class="dot{{ index == current ? ' active' : '' }}"></view>
+            </block>
+        </view>
+    </view>
+
+    <view class="title goods-title-wrap">
+        <view class="name-wrap">
+            <!--<cover-view class="name" wx:if="{{!authorizeShow&&!specShow}}">{{ goods.goods_name }}</cover-view>-->
+            <view class="goods-title">{{ goods.goods_name }}</view>
+            <!--<cover-view class="name">{{ goods.goods_name }}</cover-view>-->
+            <view class="share" bindtap="onClickShare">
+                <image class="share-img" src="../../assets/images/share.png"></image>
+            </view>
+        </view>
+        <view class="summary">
+            <view class="price">
+                <span class="symbol">¥</span>
+                <span class="price-num" wx:if="{{defaultSkuId}}">{{ fn.formatMoney(specInfo.price) }}</span>
+                <span class="price-num" wx:else>{{ fn.formatMoney(minPrice) }}<block wx:if="{{minPrice!=maxPrice}}">-{{fn.formatMoney(maxPrice)}}</block></span>
+            </view>
+            <!-- <view class="freight">
+                <span class="iconfont icon-wancheng"></span>
+                <span class="text">免运费</span>
+            </view> -->
+            <view class="sales">
+                <span class="text">月销{{ goods.goods_sales }}</span>
+            </view>
+        </view>
+        <!-- 预售 -->
+        <view class="pre-sale" wx:if="{{selectedSku.is_pro_sale==1}}">
+            <view class="tag">预售</view>
+            {{selectedSku.pro_sale_msg}}
+        </view>
+        <view class="discount-box text-ellipsis" wx:if="{{ member_discount_value > 0 && maxDiscount > 0 && maxDiscount < 100 }}">
+            <image class="member-icon" src="../../assets/images/memberIcon.png"></image>
+            <view class="discount-text margin-left-12">
+                <text>批发享{{ maxDiscount / 10 }}折 </text>
+                <text>预计省￥{{fn.formatToFixed(fn.formatMoney(goods.goods_min_price) - fn.formatMoney(goods.goods_min_price * maxDiscount * 0.01))}} </text>
+                <text>折后价:￥{{fn.formatMoney(goods.goods_min_price * maxDiscount * 0.01)}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="specification" bindtap="openDefaultSpec">
+        <view class="selected">已选</view>
+        <view class="value">{{ fn.join(selectedList) }}</view>
+        <view class="choose-wrap">
+            <view class="choose">
+                <image class="fullimg" src="../../assets/images/more.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="specification" bindtap="openPreference" wx:if="{{promotionList.length>0&&member_discount_value==0&&isShopAdmin!=1}}">
+        <view class="selected">优惠</view>
+        <view class="preference">
+            <view class="row" wx:for="{{promotionList}}" wx:key="id">
+                <view class="tag">{{constant.PROMOTION_TEXT[item.type]}}</view>
+                <view class="rules">{{item.name}}</view>
+            </view>
+        </view>
+        <view class="choose-wrap">
+            <view class="choose">
+                <image class="fullimg" src="../../assets/images/more.png"></image>
+            </view>
+        </view>
+    </view>
+
+    <view class="comment">
+        <view class="subject" catch:tap="goShopComment">
+            店铺评价
+            <view class="view-all">查看全部 <text class="iconfont icon-youjiantou"></text></view>
+        </view>
+        <view class="dividing"></view>
+        <view class="comment-tabs" wx:if="{{total>0}}">
+            <view>
+                <view class="tab-item {{filterNavIndex === 1?'tab-selected':''}}" data-index="1" catch:tap="onClickCommentTab">本宝贝({{total}})</view>
+                <view class="tab-item {{filterNavIndex === 2?'tab-selected':''}}" data-index="2" catch:tap="onClickCommentTab">其他宝贝({{otherTotal}})</view>
+            </view>
+        </view>
+        <block wx:for="{{commentList}}" wx:key="comment_id">
+            <view class="comment-item" data-id="{{item.comment_id}}" catch:tap="handleOnDetail">
+                <!--评论内容-->
+                <comment-item
+                    user_name="{{item.user_nick_name}}"
+                    user_avatar="{{item.user_avatar}}"
+                    create_time="{{item.created_time}}"
+                    comment="{{item.message}}"
+                    attachment="{{item.medias}}"
+                    imgSize="152rpx"
+                    second_label=""
+                ></comment-item>
+                <!--评论商品信息-->
+                <comment-goods
+                    class="comment-goods-info"
+                    sku_img="{{item.goods_sku.skuImg}}"
+                    goods_name="{{item.goods_sku.skuName}}"
+                    label="{{item.goods_sku.skuAttr}}"
+                    sku_price="{{item.goods_sku.price}}"
+                    wx:if="{{filterNavIndex == 2}}"
+                    data-id="{{item.goods_sku.goodsId}}"
+                    catch:tap="handleOnGoodsDetail"
+                />
+            </view>
+            <view class="dividing dividing-comment"></view>
+        </block>
+    </view>
+    <view class="information">
+        <view class="subject">商品信息</view>
+        <view class="dividing"></view>
+        <!-- <view class="item" wx:for="{{ specList }}">
+            <view class="label">{{ item.title  }}</view>
+            <view class="value">{{ fn.join(item.list) }}</view>
+        </view> -->
+        <view class="item" wx:if="{{brandList.length>0}}">
+            <view class="label">品牌</view>
+            <view class="value">{{ selectedSku.attr_brand ? selectedSku.attr_brand:fn.join(brandList) }}</view>
+        </view>
+        <!-- <view class="item" wx:if="{{colorList.length>0 && goods.goods_type==1}}">
+            <view class="label">颜色</view>
+            <view class="value">{{ selectedSku.attr_color ? selectedSku.attr_color:fn.join(colorList) }}</view>
+        </view> -->
+        <view class="item" wx:if="{{materialList.length>0 && goods.goods_type==1}}">
+            <view class="label">材质</view>
+            <view class="value">{{ selectedSku.attr_material ? selectedSku.attr_material:fn.join(materialList) }}</view>
+        </view>
+        <!-- <view class="item" wx:if="{{originList.length>0 && goods.goods_type==1}}">
+            <view class="label">产地</view>
+            <view class="value">{{ selectedSku.attr_origin ? selectedSku.attr_origin:fn.join(originList) }}</view>
+        </view> -->
+        <view class="item" wx:if="{{patternList.length>0 && goods.goods_type==1}}">
+            <view class="label">花纹</view>
+            <view class="value">{{ selectedSku.attr_pattern ? selectedSku.attr_pattern:fn.join(patternList) }}</view>
+        </view>
+        <view class="item" wx:if="{{unitList.length>0}}">
+            <view class="label">单位</view>
+            <view class="value">{{ selectedSku.attr_unit ? selectedSku.attr_unit:fn.join(unitList) }}</view>
+        </view>
+
+        <view class="item" wx:if="{{sizeList.length>0 && goods.goods_type==3}}">
+            <view class="label">尺寸</view>
+            <view class="value">{{ selectedSku.attr_size ? selectedSku.attr_size:fn.join(sizeList) }}</view>
+        </view>
+        <view class="item" wx:if="{{widthList.length>0}}">
+            <view class="label">幅宽</view>
+            <view class="value">{{ selectedSku.attr_width ? selectedSku.attr_width:fn.join(widthList) }}</view>
+        </view>
+        <view class="item" wx:if="{{pieceList.length>0 && goods.goods_type==3}}">
+            <view class="label">片数</view>
+            <view class="value">{{ selectedSku.attr_piece ? selectedSku.attr_piece:fn.join(pieceList) }}</view>
+        </view>
+        <view class="item" wx:if="{{weightList.length>0}}">
+            <view class="label">重量</view>
+            <view class="value">{{ selectedSku.attr_weight ? selectedSku.attr_weight + 'g':fn.join(weightList) }}</view>
+        </view>
+        <mp-html class="mp-html" content="{{htmlSnip}}" lazy-load="{{true}}" loading-img="/assets/images/placeholder.png" />
+    </view>
+    <view class="goods-action">
+        <view class="favorites" bindtap="putFavorites">
+            <span class="iconfont icon-favorites" wx:if="{{favoritesId==0}}"></span>
+            <span class="iconfont icon-favorites-fill" wx:else></span>
+            <view class="text">{{favoritesId==0?'':'已'}}收藏</view>
+        </view>
+        <view class="customer">
+            <button class="contact-btn" type="primary" open-type="contact"></button>
+            <span class="iconfont icon-kefu"></span>
+            <view class="text">客服</view>
+        </view>
+        <block>
+            <view class="cart" bindtap="gotoCart">
+                <span class="iconfont icon-gouwuche"></span>
+                <view class="text"> 购物车</view>
+                <span class="pot">{{ cartNum }}</span>
+            </view>
+        </block>
+        <van-button round type="primary" class="addcart" custom-class="custom-cart" bindtap="addCart">加入购物车</van-button>
+        <van-button round type="warning" class="buy" custom-class="custom-buy" bindtap="buyNow">
+            立即购买
+        </van-button>
+    </view>
+
+    <spec
+        id="spec"
+        memberDiscount="{{ member_discount_value }}"
+        attr="{{ attr }}"
+        goods="{{ goods }}"
+        sku="{{ sku }}"
+        mark="{{ mark }}"
+        value="{{defaultSkuId}}"
+        bind:addCard="afterAddCard"
+        bind:onSpecClose="onSpecClose"
+        bind:selectSpec="selectSpec"
+    >
+    </spec>
+    <van-popup custom-class="custom-share" show="{{ isShowShare }}" position="bottom" bind:close="onCloseShare" close-on-click-overlay="{{ true }}">
+        <view class="share-wrap">
+            <view class="title">分享好友下单</view>
+            <view class="item-list">
+                <view class="item">
+                    <view class="share-img">
+                        <button class="share-btn" type="primary" open-type="share"></button>
+                        <image class="fullimg" src="../../assets/images/weixin.png"></image>
+                    </view>
+                    <span class="text">分享到微信</span>
+                </view>
+                <view class="item">
+                    <view class="share-img" catchtap="shareGoods">
+                        <image class="fullimg" src="../../assets/images/posters.png"></image>
+                    </view>
+                    <span class="text">生成商品海报</span>
+                </view>
+                <view class="item">
+                    <view class="share-img" catchtap="shareShop">
+                        <image class="fullimg" src="../../assets/images/shop.png"></image>
+                    </view>
+                    <span class="text">生成店铺海报</span>
+                </view>
+            </view>
+        </view>
+    </van-popup>
+    <van-popup custom-class="custom-preference" show="{{ isShowPreference }}" position="bottom" bind:close="onClosePreference" close-on-click-overlay="{{ true }}">
+        <view class="share-preference">
+            <view class="title">优惠</view>
+            <view class="close" catchtap="onClosePreference">
+                <text class="iconfont icon-guanbi"></text>
+            </view>
+            <view class="preference">
+                <view class="row" wx:for="{{promotionList}}" wx:key="id" bindtap="gotoMakeUp" data-index="{{index}}">
+                    <view class="tag">{{constant.PROMOTION_TEXT[item.type]}}</view>
+                    <view class="rules">{{item.name}}</view>
+                    <text class="iconfont icon-youjiantou"></text>
+                </view>
+            </view>
+        </view>
+    </van-popup>
+</view>
+
+<authorize-popup id="authorize" bind:authorizeTrigger="authorizeTrigger" />

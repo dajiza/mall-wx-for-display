@@ -1,0 +1,627 @@
+/**index.wxss**/
+.container {
+    background: var(--background-color);
+}
+.nav {
+    background: transparent !important;
+}
+
+.nav-title {
+    color: #fff !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.top-box {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    /*height: 314px;*/
+    background: var(--primary-gradual-color);
+}
+/*顶部导航+状态栏占位*/
+.top-nav-placeholder {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0px 6rpx 12rpx 0px rgba(196, 13, 69, 0.12);
+}
+.icon-fanhuiiblack {
+    color: #fff;
+    font-size: 36rpx;
+}
+.copy-top {
+    width: 100%;
+    background: var(--primary-gradual-color);
+}
+.top-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 50rpx;
+    width: 100%;
+    height: 336rpx;
+    color: #ffffff;
+    font-weight: 500;
+    font-family: PingFangSC-Medium, PingFang SC;
+}
+.top-content .text-selected-goods {
+    margin-top: 50rpx;
+    height: 80rpx;
+    font-size: 56rpx;
+    line-height: 80rpx;
+}
+.top-content .num-selected-goods {
+    margin-top: 12rpx;
+    height: 40rpx;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.san-code {
+    position: fixed;
+    /*top: 186rpx;*/
+    right: 50rpx;
+    z-index: 12;
+    width: 130rpx;
+    height: 130rpx;
+    border-radius: 50%;
+    background: var(--scan-btn-background);
+    box-shadow: 0px 8rpx 16rpx 0px var(--box-shadow-color);
+    color: #ffffff;
+}
+.san-code .icon-scanCode {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50rpx;
+    transform: translate(-50%, -50%);
+}
+/*弧度遮挡*/
+.arc-mask {
+    position: absolute;
+    right: 0;
+    bottom: -980rpx;
+    left: 50%;
+    width: 3000rpx;
+    height: 1000rpx;
+    border-radius: 50%;
+    background: #f2f2f2;
+    background: #f2f2f2;
+    font-size: 0;
+    transform: translate(-50%, 0);
+}
+.arc-mask image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.change-background {
+    background: #ffbcbc;
+}
+
+.top-box .search-input-placeholder {
+    height: 18px;
+    color: var(--secondary-color);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 18px;
+}
+
+/*商品容器*/
+.home-page .goods-box {
+    margin-top: 40rpx;
+    width: 100%;
+}
+
+.home-page .van-loading {
+    padding: 10rpx 0;
+    width: 100%;
+}
+.no-more {
+    padding: 10rpx 0;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}
+
+/*空列表*/
+.empty-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 160rpx;
+    width: 100%;
+}
+.empty-img {
+    display: inline-block;
+    width: 202rpx;
+    height: 224rpx;
+    vertical-align: bottom;
+}
+.empty-text {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 40rpx;
+    padding-right: 36rpx;
+    width: 100%;
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 30rpx;
+}
+
+.scan-code-goods-list {
+    margin-top: -60rpx;
+    padding-bottom: calc(290rpx + env(safe-area-inset-bottom));
+    width: 100%;
+    height: auto;
+}
+.list-li {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    width: 100%;
+}
+.list-li-box {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto 20rpx;
+    padding: 20rpx;
+    width: 100%;
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+.li-checkbox {
+    position: absolute;
+    top: -20rpx;
+    right: -20rpx;
+    z-index: 11;
+    padding: 30rpx;
+}
+.goods-info,
+.goods-url {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+}
+.goods-info .img-box {
+    overflow: hidden;
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.goods-info .text-box {
+    position: relative;
+    width: 426rpx;
+}
+
+.goods-info .text-box .goods-title {
+    overflow: hidden;
+    width: 340rpx;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.goods-info .text-box .tip-color-title {
+    color: var(--tip-color-text);
+}
+
+.goods-info .text-box .goods-label {
+    display: flex;
+    align-items: center;
+    margin-top: 20rpx;
+    height: 50rpx;
+    border-radius: 52rpx;
+    background: var(--background-color);
+}
+
+.goods-info .text-box .goods-label .goods-label-content {
+    overflow: hidden;
+    padding: 8rpx 8rpx 8rpx 16rpx;
+    width: 364rpx;
+    color: var(--tip-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.goods-info .invalid-goods-label {
+    /*padding: 8rpx 8rpx 8rpx 16rpx;*/
+    overflow: hidden;
+    margin-top: 20rpx;
+    width: 364rpx;
+    color: var(--tip-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.goods-info .text-box .goods-price {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+}
+
+.price-now-unit {
+    bottom: 0;
+    display: inline-block;
+    color: var(--primary-color-text);
+    /*color: #564B4E;*/
+    font-weight: 400;
+    font-weight: 400;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    line-height: 34rpx;
+}
+
+.price-now {
+    bottom: 0;
+    display: inline-block;
+    color: var(--primary-color-text);
+    /*color: #564B4E;*/
+    font-weight: 500;
+    font-weight: 500;
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    line-height: 50rpx;
+}
+
+/* 商品购买数量跳转 */
+.selnum {
+    position: absolute;
+    right: 0rpx;
+    bottom: 0;
+    display: inline-block;
+}
+
+.list-li .selnum-number {
+    margin: 0 !important;
+    border-radius: 6rpx !important;
+    font-weight: 500 !important;
+
+    --stepper-input-font-size: 24rpx !important;
+    --stepper-input-disabled-text-color: var(--primary-color-text) !important;
+    --stepper-input-text-color: var(--primary-color-text) !important;
+    --stepper-border-radius: 6rpx !important;
+    --stepper-input-disabled-background-color: var(--background-color) !important;
+    --stepper-background-color: var(--background-color) !important;
+}
+
+.list-li .selnum-add {
+    margin: 0 0 0 20rpx !important;
+    width: 56rpx !important;
+    height: 56rpx !important;
+    border-radius: 50% !important;
+    background: linear-gradient(131deg, #fadcc7 0%, #f6bd87 100%) !important;
+    color: #fff !important;
+
+    --stepper-background-color: #ffffff !important;
+    --stepper-button-disabled-color: #ffffff !important;
+    --stepper-button-icon-color: var(--primary-color-text) !important;
+    --stepper-border-radius: 0px !important;
+}
+
+.list-li .selnum-cut {
+    margin: 0 20rpx 0 0 !important;
+    /*--stepper-button-disabled-icon-color: #c8c9cc !important;*/
+    width: 56rpx !important;
+    height: 56rpx !important;
+    border-radius: 50% !important;
+    /*background: linear-gradient(90deg, #D6DEE9 0%, #B3BAC1 100%) !important;*/
+    background: linear-gradient(131deg, #fadcc7 0%, #f6bd87 100%) !important;
+    color: #fff !important;
+
+    --stepper-button-disabled-color: #ffffff !important;
+    --stepper-button-icon-color: var(--primary-color-text) !important;
+}
+
+.list-li .van-stepper__minus--disabled,
+.list-li .van-stepper__plus--disabled {
+    /*color: #c8c9cc !important;*/
+    background: linear-gradient(90deg, #d6dee9 0%, #b3bac1 100%) !important;
+}
+
+.van-stepper__minus:before,
+.van-stepper__plus:before {
+    width: 10px !important;
+    height: 2px !important;
+}
+.van-stepper__minus:after,
+.van-stepper__plus:after {
+    width: 2px !important;
+    height: 10px !important;
+}
+
+.bottom-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 12;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 50rpx env(safe-area-inset-bottom);
+    width: 100%;
+    height: 290rpx;
+    background: rgba(255, 255, 255, 0.9);
+}
+.all-checkbox {
+    padding-top: 40rpx;
+}
+.check-all-edit {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.icon-edit {
+    display: flex;
+    align-items: center;
+    margin-left: 12rpx;
+    color: var(--tip-color-text);
+    font-size: 28rpx;
+}
+.edit-box {
+    display: flex;
+    padding-top: 40rpx;
+}
+.text-finish-edit {
+    font-weight: 500;
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    line-height: 40rpx;
+}
+.text-finish {
+    color: var(--features-color-text);
+}
+.text-edit {
+    color: var(--primary-color-text);
+}
+.btn-box {
+    margin: 50rpx auto 0;
+    width: 100%;
+    height: 100rpx;
+    /*box-shadow: 0px 10rpx 20rpx 0px rgba(251, 96, 144, 0.3);*/
+    border-radius: 50rpx;
+    background: var(--primary-color-btn);
+}
+.text-del {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #efefef;
+    font-weight: 500;
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+}
+.amount-box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.text-settlement {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 40rpx;
+    width: 428rpx;
+    color: #efefef;
+    font-weight: 500;
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    line-height: 100rpx;
+}
+.line {
+    width: 2rpx;
+    height: 100%;
+    background: #ff91b3;
+}
+.amount-value {
+    flex: 1;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-right: 40rpx;
+    color: #efefef;
+    text-align: right;
+    font-weight: bold;
+    font-size: 40rpx;
+    font-family: DINAlternate-Bold, DINAlternate;
+    line-height: 100rpx;
+}
+
+/* 选中框自定义 */
+.van-checkbox__label {
+    --checkbox-label-margin: 16rpx !important;
+    --checkbox-label-color: var(--primary-color-text) !important;
+}
+
+.van-checkbox__icon--checked {
+    background-color: #fff !important;
+    color: var(--primary-color) !important;
+
+    --checkbox-checked-icon-color: var(--primary-color) !important;
+}
+
+.van-checkbox__icon {
+    --checkbox-border-color: var(--primary-color) !important;
+}
+
+.custom-check-box-icon {
+    display: -webkit-flex;
+    display: flex;
+    overflow: hidden;
+    -webkit-align-items: center;
+    align-items: center;
+    width: 40rpx;
+    height: 40rpx;
+    color: var(--primary-color);
+    font-size: 38rpx;
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.scan-goods-popup {
+    width: 624rpx;
+    height: 874rpx;
+    border-radius: 30rpx;
+    background: #ffffff;
+}
+.scan-goods-container {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+}
+.pop-img-box {
+    width: 100%;
+    height: 468rpx;
+    border-radius: 30rpx 30rpx 0 0;
+    background: #f2f2f2;
+}
+.pop-goods-info {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 30rpx;
+    width: 100%;
+}
+.pop-good-title {
+    color: #564b4e;
+    font-weight: 500;
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    line-height: 44rpx;
+}
+.text-overflow-2 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal !important;
+    word-wrap: break-word;
+
+    -webkit-line-clamp: 2;
+}
+.pop-good-price-sku {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40rpx;
+}
+.pop-goods-price {
+    height: 68rpx;
+    color: var(--primary-color);
+    vertical-align: bottom;
+    font-weight: 600;
+    font-size: 48rpx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+}
+.pop-price-unit {
+    font-size: 32rpx;
+}
+.pop-good-price-sku .pop-goods-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 24rpx;
+    width: 368rpx;
+    height: 68rpx;
+    border-radius: 52rpx;
+    background: var(--background-color);
+}
+
+.pop-good-price-sku .goods-label-content {
+    overflow: hidden;
+    width: 310rpx;
+    color: var(--tip-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.pop-button-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50rpx;
+    width: 100%;
+}
+.pop-button-box .btn-cancel,
+.pop-button-box .btn-confirm {
+    width: 272rpx !important;
+    height: 80rpx !important;
+    border: 0px solid #ebedf0 !important;
+    border-radius: 40rpx !important;
+    background: linear-gradient(90deg, #d6dee9 0%, #b3bac1 100%) !important;
+    box-shadow: 0px 6rpx 12rpx 0px rgba(185, 185, 185, 0.5);
+    color: #ffffff !important;
+}
+.van-icon-arrow-down {
+    width: 20rpx;
+    height: 20rpx;
+}
+.no-checked {
+    background: var(--disabled-color-btn);
+}
+
+.invalid-tip {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    padding: 8rpx 22rpx;
+    border-radius: 26rpx;
+    background: var(--tip-color-text-88);
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+
+.sku-check-tip {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+    height: 52rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 52rpx;
+}
+
+.sku-check-tip-botton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0;
+    width: 112rpx !important;
+    height: 52rpx;
+    border: 2rpx solid var(--primary-color) !important;
+    border-radius: 26rpx;
+    color: var(--primary-color) !important;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 48rpx;
+}
+.van-button--large {
+    width: 100% !important;
+}

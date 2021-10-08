@@ -1,0 +1,90 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container review-publish">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="goods-info-wrap">
+        <!--评论商品信息-->
+        <comment-goods class="goods-info" sku_img="{{skuImg}}" goods_name="{{skuName}}" label="{{skuAttr}}" sku_price="{{skuPrice}}" />
+    </view>
+    <view class="review-content">
+        <!--评星-->
+        <view class="star-wrap">
+            <view class="text-box label">商品评价</view>
+            <view class="star-list">
+                <block wx:for="{{starList}}" wx:key="index">
+                    <view class="star-item" data-index="{{index}}" catch:tap="handleClickStar">
+                        <text style="color: #fb6090" class="iconfont icon-star_h" wx:if="{{index < starIndex}}"></text>
+                        <text class="iconfont icon-star" wx:else></text>
+                        <!--                        <image class="star-icon" lazy-load mode="aspectFill" src="{{index < starIndex?'/assets/images/ic_like_h.svg':'/assets/images/ic_like.svg'}}"></image>-->
+                    </view>
+                </block>
+            </view>
+            <view class="text-box star-text" wx:if="{{starIndex > 0}}">{{starList[starIndex - 1]}}</view>
+        </view>
+        <!--文字-->
+        <view class="text-wrap">
+            <!--            <icon class="iconfont icon-xiugai"-->
+            <!--                  style="display: inline-flex; font-size: 26rpx; color: var(--tip-color-text-a2); margin-right:12rpx; margin-top:5rpx;"-->
+            <!--                  wx:if="{{!showSendButton}}" />-->
+            <van-field
+                custom-style="min-height: 200rpx;padding:15rpx 30rpx"
+                model:value="{{ textMessage }}"
+                label=""
+                type="textarea"
+                placeholder="从多个角度评价宝贝，可以帮助更多想买的人"
+                autosize
+                border="{{ false }}"
+                show-confirm-bar="{{false}}"
+                adjust-position="{{false}}"
+                input-class="review-publish-textarea"
+                placeholder-style="color:var(--secondary-color-text);font-size:28rpx"
+                bind:input="bindInput"
+            />
+        </view>
+        <!--图片/视频-->
+        <view class="media-wrap">
+            <scroll-view class="media-box" scroll-x="true" scroll-with-animation="{{true}}" scroll-left="{{mediaScrollLeft}}" bindscroll="mediaScroll">
+                <view class="placeholder-box"></view>
+                <block wx:for="{{mediasList}}" wx:key="id">
+                    <view class="media-item {{index>2?'media-last':''}}">
+                        <!--图片-->
+                        <block wx:if="{{item.type=='image'}}">
+                            <image class="img" lazy-load mode="aspectFill" src="{{item.url + '!upyun520/fw/320'}}" data-src="{{item.url}}" catchtap="previewImage"></image>
+                        </block>
+                        <!--视频-->
+                        <block wx:else>
+                            <video
+                                class="video"
+                                bindplay="onPlay"
+                                bindpause="onPause"
+                                src="{{ item.url }}"
+                                binderror="videoErrorCallback"
+                                show-play-btn="{{true}}"
+                                controls="{{true}}"
+                                play-btn-position="center"
+                                enable-play-gesture="{{true}}"
+                                show-progress="{{true}}"
+                            ></video>
+                        </block>
+                        <view class="del-box" data-index="{{index}}" catch:tap="handleDel">
+                            <image src="/packageMainSecondary/static/clear.svg" class="ic-del" />
+                        </view>
+                    </view>
+                </block>
+                <view class="media-plus" wx:if="{{mediasList.length < 4}}" catch:tap="handelMediaAdd">
+                    <view class="media-plus-wrap">
+                        <text class="iconfont icon-Shape"></text>
+                        <text class="add-text">添加图片/视频</text>
+                    </view>
+                </view>
+                <view class="placeholder-box"></view>
+            </scroll-view>
+        </view>
+    </view>
+    <!-- 发表按钮 -->
+    <view class="btn-publish {{(textMessage || mediasLength > 0) ? 'btn-can-use':''}}" catch:tap="handleOnPublish">发布</view>
+</view>

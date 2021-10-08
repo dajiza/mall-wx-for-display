@@ -1,0 +1,134 @@
+<!--packageAgent/makeUp/makeUp.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed placeholder title="优惠凑单" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="clickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="filter-box-wrap" style="top: {{navHeight}};">
+        <view class="filter-box">
+            <view class="filter-label-box {{activate ==0?'filter-activate-label':''}}" bindtap="onTabChange" data-activate="{{0}}">
+                <view class="filter-label">
+                    价格
+                </view>
+                <view class="sort-arrow">
+                    <text class="iconfont icon-up pack-up" slot="icon" wx:if="{{orderPrice === 0 || orderPrice === 2}}"></text>
+                    <text class="iconfont icon-down show-more" slot="icon" wx:if="{{orderPrice === 0 || orderPrice === 1}}"></text>
+                </view>
+            </view>
+            <view class="filter-label-box {{activate ==1?'filter-activate-label':''}}" bindtap="onTabChange" data-activate="{{1}}">
+                <view class="filter-label">
+                    销量
+                </view>
+                <view class="sort-arrow">
+                    <text class="iconfont icon-up pack-up" slot="icon" wx:if="{{orderSales === 0 || orderSales === 2}}"></text>
+                    <text class="iconfont icon-down show-more" slot="icon" wx:if="{{orderSales === 0 || orderSales === 1}}"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="goods-list-wrap" style="margin-top: {{filterBoxHeight}}px;" wx:if="{{list.length>0}}">
+        <view class="rule">限时促销：{{ruleName}}</view>
+
+        <view wx:for="{{list}}" wx:for-item="goods" wx:key="id" wx:for-index="goodsIndex">
+            <view class="goods-item-box">
+                <view class="item-image-box">
+                    <image class="item-image" lazy-load mode="aspectFill" src="{{fn.limitImgSize(goods.img)}}"></image>
+                </view>
+                <view class="item-goods-name">
+                    {{goods.title}}
+                </view>
+                <view class="item-goods-bottom-box">
+                    <view class="item-goods-price">
+                        ¥ {{fn.formatMoney(goods.price)}}
+                    </view>
+                    <view class="item-goods-add" hover-class="botton-hover" bindtap="addGoods" data-index="{{goodsIndex}}"> </view>
+                </view>
+            </view>
+        </view>
+        <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{loading}}">加载中...</van-loading>
+        <view class="no-more" wx:if="{{page >= pageTotal}}">人家也是有底线的～</view>
+    </view>
+    <view class="empty-list" wx:elif="{{loaded}}" style="margin-top: {{filterBoxHeight}}px;">
+        <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+        <view class="empty-text">
+            <view>暂无商品数据</view>
+        </view>
+    </view>
+    <!-- rest: '',
+        subtotal: '',
+        capped: '',
+        top: '',  wx:if="{{!top}}"-->
+    <view class="makeup-submit" style="padding-bottom: {{safeAreaInsetBottom}}rpx; height: {{120+safeAreaInsetBottom}}rpx;">
+        <view class="makeup-submit-label-wrap">
+            <view class="makeup-tip-box" wx:if="{{!top}}">
+                <view class="makeup-tip "> <span class="red">{{subtotal}}</span></view>
+                <view class="makeup-tip small-size">
+                    {{rest}}
+                </view>
+            </view>
+            <view class="makeup-tip-box-top">
+                <view class="makeup-tip-top " wx:if="{{top}}">{{capped}} </view>
+            </view>
+        </view>
+        <van-button class="barter-btn" custom-class="custom-barter-btn" round type="primary" bindtap="openBarter" wx:if="{{promotionType==5}}">查看换购</van-button>
+        <van-button round type="{{promotionType==5?'danger':'primary'}}" custom-class="operation-btn" bindtap="gotoCart" wx:if="{{!fromOrderCheck}}">去购物车</van-button>
+        <van-button round type="{{promotionType==5?'danger':'primary'}}" custom-class="operation-btn" bindtap="gotoOrderCheck" wx:else>去结算</van-button>
+        <!-- <van-button round type="danger" custom-class="operation-btn" bindtap="gotoCart" wx:if="{{promotionType==5}}">去购物车</van-button> -->
+    </view>
+
+    <spec id="spec" mark="confirm" bind:confirm="confirmSpec" />
+</view>
+<!-- 换购 -->
+<van-popup custom-class="custom-barter" show="{{ isShowBarter }}" position="bottom" bind:close="onCloseBarter" close-on-click-overlay="{{ true }}">
+    <view class="share-barter">
+        <view class="title">查看换购</view>
+        <view class="close" catchtap="onCloseBarter">
+            <text class="iconfont icon-guanbi"></text>
+        </view>
+        <scroll-view class="barter" scroll-y="{{ true }}">
+            <view class="item {{isBarter?'':'disabled'}}" wx:for="{{barterList}}" catchtap="toggle" data-id="{{item.skuId}}">
+                <view class="checkbox">
+                    <van-checkbox
+                        id="checkbox_{{item.skuId}}"
+                        value="{{ item.checked }}"
+                        icon-size="36rpx"
+                        data-item-index="{{index}}"
+                        data-item-valid="{{false}}"
+                        data-goods-item="{{item}}"
+                        use-icon-slot="{{item.checked}}"
+                        catchtap="catchTapDummy"
+                        bind:change="checkedItem"
+                        disabled="{{!isBarter}}"
+                    >
+                        <image class="custom-check-box-icon" slot="icon" src="/assets/images/oval_nor_disabled.svg" wx:if="{{!isBarter}}" />
+                        <image class="custom-check-box-icon" slot="icon" src="/assets/images/oval_nor.svg" wx:else />
+                    </van-checkbox>
+                </view>
+                <view class="goods-img">
+                    <image class="timg" src="{{item.skuImg+ '!upyun520/fw/500'}}"></image>
+                    <view class="condition" wx:if="{{!isBarter}}">满{{promotion.rules[0].needNum/100}}可换购</view>
+                </view>
+
+                <view class="info">
+                    <view class="caption">
+                        <view class="name">{{item.title}}</view>
+                        <view class="num">X1</view>
+                    </view>
+                    <view class="original-price">¥ {{ fn.formatMoney(item.price) }}</view>
+
+                    <view class="describe">
+                        <view class="sku">{{item.attr}}</view>
+                        <view class="price">¥ {{fn.formatMoney(item.exchangePrice)}}</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="barter-bottom">
+            <view class="text">已换购 {{checkedBarterNum}}/{{barterTotal}}件</view>
+            <van-button round type="primary" custom-class="operation-btn" bindtap="confirmBarter">确定</van-button>
+        </view>
+    </view>
+</van-popup>
+<authorize-popup id="authorize" />

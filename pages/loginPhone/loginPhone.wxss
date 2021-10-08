@@ -1,0 +1,53 @@
+/* miniprogram/pages/login/login.wxss */
+.container {
+    min-height: 100vh;
+}
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    text-align: center;
+}
+.img {
+    overflow: hidden;
+    margin-top: 260rpx;
+    width: 168rpx;
+    height: 168rpx;
+    border-radius: 38rpx;
+}
+.avator {
+    width: 168rpx;
+    height: 168rpx;
+}
+
+.big-btn {
+    margin-top: 390rpx;
+    width: 600rpx !important;
+    height: 96rpx !important;
+    color: #fff;
+}
+.btn-back {
+    margin-top: 60rpx;
+    width: 600rpx !important;
+    height: 96rpx !important;
+    color: #fff;
+}
+
+.agreement {
+    margin-top: 30rpx;
+    color: #969696;
+    font-size: 24rpx;
+}
+.document {
+    color: #222;
+}
+
+/* .van-button {
+    background-color: #2eba00 !important;
+} */
+
+.van-button--round.van-button--normal.van-button--primary{
+    background: #07c160 !important;
+}

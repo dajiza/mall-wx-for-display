@@ -1,0 +1,21 @@
+<view class="container">
+    <!-- 微信授权登录 -->
+    <view class="main">
+        <view class="img">
+            <image class="avator" src="{{userInfo.avatar_url}}" />
+            <!-- <image class="avator" src="../../assets/images/weixin_logo.png" /> -->
+        </view>
+        <van-button bindgetphonenumber="getPhoneNumber" block custom-class="big-btn btn-common" lang="zh_CN" open-type="getPhoneNumber" round type="primary">
+            授权手机号
+        </van-button>
+        <van-button block custom-class="big-btn btn-common btn-back" lang="zh_CN" round type="info" bindtap="gotoIndex" wx:if="{{showBack}}">
+            返回首页
+        </van-button>
+        <!-- <view class="agreement">
+            登录表示您已同意
+            <span class="document">用户协议</span>
+            和
+            <span class="document">隐私协议</span>
+        </view> -->
+    </view>
+</view>

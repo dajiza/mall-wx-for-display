@@ -1,0 +1,76 @@
+<view class="container" style="padding-bottom: 0px;">
+    <van-nav-bar fixed placeholder title="{{isAdmin?'我的名片':'联系老师'}}" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+        <view slot="left" class="goto-detail" bindtap="gotoDetail">
+            进入团作
+        </view>
+    </van-nav-bar>
+
+    <view class="container-body">
+        <view class="content-box">
+            <view class="user-info-box">
+                <view class="timg">
+                    <image class="fullimg" mode="aspectFill" src="{{avatar}}"></image>
+                </view>
+                <view class="content">
+                    <view class="user-name">{{nickName}}</view>
+                    <view class="user-wxid-box">
+                        <view>微信号：{{wxAccount}}</view>
+                        <button class="contact-way-item-button" hover-class="botton-hover" bindtap="handleConractWayCopy" data-index="{{-1}}">
+                            <text>复制</text>
+                        </button>
+                    </view>
+                </view>
+            </view>
+            <view class="tip" wx:if="{{!isAdmin}}">添加好友时，请备注：来自{{shopName}}团作课程</view>
+            <view class="qrcode-box" style="margin-top:{{isAdmin?'60':'0'}}rpx;margin-bottom:{{contactList.length==0?'60':'0'}}rpx;">
+                <view class="image-wrap">
+                    <van-image fit="cover" width="440rpx" height="440rpx" lazy-load radius="8rpx" src="{{qrcode}}"> </van-image>
+                </view>
+            </view>
+            <view class="dividing" wx:if="{{contactList.length>0}}"></view>
+            <view class="contact-way-box" wx:if="{{contactList.length>0}}">
+                <view class="contact-way-item" wx:for="{{contactList}}" wx:key="contactWay" wx:if="{{!(item.type=='wx_official'&&!showOfficialName)}}">
+                    <view class="contact-way-item-label-box">
+                        <view class="image-box">
+                            <image class="image" mode="aspectFill" src="{{item.icon}}"></image>
+                        </view>
+                        <view>{{item.contactWay}}</view>
+                    </view>
+                    <button class="contact-way-item-button" hover-class="botton-hover" bindtap="handleConractWayCopy" data-index="{{index}}">
+                        <text>复制</text>
+                    </button>
+                </view>
+            </view>
+            <view class="official-wrap">
+                <official-account class="official" wx:if="{{show_official}}" bindload="officialLoad" binderror="officialLoad"></official-account>
+            </view>
+        </view>
+
+        <view class="bottom-button-box">
+            <view class="bottom-button-wrap" wx:if="{{isAdmin&&creat_user_id==user_id}}" catchtap="handleContactCardEdit">
+                <view>编辑名片</view>
+            </view>
+            <view class="dividing-v" wx:if="{{isAdmin&&creat_user_id==user_id}}"></view>
+            <view class="bottom-button-wrap" catchtap="handleSaveContactCard">
+                <view>保存二维码</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<van-dialog
+    message="保存二维码需要相册访问权限"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    confirm-button-open-type="openSetting"
+    bindopensetting="onOpenSetting"
+    confirm-button-text="去授权"
+    show="{{ showSaveImageToPhotosAlbumDialog }}"
+    bind:close="onClose"
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+/>

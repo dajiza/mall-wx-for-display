@@ -1,0 +1,30 @@
+/* pages/orderCheck/orderCheck.wxss */
+.container {
+    padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+    background-color: var(--background-color);
+}
+.wrap {
+    width: 100%;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+.txv {
+    width: 100%;
+    height: 500rpx;
+}

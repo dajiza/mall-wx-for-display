@@ -1,0 +1,297 @@
+/* pages/wallet/wallet.wxss */
+.container {
+    position: relative;
+    /* padding-bottom: 200rpx; */
+    background-color: var(--background-color);
+    color: #333333;
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+/* top-card */
+.top-card {
+    position: relative;
+    z-index: 9;
+    margin: 20rpx auto 0;
+    width: 690rpx;
+    height: 350rpx;
+}
+.top-card .card-img {
+    position: absolute;
+    top: 1rpx;
+    float: left;
+    width: 690rpx;
+    height: 350rpx;
+}
+.top-card .description {
+    position: absolute;
+    top: 30rpx;
+    right: 30rpx;
+    z-index: 10;
+    width: 40rpx;
+    height: 40rpx;
+}
+.top-card .info {
+    position: relative;
+    z-index: 9;
+}
+.top-card .info .total {
+    margin: 60rpx 0 0 48rpx;
+    font-weight: 400;
+    font-size: 24rpx;
+}
+.top-card .info .total .value {
+    margin-top: 10rpx;
+}
+.top-card .info .details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40rpx;
+    border-top: 1px solid #ffe7c8;
+}
+.top-card .info .col {
+    flex: 1;
+    margin-top: 20rpx;
+    text-align: center;
+}
+.top-card .info .details .text {
+    margin-top: 8rpx;
+    color: #947650;
+    font-weight: 300;
+    font-size: 22rpx;
+}
+.top-card .info .details .col-line {
+    border-right: 2rpx dashed #ffe7c8;
+}
+
+.blur-box {
+    margin: -118rpx auto 0;
+    width: 634rpx;
+    height: 118rpx;
+    background: rgba(0, 0, 0, 0.14);
+    filter: blur(10px);
+}
+/* withdraw */
+.withdraw {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 630rpx;
+    height: 118rpx;
+    border-radius: 0 0 20rpx 20rpx;
+    background: linear-gradient(135deg, #ffebe2 0%, #ffdcbe 100%);
+}
+
+.withdraw .col {
+    flex: 1;
+    text-align: center;
+}
+.withdraw .col .text {
+    color: var(--primary-color-text);
+    font-weight: 300;
+    font-size: 22rpx;
+}
+.withdraw .col .button-customize {
+    margin: 0 auto;
+    width: 120rpx;
+    height: 56rpx;
+    border-radius: 28rpx;
+    background: linear-gradient(135deg, #ffffff 0%, #fff9f3 41%, #fff5e5 100%);
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 56rpx;
+}
+
+.by-time {
+    display: flex;
+    justify-content: space-between;
+    margin: 32rpx auto 0;
+    width: 690rpx;
+}
+.by-time .item {
+    position: relative;
+    overflow: hidden;
+    width: 330rpx;
+    height: 330rpx;
+    border-radius: 30rpx;
+    box-shadow: 0 12rpx 24rpx 0 rgba(0, 0, 0, 0.08);
+}
+.by-time .item .small-card {
+    position: absolute;
+    width: 330rpx;
+    height: 330rpx;
+}
+.by-time .item .small-card {
+    position: absolute;
+    width: 330rpx;
+    height: 330rpx;
+}
+.by-time .info {
+    position: relative;
+    z-index: 9;
+}
+.by-time .title {
+    margin: 30rpx 30rpx 22rpx 30rpx;
+    padding-bottom: 16rpx;
+    border-bottom: 1px solid #ffe7c8;
+    font-weight: 400;
+    font-size: 40rpx;
+}
+.by-time .bill {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30rpx 20rpx;
+    line-height: 44rpx;
+}
+.by-time .bill .value {
+    font-weight: 500;
+    font-size: 32rpx;
+}
+.by-time .bill .label {
+    font-weight: 300;
+    font-size: 24rpx;
+}
+/* record */
+.record {
+    box-sizing: border-box;
+    margin: 32rpx auto 0;
+    padding: 30rpx 30rpx 20rpx;
+    width: 690rpx;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.record .title {
+    margin-bottom: 48rpx;
+    font-weight: 500;
+    font-size: 32rpx;
+}
+.record .list .item {
+    display: flex;
+}
+.record .list .item .name {
+    flex: 0 0 320rpx;
+    font-weight: 400;
+    font-size: 28rpx;
+}
+.record .list .item .state {
+    flex: 0 0 70px;
+    font-weight: 400;
+    font-size: 28rpx;
+}
+.record .list .item .state.red {
+    color: #ff2f2f;
+}
+.record .list .item .state.green {
+    color: #52c41a;
+}
+.record .list .item .state.black {
+}
+.record .list .item .amount {
+    margin-left: auto;
+    color: #ff2f2f;
+    text-align: right;
+    font-weight: 400;
+    font-size: 28rpx;
+}
+.record .list .item .amount.green {
+    color: #52c41a;
+}
+.record .list .time {
+    margin-top: 12rpx;
+    margin-bottom: 40rpx;
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+}
+
+/* pop */
+.pop {
+    width: 670rpx;
+}
+.pop .close {
+    margin: 20rpx 0rpx 20rpx auto;
+    width: 48rpx;
+    height: 48rpx;
+}
+.pop .close .close-img {
+    width: 48rpx;
+    height: 48rpx;
+}
+.pop .contents {
+    width: 670rpx;
+    border-radius: 30rpx;
+    background: #ffffff;
+}
+.pop .title {
+    position: relative;
+    width: 670rpx;
+    height: 108rpx;
+}
+.pop .title .subject {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 60rpx;
+    text-align: center;
+    font-weight: 500;
+    font-size: 36rpx;
+}
+.pop .title .subject .text {
+    margin: 0 20rpx;
+}
+.pop .title .subject .title-left {
+    width: 20rpx;
+    height: 16rpx;
+}
+.pop .title .subject .title-right {
+    width: 20rpx;
+    height: 16rpx;
+}
+.pop .title-img {
+    position: absolute;
+    top: 0;
+    width: 670rpx;
+    height: 108rpx;
+}
+.pop .list {
+    margin: 40rpx 30rpx 0;
+}
+.pop .list .item {
+    display: flex;
+    padding-bottom: 44rpx;
+}
+.pop .list .label {
+    flex: 0 0 140rpx;
+    margin-right: 20rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 28rpx;
+}
+.pop .list .value {
+    color: var(--primary-color-text);
+    font-weight: 300;
+    font-size: 26rpx;
+}
+
+.pop-custom {
+    background: transparent !important;
+}
+
+.no-data {
+    text-align: center;
+}

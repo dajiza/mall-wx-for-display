@@ -1,0 +1,90 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container circle-page circle-detail-page" catch:tap="hideOperation">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="详情" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <!-- 详情 -->
+    <view class="content-box">
+        <circle-item
+                content="{{ detailInfo }}"
+                isTeacher="{{isTeacher}}"
+                userId="{{userId}}"
+                shopId="{{shopId}}"
+                activeIndex="0"
+                bind:onComment="onComment"
+                bind:onLike="handleOnLike"
+                bind:onMore="handleOnMore"
+                bind:onDelete="handleOnDelete"
+                bind:onMute="handleOnMute"
+                bind:showMoreOperation="showMoreOperation"
+                bind:openAllText="openAllText"
+                bind:showAllText="showAllText"
+        >
+            <view slot="reviews" class="slot-reviews">
+                <image class="reviews-img" src="../../assets/images/reviews.svg" bind:tap="onRating"></image>
+            </view>
+        </circle-item>
+    </view>
+    <!--评论输入框-->
+    <view class="textarea-wrap" style="bottom:{{commentInputBottom + 'rpx'}}" wx:if="{{commentBoxShow}}">
+        <view class="text_box">
+            <input
+                    model:value="{{ commentText }}"
+                    placeholder="{{textareaPlaceholder}}"
+                    border="{{ false }}"
+                    focus="{{inputFocus}}"
+                    show-confirm-bar="{{false}}"
+                    adjust-position="{{false}}"
+                    contenteditable="{{true}}"
+                    class="circle-comment-textarea"
+                    placeholder-class="comment-input-placeholder"
+                    confirm-type="send"
+                    bind:focus="replaceInputFocus"
+                    bind:blur="replaceBlur"
+                    bind:input="bindReplaceInput"
+                    bind:confirm="handleOnComment"
+                    bind:keyboardheightchange="onKeyboardHeightChange"
+            ></input>
+        </view>
+        <view class="btn-publish" catch:tap="handleOnComment">发表</view>
+    </view>
+</view>
+<!-- 已被禁言提示弹窗 -->
+<van-dialog use-slot  width="600rpx" customStyle="border-radius: 16rpx" show="{{ muteTipShow }}"
+            show-confirm-button="{{true}}"
+            confirmButtonText="知道了"
+            catchtouchmove="preventTouchMove"
+            confirm-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:84rpx;width: 100% !important;"
+            bind:close="onMuteDialogClose"
+            bind:confirm="onMuteDialogClose"
+>
+    <view class="mute-dialog-content">
+        <view class="mute-dialog-content-text">您已被禁言，请联系老师</view>
+    </view>
+</van-dialog>
+<!-- 禁言弹窗 -->
+<van-dialog use-slot show="{{ showMuteDialog }}" show-cancel-button custom-style="--dialog-border-radius: 16rpx;"
+            confirm-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+            cancel-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+            close-on-click-overlay="{{false}}" bind:confirm="handleOnMuteConfirm" bind:cancel="handleOnMuteCancel"
+            asyncClose="{{true}}">
+    <view class="mute-dialog-content-box">
+        <view class="content-label">类型</view>
+        <view class="mute-type-box">
+            <view class="{{muteType==1?'mute-type-active':'mute-type-normal'}}" bindtap="changeMuteType" data-type="1"
+                  style="margin-right: 40rpx;">永久禁言</view>
+            <view class="{{muteType==1?'mute-type-normal':'mute-type-active'}}" bindtap="changeMuteType" data-type="2">择期禁言
+            </view>
+        </view>
+        <view class="content-label">时间</view>
+        <view class="mute-expire-input-box">
+            <input class="mute-expire-input" placeholder-class="mute-expire-input-placeholder"
+                   value="{{muteType==1?'永久':muteDay}}" placeholder="{{muteType==1?'':'请输入天数'}}" bindinput="handleOnMuteDayInput"
+                   disabled="{{muteType==1}}" type="number" />
+            <view class="content-label" style="margin-top:0px;margin-right:20rpx;" wx:if="{{muteType!=1}}">天</view>
+        </view>
+    </view>
+</van-dialog>

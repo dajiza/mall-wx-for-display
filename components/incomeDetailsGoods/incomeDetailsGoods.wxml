@@ -1,0 +1,24 @@
+<!--components/orderGoods/incomeDetailsGoods.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="income-goods">
+    <view
+        class="goods-info"
+        data-id="{{goods.id}}"
+    >
+        <view class="timg">
+            <image
+                class="fullimg img-radius"
+                mode="aspectFill"
+                src="{{ fn.limitImgSize(goods.order_goods_img) }}"
+            ></image>
+        </view>
+        <view class="info">
+            <view class="title">{{goods.order_goods_name}}</view>
+            <view class="order-no-amount">
+                <view class="order-no">订单编号：{{goods.order_no}}</view>
+                <view class="order-amount">付款￥{{fn.formatMoney(goods.pay_money)}}</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,56 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container comment-list-page">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="我的评价" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box" style="padding-bottom: {{safeAreaInsetBottom + 50}}rpx">
+        <view class="comment-tabs" style="top: {{navHeight}};">
+            <view class="{{tabsShow?'tabsShow':'tabsHide'}}">
+                <van-tabs active="{{ active }}" swipe-threshold="{{7}}" bind:change="onChange">
+                    <van-tab title="已评价"></van-tab>
+                    <van-tab title="待评价({{notEvaluatedTotal}})"></van-tab>
+                </van-tabs>
+            </view>
+        </view>
+        <view class="comment-list">
+            <block wx:for="{{list}}" wx:key="id">
+                <view class="goods-comment-info"
+                      style="margin-top: 24rpx; margin-bottom: {{index==list.length-1?'24rpx':'0'}};"
+                      data-item-index="{{index}}" data-id="{{item.comment_id}}" catchtap="navigation">
+                    <view class="goods-info" data-id="{{item.goods_sku.goodsId}}" catch:tap="handleOnGoodsDetail">
+                        <comment-goods
+                                style="width: 100%"
+                                sku_img="{{item.goods_sku.skuImg}}"
+                                goods_name="{{item.goods_sku.skuName}}"
+                                label="{{item.goods_sku.skuAttr}}"
+                                sku_price="{{item.goods_sku.price}}"/>
+                    </view>
+                    <!--已评价-->
+                    <view class="comment-wrap" wx:if="{{active == 0}}">
+                        <!--评论内容-->
+                        <comment-item
+                                style="width: 100%"
+                                showUser="{{false}}"
+                                comment="{{item.message}}"
+                                attachment="{{item.medias}}"
+                                textLineNum="{{2}}"
+                        ></comment-item>
+                    </view>
+                    <!--待评价-->
+                    <view class="comment-wrap" style="align-items: flex-end" wx:if="{{active == 1}}">
+                        <van-button round custom-class="comment-button"
+                                    data-index="{{index}}"
+                                    bindtap="handleGoReview">去评价
+                        </van-button>
+                    </view>
+                </view>
+            </block>
+          <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{list.length > 0 && bottomLoadingShow}}">加载中...</van-loading>
+          <view class="no-more" wx:if="{{list.length > 0 && is_all}}">人家也是有底线的～</view>
+          <view class="empty-course" wx:if="{{list.length == 0 && is_all}}">暂无评论</view>
+        </view>
+    </view>
+</view>

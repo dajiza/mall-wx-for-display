@@ -1,0 +1,9 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "空白模板",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-button": "@vant/weapp/button/index",
+        "invitation-code": "../components/invitationCode/invitationCode"
+    }
+}

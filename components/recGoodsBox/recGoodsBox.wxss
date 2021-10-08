@@ -1,0 +1,108 @@
+/* components/couponItem/couponItem.wxss */
+/*商品容器*/
+.goods-box {
+    margin-top: 40rpx;
+    width: 100%;
+}
+.goods-box .hot-goods {
+    display: flex;
+    margin: 0 auto 30rpx;
+    width: 690rpx;
+    height: 56rpx;
+    text-align: left;
+}
+.goods-box .hot-goods .hot-goods-icon {
+    position: relative;
+    width: 52rpx;
+}
+.goods-box .hot-goods .hot-goods-icon .ball-box {
+    position: absolute;
+    top: 50%;
+    width: 24rpx;
+    height: 24rpx;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    transform: translateY(-50%);
+}
+.goods-box .hot-goods .hot-goods-icon .ball-left {
+    left: 0;
+}
+.goods-box .hot-goods .hot-goods-icon .ball-right {
+    left: 12rpx;
+    background: var(--primary-color);
+}
+.goods-box .hot-goods .hot-goods-text {
+    height: 56rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 40rpx;
+    line-height: 56rpx;
+}
+.goods-box .hot-goods-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 690rpx;
+}
+.goods-box .hot-goods-list .goods-item-box {
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 30rpx;
+    margin-bottom: 30rpx;
+    width: 330rpx;
+    height: 468rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+    /* box-shadow: 0 6px 12px 0 rgba(66, 18, 33, 0.12); */
+}
+.goods-box .hot-goods-list .no-margin {
+    margin-right: 0;
+}
+.goods-box .hot-goods-list .goods-item-box .goods-img {
+    display: block;
+    margin-bottom: 20rpx;
+    width: 330rpx;
+    height: 330rpx;
+    vertical-align: bottom;
+}
+.hot-goods-name {
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0 10rpx;
+    width: 100%;
+    height: 42rpx;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 30rpx;
+    line-height: 42rpx;
+}
+.hot-goods-price {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-top: 12rpx;
+    padding: 0 10rpx;
+    height: 44rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+.hot-goods-price .pay-num {
+    color: var(--secondary-color-text);
+    font-size: 22rpx;
+}
+.van-loading {
+    padding: 10rpx 0;
+    width: 100%;
+}
+.no-more {
+    padding: 10rpx 0;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}

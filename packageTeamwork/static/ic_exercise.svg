@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="51px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>作业墙icon</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="19.4222677%" x2="87.6652511%" y2="85.1051549%" id="linearGradient-1">
+            <stop stop-color="#FAC3BA" offset="0%"></stop>
+            <stop stop-color="#FF9C85" offset="99.9262456%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="51.5643084%" x2="-28.2907423%" y2="145.133464%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F8BCAE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="作业墙icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="25.5" cy="25.5" r="25.5"></circle>
+            <path d="M34,13 C35.6568542,13 37,14.3431457 37,16 L37,29.2818438 C37,30.1175347 36.6514212,30.9153508 36.0382241,31.4831258 L29.8626154,37.201282 C29.3080678,37.714752 28.5801522,38 27.8243913,38 L17,38 C15.3431457,38 14,36.6568542 14,35 L14,16 C14,14.3431457 15.3431457,13 17,13 L34,13 Z M21,27 L18,27 C17.4477153,27 17,27.4477153 17,28 C17,28.5522847 17.4477153,29 18,29 L18,29 L21,29 C21.5522847,29 22,28.5522847 22,28 C22,27.4477153 21.5522847,27 21,27 L21,27 Z M27,23 L18,23 C17.4477153,23 17,23.4477153 17,24 C17,24.5522847 17.4477153,25 18,25 L18,25 L27,25 C27.5522847,25 28,24.5522847 28,24 C28,23.4477153 27.5522847,23 27,23 L27,23 Z M24,19 L18,19 C17.4477153,19 17,19.4477153 17,20 C17,20.5522847 17.4477153,21 18,21 L18,21 L24,21 C24.5522847,21 25,20.5522847 25,20 C25,19.4477153 24.5522847,19 24,19 L24,19 Z" id="合并形状" fill="url(#linearGradient-2)"></path>
+            <path d="M32,30 L38,30 L38,30 L30,38 L30,32 C30,30.8954305 30.8954305,30 32,30 Z" id="矩形" fill="#FF9D87" opacity="0.404668899"></path>
+        </g>
+    </g>
+</svg>

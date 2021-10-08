@@ -1,0 +1,15 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "",
+    "backgroundColor": "#FFFFFF",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance":100,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+        "van-loading": "@vant/weapp/loading/index"
+    }
+}

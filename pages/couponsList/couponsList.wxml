@@ -1,0 +1,26 @@
+<!-- packageAgent/couponsList/couponsList.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar title="{{ navTitle }}" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" title-class="nav-title" fixed placeholder>
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <!-- tabs -->
+    <view class="order-tabs" style="top: {{navHeight}};">
+        <view>
+            <van-tabs active="{{ active }}" bind:change="onChange">
+                <van-tab title="未使用({{unUseList.length}})"></van-tab>
+                <van-tab title="已使用"></van-tab>
+                <van-tab title="已过期"></van-tab>
+            </van-tabs>
+        </view>
+    </view>
+    <view class="list">
+        <coupon-item class="item" list-type="1" type="{{type}}" detail="{{item}}" wx:for="{{list}}" data-coupon="{{item}}"></coupon-item>
+        <view class="empty" wx:if="{{list.length==0}}">
+            <image class="empty-img" src="/assets/images/coupon-empty.png" />
+            <view class="text">{{active==2?'暂无过期优惠券哦':'您还没有优惠券哦'}}~</view>
+        </view>
+    </view>
+</view>

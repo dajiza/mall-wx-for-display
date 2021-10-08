@@ -1,0 +1,63 @@
+/* components/orderGoods/incomeDetailsGoods.wxss */
+@import '../../app.wxss';
+.order-goods {
+    width: 100%;
+}
+.income-goods {
+    padding-bottom: 16rpx;
+}
+.income-goods .goods-info {
+    position: relative;
+    display: flex;
+    height: 136rpx;
+}
+.income-goods .timg {
+    overflow: hidden;
+    flex: 0 0 auto;
+    margin-right: 20rpx;
+    width: 136rpx;
+    height: 136rpx;
+}
+.income-goods .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 534rpx;
+    height: 100%;
+}
+.income-goods .info .title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    justify-content: space-between;
+    height: 80rpx;
+    color: var(--primary-color-text);
+    word-break: break-all;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+
+    -webkit-line-clamp: 2;
+}
+.income-goods .info .order-no-amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40rpx;
+}
+.order-no-amount .order-no {
+    height: 34rpx;
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+
+.order-no-amount .order-amount {
+    height: 40rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}

@@ -1,0 +1,24 @@
+<wxs module="fn" src="../../../utils/fn.wxs"></wxs>
+
+<view style="width:100vw;">
+    <view class="invitation-code-info-wrap" style="{{customStyle}}">
+        <view class="invitation-code-heard-wrap {{big?'invitation-code-heard-wrap-big':''}}">
+            <view class="top-holder" wx:if="{{big}}"></view>
+            <image class="invitation-img {{big?'invitation-img-big':''}}" mode="aspectFill" src="../../static/ic_invitation_code.png"></image>
+            <view class="invitation-code-content {{big?'invitation-code-content-big':''}}">
+                <view class="invitation-code-lable">您的邀请码</view>
+                <view class="invitation-code">{{invitationCode}}</view>
+                <view class="code-copy" catchtap="codeCopy">复制邀请码</view>
+            </view>
+        </view>
+        <view class="invitation-code-tip {{big?'invitation-code-tip-big':''}}">
+            <view wx:if="{{showTipTitle}}" class="invitation-code-title">当前团作为邀请返现团</view>
+            <view wx:if="{{showTipTitle}}">活动规则如下：</view>
+            <view>1、将您的邀请码分享给好友。</view>
+            <view>2、您的好友报名参加此团作时填写您的邀请码。</view>
+            <view>3、您将会收到{{fn.formatMoney(backMoney)}}元返现奖励。同时您的好友在报名时可优惠{{fn.formatMoney(backMoney)}}元。</view>
+            <view>4、此活动无上限，直至您的报名费用全部返还完。</view>
+            <slot></slot>
+        </view>
+    </view>
+</view>

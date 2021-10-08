@@ -1,0 +1,43 @@
+<!--packageAgent/makeUp/makeUp.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed placeholder title="{{title}}" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="clickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="introduction" wx:if="{{description}}">
+        {{description}}
+    </view>
+    <view class="goods-list-wrap" style="margin-top: {{filterBoxHeight}}px;" wx:if="{{list.length>0}}">
+        <view wx:for="{{list}}" wx:for-item="goods" wx:key="id" wx:for-index="goodsIndex" data-id="{{goods.goods_id}}" bindtap="gotoDetail">
+            <view class="goods-item-box">
+                <view class="item-image-box">
+                    <image class="item-image" lazy-load mode="aspectFill" src="{{fn.limitImgSize(goods.goods_img)}}"></image>
+                </view>
+                <view class="item-goods-name">
+                    {{goods.goods_title}}
+                </view>
+                <view class="item-goods-bottom-box">
+                    <view class="item-goods-price">
+                        ¥ {{fn.formatMoney(goods.price)}}
+                    </view>
+                    <view class="sales">{{goods.real_sales}}人付款</view>
+                    <!-- <view class="item-goods-add" hover-class="botton-hover" bindtap="addGoods" data-index="{{goodsIndex}}"> </view> -->
+                </view>
+            </view>
+        </view>
+        <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{loading}}">加载中...</van-loading>
+        <view class="no-more" wx:if="{{page >= pageTotal}}">人家也是有底线的～</view>
+    </view>
+    <view class="empty-list" wx:elif="{{loaded}}" style="margin-top: {{filterBoxHeight}}px;">
+        <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+        <view class="empty-text">
+            <view>暂无商品数据</view>
+        </view>
+    </view>
+
+    <!-- <spec id="spec" mark="cart" /> -->
+</view>
+
+<authorize-popup id="authorize" />

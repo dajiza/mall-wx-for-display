@@ -1,0 +1,70 @@
+<!-- pages/cart/cart.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar title="信息确认" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="address wrap">
+        <navigator url="{{ defaultAddress? '/pages/address/address?select=true': '/pages/address/address-edit/address-edit'}}">
+            <view class="add" wx:if="{{ !defaultAddress }}">
+                <view class="content">
+                    <view class="plus">
+                        <image class="fullimg" src="../../assets/images/address-plus.png"></image>
+                    </view>
+                    <view class="text">请添加收货地址</view>
+                </view>
+            </view>
+            <view class="detail" wx:if="{{ defaultAddress }}">
+                <view class="info">
+                    <span class="name">{{ defaultAddress.name }}</span>
+                    <span class="phone">{{ defaultAddress.phone }}</span>
+                </view>
+                <view class="location">
+                    {{ defaultAddress.province }} {{ defaultAddress.city }} {{ defaultAddress.area }} {{ defaultAddress.address }}
+                </view>
+                <span class="corner iconfont icon-youjiantou"></span>
+            </view>
+        </navigator>
+        <view class="address-line" wx:if="{{ defaultAddress }}"></view>
+    </view>
+    <view class="goods-list wrap">
+        <view class="title">商品信息</view>
+        <!-- <view class="dividing"></view> -->
+        <view class="list">
+            <block wx:for="{{ goodsList }}" wx:key="skuId">
+                <view class="dividing"></view>
+                <view class="order-goods">
+                    <view class="product">
+                        <view class="goods-info">
+                            <view class="timg">
+                                <image class="fullimg img-radius" mode="aspectFill" src="{{ fn.limitImgSize(item.img) }}"></image>
+                            </view>
+                            <view class="info">
+                                <view class="title">
+                                    {{ item.title }}
+                                </view>
+                                <view class="digital">
+                                    <view class="num">x {{ item.quantity }}</view>
+                                    <view class="points">
+                                        <image class="coin" mode="aspectFill" src="/assets/images/coin.svg"></image>
+                                        {{item.points}}
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+
+    <view class="submit-bar">
+        <view class="points">
+            <image class="coin" mode="aspectFill" src="/assets/images/coin.svg"></image>
+            {{totalPoints}}
+        </view>
+        <van-button round type="primary" bindtap="submitOrder" custom-class="custom-btn-creat">确认兑换</van-button>
+    </view>
+</view>

@@ -1,0 +1,99 @@
+/* pages/orderCheck/orderCheck.wxss */
+.container {
+    padding-bottom: calc(env(safe-area-inset-bottom));
+    background-color: var(--background-color);
+}
+.wrap {
+    width: 100%;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.nav {
+    background: var(--background-color) !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+.topcard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30rpx auto 0;
+    width: 690rpx;
+    height: 240rpx;
+    border-radius: 20rpx;
+    background: linear-gradient(90deg, #394055 0%, #67718c 100%);
+    color: #ffffff;
+}
+
+.topcard .left {
+    margin-left: 40rpx;
+}
+.topcard .left .text {
+    font-size: 24rpx;
+}
+.topcard .left .score {
+    margin-top: 8rpx;
+    font-weight: 600;
+    font-size: 60rpx;
+}
+.topcard .right {
+    margin-right: 30rpx;
+    width: 108rpx;
+    height: 56rpx;
+    border-radius: 10rpx;
+    background: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 56rpx;
+}
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40rpx auto 0;
+    width: 690rpx;
+}
+.navigation .tabs {
+    display: flex;
+    align-items: baseline;
+    font-size: 32rpx;
+}
+.navigation .tabs .tab {
+    margin-right: 30rpx;
+}
+.navigation .tabs .tab.active {
+    font-weight: 600;
+    font-size: 52rpx;
+}
+.navigation .log {
+    color: var(--tip-color-text);
+    font-size: 28rpx;
+}
+.list {
+    margin-top: 48rpx;
+}
+
+.van-loading {
+    padding: 30rpx 0 0;
+    width: 100vw;
+    text-align: center;
+}
+.no-more {
+    padding: 0rpx 0 20rpx;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}

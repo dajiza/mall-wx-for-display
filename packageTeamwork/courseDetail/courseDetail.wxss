@@ -1,0 +1,405 @@
+.page {
+    /* background: var(--background-color); */
+}
+
+.container {
+    background: var(--background-color);
+}
+
+.nav {
+    background: #fff;
+}
+
+.title {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.leftIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+    color: #333333;
+    transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+
+.content-box {
+    width: 100%;
+    background: #fff;
+}
+
+.banner-wrap {
+    width: 100%;
+    height: 422rpx;
+}
+
+.vedio-wrap {
+    width: 100%;
+    height: 422rpx;
+    background-color: #000;
+}
+
+.vedio {
+    position: absolute;
+    z-index: 11;
+    width: 100%;
+    height: 422rpx;
+}
+
+.van-tabs__wrap {
+    margin-right: 30rpx !important;
+    margin-left: 30rpx !important;
+}
+
+.van-tabs--line .van-tabs__wrap,
+.van-tabs__nav {
+    height: 86rpx !important;
+}
+
+.van-tabs__line {
+    width: 52rpx !important;
+    height: 8rpx !important;
+    border-radius: 0 !important;
+    background: var(--primary-gradual-color);
+}
+
+.tabs-rwap {
+}
+.tabs-rwap .tab-scroll {
+    background: linear-gradient(180deg, #ffffff 0%, var(--background-color) 100%);
+}
+
+.van-tab {
+    padding-top: 30rpx !important;
+    color: var(--primary-color-text) !important;
+    font-size: 28rpx !important;
+    line-height: 40rpx !important;
+}
+
+.van-tab--active {
+    font-weight: 600 !important;
+}
+
+.van-tabs--line .van-tabs__wrap {
+    padding-bottom: 14rpx !important;
+}
+
+.van-tabs__scroll--line {
+    height: calc(100% + 14rpx) !important;
+}
+
+.course-tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rpx 30rpx 0px 30rpx;
+}
+
+.course-tab-label {
+    color: #564b4e;
+    font-weight: 500;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    line-height: 42rpx;
+}
+
+.course-tab-more {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 132rpx;
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    line-height: 34rpx;
+}
+
+.scroll-view_H {
+    box-sizing: border-box;
+    padding-top: 30rpx;
+    height: 300rpx;
+}
+
+.course-video {
+    display: inline-block;
+    margin-left: 30rpx;
+    width: 328rpx;
+}
+
+.video-thumbnail-wrap {
+    position: relative;
+    height: 184rpx;
+}
+
+.video-play {
+    position: absolute;
+    top: 66rpx;
+    left: 88rpx;
+    width: 152rpx;
+    height: 52rpx;
+    border-radius: 26rpx;
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 52rpx;
+    opacity: 0.4;
+}
+
+.video-play-content {
+    position: absolute;
+    top: 66rpx;
+    left: 88rpx;
+    width: 152rpx;
+    height: 52rpx;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 52rpx;
+}
+
+.video-title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    margin-top: 20rpx;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    word-break: break-all;
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+
+    -webkit-line-clamp: 1;
+}
+
+.course-image {
+    padding-bottom: 30rpx;
+    height: 122rpx;
+}
+
+.course-image-item {
+    display: flex;
+    align-items: center;
+}
+
+.course-image-item .image-wrap {
+    margin-right: 20rpx;
+    width: 122rpx;
+    height: 122rpx;
+}
+
+.course-image-item .content-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 8rpx 0;
+    height: 122rpx;
+}
+
+.course-image-item .content-wrap .content-name {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    word-break: break-all;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 36rpx;
+
+    -webkit-line-clamp: 2;
+}
+
+.course-image-item .content-wrap .content-size {
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    line-height: 36rpx;
+}
+
+.course-edit-admin {
+    display: flex;
+    justify-content: center;
+    padding-top: 60rpx !important;
+    height: 190rpx !important;
+}
+
+.course-edit {
+    display: flex;
+    justify-content: center;
+    padding-top: 0 !important;
+    height: 158rpx !important;
+}
+
+.empty-course {
+    display: flex;
+    justify-content: center;
+    padding-top: 60rpx;
+    color: var(--tip-color-text);
+    text-align: center;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.course-edit-admin .van-button--round.van-button--normal.van-button--primary {
+    /* background: rgba(var(--primary-color-opacity),0.8) !important; */
+    background: var(--scan-btn-background) !important;
+}
+
+.more-features-tab {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40rpx;
+    padding: 0 70rpx;
+}
+
+.features-item-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 110rpx;
+    height: 148rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.features-icon {
+    width: 102rpx;
+    height: 102rpx;
+}
+
+.course-image-popup {
+    width: 100%;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.course-image-popup-label {
+    padding-left: 30rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 30rpx;
+    line-height: 42rpx;
+}
+
+.course-image-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100rpx;
+}
+
+.course-image-popup-closeable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88rpx;
+    height: 100%;
+}
+
+.course-image-full-wrap {
+    padding-top: 10rpx;
+    padding-right: 30rpx;
+    padding-left: 30rpx;
+}
+
+.course-video-item {
+    display: flex;
+    align-items: center;
+}
+
+.course-video-item .image-wrap {
+    position: relative;
+    width: 328rpx;
+    height: 184rpx;
+}
+
+.course-video-item .content-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20rpx;
+    height: 184rpx;
+}
+
+.course-video-item .content-wrap .content-name {
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.course-video-item .content-wrap .content-size {
+    margin-top: 30rpx;
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.more_see {
+    margin-left: auto;
+    width: 20rpx;
+    height: 20rpx;
+}
+
+.close {
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.custom-tab .van-info--dot {
+    top: -16rpx !important;
+    left: -10rpx !important;
+}
+
+/* 推荐商品 */
+.rec-box {
+    width: 100%;
+    background: var(--background-color);
+}
+.rec-box .rec-title {
+    margin-top: 50rpx;
+    margin-left: 30rpx;
+    font-weight: 500;
+    font-size: 30rpx;
+}
+/* dialog */
+.dialog-wrap {
+    padding: 60rpx 0rpx;
+}
+.dialog-wrap .dialog-title {
+    padding: 0 100rpx;
+    color: var(--primary-color-text);
+    text-align: center;
+    font-weight: 500;
+    font-size: 32rpx;
+}
+.dialog-wrap .dialog-content {
+    margin-top: 60rpx;
+    padding: 0 100rpx;
+    color: var(--primary-color-text);
+    font-size: 28rpx;
+}
+.dialog-wrap .dialog-content.mutil {
+    padding: 0 40rpx;
+}

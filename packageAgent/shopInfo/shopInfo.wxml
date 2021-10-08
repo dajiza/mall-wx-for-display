@@ -1,0 +1,117 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="设置中心" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+
+    <view class="features-list">
+        <view class="item-warp">
+            <view class="features-item" bindtap="">
+                <view class="features-left">
+                    <text class="features-name">头像</text>
+                </view>
+                <view class="features-right">
+                    <van-uploader bind:after-read="afterRead" accept="image" max-size="10485760" bind:oversize="oversize">
+                        <view class="timg">
+                            <image class="fullimg" mode="aspectFill" src="{{avatar}}"></image>
+                        </view>
+                    </van-uploader>
+                    <text class="iconfont icon-right-corner2"></text>
+                </view>
+            </view>
+            <view class="dividing"></view>
+            <view class="features-item" bindtap="gotoSetName">
+                <view class="features-left">
+                    <text class="features-name">昵称</text>
+                </view>
+                <view class="features-right">
+                    <view class="features-value">{{nickName}}</view>
+                    <text class="iconfont icon-right-corner2"></text>
+                </view>
+            </view>
+        </view>
+        <view class="item-warp">
+            <view class="features-item">
+                <view class="features-left">
+                    <text class="features-name">店铺名称</text>
+                </view>
+                <view class="features-right">
+                    <view class="features-value">{{shopName}}</view>
+                </view>
+            </view>
+            <view class="dividing"></view>
+            <view class="features-item" bindtap="clickUnfinishedBtn">
+                <view class="features-left">
+                    <text class="features-name">店铺banner</text>
+                </view>
+                <view class="features-right">
+                    <text class="iconfont icon-right-corner2"></text>
+                </view>
+            </view>
+            <view class="dividing"></view>
+            <view class="features-item" bindtap="handleCodeOrder">
+                <view class="features-left">
+                    <text class="features-name">扫码下单</text>
+                </view>
+                <view class="features-right">
+                    <text class="iconfont icon-right-corner2"></text>
+                </view>
+            </view>
+        </view>
+        <view class="item-warp">
+            <view class="features-item" bindtap="clickLoginAgainBtn">
+                <view class="features-left">
+                    <text class="features-name">重新授权</text>
+                </view>
+                <view class="features-right">
+                    <text class="iconfont icon-right-corner2"></text>
+                </view>
+            </view>
+            <view class="dividing"></view>
+            <view class="features-item" bindtap="updatePhone">
+                <view class="features-left">
+                    <text class="features-name">手机号</text>
+                </view>
+                <view class="features-right">
+                    <view class="features-value">{{phone}}</view>
+                    <view class="phone-btn">
+                        <image class="weixin-logo" mode="aspectFill" src="../../assets/images/weixin-w.png"></image>
+                        {{phone?'重新':'一键'}}获取
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="item-warp">
+            <view class="features-item">
+                <view class="features-left">
+                    <text class="features-name">版本号</text>
+                </view>
+                <view class="features-right">
+                    {{envVersion}}-{{version?version:'非正式版无版本号'}}
+                </view>
+            </view>
+            <!-- <view class="features-item">
+                <view class="features-left">
+                    <text class="features-name">token</text>
+                </view>
+                <view class="features-right">
+                    {{token}}
+                </view>
+            </view>
+            <view class="features-item">
+                <view class="features-left">
+                    <text class="features-name">openId</text>
+                </view>
+                <view class="features-right">
+                    {{openId}}
+                </view>
+            </view> -->
+        </view>
+    </view>
+</view>
+<authorize-popup id="authorize" />

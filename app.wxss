@@ -1,0 +1,288 @@
+/**app.wxss**/
+@import './assets/fonts/iconfont.wxss';
+@import './assets/theme/master.wxss';
+page {
+    color: var(--primary-color-text);
+    font-size: 28rpx;
+    font-family: PingFang SC, SourceHanSansCN-Medium, Microsoft YaHei;
+}
+
+.custom-nav-bat-title {
+    color: #333333;
+    font-weight: 500;
+    font-size: 38rpx;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
+    /* padding-bottom: 20rpx; */
+    /* safe-area-inset-bottom */
+    min-height: 100vh;
+    width: 100vw;
+}
+/* button 样式覆写 */
+button {
+    background: initial;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button::after {
+    border: none;
+}
+.van-button {
+    width: auto !important;
+    border: 0 !important;
+    color: #fff !important;
+    font-size: 28rpx !important;
+}
+/* 去除对dialog按钮的影响 */
+van-dialog .van-button {
+    width: 100% !important;
+}
+
+/* van-dialog__button */
+.van-dialog__button {
+    color: var(--primary-color-text) !important;
+    text-align: center;
+    font-size: 32rpx;
+}
+/* base */
+.fullimg {
+    width: 100%;
+    height: 100%;
+}
+.fullimg-width {
+    width: 100%;
+}
+.img-radius {
+    border-radius: 16rpx;
+}
+/* 分割线 */
+.dividing {
+    width: 100%;
+    height: 1rpx;
+    background-color: var(--divider-border-color);
+}
+/* tabbar */
+.van-tabbar {
+    height: 100rpx !important;
+    box-shadow: 0px -2px 4px 0px rgba(209, 201, 203, 0.2);
+}
+.van-tabbar-item {
+    color: #c3c3c3 !important;
+    font-size: 20rpx !important;
+}
+.van-tabbar-item__icon {
+    margin-bottom: 0px !important;
+}
+
+.van-tabbar-item.van-tabbar-item--active {
+    /* 川家布 川小布 */
+    color: #fb6090 !important;
+    /* 进口拼布 */
+    /* color: #222222 !important; */
+    /* 木木家 */
+    /* color: #ee7093 !important; */
+    font-weight: 500;
+}
+/* cell */
+.cell-wrap {
+    /* padding: 30rpx; */
+}
+.cell-wrap .customize-cell {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40rpx;
+}
+.cell-wrap .customize-cell:last-child {
+    margin-bottom: 0;
+}
+.cell-wrap .customize-cell .label {
+    flex-basis: 160rpx;
+    flex-shrink: 0;
+    /* width: 160rpx; */
+}
+.cell-wrap .customize-cell .value {
+    text-align: right;
+}
+.cell-wrap .customize-cell .operation {
+    color: var(--tip-color-text);
+}
+.cell-wrap .customize-cell .icon-youjiantou {
+    margin-left: 20rpx;
+    color: var(--tip-color-text);
+    vertical-align: 2rpx;
+    font-size: 20rpx;
+}
+
+.cell-wrap .customize-cell .money {
+    color: var(--features-color-text);
+    font-weight: 500;
+}
+
+.loading-global-custom .van-loading__spinner--circular {
+    border-top-width: 2px !important;
+}
+.leftIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+    color: #333333;
+    transform: translateX(-25%);
+}
+.discount-text {
+    color: var(--primary-color-text);
+    font-weight: 400;
+}
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.text-overflow-4 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal !important;
+    word-wrap: break-word;
+
+    -webkit-line-clamp: 4;
+}
+/* 去除滚动条显示 */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+/* 表单新样式 */
+.new-form-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 40rpx auto 0;
+    padding: 0 40rpx;
+    width: 690rpx;
+    height: 120rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+    color: var(--tip-color-text);
+    font-size: 26rpx;
+}
+.new-form-item .van-field__placeholder {
+    color: var(--tip-color-text-88);
+    font-size: 28rpx;
+}
+.new-form-item .van-cell,
+.new-form-item-upload-wrap .van-cell {
+    padding: 0;
+}
+.new-form-item .item-value {
+    color: var(--primary-color-text);
+    font-size: 28rpx;
+}
+/* 表单 上传样式1 */
+.new-form-item-upload {
+    box-sizing: border-box;
+    margin: 40rpx auto 0;
+    padding: 40rpx 0 40rpx 40rpx;
+    width: 690rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+    color: var(--tip-color-text);
+    font-size: 26rpx;
+}
+.new-form-item-upload .name {
+    margin-bottom: 20rpx;
+}
+
+.new-form-item-upload .upload-slot {
+    margin-top: 20rpx;
+    width: 188rpx;
+    height: 188rpx;
+    border-radius: 16rpx;
+    background: rgba(0, 0, 0, 0.03);
+    text-align: center;
+    line-height: 188rpx;
+}
+.new-form-item-upload .upload-slot .icon-jia {
+    color: var(--primary-color);
+    font-size: 32rpx;
+}
+
+.new-form-item-upload .van-uploader {
+    margin-top: -20rpx;
+}
+.new-form-item-upload .van-uploader .van-uploader__upload {
+    overflow: hidden;
+    margin-top: 20rpx;
+    width: 188rpx !important;
+    height: 188rpx !important;
+    border: 2rpx solid var(--tip-color-text-d8);
+    background-color: #fff;
+}
+.new-form-item-upload .van-uploader .van-uploader__upload-text {
+    color: var(--tip-color-text);
+    font-size: 20rpx;
+}
+.new-form-item-upload .van-uploader .van-uploader__preview .van-uploader__preview-delete {
+    padding: 0;
+    width: 40rpx;
+    height: 40rpx;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAADhUlEQVRYR82YTWhUVxTHf2feZF4SpxChwY0pJG4MFIRCDLSaVbViVy4qLd2okKSFVGcjbkwWiRtxM9iATQLqoqXFLlxVbO1KqxClRaGQLopC40ZSMFBN5mU+TjmT96aTcWZeRlK4d/Vm3nnn/u7/nHvuh9BiU9Ve4ANgH9APvAW8Ebr5B/gLWAB+AX4UkSetdCGbMVZVD/gIGAPeBTb1HaDAPWAa+F5EinH9xTpW1feBL4Hd5kxzOQqPHlFaWKC0uEhpaQlWV9f76egg0d1NoqeHRH8/yT17kPb2iOEP4AsR+bkZVEMgVTVPWWDEFCk9e0b+xg0K8/OwthY30PX3qRTJwUHaDh8msWNHeTzALJARkVw9J3WBVLUb+AEY0HyetevXKdy6BcVYxeuDeh7JAwdIHTmCtLWZzQPgQxFZqv3gFaAQ5raFqLS8TDA9Tenx480pEmOV6OvDHxsj0dVllhbCoVqoDUBhmAxmoLi4SJDNos+fbwlM5ES2b8fPZPB6eiKlDKoSvlqgr4BRUyY3NbXlMNVQ7ePjkVIzIvJZ5V30EM6mnzSfl9z581sWpkbyWvjaz5yxnLJEPxjNvrJCYZ353fImuHaNws2bWxqmRs6Shw7hHz0a5dPbVqcioI+Bb21qr549+/qzqdVheB4d585FJeETEfkuArIy/15w5QqFO3di3crOnejyMrx4Ud82nUa6utCnT2N9Jffvxz9+3Ozuisg+UdU+4E/N5WQlk4ktev6pU+UKrEFAcPkyxQdWUv5r3sAA/okTiO9TePiQ4OLF5lCpFJ3ZrFV0y6VdBmQZfik/P8/azEzTj02ZzsnJio0WiwRzcxTv3y//5+3diz88jHi29K23lYmJWKVSo6O0DQ6a+ecG9DXwaXD1KoXbVoKatHSazgsXyqOvzM4Qyn7XwpiKK6dPNw5t6CQ5NIR/7Jj9+saAfgXeWZ2aovQkfqdQDsnIyAYVTClr1cqU1ZudfSWk9Yab6O2lY3zcXv1mQLaevPny5MnYkUTO6oWmuqPaUDaXHUin2baea38bkJVt/+XwcEvTvRFUyzDl5PPYNjdnT4GTQM6FzLmkdm7aO1cY3Vo6bK6pqjuLawjk3PbDVkN3NmihSnYgdGMLW1m5Vd3Z5Icq2WnVnWNQCGWnVjcOilWhc+coXQXlzmXDhs2WK9cxNVDuXFjVbj/DY9PB/+tK71/HN3nZ4RzkQgAAAABJRU5ErkJggg==);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.new-form-item-upload .van-uploader .van-uploader__preview .van-uploader__preview-delete:after {
+    background-color: transparent;
+}
+.new-form-item-upload .van-uploader .van-uploader__preview .van-uploader__preview-delete .van-uploader__preview-delete-icon {
+    display: none;
+}
+.new-form-item-upload .van-uploader .van-uploader__preview {
+    overflow: hidden;
+    margin: 0 2rpx 0 0;
+    padding: 20rpx 20rpx 0 0;
+}
+.new-form-item-upload .van-uploader .van-uploader__preview image {
+    width: 188rpx !important;
+    height: 188rpx !important;
+    border-radius: 16rpx;
+}
+.new-form-item-upload .van-uploader .van-uploader__preview:last-child {
+    margin-right: 0rpx;
+}
+
+/* 表单换行 */
+.new-form-item-upload-wrap {
+    box-sizing: border-box;
+    margin: 40rpx auto 0;
+    padding: 40rpx 40rpx 40rpx 40rpx;
+    width: 690rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+    color: var(--tip-color-text);
+    font-size: 26rpx;
+}
+.new-form-item-upload-wrap .wrap-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 50rpx;
+    color: var(--tip-color-text-88);
+    font-size: 28rpx;
+}
+.new-form-item-upload-wrap .wrap-value .iconfont {
+    color: var(--tip-color-text-d8);
+    font-size: 24rpx;
+}

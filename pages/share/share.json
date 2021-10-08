@@ -1,0 +1,9 @@
+{
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-dialog": "@vant/weapp/dialog/index"
+    }
+}

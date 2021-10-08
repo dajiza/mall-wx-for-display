@@ -1,0 +1,153 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <!-- 订单状态 tabs -->
+        <view class="order-tabs {{isAdmin?'h204':''}}" style="top: {{navHeight}};">
+            <view class="buy-sell-order" wx:if="{{isAdmin}}">
+                <view class="buy-sell-box">
+                    <view class="buy-sell-init-box">
+                        <view class="buy-sell-init-content">
+                            <view class="buy-sell-init {{agentSelectedType === 'buy'?'type-selected':''}}" data-type="buy" catch:tap="chooseBuyOrSell">买入的订单</view>
+                            <view class="buy-sell-init {{agentSelectedType === 'sell'?'type-selected':''}}" data-type="sell" catch:tap="chooseBuyOrSell">卖出的订单</view>
+                        </view>
+                        <view class="view-order-init {{agentSelectedType === 'sell'? 'view-sell-order':''}}"></view>
+                    </view>
+                </view>
+            </view>
+            <view class="{{tabsShow?'tabsShow':'tabsHide'}}">
+                <van-tabs active="{{ active }}" swipe-threshold="{{7}}" bind:change="onChange">
+                    <van-tab title="全部"></van-tab>
+                    <van-tab title="待付款"></van-tab>
+                    <van-tab title="待发货"></van-tab>
+                    <van-tab title="待收货"></van-tab>
+                    <van-tab title="已完成"></van-tab>
+                    <van-tab title="售后"></van-tab>
+                </van-tabs>
+            </view>
+        </view>
+        <!-- 订单列表部分 -->
+        <view class="order-list {{isAdmin?'paddingTop204':''}}">
+            <!-- 空列表 -->
+            <view class="empty-list" wx:if="{{orderList.length < 1 && loading_finish}}">
+                <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+                <text class="empty-text">还没有订单哦~</text>
+            </view>
+            <button class="share-shop" hover-class="button-hover" wx:if="{{(orderList.length < 1 && loading_finish) && isAdmin && agentSelectedType === 'sell'}}" bindtap="handleOnShare">
+                立即分享店铺 增加订单
+            </button>
+            <!-- 订单列表 -->
+            <block wx:for="{{orderList}}" wx:key="index">
+                <view class="order-item" data-id="{{item.id}}" bind:tap="handleOnGoOrderDetail">
+                    <view class="order-status-time">
+                        <text class="order-status order-status-color-{{item.status}}" wx:if="{{active !== 5}}">{{fn.orderListStatus(item.status,isAdmin && agentSelectedType === 'sell')}}</text>
+                        <text class="order-status order-status-color-{{item.status}}" wx:if="{{active === 5}}">{{fn.applyListStatus(item.status,item.type)}}</text>
+                        <text class="order-time">{{item.created_time}}</text>
+                    </view>
+                    <block wx:if="{{active !== 5}}">
+                        <block wx:for="{{item.detail}}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="goodsIndex">
+                            <order-goods goods="{{ goods }}" isApply="{{false}}" showStatus="{{true}}" isSellOrder="{{isAdmin && agentSelectedType === 'sell'}}"></order-goods>
+                        </block>
+                    </block>
+                    <block wx:if="{{active === 5}}">
+                        <order-goods goods="{{ item }}" isApply="{{true}}" showStatus="{{false}}"></order-goods>
+                    </block>
+
+                    <view class="amount-box">
+                        <!--会员折扣-->
+                        <view class="discount-box-order text-ellipsis" wx:if="{{item.status == 0 && agentSelectedType !== 'sell' && item.off_2 > 0}}">
+                            <image class="member-icon" src="../../assets/images/memberIcon.png"></image>
+                            <view class="discount-text margin-left-12">
+                                <text>批发预计省￥{{fn.formatMoney(item.off_2)}}</text>
+                            </view>
+                        </view>
+                        <!--退款金额-->
+                        <view style="margin-left: auto">
+                            <text class="tip-text">{{active === 5 && (item.type === 0 || item.type === 1)? '退款金额':'总计'}}</text>
+                            <text class="amount-symbol">¥</text>
+                            <text class="amount" wx:if="{{active !== 5}}">{{fn.formatMoney(item.price_total_real)}}</text>
+                            <text class="amount" wx:if="{{active === 5}}"
+                                >{{(item.type === 0 || item.type === 1) ? fn.formatMoney(item.money): fn.formatMoney(item.order_detail_money * item.order_detail_num)}}</text
+                            >
+                        </view>
+                    </view>
+                    <view class="btn-box" wx:if="{{((item.status === 0 || item.status === 3) && active !== 5) && !(isAdmin && agentSelectedType === 'sell')}}">
+                        <block wx:if="{{item.status === 0}}">
+                            <van-button
+                                round
+                                class="btn-reset order-btn"
+                                custom-class="btn-cancel-order order-btn"
+                                data-id="{{item.id}}"
+                                data-status="{{item.status}}"
+                                data-index="{{index}}"
+                                catch:tap="handleOnCancelOrder"
+                                >取消订单</van-button
+                            >
+                            <van-button
+                                round
+                                class="btn-reset order-btn"
+                                custom-class="btn-go-pay order-btn"
+                                data-id="{{item.id}}"
+                                data-status="{{item.status}}"
+                                data-no="{{item.order_no}}"
+                                data-total="{{item.price_total_real}}"
+                                catch:tap="handleOnGoPay"
+                                >去支付</van-button
+                            >
+                        </block>
+                        <block wx:if="{{item.status === 3}}">
+                            <van-button
+                                round
+                                class="btn-reset order-btn"
+                                custom-class="btn-go-pay order-btn"
+                                data-id="{{item.id}}"
+                                data-status="{{item.status}}"
+                                data-index="{{index}}"
+                                catch:tap="handleOnConfirmReceipt"
+                                >确认收货</van-button
+                            >
+                        </block>
+                    </view>
+                </view>
+            </block>
+            <!-- 加载更多 -->
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{bottomLoadingShow && orderList.length > 0}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{is_all && orderList.length > 0}}">人家也是有底线的～</view>
+        </view>
+    </view>
+</view>
+<!-- 弹窗 -->
+<van-dialog
+    use-slot
+    title=""
+    show-cancel-button
+    width="600rpx"
+    customStyle="border-radius: 16rpx"
+    show="{{ dialogShow }}"
+    show-confirm-button="{{false}}"
+    showCancelButton="{{false}}"
+    catchtouchmove="preventTouchMove"
+    bind:close="onClose"
+>
+    <view class="dialog-content">
+        <view class="dialog-content-text">
+            <block wx:if="{{operatingOrderStatus === 0 || operatingOrderStatus === 2}}">是否确认取消订单</block>
+            <block wx:if="{{operatingOrderStatus === 3}}">是否确认收货</block>
+        </view>
+    </view>
+    <view class="dialog-button-box">
+        <block wx:if="{{operatingOrderStatus === 0 || operatingOrderStatus === 2}}">
+            <view class="btn-sure border-right" bind:tap="sureCancelOrder">确认</view>
+            <view class="btn-cancel" bind:tap="onClose">再想想</view>
+        </block>
+        <block wx:if="{{operatingOrderStatus === 3 || operatingOrderStatus === 9}}">
+            <view class="btn-cancel border-right" bind:tap="onClose">取消</view>
+            <view class="btn-sure" bind:tap="ConfirmReceipt">确认</view>
+        </block>
+    </view>
+</van-dialog>

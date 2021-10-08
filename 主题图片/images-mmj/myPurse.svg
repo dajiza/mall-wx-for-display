@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>我的钱包icon</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="31.2718615%" x2="87.6652511%" y2="71.5010778%" id="linearGradient-1">
+            <stop stop-color="#D3CBFF" offset="0%"></stop>
+            <stop stop-color="#ABA9FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="我的钱包icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="客户管理icon" transform="translate(0.000000, -2.000000)">
+            <rect id="矩形" x="0" y="2" width="34" height="34"></rect>
+            <g id="Pending-payment" transform="translate(1.000000, 0.000000)">
+                <path d="M5.40114886,5.64168543 L23.5207944,7.00152898 C24.9580502,7.10939218 26.1154816,8.22409096 26.2773113,9.65627457 L26.8633073,14.8423069 C27.0493398,16.4886841 25.8654965,17.9741457 24.2191193,18.1601782 C24.1241901,18.1709047 24.0288027,18.1770906 23.9332832,18.1787149 L5.20549752,18.4971677 C3.54888276,18.5253373 2.1830952,17.2052217 2.15492563,15.5486069 C2.1545817,15.528381 2.15444236,15.5081522 2.15450761,15.4879235 L2.17665176,8.62359477 C2.18199671,6.96674914 3.5294684,5.62794331 5.18631403,5.63328825 C5.25800297,5.63351952 5.32966058,5.63632038 5.40114886,5.64168543 Z" id="矩形" fill="#E1DEFF" transform="translate(14.689297, 11.974845) rotate(-30.000000) translate(-14.689297, -11.974845) "></path>
+                <rect id="矩形" fill="url(#linearGradient-1)" x="1.25925926" y="9.08856683" width="30.2222222" height="23.6521739" rx="3"></rect>
+                <circle id="椭圆形" fill="#FFFFFF" cx="22.9404187" cy="20.257649" r="3.28502415"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

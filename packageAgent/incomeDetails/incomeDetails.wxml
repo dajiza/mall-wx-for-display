@@ -1,0 +1,61 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed
+                 placeholder
+                 title="收益明细"
+                 border="{{false}}"
+                 custom-class="nav"
+                 title-class="title" >
+
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <!-- 订单状态 tabs -->
+        <view class="order-tabs" style="top: {{navHeight}};">
+            <view>
+                <van-tabs
+                    active="{{ active }}"
+                    swipe-threshold="{{5}}"
+                    bind:change="onChange">
+                    <van-tab title="全部"></van-tab>
+                    <van-tab title="待结算"></van-tab>
+                    <van-tab title="已结算"></van-tab>
+                    <van-tab title="失效"></van-tab>
+                </van-tabs>
+            </view>
+        </view>
+        <!-- 订单列表部分 -->
+        <view class="order-list" >
+            <!-- 空列表 -->
+            <view class="empty-list" wx:if="{{listData.length < 1 && loading_finish}}">
+                <image class="empty-img" src="../../assets/images/no-record.png"></image>
+                <text class="empty-text">还没有收益单哦~</text>
+            </view>
+            <!-- 订单列表 -->
+            <block wx:for="{{listData}}" wx:key="index">
+                <view class="order-item"
+                      data-id="{{item.id}}">
+                    <view class="order-status-time order-status-color-{{item.status}}">
+                        <text class="order-status order-status-color-{{item.status}}">{{item.status===1 ? '待结算':item.status===2?'已结算':'失效'}}</text>
+                        <text class="order-time payment-date">{{item.status===2?'':'预计'}}{{fn.formatDateYTM(item.arrival_time,'年月日')}}到账</text>
+                    </view>
+                    <income-goods class="income-goods-item" goods="{{ item }}"></income-goods>
+                    <view class="amount-box">
+                        <!--收益金额-->
+                        <view class="income-amount income-status-{{item.status}}">赚￥{{fn.formatMoney(item.commission)}}</view>
+                    </view>
+                </view>
+            </block>
+            <!-- 加载更多 -->
+            <van-loading
+                class="bottom-loading"
+                size="24px"
+                text-size="24rpx"
+                wx:if="{{bottomLoadingShow && listData.length > 0}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{is_all && listData.length > 0}}">人家也是有底线的～</view>
+        </view>
+    </view>
+</view>

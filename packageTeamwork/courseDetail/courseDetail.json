@@ -1,0 +1,16 @@
+{
+    "navigationStyle": "custom",
+    "backgroundColor": "#fff",
+    "disableScroll": false,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "rec-goods-box": "/components/recGoodsBox/recGoodsBox",
+        "van-dialog": "@vant/weapp/dialog/index"
+    }
+}

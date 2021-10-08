@@ -1,0 +1,25 @@
+<view class="container">
+    <!-- 微信授权登录 -->
+    <van-nav-bar fixed placeholder title="微信授权登录" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="main">
+        <view class="img">
+            <image class="avator" src="../../assets/images/weixin_logo.png" />
+        </view>
+        <!-- <view class="tip">
+            <view>登录中 请稍后</view>
+            <view>登录成功自动返回</view>
+        </view> -->
+        <view class="login-label">{{shopName}}申请微信授权登录</view>
+        <!-- <van-button bindgetuserinfo="onGotUserInfo" block custom-class="big-btn btn-common login-button" loading="{{loading}}" lang="zh_CN" open-type="getUserInfo" round type="primary">
+            登录
+        </van-button> -->
+        <van-button bindtap="getUserProfile" block custom-class="big-btn btn-common login-button" loading="{{loading}}" lang="zh_CN" round type="primary">登录</van-button>
+        <van-button block custom-class="cancel-button btn-common login-button" lang="zh_CN" round type="primary" bind:tap="onCancel">
+            取消
+        </van-button>
+    </view>
+</view>

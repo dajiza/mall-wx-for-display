@@ -1,0 +1,9 @@
+<view class="comment-widget-wrap {{custom_class}}" catchtap="onClick">
+  <view class="comment-value {{label_custom_class}}">{{value}}</view>
+  <view class="comment-icon" style="width:{{icon_width}};height:{{icon_height}};">
+    <van-image fit="cover" width="{{icon_width}}" height="{{icon_height}}" lazy-load
+      src="{{'/assets/images/ic_comment.svg'}}" wx:if="{{type==0}}" />
+    <van-image fit="cover" width="{{icon_width}}" height="{{icon_height}}" lazy-load
+      src="{{checked?'/assets/images/ic_like_h.svg':'/assets/images/ic_like.svg'}}" wx:else />
+  </view>
+</view>

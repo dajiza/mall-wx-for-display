@@ -1,0 +1,74 @@
+.comment-goods-info{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 136rpx;
+}
+
+.comment-goods-info .img-box{
+  padding-right: 20rpx;
+}
+.img-box .goods-img{
+  width: 136rpx;
+  height: 136rpx;
+  border-radius: 8rpx;
+  display: block;
+  vertical-align: bottom;
+}
+.comment-goods-info .text-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(100% - 156rpx);
+  height: 136rpx;
+  box-sizing: border-box;
+}
+
+.comment-goods-info .text-box .goods-title{
+  overflow: hidden;
+  color: var(--primary-color-text);
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.comment-goods-info .text-box .text-box-bottom-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-goods-info .text-box .text-box-bottom-wrap .goods-label{
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 36rpx;
+}
+
+.comment-goods-info .text-box .text-box-bottom-wrap .goods-price{
+  margin-left: auto;
+}
+
+.comment-goods-info .text-box .text-box-bottom-wrap .goods-price .price-now-unit{
+  bottom: 0;
+  display: inline-block;
+  color: #564B4E;
+  font-weight: 400;
+  font-size: 24rpx;
+  line-height: 34rpx;
+}
+
+.comment-goods-info .text-box .text-box-bottom-wrap .goods-price .price-now{
+  bottom: 0;
+  display: inline-block;
+  color: #564B4E;
+  font-weight: 400;
+  font-size: 30rpx;
+  line-height: 34rpx;
+}

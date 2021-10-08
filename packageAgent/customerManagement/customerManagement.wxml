@@ -1,0 +1,128 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container page">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" custom-class="nav" title-class="title" z-index="{{121}}">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <!-- 搜索框 -->
+        <view class="search-box" id="searchBox" style="top: {{navHeight}}">
+            <view class="search-bar">
+                <input
+                    class="search-input"
+                    value="{{ name }}"
+                    placeholder-class="search-input-placeholder"
+                    confirm-type="search"
+                    bindinput="bindSearchInput"
+                    bindconfirm="handleOnSearch"
+                    placeholder="输入想查询的客户名称"
+                />
+                <text class="iconfont icon-glass"></text>
+                <van-icon class="close-icon" wx:if="{{name}}" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch" />
+            </view>
+            <text class="iconfont icon-filtrate filter-search-icon {{timeFilter?'time-is-selected':''}}" bind:tap="handleSelectDate"></text>
+        </view>
+        <view class="search-time-box" wx:if="{{timeFilter}}" style="top: {{customerTapHeight}}">
+            <text class="time-text">{{ParamsStartDateStr}} 到 {{ParamsEndDateStr}} {{showType===1?'注册的客户':'订单数量'}}</text>
+            <text class="iconfont icon-guanbi" bind:tap="handleOnDateReset"></text>
+        </view>
+        <view class="customer-num-box" id="customerNumBox" wx:if="{{showType === 1}}">
+            <view class="num-box-item">
+                <view class="num-box-title">客户总数</view>
+                <view class="num">{{customerSum.customer_total}}</view>
+                <view class="bottom-icon-big"></view>
+                <view class="bottom-icon-small"></view>
+            </view>
+            <view class="num-box-item">
+                <view class="num-box-title">本月新增</view>
+                <view class="num">{{customerSum.new_monthly}}</view>
+                <view class="bottom-icon-big bg-blue"></view>
+                <view class="bottom-icon-small small-bg-blue"></view>
+            </view>
+            <view class="num-box-item">
+                <view class="num-box-title">昨日新增</view>
+                <view class="num">{{customerSum.new_daily}}</view>
+                <view class="bottom-icon-big bg-orange"></view>
+                <view class="bottom-icon-small small-bg-orange"></view>
+            </view>
+        </view>
+        <view class="placeholder-box" id="customerNumBox" wx:if="{{showType === 2}}"></view>
+        <!-- 表头 -->
+        <view class="customer-list-th {{!scrollTop?'':'scrollTopClass'}}" style="top: {{timeFilter?timeShowCustomerTapHeight:customerTapHeight}}">
+            <view class="customer-item-time height100" style="line-height: 100rpx" bind:tap="handleOpenSelectDate">{{showType === 1?'注册时间':'客户名称'}}</view>
+            <view class="customer-item-buy height100 {{filterNavIndex === 1?'filter-nav-selected':''}}" data-index="1" bind:tap="onClickTab">
+                <view class="filter-nav-text">已购订单数</view>
+                <view class="sort-wrap">
+                    <view class="iconfont icon-arrow_up_s {{order_sales === 1 ?'sort-item-nochecked':'sort-item-checked'}} {{order_sales === 0 ?'sort-item-nochecked':''}}"></view>
+                    <view class="iconfont icon-arrow_down_s {{order_sales === 2 ?'sort-item-nochecked':'sort-item-checked'}} {{order_sales === 0 ?'sort-item-nochecked':''}}"></view>
+                </view>
+            </view>
+            <view class="customer-item-amount height100 {{filterNavIndex === 2?'filter-nav-selected':''}}" style="width: 192rpx" data-index="2" bind:tap="onClickTab">
+                <view class="filter-nav-text">贡献佣金</view>
+                <view class="sort-wrap">
+                    <view class="iconfont icon-arrow_up_s {{order_price === 1 ?'sort-item-nochecked':'sort-item-checked'}} {{order_price === 0 ?'sort-item-nochecked':''}}"></view>
+                    <view class="iconfont icon-arrow_down_s {{order_price === 2 ?'sort-item-nochecked':'sort-item-checked'}} {{order_price === 0 ?'sort-item-nochecked':''}}"></view> </view
+            ></view>
+        </view>
+        <!-- 订单列表部分 -->
+        <view class="customer-list" id="customerList" wx:if="{{customerList.length > 0 && loading_finish}}">
+            <!-- 列表 -->
+            <block wx:for="{{customerList}}" wx:key="index">
+                <view class="customer-item {{showType === 2?'ranking-item':''}}" data-id="{{item.id}}">
+                    <view class="customer-item-time">
+                        <view class="head-img" wx:if="{{showType === 1}}">
+                            <image class="top-background-img" src="{{item.avatar_url||'../../assets/images/weixin_logo.png'}}"></image>
+                        </view>
+                        <view class="nick-name text-ellipsis {{showType === 2?'marginTop0':''}}">{{item.nick_name}}</view>
+                        <view class="register-time" wx:if="{{showType === 1}}">{{fn.formatDateYTM(item.created_at_txt,'.')}} 注册</view>
+                    </view>
+                    <view class="customer-item-buy">{{item.order_num}}单</view>
+                    <view class="customer-item-amount">￥{{fn.formatMoney(item.commission)}}</view>
+                </view>
+            </block>
+            <!-- 加载更多 -->
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{bottomLoadingShow && customerList.length > 0}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{is_all && customerList.length > 0}}">人家也是有底线的～</view>
+        </view>
+        <!-- 空列表 -->
+        <view class="empty-list" wx:if="{{customerList.length < 1 && loading_finish}}">
+            <image class="empty-img" src="../../assets/images/no-customer.png"></image>
+            <text class="empty-text">{{showType === 1? '还没有客户哦~':'暂无数据'}}</text>
+        </view>
+    </view>
+</view>
+<van-popup show="{{ showSelectTime }}" custom-class="datetime-picker-popup" bind:click-overlay="handleSelectDateCancel" position="top" catchtouchmove="preventTouchMove">
+    <view class="popup-time-box" style="margin-top: {{navHeight}}">
+        <view class="popup-title">{{showType === 1 ? '注册':''}}时间筛选</view>
+        <view class="start-end-date-box">
+            <view class="start-date-box" bind:tap="handleDatePick" data-picker="start">
+                <text wx:if="{{startDateStr}}">{{startDateStr}}</text>
+                <text wx:if="{{!startDateStr}}">开始时间</text>
+            </view>
+            <view class="zhi-text">至</view>
+            <view class="end-date-box" bind:tap="handleDatePick" data-picker="end">
+                <text wx:if="{{endDateStr}}">{{endDateStr}}</text>
+                <text wx:if="{{!endDateStr}}">结束时间</text>
+            </view>
+        </view>
+        <view class="popup-btn-box">
+            <view class="reset-btn" hover-class="btn-hover" bind:tap="handleOnDateReset">重置</view>
+            <view class="sure-btn" hover-class="btn-hover" bind:tap="handleOnDateSure">确定</view>
+        </view>
+    </view>
+</van-popup>
+<van-popup show="{{ showDatePicker }}" custom-class="datetime-picker-popup" bind:click-overlay="handleOnCancel" position="bottom" catchtouchmove="preventTouchMove">
+    <van-datetime-picker
+        type="date"
+        toolbar-class="picker-toolbar"
+        title="{{pickerTitle}}"
+        value="{{ currentDate }}"
+        min-date="{{minDate}}"
+        max-date="{{maxDate}}"
+        formatter="{{ formatter }}"
+        bind:confirm="handleOnConfirm"
+        bind:cancel="handleOnCancel"
+    />
+</van-popup>

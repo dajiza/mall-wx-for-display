@@ -1,0 +1,66 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="报名" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="new-form-item">
+        <view class="name">姓名</view>
+        <van-field class="input" input-class="custom-input" placeholder="请输入您的姓名" border="{{ false }}" input-align="right" model:value="{{ name }}" />
+    </view>
+    <view class="dividing"></view>
+    <view class="new-form-item">
+        <view class="name">手机号</view>
+        <van-field class="input" input-class="custom-input" maxlength="{{11}}" type="number" placeholder="请输入您的手机号" border="{{ false }}" input-align="right" model:value="{{ phone }}" />
+    </view>
+    <block wx:if="{{type==22}}">
+        <view class="new-form-item">
+            <view class="name check-name"
+                >邀请码
+                <image class="check-status" wx:if="{{checkStatus==1}}" src="../../assets/images/check-yes.svg"></image>
+                <image class="check-status" wx:if="{{checkStatus==0}}" src="../../assets/images/check-no.svg"></image>
+            </view>
+            <van-field class="input input-invite" input-class="custom-input" placeholder="选填" border="{{ false }}" input-align="right" model:value="{{ inviter_code }}" />
+            <view class="check" bindtap="checkCode">检查</view>
+        </view>
+    </block>
+    <block wx:if="{{type==11||type==21}}">
+        <view class="new-form-item-upload">
+            <view class="name">凭证（{{fileList.length}}/6）</view>
+            <van-uploader
+                bind:delete="deleteImg"
+                bind:after-read="afterRead"
+                accept="image"
+                max-size="10485760"
+                bind:oversize="oversize"
+                file-list="{{ fileList }}"
+                deletable="{{ true }}"
+                max-count="{{ 6 }}"
+                upload-text=""
+                accept="image"
+                multiple
+            >
+                <view class="upload-slot">
+                    <text class="iconfont icon-jia"></text>
+                </view>
+            </van-uploader>
+            <view class="tips">要求：{{comment}}</view>
+        </view>
+    </block>
+    <view class="pay-tips" wx:if="{{type==21}}">
+        <view>凭证通过老师审核后，可返现{{fn.formatMoney(cash_back_money)}}元。 </view>
+        <view>如果您没有凭证，可直接点击“下一步”</view>
+    </view>
+    <view class="pay-tips" wx:if="{{type==22}}">
+        <view>邀请码通过后，您和邀请者都将减免{{fn.formatMoney(cash_back_money)}}元 </view>
+        <view>如果您没有邀请码，可直接点击“下一步”</view>
+    </view>
+    <view class="btn-wrap">
+        <van-button custom-class="big-btn" bind:click="signUp" round type="primary" size="large">
+            下一步
+        </van-button>
+    </view>
+</view>

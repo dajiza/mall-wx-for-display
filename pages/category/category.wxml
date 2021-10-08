@@ -1,0 +1,59 @@
+<!--pages/cart/cart.wxml-->
+<view class="container">
+    <van-nav-bar fixed placeholder title="商品分类" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+     </van-nav-bar>
+    <view class="search-box" style="top: {{navHeight}}">
+        <view class="search-bar">
+            <input class="search-input" placeholder-class="search-input-placeholder" value="{{ searchValue }}" placeholder="输入想搜索的信息" confirm-type="search" bindinput="bindSearchInput" bindconfirm="handleOnSearch" />
+            <text class="iconfont icon-glass"></text>
+            <van-icon class="close-icon" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch" wx:if="{{searchValue}}" />
+        </view>
+    </view>
+    <view class="content-box" style="padding-bottom:{{safeAreaInsetBottom+100}}rpx;">
+        <view class="cate-wrap-box">
+            <view class="cate-left-box">
+                <view class="cate-cloth text-ellipsis {{type_index === -1?'cate-selected':''}}" bindtap="selectedType" data-index="-1">布料</view>
+                <block wx:for="{{cateAllList}}" wx:key="index">
+                    <view class="cate-other text-ellipsis {{type_index === item.id?'cate-selected':''}}" bindtap="selectedType" data-index="{{item.id}}">{{item.name}}</view>
+                </block>
+            </view>
+            <view class="cate-right-box">
+                <view class="cate-cloth-box" wx:if="{{type_index === -1}}">
+                    <block wx:for="{{cloth_list}}" wx:key="index">
+                        <view class="attr-box">
+                            <view class="attr-name">{{item.attr_name}}</view>
+                            <view class="attr-list-box">
+                                <block wx:for="{{item.list}}" wx:for-item="childItem" wx:for-index="item_index" wx:key="item_index">
+                                    <view class="attr-list-item {{childItem.name.length > 7 ? '':'font-26'}}" wx:if="{{item_index < 6 || item.showAll}}" data-name="{{childItem.name}}" data-attr="{{item.attr_key}}" bind:tap="onclickCate">
+                                        <view class="name-text">{{childItem.name}}</view>
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="icon-up-down" wx:if="{{item.list.length > 6}}" data-index="{{index}}" bind:tap="onClickShowAll">
+                                <text class="iconfont icon-up" wx:if="{{item.showAll}}" slot="icon"></text>
+                                <text class="iconfont icon-down" wx:if="{{!item.showAll}}" slot="icon"></text>
+                            </view>
+                        </view>
+                    </block>
+                    <view class="box-placeholder" style="height:{{safeAreaInsetBottom}}px;"></view>
+                </view>
+                <view class="cate-other-box" wx:if="{{type_index > -1}}">
+                    <view class="other-list">
+                        <block wx:for="{{cateSonsList}}" wx:key="index">
+                            <view class="other-item-box" data-name="{{item.name}}" data-parent-id="{{item.parent_id}}" data-id="{{item.id}}" bind:tap="onclickSonsItem">
+                                <view class="other-img-box">
+                                    <image class="other-img" lazy-load mode="aspectFill" src="{{item.category_img}}" alt=""></image>
+                                </view>
+                                <view class="other-name text-overflow-2">{{item.name}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<authorize-popup id="authorize" />

@@ -1,0 +1,95 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container circle-publish-page">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+
+    <view class="content-box">
+        <!--文字-->
+        <view class="text-wrap">
+            <van-field
+                    custom-style="min-height: 144rpx"
+                    model:value="{{ textMessage }}"
+                    label=""
+                    type="textarea"
+                    placeholder="输入你想说的…"
+                    autosize
+                    border="{{ false }}"
+                    show-confirm-bar="{{false}}"
+                    adjust-position="{{false}}"
+                    input-class="circle-publish-textarea"
+                    placeholder-style="color:var(--secondary-color-text);"
+                    bind:input="bindInput"
+            />
+        </view>
+        <!--图片-->
+        <view class="img-wrap" wx:if="{{showType == 2}}">
+            <drag id="drag-image" generic:item="drag-item" bind:click="itemClick" bind:delete="itemDelete"
+                  bind:change="change" bind:sortend="sortEnd" bind:scroll="scroll" list-data="{{coursewareImages}}"
+                  columns="{{size}}" scroll-top="{{scrollTop}}" item-height="{{(750 - 50) / size}}" extra-nodes="{{extraNodes}}"
+                  data-type="image"
+                  delete-icon="/packageTeamwork/static/ic_del_red.svg"
+                  >
+                <view slot="plus" class="plus-wrap">
+                    <view class="plus-item">
+                        <view class="courseware-add" bindtap="handelImageAdd">
+                            <image src="/packageTeamwork/static/ic_add.png" class="ic-add"/>
+<!--                            <text class="iconfont icon-jiahao" style="font-size: 120rpx;color: #968F91;"></text>-->
+                        </view>
+                    </view>
+                </view>
+            </drag>
+        </view>
+        <!--视频-->
+        <view wx:if="{{showType == 1}}">
+            <view class="video-wrap"  wx:if="{{videoPreviewUrl}}">
+                <video
+                        class="video"
+                        bindplay="onPlay"
+                        bindpause="onPause"
+                        src="{{ videoPreviewUrl }}"
+                        binderror="videoErrorCallback"
+                        show-play-btn="{{true}}"
+                        controls="{{true}}"
+                        play-btn-position="center"
+                        enable-play-gesture="{{true}}"
+                        show-progress="{{true}}"
+                ></video>
+                <view class="del-video" catchtap="handleDeleteVideo">
+                    <image src="/packageTeamwork/coursePublish/static/ic_del_red.svg" class="delete-video-icon" />
+                </view>
+            </view>
+
+            <view class="video-plus-wrap" wx:if="{{!videoPreviewUrl}}"  bindtap="handelVideoAdd">
+                <image src="/packageTeamwork/static/ic_add.png" class="ic-add"/>
+            </view>
+            <view class="tip-text" wx:if="{{!videoPreviewUrl}}">由于微信限制，视频过长有可能上传失败哦</view>
+        </view>
+        <!--发布类型-->
+        <view class="publish-type-wrap">
+            <view class="label-text">类型</view>
+            <view class="type-all-wrap">
+                <view class="type-item {{selectedType == 2 ? 'selected-item':''}}"
+                      data-type="2"
+                      catch:tap="onChooseType">圈子</view>
+                <view class="type-item {{selectedType == 3 ? 'selected-item':''}}"
+                      data-type="3"
+                      wx:if="{{!isTeacher}}"
+                      catch:tap="onChooseType">作业</view>
+                <view class="type-item {{selectedType == 4 ? 'selected-item':''}}"
+                      data-type="4"
+                      wx:if="{{isTeacher}}"
+                      catch:tap="onChooseType">示范作业</view>
+            </view>
+        </view>
+
+    </view>
+    <!-- 发表按钮 -->
+    <view
+        class="btn-publish {{(videoPreviewUrl || imagesLength > 0) ? 'btn-can-use':''}}"
+        catch:tap="handleOnPublish"
+    >发表</view>
+</view>

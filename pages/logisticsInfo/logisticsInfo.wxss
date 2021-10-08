@@ -1,0 +1,269 @@
+.page {
+    background: var(--background-color);
+}
+
+.container {
+    padding-bottom: 0;
+    background: var(--background-color);
+}
+
+.nav {
+    background: #fff;
+}
+
+.title {
+    color: #333333 !important;
+    font-weight: 500;
+    font-size: 38rpx;
+}
+
+.leftIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+    color: #333333;
+    transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+
+.content-box {
+    -webkit-box-sizing: border-box;
+    /*padding-top: 166rpx;*/
+    /*padding-bottom: 100rpx;*/
+    box-sizing: border-box;
+    width: 100%;
+}
+/*物流状态*/
+.logistics-status-box {
+    position: sticky;
+    /*position: fixed;*/
+    left: 0;
+    z-index: 21;
+    display: flex;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 30rpx 30rpx 0 28rpx;
+    width: 100%;
+    height: 166rpx;
+    border-radius: 0 0 30rpx 30rpx;
+    background: linear-gradient(90deg, #ffe8ef 0%, #ffe8e8 100%);
+}
+
+.status-icon-box {
+    display: flex;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 48rpx;
+    height: 44rpx;
+}
+
+.status-icon-box .iconfont {
+    font-size: 32rpx;
+}
+.logistics-status-no {
+    flex: 1;
+}
+.express-car-box {
+    width: 114rpx;
+    height: 100%;
+}
+.express-car {
+    display: inline-block;
+    margin-top: 12rpx;
+    width: 114rpx;
+    height: 80rpx;
+    vertical-align: bottom;
+}
+
+.logistics-status-no .logistics-status {
+    height: 44rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+
+.logistics-status-no .logistics-no {
+    display: flex;
+    align-items: center;
+    margin-top: 16rpx;
+    height: 48rpx;
+    color: var(--primary-color-text);
+    font-weight: 300;
+    font-size: 26rpx;
+    line-height: 48rpx;
+}
+
+.logistics-info-box {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 24rpx;
+    padding-bottom: 44rpx;
+    border-radius: 30rpx 30rpx 0 0;
+    background: #ffffff;
+}
+
+.logistics-steps {
+}
+
+/*物流*/
+.express-container {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 38rpx 0;
+    width: 100%;
+    /*margin: 10rpx auto;*/
+    border-radius: 5px;
+}
+
+.express-item {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+
+.express-middle-axis {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 48rpx;
+    /*justify-content: center;*/
+}
+
+/*运输中-不是最新运输状态*/
+.dot-transporting {
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    width: 14rpx;
+    height: 14rpx;
+    border-radius: 50%;
+    background: var(--tip-color-text-d8);
+}
+
+.dot-closing {
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    background: var(--tip-color-text-d8);
+    text-align: center;
+    line-height: 50rpx;
+}
+
+.dot-closing .iconfont {
+    color: #ffff;
+    font-size: 22rpx;
+}
+.dot-closing .icon-yilanshouicon {
+    font-size: 26rpx;
+}
+
+.dot-shou {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10rpx 0;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    background: var(--secondary-color-text);
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.dot-received,
+.dot-processing {
+    background: var(--primary-gradual-color);
+}
+
+/*实线*/
+.online-solid {
+    flex: 1;
+    width: 2rpx;
+    /*height: 100rpx;*/
+    background: var(--tip-color-text-d8);
+}
+
+/*虚线*/
+.online-dotted {
+    height: 92rpx;
+    border-left: 2rpx dashed var(--tip-color-text-d8);
+}
+
+.express-status {
+    color: var(--tip-color-text-a2);
+    font-weight: 400;
+    font-size: 30rpx;
+    line-height: 42rpx;
+}
+
+.express-status-address {
+    color: var(--tip-color-text-a2);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.text-processing {
+    color: var(--primary-color-text);
+}
+
+/*步骤条左边-日期-时间*/
+.express-left-date {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 112rpx;
+    /*justify-content: center;*/
+}
+.express-date {
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.express-time {
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 20rpx;
+    line-height: 28rpx;
+}
+
+/*步骤条-右侧*/
+.express-right {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20rpx;
+    padding-bottom: 50rpx;
+    width: 538rpx;
+    /*justify-content: center;*/
+}
+
+.color-FB6090 {
+    color: var(--features-color-text);
+}
+.copy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    margin-left: 12rpx;
+    padding: 12rpx;
+    width: 76rpx;
+    height: 48rpx;
+    border-radius: 8rpx;
+    background: #ffffff;
+    box-shadow: 0px 0px 8rpx 0px rgba(0, 0, 0, 0.15);
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 48rpx;
+}
+.button-hover {
+    opacity: 0.8;
+}

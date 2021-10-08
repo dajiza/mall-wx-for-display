@@ -1,0 +1,23 @@
+<!--components/couponItem/couponItem.wxml-->
+<wxs module="fn" src="/utils/fn.wxs"></wxs>
+
+<view class="goods-box">
+    <view class="hot-goods-list">
+        <view
+            class="goods-item-box {{(index+1)%2 === 0?'no-margin':''}}"
+            wx:for="{{ goodsList }}"
+            wx:for-index="index"
+            wx:for-item="item"
+            wx:key="goods_id"
+            data-id="{{item.goods_id}}"
+            bind:tap="gotoDetail"
+        >
+            <image class="goods-img" lazy-load mode="aspectFill" src="{{item.goods_img + '!upyun520/fw/500'}}" alt=""></image>
+            <view class="hot-goods-name">{{item.goods_title}}</view>
+            <view class="hot-goods-price">
+                <view>￥{{fn.formatMoney(item.price)}}</view>
+                <view class="pay-num">{{item.real_sales}}人付款</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,81 @@
+<!--packageAgent/makeUp/freightFree.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="clickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="filter-box-wrap" style="top: {{navHeight}};">
+        <view class="filter-box">
+            <view class="filter-label-box {{activate ==0?'filter-activate-label':''}}" bindtap="onTabChange" data-activate="{{0}}">
+                <view class="filter-label">
+                    价格
+                </view>
+                <view class="sort-arrow">
+                    <text class="iconfont icon-up pack-up" slot="icon" wx:if="{{orderPrice === 0 || orderPrice === 2}}"></text>
+                    <text class="iconfont icon-down show-more" slot="icon" wx:if="{{orderPrice === 0 || orderPrice === 1}}"></text>
+                </view>
+            </view>
+            <view class="filter-label-box {{activate ==1?'filter-activate-label':''}}" bindtap="onTabChange" data-activate="{{1}}">
+                <view class="filter-label">
+                    销量
+                </view>
+                <view class="sort-arrow">
+                    <text class="iconfont icon-up pack-up" slot="icon" wx:if="{{orderSales === 0 || orderSales === 2}}"></text>
+                    <text class="iconfont icon-down show-more" slot="icon" wx:if="{{orderSales === 0 || orderSales === 1}}"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="goods-list-wrap" style="margin-top: {{filterBoxHeight}}px;" wx:if="{{goodsList.length>0}}">
+        <view wx:for="{{goodsList}}" wx:for-item="goods" wx:key="id" wx:for-index="goodsIndex">
+            <view class="goods-item-box">
+                <view class="item-image-box">
+                    <image class="item-image" lazy-load mode="aspectFill" src="{{fn.limitImgSize(goods.img)}}"></image>
+                </view>
+                <view class="item-goods-name">
+                    {{goods.title}}
+                </view>
+                <view class="item-goods-bottom-box">
+                    <view class="item-goods-price">
+                        ¥ {{fn.formatMoney(goods.price)}}
+                    </view>
+                    <view class="item-goods-add" hover-class="botton-hover" bindtap="addGoods" data-index="{{goodsIndex}}"> </view>
+                </view>
+            </view>
+        </view>
+        <van-loading custom-class="bottom-loading" size="36rpx" text-size="24rpx" wx:if="{{goodsList.length > 0 && bottomLoadingShow}}">加载中...</van-loading>
+        <view class="no-more" wx:if="{{goodsList.length > 2 && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～</view>
+    </view>
+    <view class="empty-list" wx:elif="{{loaded}}" style="margin-top: {{filterBoxHeight}}px;">
+        <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+        <view class="empty-text">
+            <view>暂无商品数据</view>
+        </view>
+    </view>
+
+    <view class="makeup-submit" style="padding-bottom: {{safeAreaInsetBottom}}rpx; height: {{120+safeAreaInsetBottom}}rpx;">
+        <view class="makeup-submit-label-wrap">
+            <view class="makeup-tip-box">
+                <view class="flex-box">
+                    <!-- <view class="makeup-tip" wx:if="{{totalAmount==0}}">请选择商品</view> -->
+                    <!--凑件-->
+                    <view wx:if="{{freeType === 1 && totalAmount >= 0}}">
+                        <view class="makeup-tip" wx:if="{{addGoodsTotal < needNum}}"> <span class="red">再买 {{needNum-addGoodsTotal}} 件</span> 可免运费</view>
+                        <view class="makeup-tip font24" wx:else>已满足免运费条件，快去下单吧~</view>
+                    </view>
+                    <!--凑单-->
+                    <view wx:if="{{freeType === 2 && totalAmount > 0}}">
+                        <view class="makeup-tip" wx:if="{{totalAmount < needNum}}"> <span class="red">再买 ￥{{fn.formatMoney(needNum-totalAmount)}}</span> 可免运费</view>
+                        <view class="makeup-tip font24" wx:else>已满足免运费条件，快去下单吧~</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <van-button round type="primary" custom-class="operation-btn w128" bindtap="gotoOrderCheck" wx:if="{{source === 2}}"> 回到结算页</van-button>
+        <van-button round type="primary" custom-class="operation-btn w128" bindtap="gotoOrderCheck" wx:else> 回到购物车</van-button>
+    </view>
+
+    <spec id="spec" mark="confirm" bind:confirm="confirmSpec" />
+</view>

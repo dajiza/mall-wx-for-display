@@ -1,0 +1,129 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <!-- 自定义nav -->
+    <van-nav-bar
+        fixed
+        placeholder
+        title="评价详情"
+        border="{{false}}"
+        custom-class="nav"
+        title-class="title"
+        custom-style="--nav-bar-background-color:{{showGoodsInfo?'var(--divider-border-color)':'#fff'}};"
+    >
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="comment-goods-wrap" style="top:{{navHeight}};" wx:if="{{showGoodsInfo}}">
+        <!--评价商品-->
+        <comment-goods
+            style="width: 100%"
+            sku_img="{{detailInfo.goods_sku.skuImg}}"
+            goods_name="{{detailInfo.goods_sku.skuName}}"
+            label="{{detailInfo.goods_sku.skuAttr}}"
+            sku_price="{{detailInfo.goods_sku.price}}"
+        />
+    </view>
+    <view class="content-box" style="padding-bottom: {{safeAreaInsetBottom + 150}}rpx;">
+        <view class="content-header {{showGoodsInfo?'content-header-radius':''}}">
+            <!--评论内容-->
+            <comment-content
+                user_name="{{detailInfo.user_nick_name}}"
+                user_avatar="{{detailInfo.user_avatar}}"
+                create_time="{{detailInfo.created_time}}"
+                second_label="{{showGoodsInfo?'':detailInfo.goods_sku.skuAttr}}"
+                comment="{{detailInfo.message}}"
+                attachment="{{detailInfo.medias}}"
+                bind:onItemClick="onItemClick"
+            >
+                <view class="comment-content-goods" wx:if="{{false}}">
+                    <comment-goods
+                        style="width: 100%"
+                        sku_img="{{detailInfo.goods_sku.skuImg}}"
+                        goods_name="{{detailInfo.goods_sku.skuName}}"
+                        label="{{detailInfo.goods_sku.skuAttr}}"
+                        sku_price="{{detailInfo.goods_sku.price}}"
+                    />
+                </view>
+            </comment-content>
+        </view>
+        <view class="content-body" wx:if="{{replyList && replyList.length > 0}}">
+            <view class="reply-count">{{replyList.length}}条回复</view>
+            <block wx:for="{{replyList}}" wx:key="comment_id">
+                <view class="comment-list-item">
+                    <view class="user-info-wrap">
+                        <van-image fit="cover" width="76rpx" height="76rpx" radius="38rpx" lazy-load src="{{item.user_avatar}}" />
+                        <view class="user-info-second-wrap">
+                            <view class="user-info-name">{{item.user_nick_name}}</view>
+                            <view class="user-info-extra">{{item.created_time}}</view>
+                        </view>
+                        <view style="margin-left: auto;">
+                            <comment-widget value="{{item.like_count}}" type="{{1}}" checked="{{item.my_like}}" bind:click="onLikeClick" data-id="{{item.comment_id}}" data-index="{{index}}" />
+                        </view>
+                    </view>
+                    <view class="comment-content" catchtap="commentClick" data-user-id="{{item.user_id}}" data-id="{{item.comment_id}}" data-index="{{index}}">
+                        <block wx:if="{{item.parent_id > 0 && item.parent_id != detailInfo.comment_id}}">
+                            <text>回复</text>
+                            <text style="color: var(--features-color-text)">{{item.at_user_nick_name}}</text>
+                            <text>：</text>
+                        </block>
+                        <text>{{item.message}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="content-footer" wx:if="{{!showSendButton}}">
+        <view class="footer-wrap">
+            <view class="input" data-user-id="{{detailInfo.user_id}}" data-id="{{detailInfo.comment_id}}" data-index="{{-1}}" catch:tap="commentClick">
+                <icon class="iconfont icon-xiugai" style="display: inline-flex; font-size: 26rpx; color: var(--tip-color-text-a2); margin-right:12rpx; margin-top:5rpx;" wx:if="{{!showSendButton}}" />
+                <text class="input-placeholder">说点什么呗~</text>
+            </view>
+            <comment-widget
+                value="{{detailInfo.like_count}}"
+                type="{{1}}"
+                checked="{{detailInfo.my_like}}"
+                icon_width="48rpx"
+                icon_height="48rpx"
+                bind:click="onLikeClick"
+                data-id="{{-1}}"
+                wx:if="{{!showSendButton}}"
+            />
+        </view>
+        <view style="width: 100%;height: {{safeAreaInsetBottom + 'rpx'}}" wx:if="{{safeAreaInsetBottom > 0}}"></view>
+    </view>
+    <view class="content-footer" style="bottom:{{commentInputBottom + 'rpx'}};" wx:if="{{showSendButton}}">
+        <view class="footer-wrap">
+            <view class="input input-full">
+                <input
+                    placeholder="{{placeholder}}"
+                    maxlength="{{-1}}"
+                    placeholder-class="input-placeholder"
+                    style="width:100%; margin-right:28rpx}};"
+                    model:value="{{ commentText }}"
+                    focus="{{commentInputFocus}}"
+                    show-confirm-bar="{{false}}"
+                    adjust-position="{{false}}"
+                    contenteditable="{{true}}"
+                    confirm-type="send"
+                    bind:blur="inputBlur"
+                    bind:input="bindReplaceInput"
+                    bind:focus="inputFocus"
+                    bind:confirm="commentSend"
+                    bind:keyboardheightchange="onKeyboardHeightChange"
+                />
+                <van-button round type="primary" custom-class="comment-send-button" bindtap="commentSend" wx:if="{{showSendButton}}">发送 </van-button>
+            </view>
+            <comment-widget
+                value="{{detailInfo.like_count}}"
+                type="{{1}}"
+                checked="{{detailInfo.my_like}}"
+                icon_width="48rpx"
+                icon_height="48rpx"
+                bind:click="onLikeClick"
+                data-id="{{-1}}"
+                wx:if="{{!showSendButton}}"
+            />
+        </view>
+    </view>
+</view>

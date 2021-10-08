@@ -1,0 +1,62 @@
+/* components/pointsGoodsList/pointsGoodsList.wxss */
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+}
+.list .item {
+    flex-grow: 0;
+    margin-bottom: 30rpx;
+    width: 330rpx;
+    height: 484rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+}
+.list .timg {
+    overflow: hidden;
+    width: 330rpx;
+    height: 330rpx;
+    border-radius: 20px 20px 0px 0px;
+}
+.list .img {
+    width: 330rpx;
+    height: 330rpx;
+}
+.list .title {
+    overflow: hidden;
+    margin-top: 20rpx;
+    padding: 0 12rpx;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 30rpx;
+}
+.list .price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16rpx;
+    padding: 0 12rpx;
+}
+.list .price .money {
+    color: var(--tip-color-text);
+    text-decoration: line-through;
+    font-size: 28rpx;
+}
+.list .price .points {
+    display: flex;
+    align-items: center;
+    padding: 0 20rpx 0 10rpx;
+    height: 56rpx;
+    border-radius: 28px;
+    background: rgba(254, 206, 10, 0.2);
+    color: #fab001;
+    font-weight: 500;
+    font-size: 28rpx;
+}
+.list .price .points .coin {
+    margin-right: 10rpx;
+    width: 36rpx;
+    height: 36rpx;
+}

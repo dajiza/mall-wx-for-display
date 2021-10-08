@@ -1,0 +1,34 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="团作介绍" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="editor_toolbox">
+        <!-- <i class="iconfont icon-undo" data-method="undo" bindtap="edit" /> -->
+        <!-- <i class="iconfont icon-redo" data-method="redo" bindtap="edit" /> -->
+        <i class="iconfont icon-pic" data-method="insertImg" bindtap="edit" />
+        <i class="iconfont icon-shipin" data-method="insertVideo" bindtap="edit" />
+        <i class="iconfont icon-url" data-method="insertLink" bindtap="edit" />
+        <i class="iconfont icon-txt" data-method="insertText" bindtap="edit" />
+        <i class="iconfont icon-shanchu" bindtap="clear" />
+        <i class="iconfont icon-saving" bindtap="save" />
+    </view>
+    <view style="padding-bottom: 50px; width:100%">
+        <mp-html id="article" container-style="padding:20px" content="{{content}}" domain="https://6874-html-foe72-1259071903.tcb.qcloud.la/demo" editable="{{editable}}"></mp-html>
+    </view>
+</view>
+<block wx:if="{{modal}}">
+    <view class="mask" />
+    <view class="modal">
+        <view class="modal_title">{{modal.title}}</view>
+        <input class="modal_input" value="{{modal.value}}" maxlength="-1" auto-focus bindinput="modalInput" />
+        <view class="modal_foot">
+            <view class="modal_button" bindtap="modalCancel">取消</view>
+            <view class="modal_button" style="color:#576b95;border-left:1px solid rgba(0,0,0,.1)" bindtap="modalConfirm">确定</view>
+        </view>
+    </view>
+</block>

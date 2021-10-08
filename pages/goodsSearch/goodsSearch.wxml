@@ -1,0 +1,72 @@
+<!--pages/cart/cart.wxml-->
+<view class="container">
+    <!-- view包裹 -->
+    <van-nav-bar fixed placeholder title="商品搜索" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <!--<van-icon name="arrow-left" color="white" size="25px"  />-->
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <view class="search-box" style="top: {{navHeight}}">
+            <view class="search-bar">
+                <input class="search-input" value="{{ searchValue }}" placeholder-class="search-input-placeholder" auto-focus="{{true}}" placeholder="输入想搜索的信息" confirm-type="search" bindinput="bindSearchInput" bindconfirm="handleOnSearch" />
+                <text class="iconfont icon-glass"></text>
+                <van-icon class="close-icon" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch" wx:if="{{searchValue}}" />
+                <van-uploader class="upload" wx:if="{{!searchValue}}" bind:after-read="afterRead" accept="image" max-size="10485760" bind:oversize="oversize" max-count="{{ 1 }}" accept="image">
+                    <span class="iconfont icon-camera camera-icon"></span>
+                </van-uploader>
+            </view>
+            <view class="cancel-btn" bind:tap="handleCancel">取消</view>
+        </view>
+        <view class="search-history" wx:if="{{ historyList.length > 0 }}">
+            <view class="search-history-text-delete">
+                <view class="search-history-text">搜索历史</view>
+                <text class="iconfont icon-ashbin" bind:tap="handleDeleteAllSearch"></text>
+            </view>
+            <view class="search-history-list {{ unfoldBtnFlag ? 'searchList-content-unfold' : ''}}">
+                <block wx:for="{{ historyList }}" wx:key="index">
+                    <view class="search-item" data-value="{{ item }}" bind:tap="handleClickHistory">{{ item }}</view>
+                </block>
+                <!--展开全部-->
+                <view wx:if="{{unfoldBtnFlag && !showAllSearchHistory}}" class="open-close" bind:tap="unfoldList">
+                    <text class="iconfont icon-xia"></text>
+                </view>
+                <!--收起-->
+                <view wx:if="{{unfoldBtnFlag && showAllSearchHistory}}" class="open-close" bind:tap="handlePackUp">
+                    <text class="iconfont icon-shang"></text>
+                </view>
+            </view>
+        </view>
+        <view class="hot-search {{ historyList.length > 0 ?'':'no-history'}}">
+            <view class="hot-search-text-icon">
+                <view class="hot-search-text">热搜榜</view>
+                <image class="search-hot-img" src="../../assets/images/search-hot.png"></image>
+            </view>
+            <view class="hot-search-list">
+                <block wx:for="{{ hotSearchList }}" wx:key="index">
+                    <view class="hot-search-item" data-value="{{ item }}" data-id="{{item.goods_id}}" bind:tap="handleGoGoodsDetail">
+                        <view class="goods-img-box">
+                            <image class="goods-img" lazy-load mode="aspectFill" src="{{item.goods_img + '!upyun520/fw/500'}}"></image>
+                            <view class="search-ranking {{index < 3 ? 'search-ranking-'+ index:''}}">{{index + 1}}</view>
+                        </view>
+                        <text class="goods-name">{{item.goods_name}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <van-dialog id="van-dialog" className="delete-dialog" />
+</view>
+<van-dialog
+    message="确认删除全部历史记录？"
+    show="{{ showDeleteConfirmDialog }}"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+    catchtouchmove="preventTouchMove"
+    bind:close="onDeleteConfirmDialogClose"
+    bind:confirm="onDeleteConfirm"
+/>

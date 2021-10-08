@@ -1,0 +1,213 @@
+<view class="container" style="padding-bottom: 0px;">
+    <van-nav-bar fixed placeholder title="发布课程" border="{{false}}" custom-class="nav" title-class="title"
+                 z-index="{{100}}">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="nav-tabs" style="top: {{navHeight}}px;">
+        <van-tabs active="{{ active }}" swipe-threshold="{{3}}" bind:change="onChange">
+            <van-tab title="视频({{videosLength}})"></van-tab>
+            <van-tab title="图片({{imagesLength}})"></van-tab>
+        </van-tabs>
+    </view>
+    <view class="drag-wrap" style="position: relative; z-index: 9;padding-bottom: {{160+safeAreaInsetBottom}}rpx;">
+        <block wx:if="{{coursewareImages.length > 0 && active == 1}}">
+            <view class="touchView" style="height:{{scrollPosition.scrollViewHeight}}px;" catchtouchstart="draggleTouch"
+                  catchtouchmove="draggleTouch" catchtouchend="draggleTouch"></view>
+            <movable-area class="moveable_row {{movableViewPosition.className}}"
+                          style="height: {{scrollPosition.scrollViewHeight}}px;" wx:if="{{movable}}">
+                <movable-view
+                        style="height: {{scrollPosition.everyOptionHeight}}px; width: 100%;"
+                        direction="vertical"
+                        x="{{movableViewPosition.x}}"
+                        y="{{movableViewPosition.y}}"
+                        inertia="false"
+                        damping="9999"
+                        friction="9999"
+                >
+                    <view class="edit_row " >
+                        <view class="media-item">
+                            <view class="icon-sort-wrap">
+                                <image src="/packageTeamwork/static/ic_sort.png" class="sort-image"/>
+                            </view>
+                            <view class="img-box">
+                                <van-image fit="cover" custom-class="image" lazy-load radius="8rpx"
+                                           src="{{movableViewPosition.data.url}}"></van-image>
+                            </view>
+                            <view class="media-title">
+                                <input
+                                        model:value="{{ movableViewPosition.data.title }}"
+                                        placeholder="{{textareaPlaceholder}}"
+                                        border="{{ false }}"
+                                        show-confirm-bar="{{false}}"
+                                        adjust-position="{{false}}"
+                                        contenteditable="{{true}}"
+                                        class="title-input"
+                                        placeholder-class="title-input-placeholder"
+                                ></input>
+                            </view>
+                            <view class="delete-box">
+                                <image src="/packageTeamwork/static/ic_del_red.svg" class="delete-image"/>
+                            </view>
+                        </view>
+                    </view>
+                </movable-view>
+            </movable-area>
+            <scroll-view class="edit_row_holder" scroll-y="{{scrollPosition.scrollY}}" style="" bindscroll="bindScroll">
+                <block wx:for="{{coursewareImages}}" wx:key="id">
+                    <view class="edit_row" id="media-{{index}}">
+                        <view class="media-item {{item.selectClass}}">
+                            <view class="icon-sort-wrap">
+                                <image src="/packageTeamwork/static/ic_sort.png" class="sort-image"/>
+                            </view>
+                            <view class="img-box">
+                                <van-image fit="cover" custom-class="image" lazy-load radius="8rpx" src="{{item.url + '!upyun520/fw/320'}}"
+                                           data-src="{{item.url}}"
+                                           catchtap="previewImage"></van-image>
+                            </view>
+                            <view class="media-title">
+                                <input
+                                        model:value="{{ item.title }}"
+                                        placeholder="{{textareaPlaceholder}}"
+                                        border="{{ false }}"
+                                        show-confirm-bar="{{false}}"
+                                        adjust-position="{{false}}"
+                                        contenteditable="{{true}}"
+                                        class="title-input {{item.selectClass}}"
+                                        placeholder-class="title-input-placeholder"
+                                        data-index="{{index}}"
+                                        data-id="{{item.id}}"
+                                        bindinput="onInput"
+                                        bind:focus="onFocus"
+                                        bind:blur="onBlur"
+                                ></input>
+                            </view>
+                            <view class="delete-box" data-type="image" data-index="{{index}}" catch:tap="itemDelete">
+                                <image src="/packageTeamwork/static/ic_del_red.svg" class="delete-image"/>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </block>
+        <block wx:if="{{coursewareVideos.length > 0 && active == 0}}">
+            <view class="touchView" style="height:{{scrollPosition.scrollViewHeight}}px;" catchtouchstart="draggleTouch"
+                  catchtouchmove="draggleTouch" catchtouchend="draggleTouch"></view>
+            <movable-area class="moveable_row {{movableViewPosition.className}}"
+                          style="height: {{scrollPosition.scrollViewHeight}}px;" wx:if="{{movable}}">
+                <movable-view
+                        style="height: {{scrollPosition.everyOptionHeight}}px; width: 100%;"
+                        direction="vertical"
+                        x="{{movableViewPosition.x}}"
+                        y="{{movableViewPosition.y}}"
+                        inertia="false"
+                        damping="9999"
+                        friction="9999"
+                >
+                    <view class="edit_row ">
+                        <view class="media-item">
+                            <view class="icon-sort-wrap">
+                                <image src="/packageTeamwork/static/ic_sort.png" class="sort-image"/>
+                            </view>
+                            <view class="img-box">
+                                <video
+                                        class="video"
+                                        bindplay="onPlay"
+                                        bindpause="onPause"
+                                        src="{{ movableViewPosition.data.link }}"
+                                        binderror="videoErrorCallback"
+                                        show-play-btn="{{true}}"
+                                        controls="{{true}}"
+                                        play-btn-position="center"
+                                        enable-play-gesture="{{true}}"
+                                        show-progress="{{true}}"
+                                ></video>
+                            </view>
+                            <view class="media-title">
+                                <input
+                                        model:value="{{ movableViewPosition.data.title }}"
+                                        placeholder="{{textareaPlaceholder}}"
+                                        border="{{ false }}"
+                                        show-confirm-bar="{{false}}"
+                                        adjust-position="{{false}}"
+                                        contenteditable="{{true}}"
+                                        class="title-input"
+                                        placeholder-class="title-input-placeholder"
+                                ></input>
+                            </view>
+                            <view class="delete-box">
+                                <image src="/packageTeamwork/static/ic_del_red.svg" class="delete-image"/>
+                            </view>
+                        </view>
+                    </view>
+                </movable-view>
+            </movable-area>
+            <scroll-view class="edit_row_holder" scroll-y="{{scrollPosition.scrollY}}" style="" bindscroll="bindscroll">
+                <block wx:for="{{coursewareVideos}}" wx:key="variableNum">
+                    <view class="edit_row" id="media-{{index}}">
+                        <view class="media-item {{item.selectClass}}">
+                            <view class="icon-sort-wrap">
+                                <image src="/packageTeamwork/static/ic_sort.png" class="sort-image"/>
+                            </view>
+                            <view class="img-box">
+                                <video
+                                        class="video"
+                                        bindplay="onPlay"
+                                        bindpause="onPause"
+                                        src="{{ item.link }}"
+                                        binderror="videoErrorCallback"
+                                        show-play-btn="{{true}}"
+                                        controls="{{true}}"
+                                        play-btn-position="center"
+                                        enable-play-gesture="{{true}}"
+                                        show-progress="{{true}}"
+                                ></video>
+                            </view>
+                            <view class="media-title">
+                                <input
+                                        model:value="{{ item.title }}"
+                                        placeholder="{{textareaPlaceholder}}"
+                                        border="{{ false }}"
+                                        show-confirm-bar="{{false}}"
+                                        adjust-position="{{false}}"
+                                        contenteditable="{{true}}"
+                                        class="title-input {{item.selectClass}}"
+                                        placeholder-class="title-input-placeholder"
+                                        data-index="{{index}}"
+                                        data-id="{{item.id}}"
+                                        bindinput="onInput"
+                                        bind:focus="onFocus"
+                                        bind:blur="onBlur"
+                                ></input>
+                            </view>
+                            <view class="delete-box" data-type="video" data-index="{{index}}" catch:tap="itemDelete">
+                                <image src="/packageTeamwork/static/ic_del_red.svg" class="delete-image"/>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </block>
+        <view class="plus-wrap">
+            <view class="courseware-add" bindtap="handelAddMedia">
+                <text class="iconfont icon-jiahao" style="font-size: 88rpx;color: #968F91;"></text>
+            </view>
+        </view>
+        <view class="placeholder-bottom" style="height: {{placeholderHeight}}px"></view>
+    </view>
+    <view class="bottom-button-container" style="padding-bottom:{{(40+safeAreaInsetBottom)+''}}rpx;">
+        <button class="bottom-button" hover-class="botton-hover" bindtap="handleSave">
+            <text class="bottom-button-container-label">保存</text>
+        </button>
+    </view>
+</view>
+<view class="video-preview-box" wx:if="{{videoPreviewUrl.length>0}}">
+    <video id="myVideo" src="{{videoPreviewUrl}}" class="video-preview" binderror="videoErrorCallback"
+           show-play-btn="{{true}}" controls="{{true}}" play-btn-position="center" enable-play-gesture="{{true}}"
+           show-progress="{{true}}"></video>
+</view>
+<view class="video-preview-close" style="height:{{navHeight}}px;padding-top:{{statusBarHeight}}px"
+      catchtap="handleVideoPreviewClose" wx:if="{{videoPreviewUrl.length>0}}">
+    <text class="iconfont icon-fanhuiiblack" style="font-size: 36rpx !important;"></text>
+</view>

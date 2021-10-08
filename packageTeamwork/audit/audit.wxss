@@ -1,0 +1,217 @@
+.page {
+  background: var(--background-color);
+  position: relative;
+}
+
+.container {
+  background: var(--background-color);
+}
+
+.nav {
+  background: #fff;
+}
+
+.title {
+  color: #333333 !important;
+  font-weight: 500 !important;
+  font-size: 38rpx !important;
+}
+
+.leftIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx;
+  color: #333333;
+  transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+  font-size: 36rpx;
+}
+
+.coures-desc {
+  width: 690rpx;
+  height: 160rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  margin: 30rpx auto;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16rpx;
+}
+
+.coures-poster {
+  width: 128rpx;
+  height: 128rpx;
+}
+
+.coures-info-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 128rpx;
+  justify-content: space-between;
+  margin-left: 18rpx;
+  width: 100%;
+}
+
+.coures-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--primary-color-text);
+  line-height: 40rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.coures-time {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 34rpx;
+}
+
+.coures-sign-and-type-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coures-sign {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 34rpx;
+}
+
+.coures-type {
+  background: rgba(var(--primary-color-opacity), 0.12);
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  font-weight: 400;
+  color: var(--primary-color);
+  line-height: 28rpx;
+  padding: 6rpx 16rpx;
+}
+
+.certificate-wrap {
+  width: 690rpx;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+}
+
+.user-wrap {
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.user-info-wrap {
+  margin-left: 16rpx;
+  display: flex;
+  flex-direction: column;
+  height: 120rpx;
+  justify-content: space-between;
+}
+
+.user-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--primary-color-text);
+  line-height: 44rpx;
+}
+
+.user-wx-name {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: var(--primary-color-text);
+  line-height: 34rpx;
+}
+
+.user-phone {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 34rpx;
+}
+
+.certificate-image-wrap {
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 10rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding-bottom: 22rpx;
+}
+
+.certificate-image {
+  width: 200rpx;
+  height: 216rpx;
+}
+
+.bottom-btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  position: fixed;
+  padding-bottom: env(safe-area-inset-bottom);
+  bottom: 40rpx;
+}
+
+.middle-btn {
+  width: 332rpx !important;
+}
+
+.reject-dialog-content-wrap {
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.reject-dialog-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--primary-color-text);
+  line-height: 42rpx;
+}
+
+.reject-reason-content {
+  width: 100%;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+  height: 200rpx;
+  background: rgba(86, 75, 78, 0.04);
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: var(--primary-color-text);
+  line-height: 40rpx;
+}
+
+.reject-reason-placeholder {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #B2B2B2 !important;
+}
+
+.van-dialog__message-text {
+  font-size: 32rpx !important;
+  font-weight: 500 !important;
+  color: var(--primary-color-text) !important;
+  line-height: 44rpx !important;
+}

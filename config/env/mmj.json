@@ -1,0 +1,10 @@
+{
+    "environment": "mmj",
+    "wxAppId": "",
+    "apiUrl": "https://mmsz-api.chuanshui.com/wx-app/",
+    "shopId": 3,
+    "shopName": "木木手作间",
+    "logDebug": true,
+    "shareTitle": "您要的布，我们都有。",
+    "httpLog": true
+}

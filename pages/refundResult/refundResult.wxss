@@ -1,0 +1,130 @@
+/* pages/refundResult/refundResult.wxss */
+.container {
+    position: relative;
+    padding-bottom: calc(200rpx + env(safe-area-inset-bottom));
+    background-color: var(--background-color);
+}
+.nav {
+    background: transparent !important;
+}
+.nav-title {
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.refund-back {
+    color: #fff;
+}
+.top {
+    width: 100%;
+    height: calc(280rpx + env(safe-area-inset-bottom));
+    border-radius: 0px 0px 30rpx 30rpx;
+    background: var(--secondary-gradual-color);
+    /* background: linear-gradient(315deg, #ff7070 0%, #ff1b1b 100%); */
+}
+.top .text1 {
+    margin: calc(128rpx + env(safe-area-inset-bottom)) 0 0 80rpx;
+    color: #ffffff;
+    font-size: 40rpx;
+}
+.top .text2 {
+    margin: 20rpx 0 0 80rpx;
+    color: #ffffff;
+    font-size: 26rpx;
+}
+.wrap {
+    box-sizing: border-box;
+    margin: 24rpx auto 0;
+    padding: 30rpx;
+    width: 100%;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.goods-list {
+    padding-bottom: 0;
+}
+.address .dividing {
+    margin: 20rpx 0 32rpx;
+}
+.address .title {
+    font-weight: 500;
+}
+.address .title .label {
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+}
+
+.contact-bar {
+    position: fixed;
+    bottom: env(safe-area-inset-bottom);
+    z-index: 9;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    width: 100%;
+    height: 100rpx;
+    background-color: #fff;
+    box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.08);
+    line-height: 100rpx;
+}
+
+.count-label {
+    color: var(--primary-color-text) !important;
+}
+.field-index--van-field {
+    padding: 0 !important;
+}
+
+.submit-btn {
+    position: fixed;
+    right: 0;
+    bottom: 0rpx;
+    left: 0;
+    /* margin: auto; */
+    text-align: center;
+}
+.custom-submit-btn {
+    margin: 0 auto 40rpx;
+    width: 690rpx !important;
+}
+
+.express-cell {
+    padding-bottom: 40rpx;
+}
+.express-cell.customize-cell {
+    margin-bottom: 0rpx;
+}
+.custom-reason {
+    border-radius: 30rpx 30rpx 0 0;
+    background: #ffffff;
+}
+.custom-reason .reason-wrap {
+    max-height: 700rpx;
+}
+.custom-reason .reason-wrap .title {
+    margin-top: 30rpx;
+    text-align: center;
+    font-size: 32rpx;
+}
+.custom-reason .reason-wrap .item-list {
+    padding: 60rpx 30rpx 0;
+}
+.custom-reason .reason-wrap .item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60rpx;
+    font-size: 32rpx;
+    line-height: 40rpx;
+}
+.custom-reason .reason-wrap .item .iconfont {
+    color: var(--features-color-text);
+    font-size: 40rpx;
+}
+.custom-reason .reason-wrap .item .checked {
+    font-size: 32rpx;
+}

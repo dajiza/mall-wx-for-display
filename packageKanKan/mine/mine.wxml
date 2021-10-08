@@ -1,0 +1,193 @@
+<view class="container">
+  <view class="blur-box">
+    <image class="blur-avatar" mode="aspectFill" src="{{avatar}}"></image>
+  </view>
+  <view class="blur-mask">
+    <view class="mask"></view>
+  </view>
+  <van-nav-bar placeholder fixed="{{layoutType ==1}}" border="{{false}}" z-index="{{13}}" custom-class="nav-custom-class">
+    <view slot="left" class="leftIcon" style="color: #FFFFFF !important;" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <van-nav-bar fixed border="{{false}}" z-index="{{14}}"
+    custom-style="opacity:{{navOpacity}}; --nav-bar-background-color: #FFFFFF;" wx:if="{{layoutType ==1}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+    <view slot="title" class="nav-title-wrap">
+      <image class="nav-title-avatar" mode="aspectFill" src="{{avatar}}" wx:if="{{false}}"></image>
+      <view class="nav-title">{{isAuthor?'我的看看':name}}</view>
+    </view>
+  </van-nav-bar>
+  <view class="personal-info-wrap" wx:if="{{layoutType ==1}}">
+    <view class="img-wrap">
+      <image class="personal-avatar" mode="aspectFill" src="{{avatar}}"></image>
+      <view id="rule" class="tip-wrap" bindtap="handleShowRuleTip" wx:if="{{isAuthor}}">
+        <image class="fullimg" mode="aspectFill" src="/packageKanKan/static/ic_look_tip.png"></image>
+      </view>
+    </view>
+    <view class="personal-name">{{name}}</view>
+    <view class="personal-introduce">
+      <view class="introduce">{{introduce.length==0?'自我介绍：xxx':introduce}}</view>
+      <view id="introduce" class="introduce-edit" bindtap="handleIntroduceEdit" wx:if="{{isAuthor}}">
+        <view>编辑</view>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" style="height:100vh;position: absolute;top: 0;z-index: 11;" bindscroll="handleOnScroll"
+    class="{{navOpacity==1?'scroll-fixed':''}}" bindtap="handletap" enhanced="{{true}}" bounces="{{false}}"
+    show-scrollbar="{{false}}" wx:if="{{layoutType ==1}}">
+    <view style="height:{{listOffset}}px;"></view>
+    <view id="courseList" class="list-wrap" style="height:{{listWrapHeight}}">
+      <view class="list-header" catchtouchmove="dummyTouchMove">
+        <view class="share-wrap">
+          <image class="share-icon" src="/packageKanKan/static/ic_look_share.png"></image>
+          <view class="share-label">{{shareCount}}个分享</view>
+        </view>
+        <view class="collect-wrap">
+          <image class="collect-icon" src="/packageKanKan/static/ic_collect.png"></image>
+          <view class="collect-label">{{collectCount}}</view>
+        </view>
+      </view>
+      <scroll-view id="contentList" class="list-content" scroll-y="{{navOpacity>0}}" style="height:calc(100% - 120rpx);"
+        wx:if="{{true}}" enhanced="{{true}}" bounces="{{false}}" show-scrollbar="{{false}}" bindscroll="bindscroll">
+        <view class="course-item-wrap" wx:if="{{courseList.length>0}}">
+          <view class="course-item" data-item="{{item}}" bindtap="handleCourseDetail" wx:for="{{courseList}}"
+            wx:key="id">
+            <view class="poster-wrap">
+              <image class="poster" mode="aspectFill" src="{{item.poster + '!upyun520/fw/400'}}"></image>
+              <!-- 审核通过 -->
+              <view class="favorites-wrap" wx:if="{{item.audit == 2}}" catchtap="handleAddFavorite" data-item="{{item}}"
+                data-index="{{index}}">
+                <view class="favorite-num">{{item.favorites}}</view>
+                <span class="iconfont icon-favorites-fill {{item.isFavorite?'no-favorite':'no-favorite'}}"></span>
+              </view>
+              <view class="audit-wrap {{item.audit==3?'audit-reject':''}}" wx:else>
+                <view>{{item.auditStatus}}</view>
+              </view>
+            </view>
+            <view class="course-title">{{item.title}}</view>
+            <view class="author-wrap">
+              <image class="author-avatar" src="{{item.authorAvatar}}" lazy-load></image>
+              <view class="author-name">{{item.authorName}}</view>
+            </view>
+          </view>
+          <van-loading class="bottom-loading" size="36rpx" text-size="24rpx"
+            wx:if="{{courseList.length > 0 && bottomLoadingShow}}">
+            加载中...</van-loading>
+          <view class="no-more" wx:if="{{courseList.length > pageSize && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～
+          </view>
+        </view>
+        <view class="empty-wrap" wx:if="{{courseList.length==0}}">
+          <view>我居然一个分享都没有！</view>
+        </view>
+      </scroll-view>
+    </view>
+  </scroll-view>
+  <view wx:if="{{layoutType ==2}}" style="width: 100%;z-index: 11;">
+    <view class="personal-info-wrap">
+      <view class="img-wrap">
+        <image class="personal-avatar" mode="aspectFill" src="{{avatar}}"></image>
+        <view id="rule" class="tip-wrap" bindtap="handleShowRuleTip" wx:if="{{isAuthor}}">
+          <image class="fullimg" mode="aspectFill" src="/packageKanKan/static/ic_look_tip.png"></image>
+        </view>
+      </view>
+      <view class="personal-name">{{name}}</view>
+      <view class="personal-introduce">
+        <view class="introduce">{{introduce.length==0?'自我介绍：xxx':introduce}}</view>
+        <view id="introduce" class="introduce-edit" bindtap="handleIntroduceEdit" wx:if="{{isAuthor}}">
+          <view>编辑</view>
+        </view>
+      </view>
+    </view>
+
+    <view id="courseList" class="list-wrap">
+      <view class="list-header" catchtouchmove="dummyTouchMove">
+        <view class="share-wrap">
+          <image class="share-icon" src="/packageKanKan/static/ic_look_share.png"></image>
+          <view class="share-label">{{shareCount}}个分享</view>
+        </view>
+        <view class="collect-wrap">
+          <image class="collect-icon" src="/packageKanKan/static/ic_collect.png"></image>
+          <view class="collect-label">{{collectCount}}</view>
+        </view>
+      </view>
+      <view class="list-content">
+        <view class="course-item-wrap" wx:if="{{courseList.length>0}}">
+          <view class="course-item" data-item="{{item}}" bindtap="handleCourseDetail" wx:for="{{courseList}}"
+            wx:key="id">
+            <view class="poster-wrap">
+              <image class="poster" mode="aspectFill" src="{{item.poster + '!upyun520/fw/400'}}"></image>
+              <!-- 审核通过 -->
+              <view class="favorites-wrap" wx:if="{{item.audit == 2}}" catchtap="handleAddFavorite" data-item="{{item}}"
+                data-index="{{index}}">
+                <view class="favorite-num">{{item.favorites}}</view>
+                <span class="iconfont icon-favorites-fill {{item.isFavorite?'no-favorite':'no-favorite'}}"></span>
+              </view>
+              <view class="audit-wrap {{item.audit==3?'audit-reject':''}}" wx:else>
+                <view>{{item.auditStatus}}</view>
+              </view>
+            </view>
+            <view class="course-title">{{item.title}}</view>
+            <view class="author-wrap">
+              <image class="author-avatar" src="{{item.authorAvatar}}" lazy-load></image>
+              <view class="author-name">{{item.authorName}}</view>
+            </view>
+          </view>
+          <van-loading class="bottom-loading" size="36rpx" text-size="24rpx"
+            wx:if="{{courseList.length > 0 && bottomLoadingShow}}">
+            加载中...</van-loading>
+          <view class="no-more" wx:if="{{courseList.length > pageSize && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～
+          </view>
+        </view>
+        <view class="empty-wrap" wx:if="{{courseList.length==0}}">
+          <view>我居然一个分享都没有！</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btn-publish-wrap" wx:if="{{isAuthor}}">
+    <button class="btn-publish" bindtap="handlePublish">
+      <image class="publish-icon" src="/packageKanKan/static/ic_comment.png"></image>
+      <text class="btn-label">发布看看</text>
+    </button>
+  </view>
+</view>
+
+<van-dialog use-slot show="{{ showIntroduceDialog }}" show-cancel-button custom-style="--dialog-border-radius: 16rpx;"
+  confirm-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+  cancel-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+  close-on-click-overlay="{{false}}" bind:confirm="handleIntroduceEditConfirm" bind:cancel="handleIntroduceEditCancel"
+  asyncClose="{{true}}" confirm-button-text="保存" width="600rpx">
+
+  <view class="introduce-edit-dialog">
+    <textarea value="{{introduce}}" class="introduce-content" placeholder="请输入自我介绍(最多40字)"
+      placeholder-style="font-size: 28rpx;font-weight: 400;color: #B2B2B2 !important;" bindinput="bindIntroduceInput"
+      maxlength="{{40}}" disable-default-padding="{{true}}" show-confirm-bar="{{false}}"></textarea>
+  </view>
+</van-dialog>
+
+<van-popup show="{{ showPop }}" bind:close="onClose" custom-class="pop-custom">
+  <view class="pop">
+    <view class="close" bindtap="onClose">
+      <image class="close-img" src="../../assets/images/pop-close.png" />
+    </view>
+    <view class="contents">
+      <view class="title">
+        <image class="title-img" src="../../assets/images/pop-title.png" />
+        <view class="subject">
+          <image class="title-left" src="../../assets/images/title-left.png" />
+          <view class="text">规则</view>
+          <image class="title-right" src="../../assets/images/title-right.png" />
+        </view>
+      </view>
+      <view class="list">
+        <view class="item" wx:for="{{rules}}">
+          <view class="label">{{item.title}}：</view>
+          <view class="value">{{item.value}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</van-popup>

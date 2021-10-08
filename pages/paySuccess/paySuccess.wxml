@@ -1,0 +1,57 @@
+<!--pages/paySuccess.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar fixed title="" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack refund-back"></text>
+        </view>
+    </van-nav-bar>
+    <view class="header">
+        <view class="info">
+            <view class="img">
+                <image class="fullimg success-icon" src="../../assets/images/success-icon.png"></image>
+            </view>
+            <view class="text">
+                <view class="text1">支付成功！</view>
+                <view class="text2">感谢您的购买</view>
+            </view>
+        </view>
+    </view>
+    <view class="detail">
+        <view class="line">
+            <image class="fullimg" src="../../assets/images/success-line.png"></image>
+        </view>
+        <view class="content">
+            <view class="total">
+                <span class="symbol">￥</span>
+                <span class="amount">{{fn.formatMoney(detail.price_total_real)}}</span>
+            </view>
+            <view class="list">
+                <view class="item">
+                    <view class="label">订单编号</view>
+                    <view class="value">{{detail.order_no}}</view>
+                </view>
+                <view class="item">
+                    <view class="label">下单时间</view>
+                    <view class="value">{{detail.created_time}}</view>
+                </view>
+                <view class="item">
+                    <view class="label">付款时间</view>
+                    <view class="value">{{detail.paid_time}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="btn-warp">
+
+        <van-button round type="primary" size="large" class="submit-btn" custom-class="custom-submit-btn btn-index"
+            bindtap="gotoIndex">
+            返回首页
+        </van-button>
+        <van-button round type="default" size="large" class="submit-btn" custom-class="custom-submit-btn"
+            bindtap="gotoOrderDetail">
+            查看订单
+        </van-button>
+    </view>
+</view>

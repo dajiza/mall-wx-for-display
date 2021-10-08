@@ -1,0 +1,62 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container circle-news-page">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="消息" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <!-- 消息列表 -->
+    <view class="content-box">
+        <block wx:for="{{listData}}" wx:key="id">
+            <view class="news-item" catch:tap="viewCircleDetail" data-id="{{item.comment_id}}" data-root="{{item.root_id}}">
+                <view class="news-left">
+                    <image class="head-img" lazy-load mode="aspectFill" src="{{item.notice_type==1 ?item.reply_avatar: item.operator_avatar}}"
+                           data-src="{{item.notice_type==1 ?item.reply_avatar: item.operator_avatar}}"
+                           data-type="1"
+                           data-item="{{item}}"
+                           catchtap="previewImage"
+                    ></image>
+                </view>
+                <view class="news-center">
+                    <view class="reply-nick-name fontWeight500 text-ellipsis">{{item.notice_type==1 ?item.reply_nick_name: item.operator_nick_name}}</view>
+                    <!--评论-->
+                    <view class="comment-text" wx:if="{{item.at_user_nick_name && item.reply_message && item.notice_type==1}}">
+                        <text>{{item.comment_or_reply == 2 ? '回复了 ':'评论了 '}}</text>
+                        <text class="fontWeight500">{{item.at_user_nick_name}}</text>
+                        <text>：{{item.reply_message}}</text>
+                    </view>
+                    <!--点赞-->
+                    <view class="ic-zan-wrap" wx:if="{{item.notice_type==2}}">
+                        <text class="iconfont icon-zan"></text>
+                    </view>
+                    <view class="time-box {{item.notice_type==2?'marginTop10':'marginTop6'}}">{{item.time}}</view>
+                </view>
+                <view class="news-right">
+                    <block wx:if="{{item.root_medias[0].media_url && item.root_medias[0].media_type == 2 }}">
+                        <image class="img" lazy-load mode="aspectFill"
+                               src="{{item.root_medias[0].media_url + '!upyun520/fw/320'}}"
+                               data-src="{{item.root_medias[0].media_url}}"
+                               data-type="2"
+                               data-item="{{item}}"
+                               catchtap="previewImage"
+                        ></image>
+                    </block>
+                    <block wx:if="{{item.root_medias[0].media_url && item.root_medias[0].media_type == 1}}">
+                        <view class="video-wrap" catchtap>
+                            <video class="video"
+                                   src="{{ item.root_medias[0].media_url }}"
+                                   binderror="videoErrorCallback"
+                                   show-play-btn="{{true}}"
+                                   controls="{{true}}"
+                                   play-btn-position="center"
+                                   enable-play-gesture="{{true}}"
+                                   show-progress="{{true}}"></video>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </block>
+        <view class="no-more" wx:if="{{ listData.length > 0}}">人家也是有底线的～</view>
+    </view>
+</view>

@@ -1,0 +1,104 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+  <van-nav-bar fixed placeholder title="材料清单" border="{{false}}" custom-class="nav" title-class="title">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <view>取消</view>
+    </view>
+  </van-nav-bar>
+  <view class="header-fixed" style="top: {{navHeight}}rpx;">
+    <view class="search-box">
+      <view class="search-bar">
+        <input class="search-input" value="{{ searchValue }}" placeholder-class="search-input-placeholder"
+          placeholder="搜索商品" confirm-type="search" bindinput="bindSearchInput" bindconfirm="handleOnSearch" />
+        <text class="iconfont icon-glass"></text>
+        <van-icon class="close-icon" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch"
+          wx:if="{{searchValue}}" />
+      </view>
+    </view>
+  </view>
+  <view class="material-tabs" style="top: {{navHeight+120}}rpx;">
+    <view class="tabs-wrap">
+      <text class="tabs-item tabs-index-1 {{active==2?'tabs-active':''}}">购买过的商品</text>
+      <text class="tabs-item tabs-index-2 {{active==1?'tabs-active':''}}">已添加</text>
+      <view class="to-do-num" wx:if="{{checkedList.length>0}}">{{checkedList.length}}</view>
+      <view class="line {{(active==1)?'line-2':''}}"></view>
+      <view class="div"></view>
+      <view class="click-wrap">
+        <view class="click-item" data-name="2" catch:tap="onChange"></view>
+        <view class="click-item" data-name="1" catch:tap="onChange"></view>
+      </view>
+    </view>
+  </view>
+  <view class="tab-content">
+    <!-- 购买过 -->
+    <scroll-view id="materialAllList" class="material-all-list {{active == '2'?'':'hide'}}" lower-threshold="{{100}}" scroll-y="{{true}}" style="margin-top:{{120+100}}rpx;height:calc(100vh - {{(navHeight+120+100)}}rpx);" bindscroll="bindscroll">
+      <view class="material-list" wx:if="{{allList.length>0}}">
+        <view style="height:50rpx;background: #fff;"></view>
+        <view wx:for="{{allList}}" class="material-item-wrap" wx:key="id">
+          <view class="check-status" catchtap="handleMaterialCheck" data-item="{{item}}" data-index="{{index}}">
+            <icon class="iconfont icon-jiahao1 checked" wx:if="{{item.checked}}" />
+            <icon class="iconfont icon-a-jiahao1 no-checked" wx:else />
+          </view>
+          <view class="material-detail-wrap">
+            <view class="material-img">
+              <van-image fit="cover" width="136rpx" height="136rpx" radius="8rpx" lazy-load src="{{item.img + '!upyun520/fw/300'}}">
+              </van-image>
+            </view>
+            <view class="material-detail">
+              <view class="material-title">{{item.title}}</view>
+              <view class="material-info">
+                <view class="material-sku-wrap">{{item.sku}}</view>
+                <view class="material-price-wrap">
+                  <view class="material-price-unit">¥</view>
+                  <view class="material-price">{{fn.formatMoney(item.price)}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <van-loading class="bottom-loading" size="36rpx" text-size="24rpx"
+          wx:if="{{allList.length > 0 && bottomLoadingShow}}">
+          加载中...</van-loading>
+        <view class="no-more" wx:if="{{allList.length > pageSize && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～</view>
+        <view style="height:160rpx;"></view>
+      </view>
+    </scroll-view>
+    <!-- 已添加 -->
+    <scroll-view class="material-checked-list {{active == '2'?'hide':''}}" scroll-y="{{true}}" style="margin-top:{{120+100}}rpx;height:calc(100vh - {{(navHeight+120+100)}}rpx);">
+      <view class="material-list" wx:if="{{checkedList.length>0}}">
+        <view style="height:50rpx;background: #fff;" wx:if="{{filterCheckedList.length>0}}"></view>
+        <view wx:for="{{filterCheckedList}}" class="material-item-wrap" wx:key="id">
+          <view class="check-status" catchtap="handleMaterialCheck" data-item="{{item}}" data-index="{{index}}">
+            <!-- <icon class="iconfont icon-clear clear-checked" /> -->
+            <image src="/packageKanKan/static/ic_clear.png" style="width:48rpx;height:48rpx;"></image>
+          </view>
+          <view class="material-detail-wrap">
+            <view class="material-img">
+              <van-image fit="cover" width="136rpx" height="136rpx" radius="8rpx" lazy-load src="{{item.img + '!upyun520/fw/300'}}">
+              </van-image>
+            </view>
+            <view class="material-detail">
+              <view class="material-title">{{item.title}}</view>
+              <view class="material-info">
+                <view class="material-sku-wrap">{{item.sku}}</view>
+                <view class="material-price-wrap">
+                  <view class="material-price-unit">¥</view>
+                  <view class="material-price">{{fn.formatMoney(item.price)}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view style="height:160rpx;" wx:if="{{filterCheckedList.length>0}}"></view>
+      </view>
+      <view wx:if="{{checkedList.length==0}}" class="empty">还未添加材料～
+      </view>
+    </scroll-view>
+  </view>
+  <view class="bottom-button-container">
+    <button class="bottom-button" style="margin-bottom: 40rpx;margin-top: 40rpx;" hover-class="botton-hover"
+      bindtap="handleSave">
+      <text class="bottom-button-container-label">确定</text>
+    </button>
+  </view>
+</view>

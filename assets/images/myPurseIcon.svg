@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>我的钱包</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="19.4222677%" x2="87.6652511%" y2="85.1051549%" id="linearGradient-1">
+            <stop stop-color="#D3CBFF" offset="0%"></stop>
+            <stop stop-color="#ABA9FF" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0.962962963" y="6.95008052" width="23.1111111" height="18.0869565" rx="3"></rect>
+        <filter x="-30.3%" y="-27.6%" width="160.6%" height="177.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.653902957   0 0 0 0 0.645141006   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="我的钱包" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="23" cy="23" r="23"></circle>
+            <g id="Pending-payment" transform="translate(10.000000, 8.500000)">
+                <path d="M4.88654898,4.37098575 L17.403536,5.31036086 C18.8407918,5.41822407 19.9982233,6.53292285 20.160053,7.96510646 L20.455316,10.5781683 C20.6413485,12.2245455 19.4575052,13.710007 17.811128,13.8960395 C17.7161988,13.9067661 17.6208114,13.912952 17.5252919,13.9145763 L4.70087824,14.1326464 C3.04426347,14.160816 1.67847591,12.8407003 1.65030634,11.1840856 C1.64996242,11.1638597 1.64982307,11.1436309 1.64988833,11.1234022 L1.66205189,7.35289509 C1.66739683,5.69604946 3.01486852,4.35724363 4.67171415,4.36258857 C4.74340309,4.36281984 4.8150607,4.3656207 4.88654898,4.37098575 Z" id="矩形" fill="#EDECFF" transform="translate(11.232992, 9.157234) rotate(-30.000000) translate(-11.232992, -9.157234) "></path>
+                <g id="矩形">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-2"></use>
+                </g>
+                <circle id="椭圆形" fill="#D2D0FF" cx="17.5426731" cy="15.4911433" r="2.51207729"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

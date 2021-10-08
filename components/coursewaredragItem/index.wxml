@@ -1,0 +1,11 @@
+<view catchtap="itemClick">
+  <view class="info">
+    <view class="info__item">
+      <van-image fit="cover" custom-class="image" lazy-load radius="8rpx" src="{{itemData.url}}">
+      </van-image>
+      <view style="position: absolute;right: 0;top: 0;padding-left: 10px;padding-bottom: 10px;" catchtap="handleDeleteImg">
+        <image src="{{deleteIcon}}" class="delete-image" />
+      </view>
+    </view>
+  </view>
+</view>

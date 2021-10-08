@@ -1,0 +1,111 @@
+/* pages/orderCheck/orderCheck.wxss */
+.container {
+    padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+    background-color: var(--background-color);
+}
+.wrap {
+    width: 100%;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.nav {
+    background: var(--background-color) !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 37rpx !important;
+}
+.leftIcon {
+    font-size: 30rpx;
+}
+.van-nav {
+    width: 100%;
+    /* background: #fff !important; */
+}
+
+.list {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 20rpx;
+    width: 100%;
+}
+.item-wrap {
+    width: 340rpx;
+}
+.item {
+    position: relative;
+    align-self: end;
+    /* flex: auto; */
+    margin-top: 20rpx;
+    padding-bottom: 24rpx;
+    width: 340rpx;
+    border-radius: 10rpx;
+    background-color: #fff;
+}
+.item .timg {
+    width: 340rpx;
+    height: 340rpx;
+    border-radius: 10rpx 10rpx 0px 0px;
+}
+.item .info {
+    box-sizing: border-box;
+    padding: 0 20rpx;
+}
+.item .info .title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    margin-top: 16rpx;
+    word-break: break-all;
+    font-weight: 500;
+    font-size: 30rpx;
+
+    -webkit-line-clamp: 2;
+}
+.item .info .author {
+    display: flex;
+    align-items: center;
+    margin-top: 16rpx;
+}
+.item .info .author .avator {
+    flex-shrink: 0;
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 18rpx;
+}
+.item .info .author .name {
+    margin-left: 12rpx;
+    color: var(--tip-color-text-a2);
+    font-size: 26rpx;
+}
+.item .num {
+    position: absolute;
+    top: 292rpx;
+    right: 8rpx;
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+    padding: 0 12rpx 0 16rpx;
+    height: 36rpx;
+    border-radius: 18rpx;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 22rpx;
+}
+.item .num .iconfont {
+    margin-left: 8rpx;
+    color: #fff;
+    font-size: 28rpx;
+}
+
+.no-more {
+    padding: 60rpx 0;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}

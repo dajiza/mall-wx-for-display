@@ -1,0 +1,47 @@
+<view class="container">
+    <van-nav-bar placeholder fixed border="{{false}}" z-index="{{11}}" bind:click-left="onPop" custom-style="--padding-md: 0px;">
+        <view slot="left">
+            <icon class="iconfont icon-fanhui" style="font-size: 36rpx; padding: 0 30rpx;" />
+        </view>
+        <view slot="title">
+            <view class="van-nav-bar__title title-class van-ellipsis custom-nav-bat-title">
+                <block>收货地址</block>
+            </view>
+        </view>
+    </van-nav-bar>
+    <view class="address-list" wx:if="{{addressList.length>0}}">
+        <view class="a-address" wx:for="{{addressList}}" wx:key="id">
+            <view class="content" catch:tap="addressChoose" data-item-index="{{index}}">
+                <view class="name-phone-container">
+                    <view style="max-width: 280rpx;">{{item.name}}</view>
+                    <view style="margin-left: 50rpx;">{{item.phone}}</view>
+                    <view class="default-address" wx:if="{{item.is_default == 2}}">默认</view>
+                </view>
+                <view class="address-detail-container">
+                    <view class="address-detail">
+                        {{item.province+item.city+item.area+item.address}}
+                    </view>
+                    <view style="height: 100%;" catch:tap="addressEdit" data-item-index="{{index}}">
+                        <icon class="iconfont icon-xiugai" style="display: inline-flex; font-size: 30rpx; color: var(--primary-color-text);" />
+                    </view>
+                </view>
+            </view>
+            <view class="a-address-divider-container">
+                <van-divider style="--divider-margin: 0px 40rpx;" />
+            </view>
+        </view>
+    </view>
+    <view class="address-list-empty-container {{(addressList.length==0 && !isFirstLoad)?'address-list-empty-container-show':''}}">
+        <image src="/assets/images/icon_address_list_empty.png" class="address-list-empty-view"></image>
+        <view class="address-list-empty-tip">还没有任何收货地址</view>
+    </view>
+    <view class="bottom-button-container" style="bottom: {{safeAreaInsetBottom}}rpx;">
+        <button class="bottom-button" hover-class="botton-hover" bindtap="addressEdit" data-item-index="{{-1}}">
+            <icon class="iconfont icon-jiahao" style="font-size:40rpx !important;" />
+            <text class="bottom-button-container-label">新增收货地址</text>
+        </button>
+    </view>
+</view>
+<van-popup id="loading" overlay="{{true}}" custom-style="--popup-background-color:rgba(0,0,0,0); width: 100px; height: 100px; display: flex; justify-content: center;" overlay-style="--overlay-background-color: rgba(0,0,0,0);">
+    <van-loading color="var(--primary-color)" size="45px" custom-class="loading-global-custom" />
+</van-popup>

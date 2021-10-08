@@ -1,0 +1,361 @@
+<!-- pages/cart/cart.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container home-page">
+    <van-nav-bar fixed title="" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="top-box" style="height: {{topHeight}}">
+        <image class="top-box-bg" mode="aspectFit" src="../../assets/images/order-detail-bg.png"></image>
+        <view class="top-nav-placeholder" style="height:{{navHeight}}">
+            <view class="copy-top" style="height: {{topHeight}}">
+                <image class="top-box-bg" mode="aspectFit" src="../../assets/images/order-detail-bg.png"></image>
+            </view>
+        </view>
+        <view class="status-box {{orderInfo.status === 0?'h248':'h144'}}">
+            <view class="icon-status">
+                <text class="iconfont icon-wancheng" wx:if="{{orderInfo.status === 10}}"></text>
+                <text class="iconfont icon-shijian" wx:if="{{orderInfo.status === 0}}"></text>
+                <text class="iconfont icon-guanbiicon" wx:if="{{orderInfo.status === 9}}"></text>
+                <image class="status-img" src="../../assets/images/wait-receipt.png" wx:if="{{orderInfo.status === 3}}"></image>
+                <image class="status-img" src="../../assets/images/wait-delivered.svg" wx:if="{{orderInfo.status === 1 || orderInfo.status === 2}}"></image>
+                <view wx:if="{{orderInfo.status === 0}}">{{isAgentSell?'等待买家付款':'等待付款'}}</view>
+                <view wx:if="{{orderInfo.status !== 0}}">
+                    {{fn.orderListStatus(orderInfo.status,isAgentSell)}}
+                </view>
+            </view>
+            <view class="amount-time" wx:if="{{orderInfo.status === 0}}">
+                <text>{{isAgentSell?'共计':'需付款'}}：</text>
+                <text class="amount-symbol">¥</text>
+                <text class="amount">{{fn.formatMoney(orderInfo.price_total_real)}}</text>
+                <text class="time-left">剩余时间：</text>
+                <van-count-down time="{{ payment_time }}" format="HH 时 mm 分 ss 秒" bind:finish="payTimeEnd" />
+            </view>
+        </view>
+    </view>
+    <!-- style="min-height: {{'calc(100vh - ' + topHeight + ')'}}" -->
+    <view class="content-box {{(orderInfo.status !== 9 && !isAgentSell)?'bottom-btn-show':''}}" style="min-height: {{'calc(100vh - ' + topHeight + ')'}}">
+        <view class="info-wrap delivery-info" wx:if="{{!isAgentSell}}">
+            <view class="delivery-info-left">
+                <text class="iconfont icon-dizhi"></text>
+            </view>
+            <view class="delivery-info-right">
+                <view class="receiver-name-tel">
+                    <text class="receiver-name">{{orderInfo.logistics_name}}</text>
+                    <text class="receiver-tel">{{orderInfo.logistics_phone}}</text>
+                </view>
+                <view class="receiver-address">
+                    {{orderInfo.logistics_province}}{{orderInfo.logistics_city}}{{orderInfo.logistics_area}} {{orderInfo.logistics_address}}
+                </view>
+            </view>
+        </view>
+        <view class="info-wrap order-goods-box {{isAgentSell?'marginTop32':''}}">
+            <block wx:for="{{ orderInfo.detail }}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="goodsIndex">
+                <order-goods goods="{{ goods }}" isApply="{{false}}" goGoodsDetail="{{true}}" showStatus="{{isAgentSell}}"></order-goods>
+                <view class="discount-wrap-order-detail" wx:if="{{goods.status === 0 && goods.off_2 > 0 && !isAgentSell}}">
+                    <view class="discount-box-order-detail text-ellipsis">
+                        <image class="member-icon" src="../../assets/images/memberIcon.png"></image>
+                        <view class="discount-text margin-left-12">
+                            <text>批发预计省￥{{fn.formatMoney(goods.off_2)}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="operating-box" wx:if="{{isAgentSell && (goods.status === 3 || goods.status === 10) && !isUnique }}">
+                    <van-button
+                        round
+                        class="btn-reset order-btn"
+                        custom-class="btn-operating order-btn"
+                        data-status="{{orderInfo.status}}"
+                        data-source="goods"
+                        data-order_detail_id="{{goods.id}}"
+                        data-logistics_no="{{goods.logistics_no}}"
+                        data-logistics_company_name="{{goods.logistics_company_name}}"
+                        wx:if="{{ (goods.status === 3 || goods.status === 10) && !isUnique }}"
+                        catch:tap="handleOnViewLogistics"
+                    >
+                        查看物流
+                    </van-button>
+                </view>
+                <view class="operating-box" wx:if="{{!(goods.status === 0 || goods.status === 4) && !isAgentSell}}">
+                    <van-button
+                        round
+                        class="btn-reset order-btn"
+                        custom-class="btn-operating order-btn"
+                        data-status="{{orderInfo.status}}"
+                        data-source="goods"
+                        data-order_detail_id="{{goods.id}}"
+                        data-logistics_no="{{goods.logistics_no}}"
+                        data-logistics_company_name="{{goods.logistics_company_name}}"
+                        wx:if="{{ (goods.status === 3 || goods.status === 10) && !isUnique }}"
+                        catch:tap="handleOnViewLogistics"
+                    >
+                        查看物流
+                    </van-button>
+                    <van-button
+                        round
+                        custom-class="btn-operating order-btn"
+                        custom-style="line-height: 1;"
+                        wx:if="{{ (goods.status === 1 || goods.status === 2 ) && goods.price_real>0}}"
+                        data-id="{{orderInfo.id}}"
+                        data-status="{{orderInfo.status}}"
+                        data-order_detail_id="{{goods.id}}"
+                        data-goods_name="{{goods.goods_name}}"
+                        data-goods_img="{{goods.product_img}}"
+                        data-goods_price="{{goods.price_real}}"
+                        data-goods_quantity="{{goods.num}}"
+                        data-goods_sku="{{goods.sku_id}}"
+                        data-goods_attr="{{goods.goods_attr}}"
+                        data-price_sum_end="{{goods.price_sum_end}}"
+                        data-refund_money="{{goods.refund_money}}"
+                        catch:tap="handleOnOnlyRefund"
+                    >
+                        退款
+                    </van-button>
+                    <!-- 订单状态为待收货或者交易取消时 商品显示退款中、换货中、退款成功 -->
+                    <van-button
+                        round
+                        custom-class="btn-operating order-btn"
+                        wx:if="{{ goods.status === 5 || goods.status === 6 || goods.status === 11 }}"
+                        data-id="{{goods.id}}"
+                        catch:tap="handleOnApplyDetail"
+                    >
+                        {{goods.status_name}}
+                    </van-button>
+                    <van-button
+                        round
+                        custom-class="btn-operating"
+                        wx:if="{{ goods.status === 3 }}"
+                        data-id="{{orderInfo.id}}"
+                        data-status="{{orderInfo.status}}"
+                        data-order_detail_id="{{goods.id}}"
+                        data-goods_name="{{goods.goods_name}}"
+                        data-goods_img="{{goods.product_img}}"
+                        data-goods_price="{{goods.price_real}}"
+                        data-goods_quantity="{{goods.num}}"
+                        data-goods_sku="{{goods.sku_id}}"
+                        data-goods_attr="{{goods.goods_attr}}"
+                        data-price_sum_end="{{goods.price_sum_end}}"
+                        data-refund_money="{{goods.refund_money}}"
+                        data-type="退换"
+                        catch:tap="handleOnOrderApply"
+                    >
+                        退换
+                    </van-button>
+                    <van-button
+                        round
+                        custom-class="btn-operating marginRight20"
+                        wx:if="{{ goods.status === 10 && goods.comment_state != 1}}"
+                        data-no="{{orderInfo.order_no}}"
+                        data-index="{{goodsIndex}}"
+                        data-status="{{goods.comment_state}}"
+                        catch:tap="handleOnComment"
+                    >
+                        评价
+                    </van-button>
+                    <van-button
+                        round
+                        custom-class="btn-operating"
+                        wx:if="{{ goods.status === 10 }}"
+                        data-id="{{orderInfo.id}}"
+                        data-status="{{orderInfo.status}}"
+                        data-order_detail_id="{{goods.id}}"
+                        data-goods_name="{{goods.goods_name}}"
+                        data-goods_img="{{goods.product_img}}"
+                        data-goods_price="{{goods.price_real}}"
+                        data-goods_quantity="{{goods.num}}"
+                        data-goods_sku="{{goods.sku_id}}"
+                        data-goods_attr="{{goods.goods_attr}}"
+                        data-success_time="{{goods.success_time}}"
+                        data-price_sum_end="{{goods.price_sum_end}}"
+                        data-refund_money="{{goods.refund_money}}"
+                        data-type="申请售后"
+                        catch:tap="handleOnOrderApply"
+                    >
+                        申请售后
+                    </van-button>
+                </view>
+            </block>
+        </view>
+        <view class="info-wrap order-amount-box">
+            <view class="amount-item">
+                <view class="amount-name">商品总额</view>
+                <view class="amount-value">
+                    ￥{{fn.formatMoney(orderInfo.price_total)}}
+                </view>
+            </view>
+            <view class="amount-item" wx:if="{{orderInfo.off_2 > 0}}">
+                <view class="amount-name">会员折扣</view>
+                <view class="amount-value">
+                    <text wx:if="{{orderInfo.off_2  > 0 }}">-</text>
+                    ￥{{fn.formatMoney(orderInfo.off_2)}}
+                </view>
+            </view>
+            <view class="amount-item" wx:if="{{orderInfo.off_3 > 0}}">
+                <view class="amount-name">促销减免</view>
+                <view class="amount-value">
+                    <text wx:if="{{orderInfo.off_3  > 0 }}">-</text>
+                    ￥{{fn.formatMoney(orderInfo.off_3)}}
+                </view>
+            </view>
+            <view class="amount-item" wx:if="{{orderInfo.coupon.coupon_user_id!=0}}">
+                <view class="amount-name">优惠</view>
+                <view class="amount-value">
+                    {{orderInfo.coupon.type==1?'-￥'+fn.formatMoney(orderInfo.coupon.coupon_amount):orderInfo.coupon.coupon_amount/10+'折'}}
+                </view>
+            </view>
+            <view class="amount-item">
+                <view class="amount-name">运费</view>
+                <view class="amount-value">
+                    {{orderInfo.logistics_money > 0 ? fn.formatMoney(orderInfo.logistics_money) : '免运费'}}
+                </view>
+            </view>
+            <view class="amount-item" wx:if="{{remark.length>0}}">
+                <view class="amount-name">备注</view>
+                <view class="remark-label">{{remark}}</view>
+            </view>
+            <view class="real-payment">
+                <text class="real-payment-text">实付款：</text>
+                <text class="amount-symbol">￥</text>
+                <text class="amount-value-all">{{fn.formatMoney(orderInfo.price_total_real)}}</text>
+            </view>
+        </view>
+        <view class="info-wrap order-no-time-box">
+            <view class="no-time-item" wx:if="{{isAgentSell}}">
+                <view class="no-time-name">用户昵称</view>
+                <view class="no-time-value">{{orderInfo.user_name}}</view>
+            </view>
+            <view class="no-time-item">
+                <view class="no-time-name">订单编号</view>
+                <view class="no-time-value">
+                    <button class="copy-button" hover-class="button-hover" bindtap="handleCopy">
+                        <text>复制</text>
+                    </button>
+                    <text>{{orderInfo.order_no}}</text>
+                </view>
+            </view>
+            <view class="no-time-item">
+                <view class="no-time-name">下单时间</view>
+                <view class="no-time-value">{{orderInfo.created_time}}</view>
+            </view>
+            <view class="no-time-item" wx:if="{{orderInfo.paid_time}}">
+                <view class="no-time-name">付款时间</view>
+                <view class="no-time-value">{{orderInfo.paid_time}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 未付款订单底部按钮 -->
+    <view class="bottom-box" wx:if="{{orderInfo.status !== 9 && !isAgentSell}}">
+        <view class="bottom-btn-box">
+            <van-button round type="default" class="btn-reset order-btn" custom-class="btn-go-pay order-btn" wx:if="{{!(orderInfo.status === 9 || orderInfo.status === 0)}}" open-type="contact">
+                联系客服
+            </van-button>
+            <van-button
+                round
+                class="btn-reset order-btn"
+                custom-class="btn-cancel-order order-btn"
+                data-id="{{orderInfo.id}}"
+                data-status="{{orderInfo.status}}"
+                wx:if="{{orderInfo.status === 0}}"
+                catch:tap="handleOnCancelOrder"
+            >
+                取消订单
+            </van-button>
+            <van-button
+                round
+                type="warning"
+                class="btn-reset order-btn"
+                custom-class="btn-go-pay order-btn"
+                data-id="{{orderInfo.id}}"
+                data-status="{{orderInfo.status}}"
+                data-no="{{orderInfo.order_no}}"
+                data-total="{{orderInfo.price_total_real}}"
+                wx:if="{{orderInfo.status === 0}}"
+                catch:tap="handleOnGoPay"
+            >
+                立即支付
+            </van-button>
+            <van-button
+                round
+                class="btn-reset order-btn"
+                custom-class="btn-cancel-order order-btn"
+                data-status="{{orderInfo.status}}"
+                data-source="order"
+                data-order_id="{{orderInfo.id}}"
+                data-logistics_no="{{orderInfo.logistics_no}}"
+                data-logistics_company_name="{{orderInfo.logistics_company_name}}"
+                wx:if="{{(orderInfo.status === 3 || orderInfo.status === 10) && isUnique}}"
+                catch:tap="handleOnViewLogistics"
+            >
+                查看物流
+            </van-button>
+            <van-button
+                round
+                type="warning"
+                class="btn-reset order-btn"
+                custom-class="btn-go-pay order-btn"
+                data-id="{{orderInfo.id}}"
+                data-status="{{orderInfo.status}}"
+                wx:if="{{orderInfo.status === 3}}"
+                catch:tap="handleOnConfirmReceipt"
+            >
+                确认收货
+            </van-button>
+        </view>
+    </view>
+    <!--待客户收货-->
+    <view class="bottom-box" wx:if="{{(orderInfo.status == 3 || orderInfo.status === 10) && isAgentSell && isUnique}}">
+        <view class="bottom-btn-box">
+            <van-button
+                round
+                class="btn-reset order-btn"
+                custom-class="btn-cancel-order order-btn"
+                data-status="{{orderInfo.status}}"
+                data-source="order"
+                data-order_id="{{orderInfo.id}}"
+                data-logistics_no="{{orderInfo.logistics_no}}"
+                data-logistics_company_name="{{orderInfo.logistics_company_name}}"
+                catch:tap="handleOnViewLogistics"
+            >
+                查看物流
+            </van-button>
+        </view>
+    </view>
+</view>
+<!-- 弹窗 -->
+<van-dialog
+    use-slot
+    title=""
+    show-cancel-button
+    width="600rpx"
+    customStyle="border-radius: 16rpx"
+    show="{{ dialogShow }}"
+    show-confirm-button="{{false}}"
+    showCancelButton="{{false}}"
+    catchtouchmove="preventTouchMove"
+    bind:close="onClose"
+>
+    <view class="dialog-content">
+        <view class="dialog-content-text">
+            <block wx:if="{{orderInfo.status === 0}}">是否确认取消订单</block>
+            <block wx:if="{{orderInfo.status === 3}}">是否确认收货</block>
+            <block wx:if="{{orderInfo.status === 10}}">已超出可申请售后时间</block>
+        </view>
+    </view>
+    <view class="dialog-button-box">
+        <block wx:if="{{orderInfo.status === 0}}">
+            <view class="btn-sure border-right" bind:tap="onSureCancelOrder">确认</view>
+            <view class="btn-cancel" bind:tap="onClose">再想想</view>
+        </block>
+        <block wx:if="{{orderInfo.status === 3}}">
+            <view class="btn-cancel border-right" bind:tap="onClose">取消</view>
+            <view class="btn-sure" bind:tap="ConfirmReceipt">确认</view>
+        </block>
+        <block wx:if="{{orderInfo.status === 10}}">
+            <view class="btn-sure width-100" bind:tap="onClose">确认</view>
+        </block>
+    </view>
+</van-dialog>
+<view class="back-home" bind:tap="onGoHome" wx:if="{{false}}">
+    <text class="iconfont icon-index"></text>
+</view>

@@ -1,0 +1,132 @@
+.page {
+  background: var(--background-color);
+  position: relative;
+}
+
+.container {
+  background: var(--background-color);
+}
+
+.nav {
+  background: #fff;
+}
+
+.title {
+  color: #333333 !important;
+  font-weight: 500 !important;
+  font-size: 38rpx !important;
+}
+
+.leftIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx;
+  color: #333333;
+  transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+  font-size: 36rpx;
+}
+
+.invitation-record-wrap {
+  width: 690rpx;
+  margin: 24rpx auto;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.invitation-record-title-wrap {
+  position: relative;
+  width: 238rpx;
+  height: 72rpx;
+  margin-top: 8rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.invitation-record-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.invitation-record-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 40rpx;
+  margin-top: 20rpx;
+}
+
+.invitation-record-shadow {
+  position: absolute;
+  z-index: 1;
+  background: rgba(var(--primary-color-opacity), 0.12);
+  width: 112rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
+  top: 38rpx;
+}
+
+.invitee-item{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 40rpx 40rpx 40rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: var(--primary-color-text);
+  line-height: 40rpx;
+}
+
+.invitee-img{
+  height: 52rpx;
+  width: 52rpx;
+}
+
+.invitee-name{
+  margin-left: 20rpx;
+  word-break: break-all;
+  width: 140rpx;
+}
+
+.invitee-time{
+  margin-left: 48rpx;
+  width: 144rpx;
+}
+
+.invitee-back{
+  margin-left: auto;
+}
+
+.empty-view{
+  margin-bottom: 40rpx;
+}
+
+.empty-title{
+  padding: 80rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #b2b2b2;
+  line-height: 40rpx;
+}
+
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 60rpx;
+  padding-bottom: 20rpx;
+}
+
+.middle-btn {
+  width: 320rpx !important;
+}

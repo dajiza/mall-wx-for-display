@@ -1,0 +1,257 @@
+page {
+  overflow: hidde;
+  box-sizing: border-box;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+.publish-label {
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 36rpx;
+}
+
+.publish-label-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.publish-content {
+  font-size: 28rpx;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: var(--primary-color-text);
+}
+
+.publish-content-placeholder {
+  color: #888888 !important;
+}
+
+.publish-content-wrap {
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.publish-operate {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: var(--primary-color-text);
+  line-height: 36rpx;
+}
+
+.publish-box {
+  width: 690rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding: 40rpx;
+}
+
+.audit-status-box {
+  height: 120rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audit-status-wrap {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--primary-color);
+  line-height: 42rpx;
+}
+
+.audit-status-icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
+}
+
+.audit-status {
+  color: var(--primary-color);
+}
+
+.audit-pass {
+  color: #27C05E;
+}
+
+.audit-reject {
+  display: flex;
+  margin-right: 16rpx;
+  font-size: 40rpx;
+}
+
+.audit-reject-reason{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.introduction-content {
+  height: 208rpx;
+  margin-top: 30rpx;
+}
+
+.finished-picture-wrap {
+  margin-top: 20rpx;
+  min-height: 382rpx;
+}
+
+.material-wrap {
+  height: 206rpx;
+  margin-top: 40rpx;
+}
+
+.course-wrap {
+  height: 206rpx;
+  margin-top: 40rpx;
+}
+
+.drag-tip {
+  font-size: 20rpx;
+  font-weight: 400;
+  color: #B2B2B2;
+  line-height: 28rpx;
+  margin-left: auto;
+  width: 200rpx;
+  text-align: end;
+  margin-top: 20rpx;
+}
+
+.operate-icon {
+  font-size: 24rpx;
+  color: #D8D8D8;
+}
+
+.plus-wrap {
+  position: relative;
+  padding-top: 100%;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.plus-wrap .plus-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 12rpx 12rpx 12rpx 12rpx;
+}
+
+.picture-add {
+  width: calc(100% - 0rpx);
+  height: calc(100% - 0rpx);
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.bottom-button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #F5F5F5;
+  padding-top: 100rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.botton-hover {
+  opacity: 0.8;
+}
+
+.bottom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 690rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: var(--primary-color-btn);
+  color: #ffffff;
+  line-height: 88rpx;
+  margin-bottom: 40rpx;
+}
+
+.mutli-bottom-button-wrap {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+
+.mutli-btn {
+  width: 332rpx !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.bottom-button-container-label {
+  height: 40rpx;
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.btn-next-wrap {
+  width: 100%;
+  height: 88rpx;
+  position: fixed;
+  bottom: 120rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-next {
+  width: 480rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  border: 2rpx solid #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 40rpx;
+}
+
+.guide-tip {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 40rpx;
+  text-align: center;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+.guide-tip-img-1 {
+  width: 58rpx;
+  height: 206rpx;
+  position: fixed;
+  margin-left: 418rpx;
+}
+
+.guide-tip-img {
+  width: 58rpx;
+  height: 206rpx;
+  position: fixed;
+  margin-left: 418rpx;
+}

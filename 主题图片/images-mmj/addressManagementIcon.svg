@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>地址管理icon</title>
+    <defs>
+        <linearGradient x1="22.353402%" y1="19.4222677%" x2="77.9890003%" y2="85.1051549%" id="linearGradient-1">
+            <stop stop-color="#F4ACC2" offset="0%"></stop>
+            <stop stop-color="#EF7F9E" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="地址管理icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <rect id="矩形" x="0" y="0" width="34" height="34"></rect>
+            <g id="编组-4" transform="translate(3.000000, 1.000000)">
+                <path d="M27.6833333,13.4543865 C27.6833333,20.8842754 18.2367778,32.1140532 13.8416667,32.1140532 C9.44655556,32.1140532 -5.49560397e-15,20.8842754 -5.49560397e-15,13.4543865 C0.108777778,5.9181643 6.30422222,-0.104946806 13.8416667,0.00138652703 C21.3778889,-0.104946806 27.5745556,5.9181643 27.6833333,13.4543865 Z" id="Fill-1" fill="url(#linearGradient-1)"></path>
+                <path d="M13.8607639,8.25 C16.5606528,8.25 18.7496528,10.439 18.7496528,13.1388889 C18.7496528,15.8387778 16.5606528,18.0277778 13.8607639,18.0277778 C11.160875,18.0277778 8.971875,15.8387778 8.971875,13.1388889 C8.971875,10.439 11.160875,8.25 13.8607639,8.25" id="Fill-3" fill="#FEFEFE"></path>
+            </g>
+        </g>
+    </g>
+</svg>

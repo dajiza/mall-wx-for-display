@@ -1,0 +1,28 @@
+<!--components/orderGoods/orderGoods.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="order-goods">
+    <view class="list">
+        <view class="product">
+            <view class="goods-info">
+                <view class="timg">
+                    <image class="fullimg img-radius" mode="aspectFill" src="{{ fn.limitImgSize(goods.img) }}"></image>
+                </view>
+                <view class="info">
+                    <view class="title">
+                        {{ goods.name }}
+                    </view>
+                    <view class="specification">{{ attribute }}</view>
+                </view>
+                <view class="digital">
+                    <view class="price">
+                        <span class="symbol">¥</span>
+                        <span class="price-num"> {{ fn.formatMoney(goods.price) }}</span>
+                    </view>
+                    <view class="{{useCoupon?'':'hidden'}} use-coupon">优惠商品</view>
+                    <view class="num">x {{ goods.quantity }}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

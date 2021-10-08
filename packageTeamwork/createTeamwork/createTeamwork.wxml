@@ -1,0 +1,191 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="发布团作" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="new-form-item">
+        <view class="name">团作名称</view>
+        <van-field class="input" model:value="{{ title }}" input-class="custom-input" placeholder="请输入团作名称" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item-upload-wrap">
+        <view class="name">课程时间</view>
+        <view class="wrap-value" bindtap="areaPick">
+            <view style="display:flex">
+                <view class="{{start_time?'time-deep':''}} 'time-start'" bindtap="openStartDate">{{start_time||'开始时间'}}</view>
+                <view class="time-item">~</view>
+                <view class="{{end_time?'time-deep':''}} 'time-end'" bindtap="openEndDate">{{end_time||'结束时间'}}</view>
+            </view>
+            <text class="iconfont icon-right-corner2"></text>
+        </view>
+    </view>
+    <view class="new-form-item">
+        <view class="name">报名限额</view>
+        <van-field class="input" model:value="{{ limit_num }}" type="number" input-class="custom-input" placeholder="选填" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item">
+        <view class="name">团作模式</view>
+        <view class="mode-wrap">
+            <view class="{{type==1?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkMode" data-key="1">免费</view>
+            <view class="{{type==2?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkMode" data-key="2">付费</view>
+            <view class="{{type==3?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkMode" data-key="3">押金</view>
+        </view>
+    </view>
+    <view class="new-form-item" wx:if="{{type==2}}">
+        <view class="name">价格</view>
+        <view class="symbol">￥</view>
+        <van-field class="price-input" model:value="{{ course_price }}" disabled="{{id&&is_draft==2}}" input-class="custom-input" placeholder="请输入价格" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item" wx:if="{{type==3}}">
+        <view class="name">押金金额</view>
+        <view class="symbol">￥</view>
+        <van-field class="price-input" model:value="{{ course_price }}" disabled="{{id&&is_draft==2}}" input-class="custom-input" placeholder="请输入价格" border="{{ false }}" input-align="right" />
+    </view>
+    <block wx:if="{{type==1}}">
+        <view class="new-form-item">
+            <block wx:if="{{tipShow}}">
+                <view class="mask" bindtap="closeTip"></view>
+                <view class="tips tips-free">
+                    <view class="intent">学生根据您填写的凭证要求，进行截图。在您审核通过后，即可加入团作。</view>
+                </view>
+            </block>
+            <view class="name" bindtap="openTip">是否需要提交凭证<text class="iconfont icon-question"></text></view>
+            <view class="mode-wrap">
+                <view class="{{typeFree==11?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkModeFree" data-key="11">是</view>
+                <view class="{{typeFree==12?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkModeFree" data-key="12">否</view>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{typeFree==11&&type==1}}">
+        <view class="new-form-item-upload-wrap">
+            <view class="name">凭证要求</view>
+            <view class="wrap-value" bindtap="openTextarea">
+                <span>{{comment||'请输入凭证'}}</span>
+                <text class="iconfont icon-right-corner2"></text>
+            </view>
+        </view>
+    </block>
+    <!-- 付费 -->
+    <block wx:if="{{type==2}}">
+        <view class="new-form-item">
+            <block wx:if="{{tipShow}}">
+                <view class="mask" bindtap="closeTip"></view>
+                <view class="tips tips-pay {{(typePay==20||typePay==21)?'tips-small':''}}">
+                    <block wx:if="{{typePay==20}}">
+                        <view class="rules">
+                            <view class="rule-title">提现规则：</view>
+                            <view class="rule-detail">可立即提现</view>
+                        </view>
+                    </block>
+                    <block wx:if="{{typePay==21}}">
+                        <view class="intent">学生根据您填写的凭证要求，进行截图。在您审核通过后，可进行相应金额的退还。</view>
+                        <view class="rules">
+                            <view class="dividing"></view>
+                            <view class="rule-title">提现规则：</view>
+                            <view class="rule-detail">团作结束3天后可提现</view>
+                        </view>
+                    </block>
+                    <block wx:if="{{typePay==22}}">
+                        <view class="intent"
+                            >学生报名团作成功后，会获得专属邀请码。学生将邀请码分享给好友，好友在报名团作时填写了该邀请码后，将会减免对应的金额，同时邀请者会获得对应金额的返现。
+                            返现次数无限制，返现金额到达报名金额后不再返现。</view
+                        >
+                        <view class="rules">
+                            <view class="dividing"></view>
+                            <view class="rule-title">提现规则：</view>
+                            <view class="rule-detail">团作结束3天后可提现</view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <view class="name" bindtap="openTip">付费模式<text class="iconfont icon-question"></text></view>
+            <view class="mode-wrap">
+                <view class="{{typePay==20?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkModePay" data-key="20">普通</view>
+                <view class="{{typePay==21?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkModePay" data-key="21">凭证返现</view>
+                <view class="{{typePay==22?'active':''}} {{id&&is_draft==2?'disabled':''}} mode" bindtap="checkModePay" data-key="22">邀人返现</view>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{(typePay==21||typePay==22)&&type==2}}">
+        <view class="new-form-item">
+            <view class="name">审核通过返现金额</view>
+            <view class="symbol">￥</view>
+            <van-field class="price-input" model:value="{{ back_money }}" disabled="{{id&&is_draft==2}}" input-class="custom-input" placeholder="请输入价格" border="{{ false }}" input-align="right" />
+        </view>
+    </block>
+    <block wx:if="{{typePay==21&&type==2}}">
+        <view class="new-form-item-upload-wrap">
+            <view class="name">凭证要求</view>
+            <view class="wrap-value" bindtap="openTextarea">
+                <span>{{comment||'请输入凭证要求'}}</span>
+                <text class="iconfont icon-right-corner2"></text>
+            </view>
+        </view>
+    </block>
+    <view class="new-form-item poster">
+        <van-uploader class="upload" bind:after-read="afterRead" accept="image" max-size="10485760" bind:oversize="oversize" max-count="{{ 1 }}" accept="image">
+            <image class="avatar" mode="aspectFill" src="{{poster_link}}" wx:if="{{poster_link}}"></image>
+            <view class="upload-slot" wx:else>
+                <text class="iconfont icon-jia"></text>
+            </view>
+        </van-uploader>
+        <view class="name">海报 建议尺寸：750*360px</view>
+        <text class="iconfont icon-right-corner2"></text>
+    </view>
+    <view class="new-form-item-upload-wrap">
+        <view class="name">团作介绍<span class="subtitle">编辑</span></view>
+        <view class="wrap-value" bindtap="gotoDesc">
+            <span>{{id?'查看或编辑团作介绍':'请上传或编辑团作介绍'}}</span>
+            <text class="iconfont icon-right-corner2"></text>
+        </view>
+    </view>
+    <view class="new-form-item-upload-wrap">
+        <view class="name">推荐商品({{goodsNum}})<span class="subtitle">管理</span></view>
+        <view class="wrap-value" bindtap="gotoRec">
+            <view class="description {{goodsNum==0?'':'fill'}}">请选择商品</view>
+            <text class="iconfont icon-right-corner2"></text>
+        </view>
+    </view>
+
+    <view class="btn-wrap" wx:if="{{!id}}">
+        <van-button custom-class="big-btn" bind:click="creatTeamwork" round type="primary" size="large">
+            发布
+        </van-button>
+    </view>
+    <view class="btn-wrap" wx:if="{{id&&is_draft==2}}">
+        <van-button custom-class="middle-btn" bind:click="deleteTeamwork" round type="info" size="large">
+            删除
+        </van-button>
+        <van-button custom-class="middle-btn" bind:click="creatTeamwork" round type="primary" size="large">
+            保存修改
+        </van-button>
+    </view>
+    <view class="btn-wrap" wx:if="{{id&&is_draft==1}}">
+        <van-button custom-class="small-btn" bind:click="deleteTeamwork" round type="info" size="large">
+            删除
+        </van-button>
+        <van-button custom-class="small-btn" bind:click="previewTeamwork" round type="primary" size="large">
+            预览
+        </van-button>
+        <van-button custom-class="small-btn" bind:click="creatTeamwork" round type="primary" size="large">
+            发布
+        </van-button>
+    </view>
+</view>
+<van-popup show="{{ showDatePicker }}" custom-class="datetime-picker-popup" bind:click-overlay="handleOnCancel" position="bottom" catchtouchmove="preventTouchMove">
+    <van-datetime-picker
+        type="date"
+        toolbar-class="picker-toolbar"
+        title="选择时间"
+        value="{{ currentDate }}"
+        min-date="{{minDate}}"
+        formatter="{{ formatter }}"
+        bind:confirm="handleOnConfirm"
+        bind:cancel="handleOnCancel"
+    />
+</van-popup>
+
+<pop-textarea id="textarea" bind:saveText="getTetx" content="{{defaultText}}" title="凭证要求" placeholder="请输入凭证要求"></pop-textarea>

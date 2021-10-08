@@ -1,0 +1,30 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container" style="padding-bottom: 0px;">
+    <van-nav-bar fixed placeholder title="邀请好友" border="{{false}}" custom-class="nav" title-class="title" z-index="{{100}}">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+
+    <invitation-code invitation-code="{{inviteCode}}" backMoney="{{cash_back_money}}" />
+
+    <view class="invitation-record-wrap">
+        <view class="invitation-record-title-wrap">
+            <image class="invitation-record-img" mode="aspectFill" src="../static/ic_invitation_record.png"></image>
+            <view class="invitation-record-shadow"></view>
+            <view class="invitation-record-title">邀请记录</view>
+        </view>
+        <view style="width: 690rpx;height: 1rpx;background: var(--divider-background-color);margin-bottom: 40rpx;"></view>
+        <view class="invitee-item" wx:for="{{list}}">
+            <view class="invitee-img">
+                <van-image fit="cover" width="52rpx" height="52rpx" lazy-load radius="26rpx" src="{{item.avatar_url}}" />
+            </view>
+            <view class="invitee-name">{{item.nick_name}}</view>
+            <view class="invitee-time">{{item.showTime}}</view>
+            <view class="invitee-back">+{{fn.formatMoney(item.inviter_back_money)}}元</view>
+        </view>
+        <view class="empty-view" wx:if="{{list.length==0 && loaded}}">
+            <view class="empty-title">快去邀请吧～</view>
+        </view>
+    </view>
+</view>

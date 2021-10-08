@@ -1,0 +1,22 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="报名" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="blank">
+        <view class="icon" bindtap="onClickShare">
+            <image class="fullimg" src="/assets/images/sign-success.png"></image>
+        </view>
+        <view class="text">报名成功</view>
+        <view class="text">快去加老师好友吧！更方便交流哦~</view>
+        <view class="btn-wrap">
+            <van-button custom-class="big-btn" bind:click="gotoCard" round type="primary" size="large">
+                查看老师名片
+            </van-button>
+        </view>
+    </view>
+</view>

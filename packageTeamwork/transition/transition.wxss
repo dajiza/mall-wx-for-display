@@ -1,0 +1,24 @@
+/* packageTeamwork/transition/transition.wxss */
+.list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    transition: all 2s linear;
+}
+.item {
+    flex: 0 0 200rpx;
+    margin: 5rpx;
+    width: 200rpx;
+    height: 200rpx;
+    border: 1rpx solid #000;
+    transition: all 2s linear;
+}
+.item:hover {
+    /* flex-basis: 400rpx; */
+}
+.btn {
+    width: 200rpx;
+    height: 100rpx;
+    background-color: antiquewhite;
+}

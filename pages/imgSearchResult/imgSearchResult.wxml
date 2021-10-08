@@ -1,0 +1,36 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <view class="search-img">
+            <image class="fullimg-width" mode="widthFix" src="{{img}}"></image>
+        </view>
+
+        <view class="goods-list">
+            <view class="subject">为您找到以下相似商品</view>
+            <view class="empty-list" wx:if="{{goodsList.length < 1 }}">
+                <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+                <text class="empty-text">暂无相关商品</text>
+            </view>
+            <view class="goods-list-content">
+                <block wx:for="{{ goodsList }}" wx:key="index">
+                    <view class="goods-item-box {{(index+1)%2 === 0?'no-margin':''}}" data-id="{{item.goods_id}}" data-skuid="{{item.sku_id}}" bind:tap="handleGoGoodsDetail">
+                        <image class="goods-img" mode="aspectFill" src="{{item.sku_img + '!upyun520/fw/500'}}" alt=""></image>
+                        <view class="goods-name">{{item.goods_name}}</view>
+                        <view class="goods-price">
+                            <view>￥{{fn.formatMoney(item.ssku_price)}}</view>
+                            <view class="pay-num">{{item.goods_sales}}人付款</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{loading}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{page >= goodsEntire.length&&goodsList.length>0}}">人家也是有底线的～</view>
+        </view>
+    </view>
+</view>

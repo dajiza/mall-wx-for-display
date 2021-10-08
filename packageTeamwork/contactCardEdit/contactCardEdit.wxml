@@ -1,0 +1,62 @@
+<view class="container">
+    <van-nav-bar fixed placeholder title="完善名片" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="new-form-item poster">
+        <view class="timg">
+            <image class="fullimg" mode="aspectFill" src="{{avatar}}"></image>
+        </view>
+        <view class="name">微信头像</view>
+        <text class="iconfont icon-right-corner2"></text>
+    </view>
+    <view class="new-form-item">
+        <view class="name">微信昵称</view>
+        <view class="item-value">{{nickName}}</view>
+    </view>
+    <view class="new-form-item">
+        <view class="name">微信号码</view>
+        <van-field class="input" model:value="{{ wxAccount }}" input-class="custom-input" placeholder="请输入微信号" border="{{ false }}" input-align="right" />
+    </view>
+
+    <view class="new-form-item-upload-wrap" catchtap="handleOnUploadQRCode">
+        <view class="name">微信二维码</view>
+        <view class="wrap-value">
+            <view wx:if="{{qrcode && qrcode.length>0}}" class="qrcode-image">
+                <image class="fullimg" mode="aspectFill" src="{{qrcodeShow}}"></image>
+            </view>
+            <view class="input-placeholder" wx:else>建议尺寸：320*320px</view>
+            <text class="iconfont icon-right-corner2"></text>
+        </view>
+    </view>
+    <view class="new-form-item">
+        <view class="name">微博名称</view>
+        <van-field class="input" model:value="{{ weibo }}" input-class="custom-input" placeholder="请输入微博名称" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item">
+        <view class="name">小红书号</view>
+        <van-field class="input" model:value="{{ redBook }}" input-class="custom-input" placeholder="请输入小红书号" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item">
+        <view class="name">抖音号</view>
+        <van-field class="input" model:value="{{ tikTok }}" input-class="custom-input" placeholder="请输入抖音号" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item">
+        <view class="name">公众号</view>
+        <van-field class="input" model:value="{{ wx_official }}" input-class="custom-input" placeholder="请输入公众号" border="{{ false }}" input-align="right" />
+    </view>
+    <view class="new-form-item">
+        <view class="name">公众号绑定</view>
+        <view class="mode-wrap">
+            <view class="{{isShow==1?'active':''}}  mode" bindtap="checkOfficialStatus" data-key="1">显示</view>
+            <view class="{{isShow==2?'active':''}}  mode" bindtap="checkOfficialStatus" data-key="2">隐藏</view>
+        </view>
+    </view>
+
+    <view class="bottom-button-container" style="padding-bottom:{{(40+safeAreaInsetBottom)+''}}rpx;">
+        <button class="bottom-button" hover-class="botton-hover" bindtap="handleSave">
+            <text class="bottom-button-container-label">保存</text>
+        </button>
+    </view>
+</view>

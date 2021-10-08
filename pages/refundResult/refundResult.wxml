@@ -1,0 +1,114 @@
+<!-- pages/refundResult/refundResult.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed title="" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack refund-back"></text>
+        </view>
+    </van-nav-bar>
+    <view class="top">
+        <view class="text1">{{ title }}</view>
+        <view class="text2">{{ rejectReason?rejectReason:describe }}</view>
+    </view>
+    <!-- 退款金额 -->
+    <view class="wrap" wx:if="{{detail.type!=2}}">
+        <view class="cell-wrap">
+            <view class="customize-cell">
+                <view class="label">退款金额</view>
+                <view class="money">¥{{ fn.formatMoney(detail.refundMoney) }}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 商品列表 -->
+    <view class="goods-list wrap">
+        <!-- <view class="dividing"></view> -->
+        <view class="list">
+            <order-goods goods="{{ detail }}"></order-goods>
+        </view>
+    </view>
+    <!-- 退款原因 -->
+    <view class="reason wrap">
+        <view class="cell-wrap">
+            <view class="customize-cell">
+                <view class="label">退款原因</view>
+                <view class="value">{{ detail.reason }}</view>
+            </view>
+            <view class="customize-cell">
+                <view class="label">退款编号</view>
+                <view class="value">{{ detail.orderDetailNo }}</view>
+            </view>
+            <view class="customize-cell">
+                <view class="label">申请时间</view>
+                <view class="value">{{ detail.createdTime }}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 寄件地址 -->
+    <view class="address wrap" wx:if="{{ addressShow }}">
+        <view class="cell-wrap">
+            <view class="title">
+                寄件地址
+                <span class="label">（请将货物寄到以下地址）</span>
+            </view>
+            <view class="dividing"></view>
+            <view class="customize-cell">
+                <view class="label">收货人</view>
+                <view class="value">{{ sellerAddress.name }}</view>
+            </view>
+            <view class="customize-cell">
+                <view class="label">手机号</view>
+                <view class="value">{{ sellerAddress.phone }}</view>
+            </view>
+            <view class="customize-cell">
+                <view class="label">收货地址</view>
+                <view class="value">
+                    {{ sellerAddress.province }} {{ sellerAddress.city }} {{ sellerAddress.area }} {{ sellerAddress.address }}
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 快递信息 -->
+    <view class="express wrap" wx:if="{{ expressShow }}">
+        <view class="cell-wrap">
+            <view class="customize-cell express-cell">
+                <view class="label">快递公司</view>
+                <view class="value" wx:if="{{ detail.status > 4 }}">{{ detail.companyName }}</view>
+                <view class="operation" bindtap="openExpress" wx:if="{{ detail.status == 4 }}">
+                    <span class="text">{{ expressName?expressName:'请选择' }}</span>
+                    <span class="iconfont icon-youjiantou"></span>
+                </view>
+            </view>
+            <view class="customize-cell" wx:if="{{ detail.status > 4 }}">
+                <view class="label">快递单号</view>
+                <view class="value">{{ detail.logisticsNo }}</view>
+            </view>
+        </view>
+        <van-field label-class="count-label" input-class="count-input" value="{{ expressNo }}" label="快递单号" input-align="right" bind:change="onChangeExpress" border="{{ false }}" wx:if="{{ detail.status == 4 }}"></van-field>
+    </view>
+    <view class="contact-bar" wx:if="{{ detail.status == 2 || detail.status == 8}}">
+        <van-button round type="default" open-type="contact">联系客服</van-button>
+    </view>
+    <view class="contact-bar" wx:if="{{ (detail.status == 7 || detail.status == 9) && detail.type == 2 }}">
+        <navigator bindtap="handleOnViewLogistics">
+            <van-button round type="default">查看物流</van-button>
+        </navigator>
+    </view>
+    <van-button round type="primary" class="submit-btn" custom-class="custom-submit-btn" bindtap="submitExpress" wx:if="{{ detail.status == 4 && detail.type != 0 }}">
+        提交
+    </van-button>
+    <!-- 快递选择 -->
+    <van-popup custom-class="custom-reason" show="{{ showExpressPop }}" position="bottom" bind:close="onCancelExpress">
+        <view class="reason-wrap">
+            <view class="title">快递公司</view>
+            <view class="item-list">
+                <view class="item" wx:for="{{ expressList }}" bindtap="chooseExpress" data-id="{{ item.id }}" data-name="{{ item.name }}">
+                    <view class="text">{{ item.name }}</view>
+                    <view class="check">
+                        <span class="iconfont uncheck icon-checkboxweixuanzhongda" wx:if="{{ expressId != item.id }}"></span>
+                        <span class="iconfont checked icon-checked" wx:if="{{ expressId == item.id }}"></span>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </van-popup>
+</view>

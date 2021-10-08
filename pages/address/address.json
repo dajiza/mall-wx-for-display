@@ -1,0 +1,11 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "收货地址",
+    "disableScroll":false,
+    "backgroundColor": "#FFFFFF",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-icon": "@vant/weapp/icon/index"
+    }
+}

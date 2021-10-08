@@ -1,0 +1,12 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "优惠券包",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "coupon-item": "../../components/couponItem/couponItem"
+    }
+}

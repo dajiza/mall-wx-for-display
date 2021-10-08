@@ -1,0 +1,54 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="信息确认" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <points-coupon-item class="coupon" detail="{{coupon}}" needJump="{{false}}"></points-coupon-item>
+    <view class="coupon-detail">
+        <view class="title">优惠券详情</view>
+        <view class="dividing"></view>
+        <view class="row">
+            <view class="label">面额</view>
+            <view class="value">{{info.type==1?info.coupon_amount/100+'元':info.coupon_amount/10+'折'}}</view>
+        </view>
+        <view class="row">
+            <view class="label">使用门槛</view>
+            <view class="value">{{info.with_amount>0?'满'+info.with_amount/100+'元可用':'无门槛'}}</view>
+        </view>
+        <view class="row">
+            <view class="label">使用范围</view>
+            <view class="value" wx:if="{{info.use_goods_type==1}}">
+                全场通用
+            </view>
+            <view class="value" wx:if="{{info.use_goods_type==2}}">
+                指定商品
+                <span class="examine" bindtap="gotoList">查看</span>
+            </view>
+            <view class="value" wx:if="{{info.use_goods_type==3}}">
+                指定标签可用
+            </view>
+        </view>
+        <view class="row">
+            <view class="label">有效期</view>
+            <view class="value" wx:if="{{info.valid_type==1}}">领取后{{info.valid_days}}天内有效</view>
+            <view class="value" wx:if="{{info.valid_type==2}}">{{info.start}} <block wx:if="{{info.start&&info.end}}">-</block> {{info.end}} </view>
+        </view>
+        <view class="dividing"></view>
+        <view class="row">
+            <view class="label">注意事项</view>
+            <view class="value">兑换后可在“我的-优惠券包”中查看</view>
+        </view>
+    </view>
+    <view class="goods-action">
+        <view class="customer">
+            <button class="contact-btn" type="primary" open-type="contact"></button>
+            <span class="iconfont icon-kefu"></span>
+            <view class="text">客服</view>
+        </view>
+        <view class="custom-buy {{points>=coupon.points?'':'disabled'}}" bindtap="buyCoupon">{{points>=coupon.points?'立即兑换':'积分不足'}}</view>
+    </view>
+</view>

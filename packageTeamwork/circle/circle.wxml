@@ -1,0 +1,214 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container circle-page" catch:tap="hideOperation">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <!-- nav、消息通知 -->
+        <view class="nav-notification-wrap" style="top: {{navHeight}};">
+            <view class="nav-tabs">
+                <block wx:if="{{navTitle=='圈子'}}">
+                    <van-tabs active="{{ active }}" swipe-threshold="{{3}}" bind:change="onChange">
+                        <van-tab title="全部"></van-tab>
+                        <van-tab title="我的"></van-tab>
+                    </van-tabs>
+                </block>
+                <block wx:else>
+                    <van-tabs active="{{ active }}" swipe-threshold="{{3}}" bind:change="onChange">
+                        <van-tab title="未点评"></van-tab>
+                        <van-tab title="已点评"></van-tab>
+                    </van-tabs>
+                </block>
+            </view>
+            <!-- 消息通知部分 -->
+            <view class="notification-box" wx:if="{{newsCount && navTitle=='圈子'}}" catch:tap="viewNews">{{newsCount}}条新消息</view>
+        </view>
+
+        <view class="placeholder-box {{newsCount > 0 && navTitle=='圈子' ? 'h216':''}}"></view>
+        <!-- 列表部分 -->
+        <view class="list-wrap {{newsCount > 0 && navTitle=='圈子' ? '':'paddingTop20'}}">
+            <!-- 空列表 -->
+            <view class="empty-list" wx:if="{{listData.length < 1 && loading_finish}}">
+                <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+                <text class="empty-text">还没有内容哦~</text>
+            </view>
+            <!-- 列表 -->
+            <block wx:for="{{listData}}" wx:for-index="index" wx:key="comment_id">
+                <circle-item
+                        content="{{ item }}"
+                        isTeacher="{{isTeacher}}"
+                        navTitle="{{navTitle}}"
+                        userId="{{userId}}"
+                        shopId="{{shopId}}"
+                        activeIndex="{{active}}"
+                        bind:onComment="onComment"
+                        bind:onLike="handleOnLike"
+                        bind:onMore="handleOnMore"
+                        bind:onDelete="handleOnDelete"
+                        bind:onMute="handleOnMute"
+                        bind:showMoreOperation="showMoreOperation"
+                        bind:openAllText="openAllText"
+                        bind:showAllText="showAllText"
+                >
+                    <!--昵称、评级-->
+                    <view slot="reviews" class="slot-reviews"
+                          data-id="{{item.comment_id}}"
+                          data-grade="{{item.grade}}"
+                          data-student="{{item.user_id}}"
+                          catch:tap="onRating">
+                        <image class="reviews-img" src="../../assets/images/reviews.svg"></image>
+                    </view>
+                </circle-item>
+            </block>
+            <!-- 加载更多 -->
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{bottomLoadingShow && orderList.length > 0}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{is_all && listData.length > 0}}">人家也是有底线的～</view>
+        </view>
+
+        <!--添加 发布-->
+        <view class="add-icon" bind:tap="handleOnAdd" wx:if="{{navTitle=='圈子'}}">
+            <view class="line-row"></view>
+            <view class="line-col"></view>
+        </view>
+    </view>
+    <!--评论输入框-->
+    <view class="textarea-wrap" style="bottom:{{commentInputBottom + 'rpx'}}" wx:if="{{commentBoxShow}}">
+        <view class="text_box">
+            <input
+                    model:value="{{ commentText }}"
+                    placeholder="{{textareaPlaceholder}}"
+                    border="{{ false }}"
+                    focus="{{inputFocus}}"
+                    show-confirm-bar="{{false}}"
+                    adjust-position="{{false}}"
+                    contenteditable="{{true}}"
+                    class="circle-comment-textarea"
+                    placeholder-class="comment-input-placeholder"
+                    confirm-type="send"
+                    bind:focus="replaceInputFocus"
+                    bind:blur="replaceBlur"
+                    bind:input="bindReplaceInput"
+                    bind:confirm="handleOnComment"
+                    bind:keyboardheightchange="onKeyboardHeightChange"
+            ></input>
+        </view>
+        <view class="btn-publish" catch:tap="handleOnComment">发表</view>
+    </view>
+
+    <!-- 评级弹窗 Rating-->
+    <van-dialog use-slot show-cancel-button width="600rpx" show="{{ ratingDialogShow }}"
+                customStyle="border-radius: 16rpx"
+                confirm-button-color="var(--features-color-text) !important; font-weight: 500 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+                cancel-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+                catchtouchmove="preventTouchMove" bind:close="onRatingClose"
+                close-on-click-overlay="{{false}}" bind:confirm="onRatingConfirm" bind:cancel="onRatingClose"
+                asyncClose="{{true}}">
+        <view class="rating-dialog-content">
+            <view class="rating-dialog-content-title">评级</view>
+            <view class="rate-item-wrap">
+                <view class="rate-item {{rateIndex==2 ? 'rate-active':''}}" data-index="2" bind:tap="onChooseRate">优秀</view>
+                <view class="rate-item {{rateIndex==3 ? 'rate-active':''}}" data-index="3" bind:tap="onChooseRate">良好</view>
+                <view class="rate-item {{rateIndex==4 ? 'rate-active':''}}" data-index="4" bind:tap="onChooseRate">及格</view>
+                <view class="rate-item {{rateIndex==5 ? 'rate-active':''}}" data-index="5" bind:tap="onChooseRate">不及格</view>
+            </view>
+            <view class="rating-dialog-content-title">点评</view>
+            <view class="reviews-content-wrap">
+                <textarea
+                        value="{{reviewsContent}}"
+                        class="reviews-content"
+                        placeholder="{{ratePlaceholderText}}"
+                        placeholder-class="reviews-placeholder"
+                        placeholder-style="color:var(--tip-color-text) !important;font-size: 28rpx !important;"
+                        bindinput="bindReviewsInput"
+                ></textarea>
+            </view>
+            <view class="check-wrap">
+                <view class="checkbox" catchtap="toggle" data-check-type="sync">
+                    <van-checkbox
+                            id="checkbox_sync"
+                            value="{{ showInCircle }}"
+                            catchtap="catchTapDummy"
+                            bind:change="checkedIsSync"
+                            icon-size="28rpx"
+                            use-icon-slot="{{showInCircle}}"
+                    >
+                        <icon class="custom-check-box-icon iconfont checked icon-checked" slot="icon" />
+                    </van-checkbox>
+                    <text class="check-text">将点评同步到圈子显示，让更多人看到</text>
+                </view>
+                <view class="checkbox marginTop12" catchtap="toggle" data-check-type="refund" wx:if="{{courseType == 3 && is_refund != 2}}">
+                    <van-checkbox
+                            id="checkbox_refund"
+                            value="{{ refundDeposit }}"
+                            catchtap="catchTapDummy"
+                            bind:change="checkedIsRefund"
+                            icon-size="28rpx"
+                            use-icon-slot="{{refundDeposit}}"
+                            disabled="{{is_refund == 2}}"
+                            label-disabled="{{is_refund == 2}}"
+                    >
+                        <icon class="custom-check-box-icon iconfont checked icon-checked" slot="icon" />
+                    </van-checkbox>
+                    <text class="check-text">退还押金</text>
+                </view>
+            </view>
+        </view>
+    </van-dialog>
+</view>
+
+<!-- 发布弹窗 -->
+<van-popup show="{{ publishPopupShow }}" position="bottom" z-index="{{11}}"
+           custom-style="height: 200px;background:transparent"
+           overlay-style=""
+           safe-area-inset-bottom="{{true}}"
+           bind:close="onClosePopup">
+    <view class="publish-popup-box" catchtouchmove="preventTouchMove">
+        <view class="list-box">
+            <view class="item-box" data-type="2" catch:tap="handleOnPublish">图片</view>
+            <view class="line-row"></view>
+            <view class="item-box" data-type="1" catch:tap="handleOnPublish">视频</view>
+        </view>
+        <view class="btn-cancel" catch:tap="onPublishCancel">取消</view>
+    </view>
+</van-popup>
+
+<!-- 已被禁言提示弹窗 -->
+<van-dialog use-slot  width="600rpx" customStyle="border-radius: 16rpx" show="{{ muteTipShow }}"
+            show-confirm-button="{{true}}"
+            confirmButtonText="知道了"
+            catchtouchmove="preventTouchMove"
+            confirm-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:84rpx;width: 100% !important;"
+            bind:close="onMuteDialogClose"
+            bind:confirm="onMuteDialogClose"
+>
+    <view class="mute-dialog-content">
+        <view class="mute-dialog-content-text">您已被禁言，请联系老师</view>
+    </view>
+</van-dialog>
+
+<!-- 禁言弹窗 -->
+<van-dialog use-slot show="{{ showMuteDialog }}" show-cancel-button custom-style="--dialog-border-radius: 16rpx;"
+            confirm-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+            cancel-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+            close-on-click-overlay="{{false}}" bind:confirm="handleOnMuteConfirm" bind:cancel="handleOnMuteCancel"
+            asyncClose="{{true}}">
+    <view class="mute-dialog-content-box">
+        <view class="content-label">类型</view>
+        <view class="mute-type-box">
+            <view class="{{muteType==1?'mute-type-active':'mute-type-normal'}}" bindtap="changeMuteType" data-type="1"
+                  style="margin-right: 40rpx;">永久禁言</view>
+            <view class="{{muteType==1?'mute-type-normal':'mute-type-active'}}" bindtap="changeMuteType" data-type="2">择期禁言
+            </view>
+        </view>
+        <view class="content-label">时间</view>
+        <view class="mute-expire-input-box">
+            <input class="mute-expire-input" placeholder-class="mute-expire-input-placeholder"
+                   value="{{muteType==1?'永久':muteDay}}" placeholder="{{muteType==1?'':'请输入天数'}}" bindinput="handleOnMuteDayInput"
+                   disabled="{{muteType==1}}" type="number" />
+            <view class="content-label" style="margin-top:0px;margin-right:20rpx;" wx:if="{{muteType!=1}}">天</view>
+        </view>
+    </view>
+</van-dialog>

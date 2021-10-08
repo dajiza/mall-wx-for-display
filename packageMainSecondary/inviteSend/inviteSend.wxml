@@ -1,0 +1,75 @@
+<!--pages/invite/invite.wxml-->
+<view class="container">
+    <van-nav-bar title="{{ navTitle }}" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="bg">
+        <image class="bg-img" src="/packageMainSecondary/static/invite-bg.png" />
+        <image class="title-img" src="/packageMainSecondary/static/invite-title.png" />
+
+        <view class="btn-wrap">
+            <image class="btn-img" src="/packageMainSecondary/static/invite-btn.png" />
+
+            <!-- <view class="btn btn-left" open-type="share">立即分享</view>
+            <view class="btn" bindtap="saveAlbum">保存相册</view> -->
+            <van-button custom-class="btn btn-left" open-type="share" round type="warning" size="large">
+                立即分享
+            </van-button>
+            <van-button custom-class="btn" bindtap="saveAlbum" round type="warning" size="large">
+                保存相册
+            </van-button>
+        </view>
+        <view class="text-wrap">
+            <image class="text-img" src="/packageMainSecondary/static/invite-text.png" />
+            <view class="content">
+                <view class="item">
+                    <view class="point"></view>
+                    <view class="value"><span class="title">活动对象：</span>平台内所有用户均可参与</view>
+                </view>
+                <!-- <view class="item">
+                    <view class="point"></view>
+                    <view class="value"><span class="title">活动时间：</span>长期有效</view>
+                </view> -->
+                <view class="item">
+                    <view class="point"></view>
+                    <view class="value">
+                        <span class="title">活动要求：</span>
+                        <view>1. 新用户通过您分享的二维码进入小程序并授权，您和您邀请的新用户各获得1张优惠券（新用户需成功消费后），届时会有短信提醒，请注意查看短信</view>
+                        <view>2. 优惠券领取后，7天内有效，请尽快使用</view>
+                    </view>
+                </view>
+                <view class="item">
+                    <view class="point"></view>
+                    <view class="value"><span class="title">须知：</span>平台保有对活动最终解释权，如有恶意邀请注册，平台将收回活动奖励并保留封号权利，如有疑问请联系客服。</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <van-popup show="{{ showPop }}" bind:close="onClose" custom-class="pop-custom">
+        <view class="pop">
+            <view class="contents">
+                <image class="poster-img" src="{{img}}" />
+                <van-button custom-class="big-btn" bind:click="save" round type="warning" size="large">
+                    保存到相册
+                </van-button>
+            </view>
+        </view>
+    </van-popup>
+</view>
+<van-dialog
+    message="保存海报需要相册访问权限"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    confirm-button-open-type="openSetting"
+    bindopensetting="onOpenSetting"
+    confirm-button-text="去授权"
+    show="{{ showSaveImageToPhotosAlbumDialog }}"
+    bind:close="onClosePermission"
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+/>
+
+<authorize-popup id="authorize" />

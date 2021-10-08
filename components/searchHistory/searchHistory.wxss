@@ -1,0 +1,121 @@
+/* components/searchHistory/searchHistory.wxss */
+@import '../../assets/fonts/iconfont.wxss';
+
+.content-box {
+    padding-bottom: 100rpx;
+    width: 100%;
+    background-color: #fff;
+}
+
+/*搜索历史*/
+.search-history {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 32rpx 30rpx 0;
+    width: 100%;
+}
+.search-history-text-delete {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 36rpx;
+    line-height: 50rpx;
+}
+/* .search-history-text-delete .iconfont{
+  font-size: 36rpx;
+} */
+.search-history-text {
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 36rpx;
+    line-height: 50rpx;
+}
+
+.search-history-list {
+    margin-top: 30rpx;
+    width: 690rpx;
+}
+
+.search-history-list-visible {
+    opacity: 1;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    -ms-transition: all 0.15s;
+    -o-transition: all 0.15s;
+    transition: all 0.15s;
+}
+
+.search-history-list-invisible {
+    opacity: 0;
+}
+
+.search-item {
+    display: inline-block;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+    padding: 0 24rpx;
+    max-width: 690rpx;
+    height: 64rpx;
+    border-radius: 32rpx;
+    background: rgba(0, 0, 0, 0.06);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 26rpx;
+    line-height: 64rpx;
+}
+
+/*// 26为展开按钮宽度 10为margin-right*/
+.searchList-content-unfold .search-item:nth-last-of-type(1) {
+    max-width: 606rpx;
+}
+.open-close {
+    display: inline-block;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+    max-width: 690rpx;
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 32rpx;
+    background: rgba(0, 0, 0, 0.06);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 26rpx;
+    line-height: 64rpx;
+}
+.open-close .iconfont {
+    font-size: 36rpx;
+}
+
+.dialog-index--van-dialog__cancel {
+    width: 100% !important;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.dialog-index--van-dialog__confirm {
+    width: 100% !important;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.van-dialog__message {
+    color: var(--primary-color-text);
+    font-weight: 500;
+
+    --dialog-message-font-size: 32rpx;
+    --dialog-message-line-height: 44rpx;
+}

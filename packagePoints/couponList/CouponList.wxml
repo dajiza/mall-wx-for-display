@@ -1,0 +1,58 @@
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="选择优惠券" border="{{false}}" custom-class="nav" title-class="title"
+    z-index="{{100}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <view class="header-fixed" style="top: {{navHeight}}">
+    <view class="search-box">
+      <view class="search-bar">
+        <input class="search-input" value="{{ searchValue }}" placeholder-class="search-input-placeholder"
+          placeholder="搜索优惠券" confirm-type="search" bindinput="bindSearchInput" bindconfirm="handleOnSearch" />
+        <text class="iconfont icon-glass"></text>
+        <van-icon class="close-icon" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch"
+          wx:if="{{searchValue.length>0}}" />
+      </view>
+    </view>
+  </view>
+
+  <view class="coupon-list" style="padding-bottom:{{safeAreaInsetBottom}}rpx;">
+    <view style="height:124rpx;background:var(--background-color);"></view>
+    <!-- 列表 -->
+    <view class="coupon-item" wx:key="id" wx:for="{{list}}" catchtap="handleClickItem" data-index="{{index}}">
+      <image class="coupon-item-bg" src="../static/coupon-points.png" />
+      <view style=" z-index: 1;position: relative;display: flex;align-items: center;">
+        <view class="coupon-label">
+          <view class="coupon-label-price-wrap">
+            <view class="coupon-label-price-unit" wx:if="{{item.type==1}}">￥</view>
+            <view class="coupon-label-price" wx:if="{{item.type==1}}">{{item.couponAmount/100}}</view>
+            <view class="coupon-label-price" wx:if="{{item.type!=1}}">{{item.couponAmount/10}}</view>
+            <view class="coupon-label-price-unit" style="font-size:32rpx" wx:if="{{item.type!=1}}">折</view>
+          </view>
+          <view class="coupon-label-limit" wx:if="{{item.withAmount>0}}">满{{item.withAmount/100}}元可用</view>
+          <view class="coupon-label-limit" wx:else>无门槛</view>
+          <view class="coupon-label-discount" wx:if="{{item.discount>0}}">封顶优惠{{item.discount/100}}元</view>
+        </view>
+        <view class="coupon-content">
+          <view class="coupon-content-tip">{{item.name}}</view>
+          <view style="display: flex;">
+            <view class="coupon-content-second-tip" style="margin-top:20rpx;" wx:if="{{item.useGoodsTypeStr.length>0}}">{{item.useGoodsTypeStr}}</view>
+            <view class="coupon-content-second-tip" style="margin-top:20rpx; margin-left:40rpx;">发放{{item.totalNum}}张
+            </view>
+          </view>
+          <view class="coupon-content-second-tip" style="margin-top:8rpx;">{{item.valid}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 缺省 -->
+    <view class="empty-list-box" wx:if="{{(list!=null && list.length==0) && loaded}}">
+      <view class="empty-image-wrap">
+        <image class="empty-image" style="margin-left:0px;" src="/assets/images/coupon-empty.png"></image>
+      </view>
+      <view class="empty-list-tip">暂无优惠券，快去新增吧~</view>
+    </view>
+
+  </view>
+</view>

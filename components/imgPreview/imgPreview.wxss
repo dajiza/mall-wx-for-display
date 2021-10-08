@@ -1,0 +1,29 @@
+/* components/couponItem/couponItem.wxss */
+.custom-pop-spec {
+    /* border-radius: 30rpx 30rpx 0px 0px; */
+    /* background: transparent !important; */
+}
+.coupon-pop {
+    position: relative;
+    width: 100%;
+    /* margin-bottom: 24rpx; */
+    height: 100vh;
+    /* background: var(--background-color); */
+}
+.swiper-preview {
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+}
+.swiper-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+.skuname {
+    margin-top: 10rpx;
+    color: #fff;
+}

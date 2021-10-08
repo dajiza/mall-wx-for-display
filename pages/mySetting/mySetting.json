@@ -1,0 +1,9 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "设置中心",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-uploader": "@vant/weapp/uploader/index",
+        "authorize-popup": "../../components/authorize/authorize"
+    }
+}

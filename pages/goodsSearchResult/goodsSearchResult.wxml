@@ -1,0 +1,95 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar fixed placeholder title="{{navTitle}}" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <view class="search-box">
+            <view class="search-bar">
+                <input class="search-input" value="{{ name }}" placeholder-class="search-input-placeholder" confirm-type="search" bindinput="bindSearchInput" bindconfirm="handleOnSearch" placeholder="{{searchPlace}}" />
+                <text class="iconfont icon-glass"></text>
+                <van-icon class="close-icon" wx:if="{{name}}" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch" />
+                <van-uploader class="upload" wx:if="{{!name}}" bind:after-read="afterRead" accept="image" max-size="10485760" bind:oversize="oversize" max-count="{{ 1 }}" accept="image">
+                    <span class="iconfont icon-camera camera-icon"></span>
+                </van-uploader>
+            </view>
+        </view>
+        <!--searchShowList-->
+        <scroll-view class="selected-label-box" wx:if="{{tag_show_list.length > 0|| attr_show_list.length > 0 || goodsCateId > 0}}" scroll-x="{{true}}" scroll-with-animation="{{true}}">
+            <view class="label-list-item" wx:if="{{goodsCateId > 0}}">
+                <view>{{is_other_name}}</view>
+                <van-icon name="cross" class="icon-cross" bind:tap="handleDeleteOther" />
+            </view>
+            <!--attr-->
+            <view class="label-list-item" style="display: inline-block" wx:for="{{attr_show_list}}" wx:key="index" data-index="{{index}}">
+                <view>{{item}}</view>
+                <van-icon name="cross" class="icon-cross" data-index="{{index}}" data-name="{{item}}" bind:tap="handleDeleteLabel" />
+            </view>
+            <!--tags-->
+            <view class="label-list-item" style="display: inline-block" wx:for="{{tag_show_list}}" wx:key="index" data-index="{{index}}">
+                <view>{{item.tag_name}}</view>
+                <van-icon name="cross" class="icon-cross" data-index="{{index}}" data-name="{{item.tag_name}}" data-id="{{item.tag_id}}" bind:tap="handleDeleteTag" />
+            </view>
+        </scroll-view>
+        <view class="filter-nav" style="top: {{navHeight}}">
+            <view class="filter-nav-item {{filterNavIndex === 0?'filter-nav-selected':''}}" data-index="0" bind:tap="onClickTab">综合</view>
+            <view class="filter-nav-item {{filterNavIndex === 1?'filter-nav-selected':''}}" data-index="1" bind:tap="onClickTab">
+                <view class="filter-nav-text">销量</view>
+                <view class="sort-wrap">
+                    <view class="iconfont icon-arrow_up_s {{order_sales === 1 ?'sort-item-nochecked':'sort-item-checked'}} {{order_sales === 0 ?'sort-item-nochecked':''}}"></view>
+                    <view class="iconfont icon-arrow_down_s {{order_sales === 2 ?'sort-item-nochecked':'sort-item-checked'}} {{order_sales === 0 ?'sort-item-nochecked':''}}"></view>
+                </view>
+                <!-- <view class="icon-sort {{order_sales === 1 ?'icon-descending':''}} {{order_sales === 2 ?'icon-ascending':''}}"></view> -->
+            </view>
+            <view class="filter-nav-item {{filterNavIndex === 2?'filter-nav-selected':''}}" data-index="2" bind:tap="onClickTab">
+                <view class="filter-nav-text">价格</view>
+                <view class="sort-wrap">
+                    <view class="iconfont icon-arrow_up_s {{order_price === 1 ?'sort-item-nochecked':'sort-item-checked'}} {{order_price === 0 ?'sort-item-nochecked':''}}"></view>
+                    <view class="iconfont icon-arrow_down_s {{order_price === 2 ?'sort-item-nochecked':'sort-item-checked'}} {{order_price === 0 ?'sort-item-nochecked':''}}"></view>
+                    <!-- <view class="icon-sort {{order_price === 1 ?'icon-descending':''}} {{order_price === 2 ?'icon-ascending':''}}"></view> -->
+                </view>
+            </view>
+            <view class="filter-nav-item" data-index="3" bind:tap="onClickFilter">
+                <block wx:if="{{tag_show_list.length > 0|| attr_show_list.length > 0 || goodsCateId > 0}}">
+                    <view class="filter-nav-text filter-nav-selected">筛选</view>
+                    <text class="iconfont icon-shaixuan filter-nav-icon filter-nav-selected"></text>
+                </block>
+                <block wx:else>
+                    <view class="filter-nav-text no-selected">筛选</view>
+                    <text class="iconfont icon-shaixuan filter-nav-icon no-selected"></text>
+                </block>
+            </view>
+        </view>
+        <view class="goods-list">
+            <view class="empty-list" wx:if="{{goodsList.length < 1 && loading_finish}}">
+                <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+                <text class="empty-text">暂无相关商品</text>
+            </view>
+            <view class="goods-list-content">
+                <block wx:for="{{ goodsList }}" wx:key="index">
+                    <view class="goods-item-box {{(index+1)%2 === 0?'no-margin':''}}" data-id="{{item.goods_id}}" bind:tap="handleGoGoodsDetail">
+                        <image class="goods-img" mode="aspectFill" src="{{item.goods_img + '!upyun520/fw/500'}}" alt=""></image>
+                        <view class="goods-name">{{item.goods_name}}</view>
+                        <view class="goods-price">
+                            <view>￥{{fn.formatMoney(item.goods_price)}}</view>
+                            <view class="pay-num">{{item.goods_sales}}人付款</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{bottomLoadingShow && goodsList.length > 0}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{is_all && goodsList.length > 0}}">人家也是有底线的～</view>
+        </view>
+    </view>
+    <search-fillter popup-show="{{popupShow}}" fillter-list="{{searchList}}" goods-cate="{{goodsCate}}"
+                    current-attr="{{currentFilterAttr}}" current-label="{{currentFilterLabel}}"
+                    bind:confirm="getFilter"
+                    bind:close="filterPopupClose"
+                    bind:reset="filterReset"
+                    bind:transfer="filterTransfer"
+                    bind:delOne="delOne"
+    ></search-fillter>
+</view>

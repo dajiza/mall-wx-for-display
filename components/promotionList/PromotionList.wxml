@@ -1,0 +1,31 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<van-popup bind:before-enter="onBeforeEnter" bind:close="close" bind:enter="onEnter" custom-class="custom-pop-promotion"
+  custom-style="padding-bottom: {{safeAreaInsetBottom}}px;" position="bottom" show="{{ isShow }}">
+  <view class="promotion" catchtouchmove="preventTouchMove">
+    <view class="promotion-main">
+      <view class="promotion-main-header">
+        <view class="promotion-close" catchtap="close">
+          <text class="iconfont icon-guanbi"></text>
+        </view>
+        <view class="timg">
+          <image class="fullimg" src="{{img + '!upyun520/fw/300'}}" />
+        </view>
+        <view class="label-wrap">
+          <view class="price-wrap">
+            <view class="price-now-unit">￥</view>
+            <text class="price-now">{{fn.formatMoney(price)}}</text>
+          </view>
+          <view class="arrt-label">已选 {{label}}</view>
+        </view>
+      </view>
+      <view class="tip">修改促销</view>
+      <scroll-view class="promotion-list" scroll-y="{{ true }}" style="height:500rpx">
+        <van-radio-group value="{{ promotionId }}" bind:change="onChange">
+          <van-radio use-icon-slot wx:for="{{promotionList}}" wx:key="id" name="{{item.id+''}}" custom-class="promotion-radio-root {{item.multi?'promotion-radio-root-multi':''}}" label-class="promotion-radio-label" icon-size="{{0}}">{{item.label}}<image style="width: 40rpx;height: 40rpx;" slot="icon" src="{{ promotionId === (item.id+'') ? '../../assets/images/ic_radio_check.png':'../../assets/images/ic_radio_uncheck.png'}}" />
+          </van-radio>
+        </van-radio-group>
+    </scroll-view>
+    <van-button custom-class="big-btn" bind:click="confirm" round type="primary" size="large">确定</van-button>
+  </view>
+  </view>
+</van-popup>

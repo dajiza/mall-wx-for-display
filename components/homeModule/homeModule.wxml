@@ -1,0 +1,120 @@
+<view class="top-box">
+  <!-- banner位 -->
+  <view id="banner" class="swiper-box" style="height:{{bannerHeight}}rpx">
+    <view wx:if="{{bannerList.length>1}}" class="swipercontent">
+      <swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"
+        duration="{{duration}}" bindchange="swiperChange" current="{{mainBannerCurrent}}" data-type="main">
+        <swiper-item wx:for="{{bannerList}}" wx:key="id" catchtap="handleClick" data-type="{{item.type}}"
+          data-parameter="{{item.parameter}}" skip-hidden-item-layout="{true}">
+          <view class="swiper-item">
+            <image class="item-img" mode="aspectFill" src="{{item.img}}"></image>
+          </view>
+        </swiper-item>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{bannerList}}" wx:key="unique">
+          <view class="dot {{index == mainBannerCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+    <view class="swiper-box" wx:elif="{{bannerList.length==1}}">
+      <view class="swiper-item" catchtap="handleClick" data-type="{{bannerList[0].type}}"
+          data-parameter="{{bannerList[0].parameter}}">
+        <image class="item-img" mode="aspectFill" src="{{bannerList[0].img}}"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 置顶背景 -->
+  <view class="fixed-top-bg" style="opacity:{{opacity}};height:{{navHeight}}px;"></view>
+  <!-- 搜索 -->
+  <view class="search-box" style="top: {{searchBarTop}}px;">
+    <view id="searchBar" class="search-bar" style="width: {{searchBarWidth}}rpx;">
+      <view
+        class="search-input {{searchBarFixed?'search-input-bg-fixed':''}} {{searchBarFixed?'search-input-fixed':'search-input-no-fixed'}}">
+        <view>输入想搜索的信息</view>
+      </view>
+      <text class="iconfont icon-glass {{searchBarFixed?'search-input-fixed search-input-icon-fixed':'search-input-no-fixed'}}"></text>
+      <view class="input-mask" bind:tap="goSearch"></view>
+      <view catchtap="dummy">
+        <van-uploader class="upload {{searchBarFixed?'upload-fixed':''}}" bind:after-read="afterRead" accept="image"
+          max-size="10485760" bind:oversize="oversize" max-count="{{ 1 }}" accept="image">
+          <span
+            class="iconfont icon-camera camera-icon {{searchBarFixed?'search-input-fixed':'search-input-no-fixed'}}"></span>
+        </van-uploader>
+        <view class="more-icon-wrap {{searchBarFixed?'more-icon-wrap-fixed':'more-icon-wrap'}}">
+          <view class="{{searchBarFixed?'v-div-fixed':'v-div'}}"></view>
+          <span class="iconfont icon-fenlei category-icon" catchtap="handleGocategory"></span>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 动态板块 -->
+  <view wx:if="{{layoutList.length>0}}" class="play-layout">
+    <view class="play-layout-wrap" wx:for="{{layoutList}}" wx:key="id">
+      <view class="title-wrap" wx:if="{{item.showTitle==2 || item.showSubtitle==2}}">
+        <view class="play-layout-title" wx:if="{{item.showTitle==2}}">{{item.title}}</view>
+        <view wx:if="{{item.showTitle==2 && item.showSubtitle==2}}" class="space"></view>
+        <view class="play-layout-sub-title" wx:if="{{item.showSubtitle==2}}">{{item.subtitle}}</view>
+      </view>
+      <view class="play-layout-content-wrap">
+        <!-- 非banner,垂直 -->
+        <view class="play-layout-content-v" wx:if="{{item.kind == 1}}">
+          <view
+            class="play-layout-content-item content-item-h-100 content-item-w-335 {{(contentIndex==0)?'':'margin-top-10'}}"
+            wx:for="{{item.ContentList}}" wx:for-item="content" wx:for-index="contentIndex"
+           wx:key="id" catchtap="handleClick"
+            data-type="{{content.type}}" data-parameter="{{content.parameter}}">
+            <van-image fit="cover" width="100%" height="100%" radius="20rpx" lazy-load src="{{content.img}}" />
+          </view>
+        </view>
+        <view class="play-layout-content-v" wx:elif="{{item.kind == 3}}">
+          <view
+            class="play-layout-content-item content-item-h-140 content-item-w-105 {{(contentIndex/3 >= 1)?'margin-top-10':''}}"
+            wx:for="{{item.ContentList}}" wx:for-item="content" wx:for-index="contentIndex"
+            style="margin-left:{{(contentIndex%3==0)?0:20}}rpx;" wx:key="id" catchtap="handleClick"
+            data-type="{{content.type}}" data-parameter="{{content.parameter}}">
+            <van-image fit="cover" width="100%" height="100%" radius="20rpx" lazy-load src="{{content.img}}" />
+          </view>
+        </view>
+        <!-- 非banner,水平滚动 -->
+        <view wx:elif="{{item.kind == 4}}" class="scroll-box">
+          <scroll-view class="play-layout-content-h" scroll-x="true">
+            <view class="content-item-h-140 content-item-w-300" wx:for="{{item.ContentList}}" wx:for-item="content"
+              wx:for-index="contentIndex"
+              style="margin-right: {{(contentIndex==item.ContentList.length-1)?40:20}}rpx;display: inline-block;margin-left: {{(contentIndex==0)?40:0}}rpx;"
+              wx:key="id" catchtap="handleClick" data-type="{{content.type}}" data-parameter="{{content.parameter}}">
+              <van-image fit="cover" width="100%" height="100%" radius="20rpx" lazy-load src="{{content.img}}" />
+            </view>
+          </scroll-view>
+        </view>
+        <!-- banner -->
+        <view class="play-layout-content-swiper-box" wx:elif="{{item.kind == 2}}">
+          <view wx:if="{{item.ContentList.length>1}}" id="contentBanner" class="swipercontent">
+            <swiper class="swiper-box" indicator-dots="{{false}}" autoplay="{{subBannerAutoplay}}" 
+              duration="{{duration}}" easing-function="linear" bindchange="swiperChange" current="{{item.current}}" data-type="content"
+              data-layout-index="{{index}}">
+              <swiper-item wx:for="{{item.ContentList}}" wx:key="id" wx:for-item="content" wx:for-index="contentIndex"
+                catchtap="handleClick" data-type="{{content.type}}" data-parameter="{{content.parameter}}" skip-hidden-item-layout="{true}">
+                <view class="swiper-item">
+                  <van-image fit="cover" width="100%" height="100%" lazy-load src="{{content.img}}" />
+                </view>
+              </swiper-item>
+            </swiper>
+            <view class="dots" style="bottom: 30rpx;">
+              <block wx:for="{{item.ContentList}}" wx:key="unique" wx:for-item="content" wx:for-index="contentIndex">
+                <view class="dot {{contentIndex == item.current ? ' active' : ''}}"></view>
+              </block>
+            </view>
+          </view>
+          <view id="contentBanner" class="swiper-box" wx:elif="{{item.ContentList.length==1}}">
+            <view class="swiper-item" catchtap="handleClick" data-type="{{conteitem.ContentList[0].type}}" data-parameter="{{item.ContentList[0].parameter}}">
+              <image class="item-img" mode="aspectFill" src="{{item.ContentList[0].img}}"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

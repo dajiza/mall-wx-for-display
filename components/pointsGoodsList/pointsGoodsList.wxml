@@ -1,0 +1,21 @@
+<!--components/pointsGoodsList/pointsGoodsList.wxml-->
+<wxs module="fn" src="/utils/fn.wxs"></wxs>
+
+<view class="list">
+    <view class="item" wx:for="{{list}}" bindtap="gotoDetail" data-id="{{item.goodsId}}">
+        <view class="timg">
+            <image class="img" mode="aspectFill" src="{{item.img}}"></image>
+        </view>
+        <view class="title">{{item.title}}</view>
+        <view class="price">
+            <view class="money">
+                <span class="symbol">￥</span>
+                {{fn.formatMoney(item.price)}}
+            </view>
+            <view class="points">
+                <image class="coin" mode="aspectFill" src="/assets/images/coin.svg"></image>
+                {{item.points}}
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>我的收藏</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="19.4222677%" x2="87.6652511%" y2="85.1051549%" id="linearGradient-1">
+            <stop stop-color="#D3CBFF" offset="0%"></stop>
+            <stop stop-color="#ABA9FF" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-47.1%" y="-60.0%" width="194.3%" height="220.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.565938602   0 0 0 0 0.555221037   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="我的收藏" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的钱包">
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="23" cy="23" r="23"></circle>
+            <g id="编组" filter="url(#filter-2)" transform="translate(10.220000, 15.000000)" fill-rule="nonzero">
+                <path d="M24.5578125,7.07109375 C24.5789063,6.86015625 24.5898438,6.6453125 24.5898438,6.42890625 C24.5898438,2.87890625 21.7125,3.55271368e-14 18.1617188,3.55271368e-14 C15.5484375,3.55271368e-14 13.2992187,1.56171875 12.2945313,3.8015625 C11.2898437,1.5609375 9.040625,3.55271368e-14 6.42734375,3.55271368e-14 C2.87734375,3.55271368e-14 -1.48029737e-15,2.87890625 -1.48029737e-15,6.42890625 C-1.48029737e-15,6.6453125 0.0109375,6.86015625 0.03125,7.07109375 C0.03125,7.07109375 0.15703125,13.4007813 12.3734375,19.76875 L12.3734375,19.76875 C24.5882812,13.4007813 24.5578125,7.07109375 24.5578125,7.07109375 Z" id="路径" fill="#FFFFFF"></path>
+                <path d="M6.61015625,1.41640625 C7.19375,1.41640625 7.665625,1.88828125 7.665625,2.47109375 C7.665625,3.05390625 7.19375,3.52578125 6.61015625,3.52578125 C6.0265625,3.52578125 5.55703028,3.0546875 5.55703028,2.47109375 C5.55625,1.8890625 6.02734375,1.41640625 6.61015625,1.41640625 Z" id="路径" fill="#BFBCFF"></path>
+                <path d="M3.31328125,9.3078125 C3.21484375,9.33515625 3.11484375,9.3484375 3.01796875,9.3484375 C2.5359375,9.3484375 2.09375,9.02890625 1.95859375,8.54296875 C1.79296875,7.953125 1.71484375,7.4109375 1.69453125,6.9171875 C1.59609375,4.31796875 3.19765625,3.03984375 3.27734375,2.9765625 C3.75859375,2.6046875 4.45,2.6921875 4.8203125,3.17265625 C5.190625,3.6484375 5.10703125,4.32890625 4.64140625,4.70390625 C4.584375,4.7515625 3.88984375,5.37578125 3.89453125,6.71171875 C3.896875,7.071875 3.9484375,7.48359375 4.07734375,7.9515625 C4.240625,8.53828125 3.89765625,9.14453125 3.31328125,9.3078125 Z" id="路径" fill="#BFBCFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

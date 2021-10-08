@@ -1,0 +1,123 @@
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="新增商品" border="{{false}}" custom-class="nav" title-class="title"
+    z-index="{{100}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <scroll-view id="scrollView" scroll-y="true"
+    style="height: calc(100vh - {{statusBarHeight+46}}px); padding-bottom:{{safeAreaInsetBottom}}rpx;" bindscroll="handleBindscroll"
+    >
+    <view class="goods-info-wrap">
+      <!-- 商品名称 -->
+      <input id="goodsName" model:value="{{ goodsName }}" placeholder="请输入商品名称" border="{{ false }}" show-confirm-bar="{{false}}"
+        adjust-position="{{true}}" contenteditable="{{true}}" class="goods-name-input"
+        placeholder-class="goods-name-placeholder" bindinput="handleInputGoodsInfoValue"
+        data-key="{{'goodsName'}}" bindfocus="handleBindfocus" bindblur="handleBindblur" disabled="{{lastFocus!='' && lastFocus!='goodsName'}}" bindtap="handleHideKeyboard" focus="{{lastFocus=='goodsName'}}"></input>
+      <!-- 商品图片 -->
+      <view class="goods-image-upload-wrap">
+        <view wx:for="{{images}}" wx:key="item" style="width: 212rpx;height: {{(index/3)>=1?232:212}}rpx;position: relative;">
+          <image class="goods-image" src="{{item}}" mode="aspectFill" style="margin-top:{{(index/3)>=1?32:12}}rpx" catchtap="handleImageClick" data-index="{{index}}">
+          </image>
+          <image class="goods-image-delete" src="../static/ic_delete_red.svg" catchtap="handleDeleteGoodsImage"
+          data-index="{{index}}" style="top: {{(index/3)>=1?12:0}}rpx;"></image>
+        </view>
+        <view class="goods-image-add {{imagesLength==6?'hide':''}}" bindtap="handelAddGoodsImage"
+          style="margin-top:{{imagesLength>=3?32:12}}rpx">
+          <text class="iconfont icon-jiahao" style="font-size: 88rpx;color: #968F91;"></text>
+        </view>
+        <view style="width: 212rpx" wx:if="{{imagesLength>0 && (imagesLength-1)%3==0}}"></view>
+      </view>
+      <view class="div-line"></view>
+      <!-- 积分 -->
+      <view class="input-wrap">
+        <view class="input-label">所需积分</view>
+        <input id="points" model:value="{{ points }}" type="number" maxlength="{{7}}" placeholder="请输入数量" border="{{ false }}"
+          show-confirm-bar="{{false}}" adjust-position="{{true}}" contenteditable="{{true}}" class="info-input"
+          placeholder-class="info-input-placeholder" bindinput="handleInputGoodsInfoValue"
+          data-key="{{'points'}}" bindfocus="handleBindfocus" bindblur="handleBindblur" disabled="{{lastFocus!='' && lastFocus!='points'}}" bindtap="handleHideKeyboard" focus="{{lastFocus=='points'}}"></input>
+      </view>
+      <view class="div-line"></view>
+      <!-- 售价 -->
+      <view class="input-wrap" style="position: relative;">
+        <view class="input-label">原售价</view>
+        <view style="display: flex;align-items: center;">
+          <view
+            style="font-size: 36rpx;font-weight: 600;color: var(--primary-color-text);line-height: 50rpx;padding-right: 16rpx;">
+            ￥</view>
+          <input id="amount" model:value="{{ amount }}" type="digit" placeholder="请输入价格" border="{{ false }}"
+            show-confirm-bar="{{false}}" adjust-position="{{true}}" contenteditable="{{true}}" class="info-input"
+            placeholder-class="info-input-placeholder" bindinput="handleInputGoodsInfoValue" data-key="{{'amount'}}"
+            style="width:{{inputAmount+4}}px;" bindfocus="handleBindfocus" bindblur="handleBindblur" disabled="{{lastFocus!='' && lastFocus!='amount'}}" bindtap="handleHideKeyboard" focus="{{lastFocus=='amount'}}"></input>
+        </view>
+        <view id="inputAmountPlaceholder"
+          class="amount-input-placeholder {{amount.length>0?'':'info-input-placeholder'}}">
+          {{amount.length>0?amount:'请输入价格'}}</view>
+      </view>
+      <view class="div-line"></view>
+      <!-- 库存 -->
+      <view class="input-wrap">
+        <view class="input-label">库存数</view>
+        <input id="stock" model:value="{{ stock }}" type="digit" placeholder="请输入数量" border="{{ false }}"
+          show-confirm-bar="{{false}}" adjust-position="{{true}}" contenteditable="{{true}}" class="info-input"
+          placeholder-class="info-input-placeholder" bindinput="handleInputGoodsInfoValue"
+          data-key="{{'stock'}}" bindfocus="handleBindfocus" bindblur="handleBindblur" disabled="{{lastFocus!='' && lastFocus!='stock'}}" bindtap="handleHideKeyboard" focus="{{lastFocus=='stock'}}"></input>
+      </view>
+      <view class="div-line"></view>
+      <!-- 限制 -->
+      <view class="input-wrap">
+        <view class="input-label">单用户限制</view>
+        <input id="exchangeNum" model:value="{{ exchangeNum }}" type="number" maxlength="{{5}}" placeholder="每个用户可兑换数" border="{{ false }}"
+          show-confirm-bar="{{false}}" adjust-position="{{true}}" contenteditable="{{true}}" class="info-input"
+          placeholder-class="info-input-placeholder" bindinput="handleInputGoodsInfoValue"
+          data-key="{{'exchangeNum'}}" bindfocus="handleBindfocus" bindblur="handleBindblur" disabled="{{lastFocus!='' && lastFocus!='exchangeNum'}}" bindtap="handleHideKeyboard" focus="{{lastFocus=='exchangeNum'}}"></input>
+      </view>
+      <view class="div-line"></view>
+    </view>
+    <!-- 商品属性 -->
+    <view class="add-goods-attr-wrap">
+      <view>商品属性</view>
+      <image class="add-goods-attr-image" src="../static/ic_add_goods_attr.svg" style="visibility: {{attrList.length<6?'visible':'hidden'}};" catchtap="handleAddGoodsAttr"></image>
+    </view>
+    <view>
+      <view wx:for="{{attrList}}" wx:key="id" class="goods-attr-item">
+        <view class="attr-input-wrap attr-name-input-wrap">
+          <input id="{{'attrLabel'+index}}" model:value="{{ item.attrName }}" placeholder="例如：品牌" border="{{ false }}" show-confirm-bar="{{false}}"
+            adjust-position="{{true}}" contenteditable="{{true}}" class="attr-info-input"
+            placeholder-class="info-input-placeholder" bindinput="handleInputGoodsAttrName"
+            data-index="{{index}}" bindfocus="handleBindfocus" bindblur="handleBindblur" data-key="{{'attrLabel'}}" disabled="{{lastFocus!='' && lastFocus!=('attrLabel'+index)}}" bindtap="handleHideKeyboard" focus="{{lastFocus==('attrLabel'+index)}}"></input>
+        </view>
+        <view class="attr-input-wrap attr-value-input-wrap">
+          <input id="{{'attrValue'+index}}" model:value="{{ item.attrValue }}" placeholder="例如：川水" border="{{ false }}"
+            show-confirm-bar="{{false}}" adjust-position="{{true}}" contenteditable="{{true}}" class="attr-info-input"
+            placeholder-class="info-input-placeholder" bindinput="handleInputGoodsAttrValue"
+            data-index="{{index}}" bindfocus="handleBindfocus" bindblur="handleBindblur" data-key="{{'attrValue'}}" disabled="{{lastFocus!='' && lastFocus!=('attrValue'+index)}}" bindtap="handleHideKeyboard" focus="{{lastFocus==('attrValue'+index)}}"></input>
+        </view>
+        <image class="attr-delete" src="../static/ic_delete_red.svg" catchtap="handleDeleteGoodsAttr"
+          data-index="{{index}}"></image>
+      </view>
+    </view>
+    <!-- 发布/编辑 -->
+    <view class="bottom-button-container" style="padding-bottom:{{(40+safeAreaInsetBottom)+''}}rpx;padding-top: 80rpx;">
+      <view wx:if="{{isEdit}}" class="edit-buttons-wrap">
+        <button class="bottom-button delete-bottom-button" hover-class="botton-hover" bindtap="handleDelete">
+          <text class="bottom-button-container-label">删除</text>
+        </button>
+        <button class="bottom-button off-bottom-button" hover-class="botton-hover" bindtap="handleOnOff">
+          <text class="bottom-button-container-label">{{status==1?'上架':'下架'}}</text>
+        </button>
+        <button
+          class="bottom-button save-bottom-button {{(goodsName.length==0 || points.length==0 || amount.length==0 || stock.length==0 || exchangeNum.length ==0 || images.length == 0)?'bottom-button-disable':''}}"
+          hover-class="botton-hover" bindtap="handleSave">
+          <text class="bottom-button-container-label">保存修改</text>
+        </button>
+      </view>
+      <button id="publishBtn"
+        class="bottom-button {{(goodsName.length==0 || points.length==0 || amount.length==0 || stock.length==0 || images.length == 0)?'bottom-button-disable':''}}"
+        hover-class="botton-hover" bindtap="handlePublish" wx:else>
+        <text class="bottom-button-container-label">发布</text>
+      </button>
+    </view>
+    <!-- <view style="height:{{keyboardHeight}}px"></view> -->
+  </scroll-view>
+</view>

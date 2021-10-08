@@ -1,0 +1,5 @@
+<!-- pages/shopBlank/shopBlank.wxml -->
+<view class="container">
+    <image class="img" mode="aspectFill" src="../../assets/images/shop-blank.png"></image>
+    <view class="text">店铺正在维护中哦~</view>
+</view>

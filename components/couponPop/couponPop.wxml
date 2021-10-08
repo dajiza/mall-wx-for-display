@@ -1,0 +1,54 @@
+<!-- components/couponItem/couponPop.wxml -->
+<van-popup
+    bind:after-enter="onAfterEnter"
+    bind:before-enter="onBeforeEnter"
+    bind:close="close"
+    bind:enter="onEnter"
+    custom-class="custom-pop-spec"
+    custom-style="padding-bottom: {{safeAreaInsetBottom}}px;"
+    position="bottom"
+    show="{{ isShow }}"
+>
+    <view class="coupon-pop">
+        <view class="header">
+            <view class="title"
+                >优惠券
+                <span class="tips">（订单取消或退款，优惠券不予退还）</span>
+            </view>
+            <view class="close" bindtap="close">
+                <text class="iconfont icon-guanbi"></text>
+            </view>
+        </view>
+        <view class="order-tabs" wx:if="{{ tabsShow }}">
+            <view>
+                <van-tabs id="tabs" active="{{ active }}" bind:change="onChange">
+                    <van-tab title="可用({{canUse.length}})"></van-tab>
+                    <van-tab title="可凑单({{toAdd.length}})"></van-tab>
+                    <van-tab title="不可用({{notUse.length}})"></van-tab>
+                </van-tabs>
+            </view>
+        </view>
+        <scroll-view class="scroll" scroll-y="{{ true }}">
+            <coupon-item
+                class="item"
+                list-type="2"
+                amount="{{amount}}"
+                type="{{type}}"
+                detail="{{item}}"
+                selected="{{ selectedCoupon.coupon_user_id==item.coupon_user_id }}"
+                wx:for="{{list}}"
+                bindtap="{{active==0?'onClickCoupon':''}}"
+                data-coupon="{{item}}"
+            ></coupon-item>
+            <view class="empty" wx:if="{{list.length==0}}">
+                <image class="empty-img" src="/assets/images/coupon-empty.png" />
+                <view class="text">您还没有优惠券哦~</view>
+            </view>
+        </scroll-view>
+        <view class="btn-wrap">
+            <van-button custom-class="big-btn" disabled="{{ isClick }}" round type="warning" size="large" bindtap="selectCoupon">
+                确定
+            </van-button>
+        </view>
+    </view>
+</van-popup>

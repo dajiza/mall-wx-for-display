@@ -1,0 +1,61 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container shop-comment">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="店铺评价" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box" style="padding-bottom: {{safeAreaInsetBottom + 60}}rpx">
+        <view class="comment-tabs" style="top: {{navHeight}};" wx:if="{{total > 0}}">
+            <view class="tab-item {{filterNavIndex === 1?'tab-selected':''}}" data-index="1" catch:tap="onClickTab">本宝贝({{total}})</view>
+            <view class="tab-item {{filterNavIndex === 2?'tab-selected':''}}" data-index="2" catch:tap="onClickTab">其他宝贝({{otherTotal}})</view>
+        </view>
+        <view class="tabs-placeholder" wx:if="{{total > 0}}"></view>
+        <view class="comment-list">
+            <view class="sort-box">
+                <view class="sort-new sort-item  {{sortTypeIndex === 2?'sort-selected':''}}" data-index="2" catch:tap="sortChange">最新排序</view>
+                <view class="line-box"></view>
+                <view class="sort-default sort-item {{sortTypeIndex === 1?'sort-selected':''}}" data-index="1" catch:tap="sortChange">默认排序</view>
+            </view>
+            <block wx:for="{{list}}" wx:key="comment_id">
+                <view class="comment-item" data-id="{{item.comment_id}}" catch:tap="handleOnDetail">
+                    <!--评论内容-->
+                    <comment-item
+                        user_name="{{item.user_nick_name}}"
+                        user_avatar="{{item.user_avatar}}"
+                        create_time="{{item.created_time}}"
+                        comment="{{item.message}}"
+                        attachment="{{item.medias}}"
+                        second_label="{{filterNavIndex == 1 ? item.goods_sku.skuAttr : ''}}"
+                    ></comment-item>
+                    <!--评论商品信息-->
+                    <comment-goods
+                        class="goods-info"
+                        sku_img="{{item.goods_sku.skuImg}}"
+                        goods_name="{{item.goods_sku.skuName}}"
+                        label="{{item.goods_sku.skuAttr}}"
+                        sku_price="{{item.goods_sku.price}}"
+                        wx:if="{{filterNavIndex == 2}}"
+                        data-id="{{item.goods_sku.goodsId}}"
+                        catch:tap="handleOnGoodsDetail"
+                    />
+                    <!--评论数量、点赞数量-->
+                    <view class="comment-like-count" catch:tap>
+                        <view class="comment-count-box"  data-id="{{item.comment_id}}" catch:tap="handleOnDetail">
+                            <text class="value-box">{{item.root_count}}</text>
+                            <image class="comment-icon icon-item" lazy-load mode="aspectFill" src="/assets/images/ic_comment.svg"></image>
+                        </view>
+                        <view class="like-count-box" catch:tap="handleOnLike" data-id="{{item.comment_id}}" data-is-like="{{item.my_like}}">
+                            <text class="value-box">{{item.like_count}}</text>
+                            <image class="like-icon icon-item" lazy-load mode="aspectFill" src="{{item.my_like?'/assets/images/ic_like_h.svg':'/assets/images/ic_like.svg'}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{list.length > 0 && bottomLoadingShow}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{list.length > 0 && is_all}}">人家也是有底线的～</view>
+            <view class="empty-course" wx:if="{{list.length == 0 && is_all}}">暂无评论</view>
+        </view>
+    </view>
+</view>

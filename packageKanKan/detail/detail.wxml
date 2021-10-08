@@ -1,0 +1,97 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container detail-page">
+  <van-nav-bar fixed title="{{title}}" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" title-class="nav-title">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <!-- banner位 -->
+  <view id="KanKanBanner" class="swiper-box" style="height:{{bannerHeight}}rpx">
+    <view wx:if="{{bannerList.length>1}}" class="swipercontent">
+      <swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"
+              duration="{{duration}}" bindchange="swiperChange" current="{{mainBannerCurrent}}" data-type="main">
+        <swiper-item wx:for="{{bannerList}}" wx:key="id" skip-hidden-item-layout="{true}">
+          <view class="swiper-item">
+            <image class="item-img" mode="aspectFill" lazy-load src="{{item.url + '!upyun520/fw/500'}}" bindtap="previewImage" data-src="{{item.url}}" data-type="{{1}}"></image>
+          </view>
+        </swiper-item>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{bannerList}}" wx:key="unique">
+          <view class="dot {{index == mainBannerCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+    <view class="swiper-box" wx:elif="{{bannerList.length==1}}">
+      <view class="swiper-item">
+        <image class="item-img" mode="aspectFill" src="{{bannerList[0].url + '!upyun520/fw/500'}}" bindtap="previewImage" data-src="{{item.url}}" data-type="{{1}}"></image>
+      </view>
+    </view>
+  </view>
+  <!--标题-->
+  <view class="title-author">
+    <view class="title-text">{{tutorialInfo.summary}}</view>
+    <view class="line"></view>
+    <view class="author-box" catch:tap="handleGoUserDesc" data-id="{{authorInfo.user_id}}">
+      <image class="fullimg header-img" mode="aspectFill" src="{{authorInfo.avatar_url}}"></image>
+      <view class="author-name">{{authorInfo.nick_name}}</view>
+      <view class="collect-count">{{tutorialInfo.like_count}}人收藏</view>
+    </view>
+  </view>
+  <!--材料清单-->
+  <view class="label-text" wx:if="{{materialList.length > 0}}">材料清单</view>
+  <view class="material-list" wx:if="{{materialList.length > 0}}">
+    <scroll-view class="material-scroll-view" scroll-x="true" scroll-with-animation="{{true}}" scroll-left="{{scrollLeft}}" bindscroll="XScroll">
+      <view class="placeholder-box"></view>
+      <block wx:for="{{materialList}}" wx:key="*this">
+        <view class="init material-item" wx:if="{{item.sku_img}}">
+          <image class="material-img" mode="aspectFill" src="{{item.sku_img + '!upyun520/fw/300'}}"></image>
+          <view class="title-price">
+            <view class="material-title text-overflow-2">{{item.sku_name}}</view>
+            <view class="material-price">
+              <view class="price">¥ {{fn.formatMoney(item.price)}}</view>
+              <view class="car-icon-wrap" catch:tap="openSpec" data-item="{{item}}">
+                <image class="car-icon" mode="aspectFill" src="../static/ic_car.png"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="placeholder-box"></view>
+    </scroll-view>
+  </view>
+  <!--制作步骤-->
+  <view class="label-text" wx:if="{{courseList.length > 0}}">制作步骤</view>
+  <view class="course-list" wx:if="{{courseList.length > 0}}">
+    <block wx:for="{{courseList}}" wx:key="index">
+      <view class="course-item">
+        <view class="course-title-desc">
+          <view class="course-title">
+            <text>{{index > 8 ? (index + 1) : '0'+(index + 1)}}</text>
+            <text class="course-count">/{{courseList.length > 8 ? courseList.length : '0' + courseList.length}}</text>
+          </view>
+          <text class="course-desc">{{item.description}}</text>
+        </view>
+        <view class="course-img-box" wx:if="{{item.img}}">
+          <image class="course-img" mode="aspectFill" src="{{item.img + '!upyun520/fw/500'}}" bindtap="previewImage" data-src="{{item.img}}" data-type="{{2}}"></image>
+        </view>
+      </view>
+    </block>
+    <view class="no-more">想要了解更多步骤细节，快联系作者吧~</view>
+  </view>
+
+  <!--收藏、分享-->
+  <view class="bottom-bar">
+    <view class="collect-box" wx:if="{{userId != authorInfo.user_id}}" catch:tap="handleOnLike">
+      <text class="iconfont icon-favorites-fill" wx:if="{{like_status}}"></text>
+      <text class="iconfont icon-favorites" wx:else></text>
+      <text class="bar-label-text">收藏</text>
+    </view>
+    <view class="share-box {{userId == authorInfo.user_id && userId > 0?'w100':''}}">
+      <text class="iconfont icon-share"></text>
+      <text class="bar-label-text">分享</text>
+      <button class="share-button" open-type="share"></button>
+    </view>
+  </view>
+  <spec wx:if="{{detailQueryEnd}}" id="spec" mark="{{mark}}" memberDiscount="{{ memberDiscount }}" commissionType="{{commission_type}}" commissionUserId="{{commission_user_id}}"/>
+</view>

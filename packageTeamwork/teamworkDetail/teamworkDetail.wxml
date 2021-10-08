@@ -1,0 +1,69 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="团作详情" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="item">
+        <view class="img" catchtap="previewImage" data-src="{{item.url}}">
+            <image class="fullimg" mode="aspectFill" src="{{poster_link + '!upyun520/fw/750'}}"></image>
+        </view>
+        <view class="desc">
+            <view class="title">
+                <view class="name">{{title}}</view>
+                <view class="tag" wx:if="{{type==1}}">免费</view>
+                <view class="tag" wx:if="{{type==2}}">付费</view>
+                <view class="tag" wx:if="{{type==3}}">押金</view>
+            </view>
+            <view class="info price" wx:if="{{type!=1}}">￥{{fn.formatMoney(course_price)}}</view>
+            <view class="info time">课程时间：{{start_time}}～{{end_time}}</view>
+            <view class="info number">报名人数：{{join_num}}<block wx:if="{{limit_num>0}}">/{{limit_num}}</block></view>
+            <view class="info" wx:if="{{type==3}}">押金退还规则：团作过程中提交作业后退款</view>
+        </view>
+    </view>
+    <view class="detail">
+        <view class="title">课程介绍</view>
+        <view class="dividing"></view>
+        <mp-html content="{{introduction}}" lazy-load="{{true}}" loading-img="/assets/images/placeholder.png" />
+    </view>
+    <view class="bottom" wx:if="{{is_draft==2}}">
+        <button open-type="share" class="share-btn"></button>
+        <view class="share">
+            <text class="iconfont icon-share"></text>
+            <span class="text">分享</span>
+        </view>
+        <view class="sign" wx:if="{{isShopAdmin==1}}" bindtap="gotoDetail">进入团作</view>
+        <block wx:if="{{isShopAdmin==2}}">
+            <view class="sign disable" wx:if="{{btnState==1}}">报名已满</view>
+            <view class="sign disable" wx:if="{{btnState==2}}">报名结束</view>
+            <view class="sign disable" wx:if="{{btnState==3}}">审核中</view>
+            <view class="sign disable" wx:if="{{btnState==4}}">审核拒绝</view>
+            <view class="sign disable" wx:if="{{btnState==5}}">已报名</view>
+            <view class="sign" wx:if="{{btnState==0}}" bindtap="gotoApply">立即报名</view>
+        </block>
+    </view>
+</view>
+<!-- 弹窗 -->
+<van-dialog
+    use-slot
+    title=""
+    show-cancel-button
+    width="600rpx"
+    customStyle="border-radius: 16rpx"
+    show="{{ showDialog }}"
+    show-confirm-button="{{true}}"
+    showCancelButton="{{false}}"
+    confirmButtonText="知道了"
+    catchtouchmove="preventTouchMove"
+    bind:close="onDialogClose"
+    confirm-button-color="var(--primary-color-text) !important"
+>
+    <view class="dialog-wrap">
+        <view class="dialog-title">抱歉！您提交的凭证未通过</view>
+        <view class="dialog-content" wx:if="{{dialogContent.length<12}}">理由：{{dialogContent}}</view>
+        <view class="dialog-content mutil" wx:else>理由：{{dialogContent}}</view>
+    </view>
+</van-dialog>

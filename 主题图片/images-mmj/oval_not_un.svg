@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>选择点</title>
+    <g id="选择点" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Fill-" stroke="#FB6090">
+            <path d="M9.99993771,0.909090909 C4.98761902,0.909090909 0.909090909,4.98771499 0.909090909,10 C0.909090909,15.0131558 4.98761902,19.0909091 9.99993771,19.0909091 C15.0131285,19.0909091 19.0909091,15.0131558 19.0909091,10 C19.0907845,4.98783939 15.0131285,0.909090909 9.99993771,0.909090909"></path>
+        </g>
+    </g>
+</svg>

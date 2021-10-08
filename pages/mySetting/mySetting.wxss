@@ -1,0 +1,141 @@
+/* pages/orderCheck/orderCheck.wxss */
+.container {
+    padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+    background-color: var(--background-color);
+}
+.wrap {
+    width: 100%;
+    border-radius: 30rpx;
+    background-color: #fff;
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+.features-list {
+    justify-content: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 40rpx;
+    width: 100%;
+}
+.features-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 60rpx; */
+    /* flex-basis: 690rpx; */
+    justify-content: space-between;
+    box-sizing: border-box;
+    /* margin-top: 30rpx; */
+    padding: 0rpx 40rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+.features-icon {
+    display: inline-block;
+    width: 50rpx;
+    height: 50rpx;
+    vertical-align: bottom;
+}
+.features-name {
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 28rpx;
+}
+
+.features-left {
+    display: flex;
+}
+
+.features-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    color: var(--tip-color-text);
+}
+.features-right .value {
+}
+.features-right .operate {
+    padding: 6rpx 16rpx;
+    height: 46rpx;
+    border-radius: 23px;
+    background: var(--shop-info-authorize-background);
+    color: var(--features-color-text);
+    line-height: 46rpx;
+}
+.features-right .icon-youjiantou {
+    font-size: 24rpx;
+    /*padding-bottom: 20rpx;*/
+}
+
+/*客服按钮*/
+.contact-btn {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+}
+
+.item-warp {
+    overflow: hidden;
+    justify-content: center;
+    margin: 0 auto 30rpx;
+    width: 690rpx;
+    border-radius: 20rpx;
+    background: #fff;
+}
+.icon-right-corner2 {
+    margin-left: 20rpx;
+    color: var(--icon-arrow-color);
+    font-size: 24rpx;
+}
+.features-value {
+}
+.timg {
+    overflow: hidden;
+    margin-top: 40rpx;
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 32rpx;
+}
+
+.dividing {
+    margin: 0 40rpx 0 auto;
+    width: 540rpx;
+}
+
+.phone-btn {
+    /* text-align: center;
+    line-height: 60rpx; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20rpx;
+    width: 188rpx;
+    height: 60rpx;
+    border-radius: 30rpx;
+    background: #27c05e;
+    color: #ffffff;
+    font-size: 26rpx;
+}
+.weixin-logo {
+    margin-right: 8rpx;
+    width: 35rpx;
+    height: 28rpx;
+}

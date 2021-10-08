@@ -1,0 +1,129 @@
+<view class="container">
+    <van-nav-bar placeholder fixed border="{{false}}" z-index="{{11}}" bind:click-left="onPop" custom-style="--padding-md: 0rpx;">
+        <view slot="left">
+            <icon class="iconfont icon-fanhui" style="font-size: 36rpx; padding: 0 30rpx;" />
+        </view>
+        <view slot="title">
+            <view class="van-nav-bar__title title-class van-ellipsis custom-nav-bat-title">
+                <block>{{isEdit?'修改地址':'新增地址'}}</block>
+            </view>
+        </view>
+    </van-nav-bar>
+    <view class="new-form-item">
+        <view class="name">联系人</view>
+        <van-field class="input" value="{{ address.name }}" bind:change="nameValueChange" input-align="right" maxlength="{{25}}" placeholder="请输入姓名" border="{{ false }}" />
+    </view>
+    <view class="new-form-item">
+        <view class="name">手机号</view>
+        <van-field class="input" value="{{ address.phone }}" bind:change="phoneValueChange" type="number" input-align="right" maxlength="{{11}}" placeholder="请输入手机号" border="{{ false }}" />
+    </view>
+    <view class="new-form-item-upload-wrap">
+        <view class="name">所在地区</view>
+        <view class="wrap-value" bindtap="areaPick">
+            <span>{{address.full_area?address.full_area:'请选择所在地区'}}</span>
+            <text class="iconfont icon-right-corner2"></text>
+        </view>
+    </view>
+    <view class="new-form-item-upload-wrap">
+        <view class="name">详细地址</view>
+        <view class="wrap-value" bindtap="openTextarea">
+            <span>{{address.address?address.address:'请输入详细地址'}}</span>
+            <text class="iconfont icon-right-corner2"></text>
+        </view>
+    </view>
+    <view class="new-form-item-upload-wrap">
+        <!-- <view class="new-form-item-upload-wrap" wx:if="{{!isDefaultAddress}}"> -->
+        <view class="name">设置为默认地址</view>
+        <view class="wrap-value" bindtap="openTextarea">
+            <span>设置按钮</span>
+            <van-switch
+                checked="{{ address.is_default == 2 }}"
+                size="62rpx"
+                slot="right-icon"
+                custom-class="set-default-address-switch"
+                style="height:66rpx;"
+                active-color="#4CD964"
+                inactive-color="#ffffff"
+                bind:change="setDefaultAddress"
+            />
+        </view>
+    </view>
+    <!-- <van-cell-group custom-class="edit-cell-group" border="{{false}}" style="width:100%;">
+        <van-cell
+            title="所在地区"
+            is-link
+            value="{{address.full_area?address.full_area:' '}}"
+            style="--cell-right-icon-color: var(--secondary-color-text);"
+            title-class="edit-cell-field-label"
+            value-class="address-cell-value"
+            bindtap="areaPick"
+        />
+        <van-field
+            value="{{ address.province+address.city+address.area+address.address }}"
+            bind:change="addressValueChange"
+            label="详细地址"
+            type="{{showAreaPicker?'text':'textarea'}}"
+            maxlength="{{200}}"
+            placeholder="请输入详细地址"
+            label-class="edit-cell-field-label"
+            input-class="{{showAreaPicker?'edit-cell-field-input-textarea':'edit-cell-field-input'}}"
+            placeholder-style="color:var(--secondary-color-text);"
+        />
+        <van-cell wx:if="{{!isDefaultAddress}}" title="设置为默认地址" center custom-class="set-default-address-cell">
+            <van-switch
+                checked="{{ address.is_default == 2 }}"
+                size="62rpx"
+                slot="right-icon"
+                custom-class="set-default-address-switch"
+                style="height:66rpx;"
+                active-color="#4CD964"
+                inactive-color="#ffffff"
+                bind:change="setDefaultAddress"
+            />
+        </van-cell>
+    </van-cell-group> -->
+
+    <view class="bottom-button-container" style="bottom: {{safeAreaInsetBottom}}rpx;">
+        <button class="bottom-button {{saveDisabled?'bottom-button-disable':''}}" hover-class="botton-hover" disabled="{{saveDisabled}}" bindtap="save">
+            <text class="bottom-button-container-label">保存</text>
+        </button>
+
+        <button wx:if="{{isEdit}}" class="bottom-button-delete" hover-class="botton-hover" bindtap="deleteConfirm">
+            <text class="bottom-button-container-label">删除</text>
+        </button>
+    </view>
+    <view>
+        <van-popup show="{{ showAreaPicker }}" bind:close="onAreaPickerClose" position="bottom" z-index="{{2000}}" custom-style="height: 534rpx" visible-item-count="5">
+            <van-area
+                class="area-picker"
+                title="地区选择"
+                area-list="{{ areaList }}"
+                value="{{address.area_code_van}}"
+                bind:confirm="onAreaPickerConfirm"
+                bind:cancel="onAreaPickerCancel"
+                item-height="42"
+            />
+        </van-popup>
+    </view>
+</view>
+<van-dialog
+    message="确认要删除该地址吗？"
+    show="{{ showDeleteConfirmDialog }}"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    bind:close="onDeleteConfirmDialogClose"
+    bind:confirm="onDeleteConfirm"
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+/>
+<van-popup
+    id="loading"
+    overlay="{{true}}"
+    custom-style="--popup-background-color:rgba(0,0,0,0); width: 100px; height: 100px; display: flex; justify-content: center;"
+    overlay-style="--overlay-background-color: rgba(0,0,0,0);"
+>
+    <van-loading color="var(--primary-color)" size="45px" custom-class="loading-global-custom" />
+</van-popup>
+
+<pop-textarea id="textarea" bind:saveText="getTetx" content="{{defaultText}}" title="详细地址" placeholder="请输入详细地址"></pop-textarea>

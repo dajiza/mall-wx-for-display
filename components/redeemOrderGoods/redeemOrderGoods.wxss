@@ -1,0 +1,66 @@
+.goods-info{
+    display: flex;
+}
+.goods-info .img-box{
+    width: 128rpx;
+}
+.goods-img{
+    display: block;
+    vertical-align: bottom;
+}
+.goods-info .text-box{
+    width: 540rpx;
+    margin-left: 20rpx;
+}
+.goods-info .text-box .goods-title{
+    height: 80rpx;
+}
+.text-box-bottom-wrap{
+    width: 100%;
+    height: 48rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.point-box{
+    height: 40rpx;
+    display: flex;
+    align-items: center;
+    padding-top: 8rpx;
+    font-weight: 400;
+    color: #B2B2B2;
+    line-height: 40rpx;
+}
+.point-box .point-value{
+    margin-left: 10rpx;
+}
+
+.point-icon{
+    width: 36rpx;
+    height: 36rpx;
+    display: block;
+    vertical-align: bottom;
+}
+.count-box{
+    min-width: 48rpx;
+    height: 48rpx;
+    background: #FB6090;
+    text-align: center;
+    line-height: 48rpx;
+    border-radius: 48rpx;
+    color: #fff;
+    font-size: 22rpx;
+    font-weight: 400;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+}
+.text-overflow-2 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal !important;
+    word-wrap: break-word;
+
+    -webkit-line-clamp: 2;
+}

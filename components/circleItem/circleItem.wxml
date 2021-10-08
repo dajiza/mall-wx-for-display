@@ -1,0 +1,215 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="content-wrap circle-item">
+    <view class="left-box">
+        <view class="head-img-wrap">
+            <image class="head-img" lazy-load src="{{detailInfo.user_avatar}}"></image>
+            <image src="/packageTeamwork/static/ic_v.png" class="v-img" wx:if="{{detailInfo.is_teacher}}"/>
+        </view>
+
+    </view>
+    <view class="right-box">
+        <view class="name-score">
+            <view class="name-box text-ellipsis">{{detailInfo.user_nick_name}}</view>
+            <!--评价 老师评价作业-->
+            <view class="reviews-img" wx:if="{{isTeacher && sourceType == 2}}">
+                <slot name="reviews"></slot>
+            </view>
+            <block wx:if="{{sourceType == 2}}">
+                <view class="score-box"
+                      wx:if="{{detailInfo.grade.grade > 0}}"
+                >{{fn.backGrade(detailInfo.grade.grade)}}</view>
+            </block>
+            <block wx:else>
+                <block wx:if="{{isTeacher}}">
+                    <view class="score-box"
+                          wx:if="{{detailInfo.grade.grade > 0 }}"
+                    >{{fn.backGrade(detailInfo.grade.grade)}}</view>
+                </block>
+                <block wx:else>
+                    <view class="score-box"
+                          wx:if="{{(detailInfo.grade.grade > 0) && activeIndex > 0 }}"
+                    >{{fn.backGrade(detailInfo.grade.grade)}}</view>
+                    <view class="score-box"
+                          wx:if="{{(detailInfo.grade.grade == 2 || detailInfo.grade.grade == 1) && activeIndex < 1 }}"
+                    >{{fn.backGrade(detailInfo.grade.grade)}}</view>
+                </block>
+            </block>
+
+        </view>
+        <!--文字-->
+        <view class="text-box {{detailInfo.isShowAll && detailInfo.openBtnShow ?'': 'text-overflow-4'}}">
+            <text>{{detailInfo.message}}</text>
+        </view>
+        <view class="text-box text-box-copy" id="text-box-copy-{{detailInfo.comment_id}}">
+            <text>{{detailInfo.message}}</text>
+        </view>
+        <!--文字超出4行展开收起-->
+        <view class="open-close-box" wx:if="{{detailInfo.openBtnShow}}">
+            <view class="open-close-text" data-id="{{detailInfo.comment_id}}"
+                  catchtap="openOrClose">{{detailInfo.isShowAll ? '收起':'全文'}}</view>
+        </view>
+        <!--图片-->
+        <view class="img-list-wrap" wx:if="{{detailInfo.medias && detailInfo.medias[0].media_type == 2}}" catch:tap="">
+            <block wx:if="{{detailInfo.medias.length==1}}">
+                <image class="only-one" lazy-load mode="aspectFill"
+                       src="{{detailInfo.medias[0].media_url + '!upyun520/fw/320'}}"
+                       data-src="{{detailInfo.medias[0].media_url}}"
+                       catchtap="previewImage"
+                ></image>
+            </block>
+            <block wx:else>
+                <block wx:for="{{detailInfo.medias}}" wx:for-item="img"  wx:for-index="index" wx:key="index">
+                    <image class="img-item" lazy-load mode="aspectFill"
+                           src="{{img.media_url + '!upyun520/fw/320'}}"
+                           data-src="{{img.media_url}}"
+                           catchtap="previewImage"></image>
+                </block>
+            </block>
+        </view>
+        <!--视频-->
+        <view class="video-wrap" wx:if="{{detailInfo.medias && detailInfo.medias[0].media_type == 1}}" catch:tap="">
+            <video class="video"
+                   src="{{ detailInfo.medias[0].media_url }}"
+                   binderror="videoErrorCallback"
+                   show-play-btn="{{true}}"
+                   controls="{{true}}"
+                   play-btn-position="center"
+                   enable-play-gesture="{{true}}"
+                   show-progress="{{true}}"></video>
+        </view>
+        <!--时间、更多-->
+        <view class="time-more-wrap">
+            <view class="time-box">{{detailInfo.time}}</view>
+            <view class="more-box" data-id="{{detailInfo.comment_id}}" catch:tap="openOperating">
+                <view class="point"></view>
+                <view class="point"></view>
+            </view>
+            <!--<van-transition name="slide-right" class="operating-wrap" wx:if="{{showOperating}}">
+
+            </van-transition>-->
+            <view class="operating-wrap" wx:if="{{detailInfo.showOperation}}" catch:tap="clickOperation">
+                <view class="operating-item"
+                      data-id="{{detailInfo.comment_id}}"
+                      data-grade="{{detailInfo.grade.grade}}"
+                      catch:tap="handleOnLike">
+                    <text class="iconfont icon-zan"></text>
+                    <text class="operating-text">{{detailInfo.is_like ? '取消':'点赞'}}</text>
+                </view>
+                <view class="operating-item"
+                      data-comment-id="{{detailInfo.comment_id}}"
+                      data-reply-comment-id="0"
+                      data-user="{{detailInfo.user_id}}"
+                      data-type="1"
+                      data-grade="{{detailInfo.grade.grade}}"
+                      data-name=""
+                      data-mute="{{detailInfo.isMute}}"
+                      catch:tap="onClickComment">
+                    <text class="iconfont icon-comment"></text>
+                    <text class="operating-text">评论</text>
+                </view>
+                <!--老师身份-->
+                <block wx:if="{{isTeacher}}">
+                    <!--不能禁言自己 先判断是不是自己发的-->
+                    <!--自己发的 只能删除-->
+                    <block wx:if="{{detailInfo.user_id == userId}}">
+                        <view class="operating-item"
+                              data-id="{{detailInfo.comment_id}}"
+                              catch:tap="onDel">
+                            <text class="iconfont icon-del"></text>
+                            <text class="operating-text">删除</text>
+                        </view>
+                    </block>
+                    <!--不是自己发的 可删除可禁言 -->
+                    <block wx:if="{{detailInfo.user_id != userId}}">
+                        <!--是否是禁言状态 是的话只显示删除 不是的话显示更多-->
+                        <block wx:if="{{detailInfo.isMute}}">
+                            <view class="operating-item"
+                                  data-id="{{detailInfo.comment_id}}"
+                                  catch:tap="onDel">
+                                <text class="iconfont icon-del"></text>
+                                <text class="operating-text">删除</text>
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="operating-item"
+                                  data-id="{{detailInfo.comment_id}}"
+                                  wx:if="{{!detailInfo.showMore}}"
+                                  catch:tap="showMore">
+                                <text class="iconfont icon-more1"></text>
+                                <text class="operating-text">更多</text>
+                            </view>
+                            <block wx:if="{{detailInfo.showMore}}">
+                                <view class="operating-item"
+                                      data-id="{{detailInfo.comment_id}}"
+                                      catch:tap="onDel">
+                                    <text class="iconfont icon-del"></text>
+                                    <text class="operating-text">删除</text>
+                                </view>
+                                <view class="operating-item"
+                                      data-id="{{detailInfo.comment_id}}"
+                                      data-user="{{detailInfo.user_id}}"
+                                      catch:tap="onMute">
+                                    <text class="iconfont icon-mute"></text>
+                                    <text class="operating-text">禁言</text>
+                                </view>
+                            </block>
+                        </block>
+                    </block>
+                </block>
+                <!--学生身份 只有自己的才有删除权利-->
+                <block wx:else>
+                    <view class="operating-item"
+                          data-id="{{detailInfo.comment_id}}"
+                          catch:tap="onDel"
+                          wx:if="{{detailInfo.user_id == userId}}"
+                    >
+                        <text class="iconfont icon-del"></text>
+                        <text class="operating-text">删除</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!--老师点评-->
+        <block wx:if="{{detailInfo.grade.content }}">
+            <view class="teacher-reviews-wrap" wx:if="{{activeIndex > 0}}">
+                <text class="fontWeight500">{{sourceType==2 ? '我的点评：':'老师点评：'}}</text>
+                <text class="">{{detailInfo.grade.content}}</text>
+            </view>
+            <view class="teacher-reviews-wrap" wx:if="{{activeIndex == 0 && detailInfo.grade.is_show == 2 }}">
+                <text class="fontWeight500">{{sourceType==2 ? '我的点评：':'老师点评：'}}</text>
+                <text class="">{{detailInfo.grade.content}}</text>
+            </view>
+        </block>
+        <!--点赞、评论 内容-->
+        <view class="like-comment-wrap {{sourceType==2 && detailInfo.grade.content ? 'marginTop20':''}}" wx:if="{{(detailInfo.likes && detailInfo.likes.length > 0) || (detailInfo.reply_list && detailInfo.reply_list.length > 0)}}" >
+            <view class="like-wrap" wx:if="{{detailInfo.likes && detailInfo.likes.length > 0}}">
+                <view class="zan-icon-box">
+                    <text class="iconfont icon-zan"></text>
+                </view>
+                <view class="like-names">{{detailInfo.likesName}}</view>
+            </view>
+            <view class="row-line" wx:if="{{(detailInfo.likes && detailInfo.likes.length > 0) && (detailInfo.reply_list && detailInfo.reply_list.length > 0)}}"></view>
+            <view class="comment-wrap" wx:if="{{detailInfo.reply_list && detailInfo.reply_list.length}}">
+                <block wx:for="{{detailInfo.reply_list}}"  wx:for-index="index" wx:key="index">
+                    <view class="comment-item"
+                          data-comment-id="{{detailInfo.comment_id}}"
+                          data-reply-comment-id="{{item.comment_id}}"
+                          data-type="2"
+                          data-grade="{{item.grade.grade}}"
+                          data-user="{{item.user_id}}"
+                          data-name="{{item.user_nick_name}}"
+                          data-mute="{{detailInfo.isMute}}"
+                          catch:tap="onClickComment"
+                    >
+                        <text class="fontWeight500">{{item.user_nick_name}}</text>
+                        <text class="margin8" wx:if="{{item.parent_id !== detailInfo.comment_id}}">回复</text>
+                        <text class="fontWeight500" wx:if="{{item.at_user_nick_name && item.parent_id !== detailInfo.comment_id}}">{{item.at_user_nick_name}}</text>
+                        <text class="fontWeight500">: </text>
+                        <text>{{item.message}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

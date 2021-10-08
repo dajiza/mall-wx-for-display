@@ -1,0 +1,377 @@
+.container {
+    padding-bottom: 0;
+    background: var(--divider-border-color);
+}
+.nav {
+    background: #fff !important;
+}
+
+.title {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+.leftIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+    color: #333333;
+    transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+
+.redeem-order-detail {
+}
+.redeem-order-detail .content-box {
+    width: 100%;
+}
+.redeem-order-detail .content-box .address-wrap {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 24rpx;
+    padding: 40rpx 40rpx;
+    width: 100%;
+    border-radius: 30rpx;
+    background: #ffffff;
+}
+.redeem-order-detail .address-wrap .left-box {
+    display: flex;
+    flex: 1;
+}
+.redeem-order-detail .address-wrap .copy-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60rpx;
+    height: 60rpx;
+}
+.redeem-order-detail .address-wrap .copy-box .copy-icon {
+    display: block;
+    width: 36rpx;
+    height: 36rpx;
+}
+.redeem-order-detail .address-wrap .icon-address {
+    height: 44rpx;
+    line-height: 44rpx;
+}
+.redeem-order-detail .address-wrap .icon-address .icon-dizhi {
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 32rpx;
+}
+.redeem-order-detail .address-wrap .address-info {
+    margin-left: 16rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+.redeem-order-detail .address-wrap .address-info .phone {
+    margin-left: 20rpx;
+}
+.redeem-order-detail .address-wrap .address-info .area {
+    margin-top: 20rpx;
+    color: #564b4e;
+    font-weight: 300;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.redeem-order-detail .content-box .goods-list-wrap {
+    margin-top: 24rpx;
+}
+.goods-item-box {
+    box-sizing: border-box;
+    margin-bottom: 24rpx;
+    padding: 40rpx 30rpx;
+    width: 100%;
+    border-radius: 30rpx;
+    background: #ffffff;
+}
+.redeem-order-detail .goods-list-wrap .goods-item {
+    margin-top: 40rpx;
+    width: 100%;
+    height: 128rpx;
+}
+.redeem-order-detail .goods-list-wrap .goods-item:first-child {
+    margin-top: 0;
+}
+.redeem-order-detail .exchange-time-wrap {
+    box-sizing: border-box;
+    margin-top: 24rpx;
+    padding: 30rpx;
+    width: 100%;
+    border-radius: 30rpx;
+    /*height: 240rpx;*/
+    background: #ffffff;
+}
+.redeem-order-detail .exchange-time-wrap .item,
+.goods-list-wrap .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30rpx;
+    height: 40rpx;
+    color: #564b4e;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.goods-list-wrap .item {
+    margin-top: 20rpx;
+}
+.goods-list-wrap .point-order-no {
+    margin-top: 40rpx;
+}
+.redeem-order-detail .exchange-time-wrap .item:first-child {
+    margin-top: 0;
+}
+
+.redeem-order-detail .btn-ship {
+    position: fixed;
+    bottom: 40rpx;
+    left: 30rpx;
+    width: 690rpx;
+    height: 88rpx;
+    border-radius: 44rpx;
+    background: var(--primary-color-btn);
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 88rpx;
+}
+.redeem-order-detail .btn-hover {
+    opacity: 0.8;
+}
+
+.redeem-order-detail .logistics-info-box {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 24rpx;
+    padding-bottom: 48rpx;
+    border-radius: 30rpx 30rpx 0 0;
+    background: #ffffff;
+}
+.redeem-order-detail .logistics-steps {
+}
+
+/*物流*/
+.redeem-order-detail .express-container {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 38rpx 0 0 0;
+    width: 100%;
+    /*margin: 10rpx auto;*/
+    border-radius: 10rpx;
+}
+
+.redeem-order-detail .express-item {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+
+.redeem-order-detail .express-middle-axis {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50rpx;
+    /*justify-content: center;*/
+}
+
+/*运输中-不是最新运输状态*/
+.redeem-order-detail .dot-transporting {
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    width: 14rpx;
+    height: 14rpx;
+    border-radius: 50%;
+    background: var(--tip-color-text-d8);
+}
+
+.redeem-order-detail .dot-closing {
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    background: var(--tip-color-text-d8);
+    text-align: center;
+    line-height: 50rpx;
+}
+
+.redeem-order-detail .dot-closing .iconfont {
+    color: #ffff;
+    font-size: 22rpx;
+}
+.redeem-order-detail .dot-closing .icon-yilanshouicon {
+    font-size: 26rpx;
+}
+
+.redeem-order-detail .dot-shou {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10rpx 0;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    background: var(--secondary-color-text);
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.redeem-order-detail .dot-received,
+.redeem-order-detail .dot-processing {
+    background: var(--primary-gradual-color);
+}
+
+/*实线*/
+.redeem-order-detail .online-solid {
+    flex: 1;
+    width: 2rpx;
+    /*height: 100rpx;*/
+    background: var(--tip-color-text-d8);
+}
+
+/*虚线*/
+.redeem-order-detail .online-dotted {
+    height: 92rpx;
+    border-left: 2rpx dashed var(--tip-color-text-d8);
+}
+
+.redeem-order-detail .express-status {
+    color: var(--tip-color-text-a2);
+    font-weight: 400;
+    font-size: 30rpx;
+    line-height: 42rpx;
+}
+
+.redeem-order-detail .express-status-address {
+    color: var(--tip-color-text-a2);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.redeem-order-detail .text-processing {
+    color: var(--primary-color-text);
+}
+
+/*步骤条左边-日期-时间*/
+.redeem-order-detail .express-left-date {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-right: 20rpx;
+    width: 112rpx;
+    /*justify-content: center;*/
+}
+.redeem-order-detail .express-date {
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.redeem-order-detail .express-time {
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 20rpx;
+    line-height: 28rpx;
+}
+
+/*步骤条-右侧*/
+.redeem-order-detail .express-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20rpx;
+    padding-bottom: 50rpx;
+    width: 538rpx;
+    /*justify-content: center;*/
+}
+
+.redeem-order-detail .color-FB6090 {
+    color: var(--features-color-text);
+}
+.redeem-order-detail .ship-placeholder-box {
+    width: 100%;
+}
+.logistics-dialog-content-box {
+    box-sizing: border-box;
+    padding: 48rpx 60rpx;
+    width: 100%;
+}
+.logistics-input-item {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 18rpx 20rpx;
+    width: 100%;
+    height: 80rpx;
+    border-radius: 6rpx;
+    background: var(--background-color);
+    font-size: 26rpx;
+}
+.logistics-input-item .logistics-input {
+    width: 100%;
+    height: 44rpx;
+    font-size: 26rpx;
+    /*line-height: 80rpx;*/
+}
+.logistics-input-item .logistics-input-placeholder {
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    /*line-height: 80rpx;*/
+}
+.marginTop30 {
+    margin-top: 30rpx;
+}
+.arrow-right {
+    margin-left: auto;
+}
+.arrow-right .icon-youjiantou {
+    color: var(--tip-color-text);
+    font-size: 26rpx;
+}
+.logistics-field {
+    background: transparent !important;
+}
+.company-picker-popup {
+    height: 300px;
+}
+.dialog-button-box {
+    display: flex;
+    width: 100%;
+    height: 88rpx;
+    border-top: 1rpx solid var(--tip-color-text-d8);
+}
+
+.btn-cancel,
+.btn-sure {
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    border: none;
+    color: var(--primary-color-text);
+    text-align: center;
+    font-weight: 400;
+    font-size: 32rpx;
+    line-height: 88rpx;
+}
+
+.btn-cancel:active,
+.btn-sure:active {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.border-right {
+    border-right: 2rpx solid var(--tip-color-text-d8);
+}
+.sand-dialog .van-dialog__footer {
+    display: none !important;
+}

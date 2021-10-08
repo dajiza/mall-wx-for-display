@@ -1,0 +1,36 @@
+<!--components/shelves/shelves.wxml-->
+<van-popup show="{{ show }}" custom-class="shelves-popup" bind:click-overlay="handleOnCancel">
+    <view class="shelves-container" catchtouchmove="preventTouchMove">
+        <scroll-view class="shelves-goods-wrap" scroll-y>
+            <view class="shelves-goods" wx:for="{{skus}}" wx:key="id">
+                <view class="shelves-goods-item">
+                    <van-image custom-class="shelves-goods-img" fit="cover" width="136rpx" height="136rpx" lazy-load
+                        radius="8rpx" src="{{item.imgUrl}}" style="height: 136rpx;">
+                    </van-image>
+                    <view class="shelves-goods-label">
+                        <view class="shelves-goods-name">
+                            {{item.goodsName}}
+                        </view>
+                        <view class="shelves-goods-profit">
+                            预估收益￥{{item.profitPrice}}
+                        </view>
+                    </view>
+                </view>
+                <price-stepper id="price-stepper_{{index}}" step="{{item.step}}" value="{{ item.calPrice }}" decimal-length="{{ 2 }}" min="{{item.minPrice}}" bind:change="onChange"
+                    bind:overlimit="onOverlimit" input-width="{{'364rpx'}}" bind:plus="stepperPlus"
+                    bind:minus="stepperMinus" data-index="{{index}}"></price-stepper>
+            </view>
+        </scroll-view>
+        <view class="shelves-bottom-box">
+            <view class="shelves-bottom-tip">
+                不能低于官方指导价，收益与商品售价成正比
+            </view>
+            <view class="shelves-bottom-button-box">
+                <van-button round custom-class="shelves-btn-reset" bind:tap="handleOnReset">重置</van-button>
+                <van-button round custom-class="shelves-btn-cancel" bind:tap="handleOnCancel">取消</van-button>
+                <van-button round type="warning" custom-class="shelves-btn-confirm" bind:tap="handleOnConfirm">确认上架
+                </van-button>
+            </view>
+        </view>
+    </view>
+</van-popup>

@@ -1,0 +1,164 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+	<van-nav-bar title="{{ navTitle }}" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" title-class="nav-title" fixed placeholder>
+		<view slot="left" class="leftIcon" bindtap="onPop">
+			<text class="iconfont icon-fanhuiiblack"></text>
+		</view>
+	</van-nav-bar>
+	<view class="top-card">
+		<image src="../../assets/images/money-card.png" class="card-img" />
+		<image src="../../assets/images/description.png" class="description" bindtap="showPopup" />
+		<view class="info">
+			<view class="total">
+				<view class="title">总资产(元)</view>
+				<view class="value">
+					<parse-money money="{{pool.now_money}}" size="large" showDollar="{{false}}"></parse-money>
+				</view>
+			</view>
+			<view class="details">
+				<view class="col col-line">
+					<parse-money money="{{pool.this_month_money_expected}}"></parse-money>
+					<view class="text">当月预估收益</view>
+				</view>
+				<view class="col col-line">
+					<parse-money money="{{pool.last_month_money}}"></parse-money>
+					<view class="text">上月结算收益</view>
+				</view>
+				<view class="col">
+					<parse-money money="{{pool.total_money}}"></parse-money>
+					<view class="text">累计结算收益</view>
+				</view>
+
+			</view>
+		</view>
+	</view>
+	<view class="blur-box">
+	</view>
+	<view class="withdraw">
+		<view class="col">
+			<parse-money money="{{pool.to_in_money}}"></parse-money>
+			<view class="text">待入账</view>
+		</view>
+		<view class="col">
+			<parse-money money="{{pool.can_out_money}}"></parse-money>
+			<view class="text">可提现金额</view>
+		</view>
+		<view class="col">
+			<view class="button-customize" bindtap="gotoWithdraw">提现</view>
+		</view>
+	</view>
+	<view class="by-time">
+		<view class="item">
+			<image src="../../assets/images/small-card.png" class="small-card" />
+			<view class="info">
+				<view class="title">今日</view>
+				<view class="bill">
+					<view class="value">{{pool.today_paid_num}}</view>
+					<view class="label">付款笔数</view>
+				</view>
+				<view class="bill">
+					<view class="value">
+						<parse-money money="{{pool.today_money_expected}}"></parse-money>
+					</view>
+					<view class="label">预估收益</view>
+				</view>
+				<view class="bill">
+					<view class="value">
+						<parse-money money="{{pool.today_money_else}}"></parse-money>
+					</view>
+					<view class="label">其他收益</view>
+				</view>
+			</view>
+		</view>
+		<view class="item">
+			<image src="../../assets/images/small-card.png" class="small-card" />
+			<view class="info">
+				<view class="title">本月</view>
+				<view class="bill">
+					<view class="value">{{pool.monthly_paid_num}}</view>
+					<view class="label">付款笔数</view>
+				</view>
+				<view class="bill">
+					<view class="value">
+						<parse-money money="{{pool.monthly_money_expected}}"></parse-money>
+					</view>
+					<view class="label">预估收益</view>
+				</view>
+				<view class="bill">
+					<view class="value">
+						<parse-money money="{{pool.monthly_money_else}}"></parse-money>
+					</view>
+					<view class="label">其他收益</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="record">
+		<view class="title">提现记录</view>
+		<view class="list">
+			<view wx:for="{{record}}">
+				<view class="item">
+					<view class="name">提现至微信</view>
+					<view class="state red" wx:if="{{item.status==3}}">{{constant.WITHDRAW_TEXT[item.status]}}</view>
+					<view class="state green" wx:if="{{item.status==4}}">{{constant.WITHDRAW_TEXT[item.status]}}</view>
+					<view class="state black" wx:if="{{item.status==1||item.status==2}}">{{constant.WITHDRAW_TEXT[item.status]}}</view>
+					<view class="amount">-{{fn.formatMoney(item.money)}}元</view>
+				</view>
+				<view class="time">{{item.created_at}}</view>
+			</view>
+		</view>
+	</view>
+	<van-popup show="{{ showPop }}" bind:close="onClose" custom-class="pop-custom">
+		<view class="pop">
+			<view class="close" bindtap="onClose">
+				<image class="close-img" src="../../assets/images/pop-close.png" />
+			</view>
+			<view class="contents">
+				<view class="title">
+					<image class="title-img" src="../../assets/images/pop-title.png" />
+					<view class="subject">
+						<image class="title-left" src="../../assets/images/title-left.png" />
+						<view class="text">规则</view>
+						<image class="title-right" src="../../assets/images/title-right.png" />
+					</view>
+				</view>
+				<view class="list">
+					<view class="item" wx:for="{{rules}}">
+						<view class="label">{{item.title}}：</view>
+						<view class="value">{{item.value}}</view>
+					</view>
+					<!--<view class="item">
+						<view class="label">佣金奖励：</view>
+						<view class="value">商城指导价*10%为固定奖励，(商品售价-商城指导价)*70%为额外奖励</view>
+					</view>
+					<view class="item">
+						<view class="label">结算规则：</view>
+						<view class="value">每月10号结算尚未结算的有效订单的佣金奖励</view>
+					</view>
+					<view class="item">
+						<view class="label">付款笔数：</view>
+						<view class="value">今日(本月)内所有付款的订单数量，包括有效订单和失效订单</view>
+					</view>
+					<view class="item">
+						<view class="label">有效订单：</view>
+						<view class="value">订单创建付款成功，暂未进行退款等售后申请</view>
+					</view>
+					<view class="item">
+						<view class="label">失效订单：</view>
+						<view class="value">订单申请售后，进行退货退款(包括确认收获后申请售后进行退款)</view>
+					</view>
+					<view class="item">
+						<view class="label">预估收益：</view>
+						<view class="value">今日(本月)内所有创建付款的有效订单的预估收益，包括已结算的</view>
+					</view>
+					<view class="item">
+						<view class="label">其 他：</view>
+						<view class="value">除商品佣金收益外的其他收益，包括业绩奖励，邀请奖励等</view>
+					</view>-->
+				</view>
+			</view>
+		</view>
+
+	</van-popup>
+</view>
+

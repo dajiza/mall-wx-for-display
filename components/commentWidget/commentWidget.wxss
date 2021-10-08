@@ -1,0 +1,16 @@
+@import '../../assets/fonts/iconfont.wxss';
+.comment-widget-wrap{
+  display: flex;
+  align-items: center;
+}
+
+.comment-value{
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--primary-color-text);
+  line-height: 40rpx;
+}
+
+.comment-icon{
+  margin-left: 12rpx;
+}

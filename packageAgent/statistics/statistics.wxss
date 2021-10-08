@@ -1,0 +1,232 @@
+page {
+    overflow: hidde;
+    height: 100%;
+}
+
+.container {
+    padding-bottom: 0;
+    /* height: 100%; */
+    background: #ffffff;
+}
+
+.nav {
+    background: transparent;
+
+    --nav-bar-background-color: transparent;
+}
+
+.title {
+    color: #fff !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.leftIcon {
+    color: #fff !important;
+}
+
+.container-header-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 356rpx;
+    background: var(--primary-gradual-color);
+}
+
+.header-content-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 180rpx;
+}
+
+.header-content-item-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.header-content-item-value {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: bold;
+    font-size: 40rpx;
+    line-height: 48rpx;
+}
+
+.header-content-item-label {
+    padding-top: 8rpx;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 40rpx;
+}
+
+.header-content-item-mutil-value {
+    display: flex;
+    align-items: baseline;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: bold;
+    font-size: 40rpx;
+    line-height: 48rpx;
+}
+
+.header-content-item-value-unit {
+    margin-right: 8rpx;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.container-search-box {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 30rpx;
+    height: 88rpx;
+    border-radius: 50rpx;
+    background: #ffffff;
+    box-shadow: 0px 6rpx 12rpx 0px rgba(91, 15, 39, 0.06);
+}
+
+.container-search-datepicker {
+    display: flex;
+    align-items: center;
+    margin-right: 16rpx;
+    margin-left: 28rpx;
+    width: 100%;
+    height: 20rpx;
+}
+
+.container-search-datepicker-value {
+    margin-left: 8rpx;
+    color: var(--primary-color-text);
+    font-weight: 500;
+    font-size: 28rpx;
+    line-height: 20rpx;
+}
+
+.container-search-box .operation-btn {
+    margin-right: 8rpx;
+    width: 136rpx !important;
+    height: 72rpx !important;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+
+.container-search-dividing {
+    width: 2rpx;
+    height: 52rpx;
+    background: var(--secondary-color);
+}
+
+.sku-list-box {
+    width: 100%;
+}
+
+.sku-list-item {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 30rpx;
+    padding: 20rpx;
+    height: 200rpx;
+    border-radius: 20rpx;
+    background: #ffffff;
+    box-shadow: 0px 10rpx 20rpx 0px rgba(91, 15, 39, 0.04);
+}
+
+.item-image-box {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.item-label-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20rpx;
+    width: 470rpx;
+    height: 160rpx;
+}
+
+.item-label {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    text-shadow: 0px 10rpx 20rpx rgba(91, 15, 39, 0.04);
+    word-break: break-all;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+
+    -webkit-line-clamp: 2;
+}
+
+.item-value-box {
+    display: flex;
+    justify-content: space-between;
+    height: 36rpx;
+}
+
+.item-value {
+    color: #f3913d;
+    text-shadow: 0px 10rpx 20rpx rgba(91, 15, 39, 0.04);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 18px;
+}
+
+.picker-toolbar {
+    --picker-confirm-action-color: var(--features-color-text);
+    --picker-action-font-size: 32rpx;
+}
+
+/*空列表*/
+.empty-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 160rpx;
+    width: 100%;
+}
+
+.empty-img {
+    display: inline-block;
+    width: 202rpx;
+    height: 224rpx;
+    vertical-align: bottom;
+}
+
+.empty-text {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 40rpx;
+    padding-right: 36rpx;
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 30rpx;
+}
+
+.no-more {
+    box-sizing: border-box;
+    padding: 0 0 24rpx 10rpx;
+    width: 100%;
+    color: var(--secondary-color-text);
+    text-align: center;
+    font-size: 22rpx;
+}
+
+.bottom-loading {
+    width: 100%;
+}

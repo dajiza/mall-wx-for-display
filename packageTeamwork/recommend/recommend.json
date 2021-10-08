@@ -1,0 +1,20 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 100,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-button": "@vant/weapp/button/index",
+        "search-history": "../../components/searchHistory/searchHistory",
+        "search-fillter": "../../components/searchFilter/searchFilter",
+        "price-stepper": "../../components/priceStepper/priceStepper",
+        "shelves": "../../components/shelves/shelves",
+        "agent-goods": "../../components/agentGoods/agentGoods",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-dialog": "@vant/weapp/dialog/index"
+    }
+}

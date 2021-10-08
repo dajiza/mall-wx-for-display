@@ -1,0 +1,9 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "空白模板",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "points-goods-list": "/components/pointsGoodsList/pointsGoodsList",
+        "points-coupon-list": "/components/pointsCouponList/pointsCouponList"
+    }
+}

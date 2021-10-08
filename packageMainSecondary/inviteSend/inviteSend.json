@@ -1,0 +1,11 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "邀请新用户",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-button": "@vant/weapp/button/index",
+        "authorize-popup": "/components/authorize/authorize"
+    }
+}

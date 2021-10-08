@@ -1,0 +1,23 @@
+{
+    "enablePullDownRefresh": true,
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "购物车",
+    "disableScroll": false,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-submit-bar": "@vant/weapp/submit-bar/index",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-stepper": "@vant/weapp/stepper/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-sticky": "@vant/weapp/sticky/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-overlay": "@vant/weapp/overlay/index",
+        "spec": "../../components/spec/spec",
+        "authorize-popup": "../../components/authorize/authorize",
+        "promotionList-popup": "../../components/promotionList/PromotionList"
+    }
+}

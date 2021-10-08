@@ -1,0 +1,187 @@
+page {
+    overflow: hidde;
+    box-sizing: border-box;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.container {
+    justify-content: initial;
+}
+
+.edit-cell-group {
+    font-weight: 300;
+
+    --cell-horizontal-padding: 40rpx;
+    --cell-vertical-padding: 28rpx;
+    --cell-font-size: 32rpx;
+    --cell-text-color: var(--primary-color-text);
+    --cell-line-height: 44rpx;
+}
+
+.edit-cell-field-label {
+    margin-right: 72rpx !important;
+    min-width: 128rpx !important;
+    max-width: 128rpx !important;
+    font-weight: 300;
+    font-size: 32rpx;
+    line-height: 44rpx;
+
+    --field-label-color: var(--primary-color-text);
+}
+
+.edit-cell-field-input {
+    font-weight: 400 !important;
+    font-size: 32rpx !important;
+
+    --field-input-text-color: var(--primary-color-text) !important;
+    --cell-line-height: 44rpx;
+    --field-placeholder-text-color: var(--secondary-color-text);
+    --field-text-area-min-height: 184rpx !important;
+}
+
+.edit-cell-field-input-textarea {
+    padding-bottom: 144rpx !important;
+    height: 188rpx !important;
+    font-weight: 400 !important;
+    font-size: 32rpx !important;
+
+    --field-input-text-color: var(--primary-color-text) !important;
+    --cell-line-height: 44rpx;
+    --field-placeholder-text-color: var(--secondary-color-text);
+}
+
+.set-default-address-cell {
+    --cell-horizontal-padding: 40rpx;
+    --cell-vertical-padding: 20rpx;
+}
+
+.address-cell-value {
+    color: var(--primary-color-text);
+    text-align: left !important;
+    font-weight: 400 !important;
+    font-size: 32rpx;
+    line-height: 44rpx;
+
+    --cell-value-color: var(--primary-color-text);
+}
+
+.set-default-address-switch {
+    --switch-width: 102rpx;
+    --switch-height: 62rpx;
+}
+
+.van-cell:after {
+    right: 40rpx !important;
+    left: 40rpx !important;
+    border-bottom: 2rpx solid var(--divider-background-color) !important;
+}
+
+.van-field__body--textarea {
+    padding: 2rpx 0 2rpx 0 !important;
+}
+
+.van-field__input--textarea {
+    font-weight: 400 !important;
+    font-size: 32rpx !important;
+}
+
+.van-field__placeholder {
+    font-weight: 400 !important;
+    font-size: 32rpx;
+}
+
+.bottom-button-container {
+    /* position: fixed; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 100rpx;
+    padding-bottom: 190rpx;
+    width: 100%;
+}
+
+.bottom-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 690rpx;
+    height: 88rpx;
+    border-radius: 44rpx;
+    background: var(--primary-color-btn);
+    color: #ffffff;
+    line-height: 88rpx;
+}
+
+.bottom-button-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24rpx;
+    width: 690rpx;
+    height: 88rpx;
+    border: 2rpx solid var(--liner-color-btn-grey);
+    border-radius: 44rpx;
+    background: #ffffff;
+    /* box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.1); */
+    /* color: var(--liner-color-btn-text-grey); */
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.bottom-button-disable {
+    background: var(--disabled-color-btn) !important;
+    /* background: linear-gradient(90deg, #d6dee9 0%, #b3bac1 100%); */
+    /* box-shadow: 0rpx 6rpx 12rpx 0px rgba(185, 185, 185, 0.5); */
+}
+
+.bottom-button-container-label {
+    height: 40rpx;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.botton-hover {
+    opacity: 0.8;
+}
+
+.area-picker {
+    --picker-cancel-action-color: var(--features-color-text);
+    --picker-confirm-action-color: var(--features-color-text);
+    --picker-action-padding: 0 30rpx;
+    --picker-action-font-size: 32rpx;
+    --picker-toolbar-height: 102rpx;
+    --font-weight-bold: 400;
+    --picker-option-font-size: 30rpx;
+    --picker-option-selected-text-color: #000;
+}
+
+/* 删除确认框 */
+.dialog-index--van-dialog__cancel {
+    width: 100% !important;
+    color: var(--primary-color-text) important;
+    font-weight: 400;
+    font-size: 32rpx;
+}
+
+.dialog-index--van-dialog__confirm {
+    width: 100% !important;
+    color: var(--primary-color-text) important;
+    font-weight: 400;
+    font-size: 32rpx;
+}
+
+.van-dialog__message {
+    color: var(--primary-color-text);
+    font-weight: 500;
+
+    --dialog-message-font-size: 32rpx;
+    --dialog-message-line-height: 44rpx;
+}
+
+.van-dialog__button {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,17 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "详情",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "spec": "../../components/spec/spec",
+        "authorize-popup": "../../components/authorize/authorize",
+        "van-sticky": "@vant/weapp/sticky/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "mp-html": "/components/mp-html/index",
+        "comment-goods": "../../components/commentGoods/commentGoods",
+        "comment-item": "../../components/comment/comment"
+    }
+}

@@ -1,0 +1,53 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container home-page">
+    <view class="new-user" bindtap="closeNewTip" wx:if="{{showNewTip}}"> 点击“<span class="iconfont icon-more"></span>”，添加至我的小程序<span class="iconfont icon-close"></span> </view>
+    <home-module id="homeModule" bind:go-search="goSearch" bind:after-read="afterRead" bind:oversize="oversize" wx:if="{{true}}"></home-module>
+    <!--商品列表-->
+    <view id="sortHeader" class="sort-wrap {{sortBg?'sort-bg':''}}" style="top: {{sort_top +'rpx'}};">
+        <view class="sort-box">
+            <view class="sort-item {{filterNavIndex === 1?'filter-nav-selected':''}}" data-index="1" bind:tap="onClickTab">
+                <text class="filter-text">热门</text>
+            </view>
+            <view class="sort-item {{filterNavIndex === 2?'filter-nav-selected':''}}" data-index="2" bind:tap="onClickTab">
+                <text class="filter-text">新品</text>
+            </view>
+            <view class="sort-item sort-price {{filterNavIndex === 3?'filter-nav-selected':''}}" data-index="3" bind:tap="onClickTab">
+                <text class="filter-text">价格</text>
+                <view class="sort-icon-wrap">
+                    <text class="iconfont icon-arrow_up_s {{sort_price === 1 ?'sort-no-checked':'sort-checked'}} {{sort_price === 0 ?'sort-no-checked':''}}"></text>
+                    <text class="iconfont icon-arrow_down_s {{sort_price === 2 ?'sort-no-checked':'sort-checked'}} {{sort_price === 0 ?'sort-no-checked':''}}"></text>
+                </view>
+            </view>
+            <view class="slider-wrap slider-wrap-{{filterNavIndex}}">
+                <view class="slider"></view>
+            </view>
+            <!--            <view class="slider slider-{{filterNavIndex}}"></view>-->
+        </view>
+    </view>
+    <view class="goods-box" style="padding-bottom:{{safeAreaInsetBottom+110}}rpx;">
+        <block>
+            <view class="hot-goods-list">
+                <view
+                    class="goods-item-box {{(index+1)%2 === 0?'no-margin':''}}"
+                    wx:for="{{ goodsList }}"
+                    wx:for-index="index"
+                    wx:for-item="item"
+                    wx:key="goods_id"
+                    data-id="{{item.goods_id}}"
+                    bind:tap="handleGoGoodsDetail"
+                >
+                    <image class="goods-img" lazy-load mode="aspectFill" src="{{item.goods_img + '!upyun520/fw/500'}}" alt=""></image>
+                    <view class="hot-goods-name">{{item.goods_name}}</view>
+                    <view class="hot-goods-price">
+                        <view>￥{{fn.formatMoney(item.goods_price)}}</view>
+                        <view class="pay-num">{{item.goods_sales}}人付款</view>
+                    </view>
+                </view>
+            </view>
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{goodsList.length > 0 && bottomLoadingShow}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{goodsList.length > 0 && is_all}}">人家也是有底线的～</view>
+        </block>
+    </view>
+</view>
+<authorize-popup id="authorize" />

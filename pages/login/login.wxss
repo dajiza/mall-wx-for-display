@@ -1,0 +1,86 @@
+/* miniprogram/pages/login/login.wxss */
+.container {
+    min-height: 100vh;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+}
+
+.img {
+    overflow: hidden;
+    margin-top: 240rpx;
+    width: 168rpx;
+    height: 168rpx;
+    border-radius: 38rpx;
+}
+
+.avator {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.big-btn {
+    margin-top: 362rpx;
+    width: 600rpx !important;
+    height: 88rpx !important;
+    color: #fff;
+
+    --primary-color-btn: #27c05e;
+    --button-primary-background-color: #27c05e;
+    --button-primary-border-color: #27c05e;
+}
+
+.agreement {
+    margin-top: 30rpx;
+    color: #969696;
+    font-size: 24rpx;
+}
+
+.document {
+    color: #222;
+}
+
+/* .van-button--round.van-button--normal.van-button--primary {
+    background: #27C05E !important;
+} */
+
+.nav {
+    background: #fff;
+}
+
+.title {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 38rpx !important;
+}
+
+.login-label {
+    margin-top: 40rpx;
+    color: #333333;
+    font-weight: 500;
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+}
+.tip {
+    margin-top: 200rpx;
+    color: #333333;
+    font-weight: 500;
+    font-size: 32rpx;
+    line-height: 50rpx;
+}
+
+.cancel-button {
+    margin-top: 24rpx;
+    width: 600rpx !important;
+    height: 88rpx !important;
+    color: #fff;
+
+    --primary-color-btn: #c3c3c3;
+    --button-primary-background-color: #c3c3c3;
+    --button-primary-border-color: #c3c3c3;
+}

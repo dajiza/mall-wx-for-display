@@ -1,0 +1,18 @@
+<!--pages/invite/invite.wxml-->
+<view class="container">
+    <van-nav-bar title="{{ navTitle }}" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" title-class="nav-title">
+        <!-- <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view> -->
+    </van-nav-bar>
+    <view class="inviter">
+        <image class="avator" src="{{avatar}}" />
+        <view class="name">{{nickName}} 送你一张</view>
+        <view class="coupon">川小布 8折 无门槛优惠券</view>
+        <!-- <view class="coupon">{{userId}}</view> -->
+        <view class="authorize-wrap">
+            <image class="authorize" src="/assets/images/invite-login.png" />
+            <van-button bindgetphonenumber="onGotUserInfo" open-type="getPhoneNumber" lang="zh_CN" loading="{{loading}}" custom-class="btn">授权领取</van-button>
+        </view>
+    </view>
+</view>

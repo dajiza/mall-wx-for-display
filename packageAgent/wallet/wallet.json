@@ -1,0 +1,10 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "我的钱包",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-button": "@vant/weapp/button/index",
+        "parse-money": "../../components/parseAmount/parseAmount"
+    }
+}

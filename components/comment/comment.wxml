@@ -1,0 +1,50 @@
+<view class="comment-box">
+    <view class="user-info-wrap" wx:if="{{showUser}}">
+        <!--    <van-image fit="cover" width="76rpx" height="76rpx" radius="38rpx" lazy-load src="{{user_avatar}}" />-->
+        <image class="user-head-img" mode="aspectFill" src="{{ user_avatar }}"></image>
+        <view class="user-info-second-wrap">
+            <view class="user-info-name text-ellipsis">{{user_name}}</view>
+            <view class="user-info-extra">
+                <view>{{create_time}}</view>
+                <view class="s-line" wx:if="{{label.length>0}}"></view>
+                <view wx:if="{{label}}">{{label}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="comment-content" style="-webkit-line-clamp: {{lineNum}}">
+        <text>{{commentText}}</text>
+    </view>
+    <view wx:if="{{list.length>0}}" class="comment-img-wrap">
+        <view wx:for="{{list}}" wx:for-index="index" wx:key="url" style="margin-right:{{(index+1)%4!=0?'10rpx':'0'}}; height: {{imgSize}};" catchtap="onItemClick" data-index="{{index}}">
+            <block wx:if="{{item.type == 1}}">
+                <view class="video-wrap" style="height: {{imgSize}};width: {{imgSize}}">
+                    <video
+                        id="video{{index}}"
+                        data-index="{{index}}"
+                        class="video"
+                        style="height: {{imgSize}};width: {{imgSize}}"
+                        src="{{ item.url }}"
+                        binderror="videoErrorCallback"
+                        show-play-btn="{{true}}"
+                        show-center-play-btn="{{true}}"
+                        enable-progress-gesture="{{false}}"
+                        controls="{{true}}"
+                        play-btn-position="center"
+                        direction="{{0}}"
+                        show-fullscreen-btn="{{true}}"
+                        bindplay="onVideoPlay"
+                        bindfullscreenchange="onFullChange"
+                    ></video>
+                </view>
+            </block>
+            <block wx:else>
+                <van-image fit="cover" width="{{imgSize}}" height="{{imgSize}}" radius="10rpx" lazy-load src="{{item.url + '!upyun520/fw/320'}}" data-src="{{item.url}}" catchtap="previewImage"></van-image>
+                <!--<image class="img-item" lazy-load mode="aspectFill"
+               src="{{item.url + '!upyun520/fw/320'}}"
+               data-src="{{item.url}}"
+               catchtap="previewImage"></image>-->
+            </block>
+        </view>
+    </view>
+    <slot />
+</view>

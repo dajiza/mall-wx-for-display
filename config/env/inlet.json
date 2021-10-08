@@ -1,0 +1,10 @@
+{
+    "environment": "inlet",
+    "wxAppId": "",
+    "apiUrl": "https://jkbl-api.chuanshui.com/wx-app/",
+    "shopId": 2,
+    "shopName": "川水进口布料",
+    "logDebug": true,
+    "shareTitle": "您要的布，我们都有。",
+    "httpLog": true
+}

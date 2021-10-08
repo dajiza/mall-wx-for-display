@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="51px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>发布课程icon</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="19.4222677%" x2="87.6652511%" y2="85.1051549%" id="linearGradient-1">
+            <stop stop-color="#F4ACC2" offset="0%"></stop>
+            <stop stop-color="#EF7F9E" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="57.2690217%" y1="36.9794026%" x2="-38.4723166%" y2="88.517909%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFD6E1" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="57.2690217%" y1="49.5945143%" x2="-38.4723166%" y2="51.1995197%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFD6E1" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="发布课程icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="25.5" cy="25.5" r="25.5"></circle>
+            <path d="M35,14 C36.1045695,14 37,14.8954305 37,16 L37,29 C37,30.1045695 36.1045695,31 35,31 L16,31 C14.8954305,31 14,30.1045695 14,29 L14,16 C14,14.8954305 14.8954305,14 16,14 L35,14 Z M24,18.7098475 C23.4477153,18.7098475 23,19.1575627 23,19.7098475 L23,19.7098475 L23,25.2901525 C23,25.4618894 23.0442285,25.6307321 23.1284245,25.7804138 C23.3991883,26.2617716 24.0089034,26.4324919 24.4902612,26.1617281 L24.4902612,26.1617281 L29.4505324,23.3715755 C29.6101569,23.2817868 29.7420579,23.1498857 29.8318467,22.9902612 C30.1026105,22.5089034 29.9318903,21.8991883 29.4505324,21.6284245 L29.4505324,21.6284245 L24.4902612,18.8382719 C24.3405796,18.754076 24.1717369,18.7098475 24,18.7098475 Z" id="合并形状" fill="url(#linearGradient-2)"></path>
+            <rect id="合并形状" fill="url(#linearGradient-3)" x="14" y="34" width="23" height="3" rx="1.5"></rect>
+        </g>
+    </g>
+</svg>

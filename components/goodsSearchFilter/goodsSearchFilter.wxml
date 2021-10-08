@@ -1,0 +1,123 @@
+<!--components/searchFilter/goodsSearchFilter.wxml-->
+<van-popup show="{{ show }}" position="right" z-index="{{10}}"
+    custom-style="height: 100vh;padding-top:{{navHeight}}"
+    overlay-style="height: {{'calc(100vh - ' + navHeight + ')'}};top:{{navHeight}}" safe-area-inset-top="{{true}}"
+    bind:close="onClosePopup">
+    <view class="popup-box" catchtouchmove="preventTouchMove">
+        <!--1级分类-->
+        <view class="choose-cate-box">
+            <scroll-view class="cloth-or-other-wrap" scroll-x="true">
+                <view class="placeholder-box"></view>
+                <view class="init {{selectedType === -1 ? 'type-selected':''}}"
+                      data-type="-1" data-index="-1" catch:tap="chooseType">布料</view>
+                <block wx:for="{{cateAllList}}" wx:key="index">
+                    <view class="init {{selectedType === item.id?'type-selected':''}}"
+                          catch:tap="chooseType" data-type="{{item.type}}" data-index="{{item.id}}"
+                    >{{item.name}}</view>
+                </block>
+                <view class="placeholder-box"></view>
+                <view class="placeholder-box"></view>
+            </scroll-view>
+        </view>
+        <scroll-view class="popup-content-box" scroll-y="{{true}}" scroll-with-animation="{{true}}">
+            <!--2级分类-->
+            <view class="other-cate" wx:if="{{selectedType > 0}}">
+                <view class="sons-cate-box paddingTop0">
+                    <view class="attr-list-box">
+                        <block wx:for="{{cateList}}" wx:for-item="cateItem" wx:for-index="cate_index"
+                               wx:key="cate_index">
+                            <view class="attr-list-item {{cateItem.is_selected?'is-selected':''}}"
+                                  data-name="{{cateItem.name}}"
+                                  data-id="{{cateItem.id}}"
+                                  data-index="{{cate_index}}"
+                                  data-item="{{cateItem}}"
+                                  bind:tap="onChooseOtherCate">
+                                <view class="name-text text-overflow-2 {{childItem.name.length > 5 ? '':'font-26'}}">
+                                    {{cateItem.name}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view style="padding-top: 24rpx">
+                <!--属性-->
+                <block wx:for="{{attr_list}}" wx:key="index">
+                    <view class="attr-box">
+                        <view class="attr-name">
+                            <text class="cate-name">{{item.attr_name}}</text>
+                            <view class="open-or-close" wx:if="{{item.list.length > 6}}">
+                                <text class="iconfont icon-up pack-up" wx:if="{{item.showAll}}" slot="icon"></text>
+                                <text class="iconfont icon-down show-more" wx:if="{{!item.showAll}}" slot="icon"></text>
+                                <view
+                                        class="click-box"
+                                        data-index="{{index}}"
+                                        data-list="{{attr_list}}"
+                                        data-type="attr"
+                                        bind:tap="onClickShowAll"
+                                ></view>
+                            </view>
+                        </view>
+                        <view class="attr-list-box">
+                            <block wx:for="{{item.list}}" wx:for-item="childItem" wx:for-index="item_index"
+                                   wx:key="item_index">
+                                <view class="attr-list-item {{childItem.is_selected?'is-selected':''}}"
+                                      wx:if="{{item_index < 6 || item.showAll}}" data-name="{{childItem.name}}"
+                                      data-list="{{attr_list}}" data-index="{{index}}" data-childindex="{{item_index}}"
+                                      data-item="{{childItem}}" data-type="attr" bind:tap="onclickAttr">
+                                    <view
+                                            class="name-text text-overflow-2 {{childItem.name.length > 5 ? '':'font-26'}}">
+                                        {{childItem.name}}</view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+
+            </view>
+            <!--标签-->
+            <view class="attr-box label-all-box" wx:if="{{label_list.length > 0}}">
+                <block wx:for="{{label_list}}" wx:key="index">
+                    <view class="label-box">
+                        <view class="attr-name">
+                            <text class="cate-name">{{item.tag_category_name}}</text>
+                            <view class="open-or-close" wx:if="{{item.list.length > 6}}">
+                                <text class="iconfont icon-up pack-up" wx:if="{{item.showAll && item.list.length > 6}}"
+                                      slot="icon"></text>
+                                <text class="iconfont icon-down show-more"
+                                    wx:if="{{!item.showAll && item.list.length > 6}}" slot="icon"></text>
+                                <view
+                                    class="click-box"
+                                    data-index="{{index}}"
+                                    data-list="{{label_list}}"
+                                    data-type="label"
+                                    bind:tap="onClickShowAll"
+                                ></view>
+                            </view>
+                        </view>
+                        <view class="attr-list-box">
+                            <block wx:for="{{item.list}}" wx:for-item="childItem" wx:for-index="item_index"
+                                wx:key="item_index">
+                                <view class="attr-list-item {{childItem.is_selected?'is-selected':''}}"
+                                    wx:if="{{item_index < 6 || item.showAll}}" data-name="{{childItem.tag_name}}"
+                                    data-list="{{label_list}}" data-index="{{index}}" data-childindex="{{item_index}}"
+                                    data-item="{{childItem}}" data-type="label" bind:tap="onclickAttr">
+                                    <view
+                                        class="name-text text-overflow-2 {{childItem.tag_name.length > 5 ? '':'font-26'}}">
+                                        {{childItem.tag_name}}</view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="placeholder-box"></view>
+        </scroll-view>
+        <view class="bottom-btn-box">
+            <view class="bottom-box-content">
+                <van-button round class="btn-reset" custom-class="btn-reset" bind:tap="handleOnReset">重置</van-button>
+                <van-button round type="primary" class="btn-sure" custom-class="btn-sure" bind:tap="handleOnSure">确定
+                </van-button>
+            </view>
+        </view>
+    </view>
+</van-popup>

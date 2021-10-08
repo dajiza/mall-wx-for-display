@@ -1,0 +1,84 @@
+/* components/orderGoods/orderGoods.wxss */
+@import '../../app.wxss';
+.order-goods {
+    width: 100%;
+}
+.product {
+    position: relative;
+    margin-bottom: 30rpx;
+}
+.product .goods-info {
+    display: flex;
+}
+.product .timg {
+    overflow: hidden;
+    flex: 0 0 auto;
+    margin-right: 20rpx;
+    width: 130rpx;
+    height: 130rpx;
+}
+.product .info {
+    flex: 1 1 auto;
+    margin-right: 52rpx;
+    min-width: 0;
+}
+.product .info .title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    justify-content: space-between;
+    height: 80rpx;
+
+    -webkit-line-clamp: 2;
+    /* margin-top: -4rpx; */
+    /* height: 80rpx; */
+    /* font-size: 28rpx; */
+}
+.product .info .specification {
+    overflow: hidden;
+    margin-top: 16rpx;
+    height: 30rpx;
+    color: var(--tip-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 24rpx;
+}
+
+.product .price {
+    /* font-size: 28rpx; */
+}
+.product .price .symbol {
+    /* margin-right: 6rpx; */
+    font-size: 24rpx;
+}
+.product .price .price-num {
+    /* position: relative;
+    top: 2rpx;
+    padding-left: 4rpx; */
+}
+.product .num {
+    margin-top: 14rpx;
+    font-size: 26rpx;
+}
+
+.product .digital {
+    /* flex-shrink: 0; */
+    /* width: 150rpx; */
+    text-align: right;
+    flex: 0 0 auto;
+    /* flex: 1 0 92rpx; */
+}
+.product .digital .use-coupon {
+    margin-top: 10rpx;
+    margin-left: auto;
+    width: 80rpx;
+    height: 28rpx;
+    border: 1rpx solid var(--primary-color);
+    color: var(--features-color-text);
+    font-size: 20rpx;
+    line-height: 26rpx;
+}
+.product .digital .use-coupon.hidden {
+    border: none;
+    color: #fff;
+}

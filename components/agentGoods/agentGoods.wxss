@@ -1,0 +1,133 @@
+/* components/orderGoods/agentGoods.wxss */
+@import '../../app.wxss';
+.goods-wrap {
+    -webkit-box-sizing: border-box;
+    /*padding:0 30rpx;*/
+    box-sizing: border-box;
+    margin-bottom: 24rpx;
+    width: 100%;
+    border-radius: 30rpx;
+    background: #ffffff;
+}
+.h420 {
+    height: 420rpx;
+}
+.goods-box {
+    position: relative;
+    width: 100%;
+}
+.goods-box .goods-info {
+    display: flex;
+    height: 136rpx;
+    /*margin-top: 30rpx;*/
+}
+.goods-box .timg {
+    overflow: hidden;
+    flex: 0 0 auto;
+    margin-right: 20rpx;
+    width: 136rpx;
+    height: 136rpx;
+}
+.goods-box .info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.goods-box .info .title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    justify-content: space-between;
+    color: var(--primary-color-text);
+    word-break: break-all;
+    font-weight: 400;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    /*height: 80rpx;*/
+
+    -webkit-line-clamp: 2;
+}
+.goods-box .info .price-earnings-sales {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 42rpx;
+}
+.price-earnings {
+}
+.price-earnings .price {
+    display: inline-block;
+    margin-right: 12rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+}
+.font-size-12 {
+    font-size: 24rpx;
+}
+.font-size-15 {
+    font-size: 30rpx;
+}
+.price-earnings .earnings {
+    display: inline-block;
+    padding: 0 12rpx;
+    height: 42rpx;
+    border-radius: 42rpx;
+    background: var(--secondary-background);
+    color: var(--features-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 42rpx;
+}
+.price-earnings-sales .sales {
+    color: var(--tip-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+}
+/*商品属性*/
+.goods-attr {
+    display: flex;
+    flex-wrap: wrap;
+    /*height: 88rpx;*/
+    padding: 40rpx 0;
+    width: 690rpx;
+}
+.attr-item {
+    overflow: hidden;
+    margin-right: 18rpx;
+    width: 218rpx;
+    color: var(--primary-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 300;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+.attr-item:nth-child(3n) {
+    margin-right: 0;
+    text-align: right;
+}
+.attr-item:nth-child(n + 4) {
+    margin-top: 20rpx;
+}
+
+/*停止分销*/
+.stop-distribution {
+    color: var(--tip-color-text) !important;
+}
+.stop-distribution-tip {
+    color: var(--features-color-text);
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.w100 {
+    width: 100%;
+}

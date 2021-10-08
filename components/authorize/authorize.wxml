@@ -1,0 +1,36 @@
+<!-- components/couponItem/couponPop.wxml -->
+<van-dialog
+    id="dialog"
+    confirm-button-open-type="{{openType}}"
+    bind:getuserinfo="getuserinfo"
+    bind:getphonenumber="getphonenumber"
+    bind:cancel="close"
+    custom-style="--dialog-border-radius: 12rpx;--dialog-header-padding-top:0px;"
+    show="{{ isShow }}"
+    z-index="{{100000}}"
+    use-slot
+    use-title-slot
+    async-close="{{asyncClose}}"
+    width="{{'560rpx'}}"
+    show-cancel-button
+    show-confirm-button="{{showConfirmButton}}"
+    confirm-button-text="允许"
+    cancel-button-text="{{cancelText}}"
+    confirm-button-color="#00B054 !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;font-family: PingFangSC-Medium, PingFang SC;"
+    cancel-button-color="#333333 !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;font-family: PingFangSC-Medium, PingFang SC;"
+    close-on-click-overlay="{{true}}"
+>
+    <view slot="title" class="authorize-pop-title">
+        <text>{{title}}</text>
+        <view class="authorize-pop-title_line"></view>
+    </view>
+
+    <view class="authorize-pop">
+        <image class="authorize-logo" src="/assets/images/authorize-logo.png"></image>
+        <view class="authorize-pop-label-wrap">
+            <view class="authorize-pop-label">{{shopName}} 申请获得以下权限：</view>
+        </view>
+        <view class="authorize-pop-content-line"></view>
+        <view class="authorize-pop-content">{{authorizeContent}}</view>
+    </view>
+</van-dialog>

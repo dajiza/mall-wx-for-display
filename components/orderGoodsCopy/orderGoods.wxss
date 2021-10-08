@@ -1,0 +1,107 @@
+/* components/orderGoods/orderGoods.wxss */
+@import '../../app.wxss';
+.order-goods {
+    width: 100%;
+}
+.product {
+    position: relative;
+    margin-bottom: 40rpx;
+}
+.product .goods-info {
+    position: relative;
+    display: flex;
+    height: 136rpx;
+}
+.product .timg {
+    overflow: hidden;
+    flex: 0 0 auto;
+    margin-right: 20rpx;
+    width: 136rpx;
+    height: 136rpx;
+}
+.product .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 10rpx;
+    width: 356rpx;
+    height: 100%;
+}
+.product .info .title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    justify-content: space-between;
+    height: 80rpx;
+    word-break: break-all;
+    font-weight: 400;
+    line-height: 40rpx;
+
+    -webkit-line-clamp: 2;
+}
+.product .info .specification {
+    overflow: hidden;
+    color: var(--tip-color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.product .price {
+    /* font-size: 28rpx; */
+}
+.product .price .symbol {
+    /* margin-right: 6rpx; */
+    font-size: 24rpx;
+}
+.product .price .price-num {
+    /* position: relative;
+    top: 2rpx;
+    padding-left: 4rpx; */
+}
+.product .num,
+.goods-status {
+    font-weight: 400;
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.product .digital {
+    display: flex;
+    align-items: flex-end;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+}
+.product .digital .goods-status {
+    padding-top: 12rpx;
+    color: var(--features-color-text);
+}
+.expected-revenue-box {
+    position: relative;
+    height: 42rpx;
+    border-radius: 42rpx;
+    background: rgba(251, 96, 144, 0.1);
+    color: #fb6090;
+    font-weight: 400;
+    font-size: 12px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    line-height: 42rpx;
+}
+.expected-revenue {
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    padding: 0 12rpx;
+    width: fit-content;
+    height: 44rpx;
+    border-radius: 22rpx;
+    background: var(--secondary-background);
+    color: var(--features-color-text);
+    text-align: center;
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 44rpx;
+}

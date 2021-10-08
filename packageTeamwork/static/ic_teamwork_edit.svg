@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="51px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编辑团作icon</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="19.4222677%" x2="87.6652511%" y2="85.1051549%" id="linearGradient-1">
+            <stop stop-color="#D3CBFF" offset="0%"></stop>
+            <stop stop-color="#ABA9FF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="50%" x2="-73.6023793%" y2="181.486426%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#CAC7FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="编辑团作icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="作业墙icon">
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="25.5" cy="25.5" r="25.5"></circle>
+            <path d="M32.5898713,21.7849478 L19.3661756,35 L13.7,35 L13.7,29.3369674 L26.9236957,16.1219152 L32.5898713,21.7849478 Z M33.7009478,20.6746571 L28.0355579,15.0116245 L29.5882362,13.459732 C30.201831,12.846756 31.1960085,12.846756 31.8096033,13.459732 L31.8103891,13.4589463 L35.2544118,16.8990401 C35.5492698,17.1937787 35.7149294,17.5936017 35.7149294,18.0105095 C35.7149294,18.4274172 35.5492698,18.8272402 35.2544118,19.1219788 L33.7009478,20.6746571 L33.7009478,20.6746571 Z M26.2722937,31.8459258 L35.701514,31.8459258 C36.5690158,31.8459258 37.2722649,32.549175 37.2722649,33.4166767 C37.2722649,34.2841785 36.5690158,34.9874277 35.701514,34.9874277 L26.2722937,34.9874277 C25.4047919,34.9874277 24.7015428,34.2841785 24.7015428,33.4166767 C24.7015428,32.549175 25.4047919,31.8459258 26.2722937,31.8459258 Z" id="形状" fill="url(#linearGradient-2)" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

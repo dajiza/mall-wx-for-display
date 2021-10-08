@@ -1,0 +1,70 @@
+/* pages/invite/invite.wxss */
+.container {
+    position: relative;
+    /* min-height:auto; */
+    padding-bottom: 200rpx;
+    /* height: calc(100vh - 200rpx); */
+    background-color: #fff;
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+.leftIcon .iconfont {
+    font-size: 36rpx;
+}
+.van-nav {
+    width: 100%;
+    background: #fff !important;
+}
+
+.inviter {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.inviter .avator {
+    overflow: hidden;
+    margin-top: 60rpx;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100rpx;
+}
+.inviter .name {
+    margin-top: 20rpx;
+    font-size: 32rpx;
+}
+.inviter .coupon {
+    margin-top: 20rpx;
+    font-weight: 600;
+    font-size: 44rpx;
+}
+.inviter .authorize-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 40rpx;
+    width: 100%;
+    height: 560rpx;
+}
+.inviter .authorize {
+    position: absolute;
+    width: 100%;
+    height: 560rpx;
+}
+.inviter .btn {
+    margin: 392rpx auto 0 !important;
+    width: 560rpx !important;
+    height: 80rpx !important;
+    border: 0 !important;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fcfb78 0%, #fddd19 100%);
+    color: #bc6d05 !important;
+    font-weight: 500 !important;
+    font-size: 32rpx !important;
+}

@@ -1,0 +1,3 @@
+<!--components/orderGoods/index.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+

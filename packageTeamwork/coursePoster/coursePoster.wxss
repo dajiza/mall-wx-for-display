@@ -1,0 +1,79 @@
+.page {
+  background: #fff;
+  position: relative;
+}
+
+.container {
+  background: #fff;
+}
+
+.nav {
+  background: #fff;
+}
+
+.title {
+  color: #333333 !important;
+  font-weight: 500 !important;
+  font-size: 38rpx !important;
+}
+
+.leftIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx;
+  color: #333333;
+  transform: translateX(-25%);
+}
+
+.leftIcon .iconfont {
+  font-size: 36rpx;
+}
+
+.content-image-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-image-box .image-box {
+  width: 690rpx;
+  height: 1006rpx;
+}
+
+.bottom-button-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 40rpx;
+  padding-top: 32rpx;
+  background-color: transparent;
+}
+
+.bottom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 670rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: var(--primary-gradual-color);
+  box-shadow: 0px 6rpx 12rpx 0px var(--secondary-background);
+  color: #ffffff;
+  line-height: 88rpx;
+}
+
+.bottom-button-container-label {
+  height: 40rpx;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.botton-hover {
+  opacity: 0.8;
+}

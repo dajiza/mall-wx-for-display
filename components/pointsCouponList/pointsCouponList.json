@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "points-coupon-item": "/components/pointsCouponItem/pointsCouponItem"
+    }
+}

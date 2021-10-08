@@ -1,0 +1,204 @@
+<!-- pages/cart/cart.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <van-nav-bar title="确认订单" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="address wrap">
+        <navigator url="{{ defaultAddress? '../address/address?select=true': '../address/address-edit/address-edit'}}">
+            <view class="add" wx:if="{{ !defaultAddress }}">
+                <view class="content">
+                    <view class="plus">
+                        <image class="fullimg" src="../../assets/images/address-plus.png"></image>
+                    </view>
+                    <view class="text">请添加收货地址</view>
+                </view>
+            </view>
+            <view class="detail" wx:if="{{ defaultAddress }}">
+                <view class="info">
+                    <span class="name">{{ defaultAddress.name }}</span>
+                    <span class="phone">{{ defaultAddress.phone }}</span>
+                </view>
+                <view class="location">
+                    {{ defaultAddress.province }} {{ defaultAddress.city }} {{ defaultAddress.area }} {{ defaultAddress.address }}
+                </view>
+                <span class="corner iconfont icon-youjiantou"></span>
+            </view>
+        </navigator>
+        <view class="address-line" wx:if="{{ defaultAddress }}"></view>
+    </view>
+    <view class="goods-list wrap">
+        <view class="title">订单详情</view>
+        <!-- <view class="dividing"></view> -->
+        <view class="list">
+            <block wx:for="{{ showGoodsList }}" wx:for-item="list">
+                <block wx:for="{{ list.goodsList }}" wx:key="skuId">
+                    <view class="dividing"></view>
+                    <order-goods use-coupon="{{fn.judgeInList(couponGoods,item.skuId,'goods_sku_id')}}" goods="{{ item }}"></order-goods>
+                    <view class="discount-wrap-check" wx:if="{{memberDiscount > 0 && fn.maxNum(item.user_discount, memberDiscount) < 1}}">
+                        <view class="discount-box-check text-ellipsis">
+                            <image class="member-icon" src="../../assets/images/memberIcon.png"></image>
+                            <view class="discount-text margin-left-12">
+                                <text>批发享{{(fn.maxNum(item.user_discount, memberDiscount) * 1000) / 100}}折 </text>
+                                <text>预计省￥{{fn.formatMoney(item.off_2)}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                <view class="barterItem" wx:for="{{ list.barterList }}" wx:key="skuId">
+                    <order-barter-goods goods="{{ item }}"></order-barter-goods>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="count wrap">
+        <view class="cell">
+            <view class="label">商品金额</view>
+            <view class="value">¥{{ fn.formatMoney(goodsTotalPrice) }}</view>
+        </view>
+        <view class="cell">
+            <view class="label">优惠券</view>
+            <view class="value unusable" wx:if="{{memberDiscount > 0}}">
+                无法与会员折扣共享
+                <van-icon class="icon-right" name="arrow" />
+            </view>
+            <view class="value usable" bindtap="openCoupon" wx:elif="{{canUse.length>0 && !memberDiscount}}">
+                <block wx:if="{{couponInfo}}">
+                    <view>
+                        {{couponInfo.type==1?'-￥'+fn.formatMoney(couponInfo.coupon_amount):(couponInfo.coupon_amount/10+'折'+(couponInfo.discount_top>0?' (封顶' + couponInfo.discount_top/100
+                        +'元)':''))}}
+
+                        <!-- <block wx:if="{{couponInfo.discount_top==0}}">
+                            {{couponInfo.type==1?'-￥'+fn.formatMoney(couponInfo.coupon_amount):(couponInfo.coupon_amount/10+'折')}}
+                        </block>
+                        <block wx:else>
+                            {{couponInfo.type==1?'-￥'+fn.formatMoney(couponInfo.coupon_amount):(couponInfo.coupon_amount/10+'折'+'(封顶' + couponInfo.discount_top/10 + '元)')}}
+                        </block> -->
+                    </view>
+                </block>
+                <block wx:else>
+                    {{canUse.length}}张可用
+                </block>
+                <van-icon class="icon-right" name="arrow" />
+            </view>
+            <view class="value usable" bindtap="openCoupon" wx:elif="{{toAdd.length>0 && !memberDiscount}}">
+                {{toAdd.length}}张可凑单
+                <van-icon class="icon-right" name="arrow" />
+            </view>
+            <view class="value unusable" wx:else>
+                无可用
+                <van-icon class="icon-right" name="arrow" />
+            </view>
+        </view>
+        <!-- 促销 -->
+        <!-- 单促销 -->
+        <view class="cell" wx:if="{{needPromotion&&!memberDiscount&&promotion.length==1&&promotion[0].type!=5}}">
+            <view class="label">{{constant.PROMOTION_TEXT[promotion[0].type]}}</view>
+            <view class="value">
+                {{ promotionTextArr[0].discountText }}
+            </view>
+        </view>
+        <!-- 多促销 -->
+        <view class="cell" wx:if="{{needPromotion&&!memberDiscount&&promotion.length>1}}">
+            <view class="label">满减</view>
+            <view class="value">
+                - ￥{{fn.formatMoney(discountAmount) }}
+            </view>
+        </view>
+        <view class="cell" wx:if="{{needPromotion&&!memberDiscount&&promotion.length>1&&item.promotionType==6}}" wx:for="{{promotionTextArr}}">
+            <view class="label">满券</view>
+            <view class="value">
+                {{item.discountText}}
+            </view>
+        </view>
+
+        <view class="cell" wx:if="{{needPromotionMakeUp&&!promotionTextArr[0].top&&!memberDiscount}}">
+            <view class="makeup">
+                <span class="iconfont icon-tishi"></span>{{promotionTextArr[0].rest}}
+                <span class="gotoMakeup" bindtap="gotoPromotionMakeUp">去凑单</span>
+            </view>
+        </view>
+        <view class="cell" wx:if="{{couponInfo}}">
+            <view class="tips">订单取消或退款，优惠券不予退还</view>
+        </view>
+        <view class="cell">
+            <view class="label">会员折扣</view>
+            <view class="value">
+                <text wx:if="{{memberDiscountMount > 0}}">-</text>
+                ¥{{ fn.formatMoney(memberDiscountMount) }}</view
+            >
+        </view>
+        <view class="cell">
+            <view class="label">运费</view>
+            <view class="value" wx:if="{{!defaultAddress}}">选择地址后显示</view>
+            <view class="value" wx:if="{{defaultAddress}}"
+                >{{ freight?fn.formatMoney(freight):'免运费' }}
+                <span wx:if="{{freeType==1&&freight==0}}">(已满{{totalNeedNum}}件)</span>
+                <span wx:if="{{freeType==2&&freight==0}}">(已满{{fn.formatMoney(totalNeedNum)}}元)</span>
+            </view>
+        </view>
+        <view class="cell" wx:if="{{showMakeup && freeNeedNum > 0 }}">
+            <view class="makeup">
+                <span class="iconfont icon-tishi"></span>还需凑 {{freeType==1?freeNeedNum+'件':'￥'+fn.formatMoney(freeNeedNum)}} 可免运费
+                <span class="gotoMakeup" bindtap="handleGoAddOn">去凑单</span>
+            </view>
+        </view>
+        <view class="cell">
+            <view class="label">备注</view>
+            <input
+                id="remark"
+                wx:if="{{remarkAutoHeight}}"
+                auto-height="{{remarkAutoHeight}}"
+                value="{{remark}}"
+                class="{{ios?'remark-margin-top':''}} remark-class"
+                maxlength="{{60}}"
+                bindinput="remarkBindinput"
+                bindblur="remarkBindblur"
+                bindfocus="remarkBindfocus"
+                placeholder="给商家留言"
+                placeholder-class="phcolor"
+            />
+            <!-- <textarea wx:else value="{{remark}}" class="remark-class" maxlength="{{60}}" placeholder="给商家留言"></textarea> -->
+        </view>
+        <!-- <van-cell-group border="{{ false }}">
+			<van-cell title="商品金额" value="¥{{ fn.formatMoney(totalPrice) }}" border="{{ false }}" title-class="custom-cell-title" value-class="custom-cell-value"></van-cell>
+			<van-cell title="优惠券" value="¥{{ fn.formatMoney(totalPrice) }}" border="{{ false }}" title-class="custom-cell-title" value-class="custom-cell-coupon"></van-cell>
+			<van-cell title="运费" value="{{ freight?fn.formatMoney(freight):'免运费' }}" border="{{ false }}" title-class="custom-cell-title" value-class="custom-cell-value"></van-cell>
+		</van-cell-group> -->
+        <!-- <van-cell-group>
+            <van-field
+                label-class="count-label"
+                input-class="count-input"
+                value="¥23423"
+                label="商品金额"
+                input-align="right"
+                border="{{ false }}"
+            ></van-field>
+            <van-field
+                label-class="count-label"
+                input-class="count-input"
+                value="¥23423"
+                label="运费"
+                disabled
+                input-align="right"
+            ></van-field>
+        </van-cell-group> -->
+        <view class="dividing" style="height:1px;"></view>
+        <view class="total">
+            <view class="value-title">合计：</view>
+            <view class="value">￥{{ fn.formatMoney(totalPrice) }}</view>
+        </view>
+    </view>
+    <view class="submit-bar">
+        <view class="price">
+            <!-- <view class="price-text">实付金额：</view> -->
+            <view class="symbol">￥</view>
+            <view class="price-value">{{ fn.formatMoney(totalPrice) }}</view>
+        </view>
+        <van-button round type="warning" bindtap="submitOrder" custom-class="custom-btn-creat">微信支付</van-button>
+    </view>
+    <!-- 优惠券选择 -->
+    <coupon-pop id="coupon" bind:select="selectCoupon" selected-coupon="{{couponInfo}}" active="{{active}}" canUse="{{canUse}}" toAdd="{{toAdd}}" notUse="{{notUse}}"></coupon-pop>
+</view>

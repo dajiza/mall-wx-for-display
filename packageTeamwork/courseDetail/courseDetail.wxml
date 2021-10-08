@@ -1,0 +1,231 @@
+<view class="container" style="padding-bottom: 0px;">
+    <van-nav-bar fixed placeholder title="团作详情" border="{{false}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="banner-wrap">
+        <image class="fullimg" data-src="{{bannerUrl}}" mode="aspectFill" src="{{ bannerUrl + '!upyun520/fw/500'}}" wx:if="{{bannerType==1}}" bindtap="bannerImageClick" ></image>
+        <view class="vedio-wrap" wx:if="{{bannerType==2}}">
+            <video
+                id="myVideo"
+                src="{{bannerUrl}}"
+                class="vedio"
+                binderror="videoErrorCallback"
+                show-play-btn="{{true}}"
+                controls="{{true}}"
+                play-btn-position="center"
+                enable-play-gesture="{{true}}"
+                show-progress="{{true}}"
+                picture-in-picture-mode="{{['push','pop']}}"
+                bindended="onEnd"
+            ></video>
+        </view>
+    </view>
+
+    <view class="content-box">
+        <view class="tabs-rwap">
+            <van-tabs tab-class="custom-tab" swipe-threshold="{{7}}" bind:change="onTabChange" bind:disabled="onTabChange">
+                <van-tab title="课程内容">
+                    <!-- <scroll-view class="tab-scroll" scroll-y="{{(course.video.length>0 && course.image.length>0)}}" style="height:calc(100vh - {{barrierHeight}}px);"> -->
+                    <view class="tab-scroll">
+                        <view style="padding-top: 40rpx;">
+                            <view class="course-tab">
+                                <view class="course-tab-label">课程视频</view>
+                                <view class="course-tab-more" catchtap="showCourseVideo" wx:if="{{course.video.length>0}}">
+                                    <view>查看更多</view>
+                                    <!-- <text class="iconfont icon-right-corner2" style="font-size: 20rpx;"></text> -->
+                                    <image class="more_see" mode="aspectFill" src="../static/icon-right-corner.svg"></image>
+                                </view>
+                            </view>
+                            <scroll-view scroll-x="true" enhanced="true" show-scrollbar="false" scroll-y="false" class="scroll-view_H" wx:if="{{course.video.length>0}}">
+                                <view style="display: flex; padding-bottom: 30rpx;">
+                                    <view wx:for="{{course.video}}" wx:key="id" class="course-video" catchtap="handleOnCourseVideo" data-index="{{index}}">
+                                        <view class="video-thumbnail-wrap">
+                                            <van-image fit="cover" width="328rpx" height="184rpx" lazy-load radius="8rpx" src="{{item.thumbnail}}"> </van-image>
+                                            <view class="video-play" wx:if="{{item.url==bannerUrl}}"></view>
+                                            <view class="video-play-content" wx:if="{{item.url==bannerUrl}}">播放中</view>
+                                        </view>
+                                        <view class="video-title">{{item.title}}</view>
+                                    </view>
+                                </view>
+                            </scroll-view>
+                            <view class="scroll-view_H {{isAdmin?'course-edit-admin':'course-edit'}}" wx:else>
+                                <van-button round custom-class="course-edit-btn" bind:tap="handleOnCourseEdit" type="primary" wx:if="{{isAdmin && initialize}}">发布课程</van-button>
+                                <view class="empty-course" wx:else>
+                                    暂无课程
+                                </view>
+                            </view>
+                            <view class="course-tab" style="margin-top: 20rpx;">
+                                <view class="course-tab-label">课程图片</view>
+                                <view class="course-tab-more" catchtap="showCourseImage" wx:if="{{course.image.length>0}}">
+                                    <view>查看更多</view>
+                                    <!-- <text class="iconfont icon-right-corner2" style="font-size: 20rpx;"></text> -->
+                                    <image class="more_see" mode="aspectFill" src="../static/icon-right-corner.svg"></image>
+                                </view>
+                            </view>
+                            <view style="padding: 30rpx 30rpx 0px 30rpx;" wx:if="{{course.image.length>0}}">
+                                <view wx:for="{{course.image}}" wx:key="id" class="course-image" catchtap="previewImage" data-size="{{item.old_size}}" data-src="{{item.url}}" data-index="{{index}}">
+                                    <view class="course-image-item">
+                                        <view class="image-wrap">
+                                            <van-image fit="cover" width="122rpx" height="122rpx" lazy-load radius="8rpx" src="{{item.url + '!upyun520/fw/320'}}"> </van-image>
+                                        </view>
+                                        <view class="content-wrap">
+                                            <view class="content-name">{{item.name}}</view>
+                                            <view class="content-size">{{item.size}}</view>
+                                        </view>
+                                        <image class="more_see" mode="aspectFill" src="../static/icon-right-corner.svg"></image>
+                                    </view>
+                                </view>
+                            </view>
+                            <view wx:else class="empty-course">
+                                暂无课件
+                            </view>
+                        </view>
+                    </view>
+                    <!-- </scroll-view> -->
+                </van-tab>
+                <van-tab title="圈子" disabled="{{true}}" dot="{{noticeShow}}"></van-tab>
+                <van-tab title="{{isAdmin?'名片':'联系老师'}}" disabled="{{true}}"></van-tab>
+                <van-tab title="我的" wx:if="{{!isAdmin && studentMoreFeatures.length>0}}">
+                    <view style="background:#fff; height:calc(100vh - {{barrierHeight}}px)">
+                        <view class="more-features-tab" wx:for="{{studentMoreFeatures}}">
+                            <view class="features-item-wrap" catchtap="{{item.handle}}">
+                                <image class="features-icon" src="{{item.icon}}"></image>
+                                <view style="text-align: center;">{{item.title}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </van-tab>
+                <van-tab title="更多功能" wx:if="{{isAdmin}}">
+                    <view style="background:#fff; height:calc(100vh - {{barrierHeight}}px)">
+                        <view class="more-features-tab" wx:if="{{isAdmin}}">
+                            <view class="features-item-wrap" catchtap="handleOnCourseEdit">
+                                <image class="features-icon" src="../static/ic_course_edit.svg"></image>
+                                <view style="text-align: center;">发布课程</view>
+                            </view>
+                            <view class="features-item-wrap" catchtap="handleOnWorkWall">
+                                <image class="features-icon" src="../static/ic_exercise.svg"></image>
+                                <view style="text-align: center;">作业墙</view>
+                            </view>
+                            <view class="features-item-wrap" catchtap="handleOnTeamWorkEdit">
+                                <image class="features-icon" src="../static/ic_teamwork_edit.svg"></image>
+                                <view style="text-align: center;">编辑团作</view>
+                            </view>
+                        </view>
+                        <view class="more-features-tab" wx:if="{{isAdmin}}">
+                            <view class="features-item-wrap" catchtap="handleOnStudent">
+                                <image class="features-icon" src="../static/ic_student_manage.svg"></image>
+                                <view style="text-align: center;">学员管理</view>
+                            </view>
+                            <view class="features-item-wrap" catchtap="handleOnPoster">
+                                <image class="features-icon" src="../static/ic_course_poster.svg"></image>
+                                <view style="text-align: center;">生成海报</view>
+                            </view>
+                            <view class="features-item-wrap" catchtap="handleOnRecGoods">
+                                <image class="features-icon" src="../static/ic_goods.svg"></image>
+                                <view style="text-align: center;">推荐商品</view>
+                            </view>
+                        </view>
+                    </view>
+                </van-tab>
+            </van-tabs>
+        </view>
+    </view>
+    <view class="rec-box" wx:if="{{activeTab==0&&recGoods.length>0}}">
+        <view class="rec-title">推荐商品</view>
+        <rec-goods-box goodsList="{{recGoods}}"></rec-goods-box>
+    </view>
+</view>
+
+<van-popup show="{{ courseImagePopupShow }}" position="bottom" overlay="{{false}}" custom-class="course-image-popup">
+    <view style="height: calc(100vh - {{popupOffsetTop}}px); position: relative;" catchtouchmove="preventTouchMove">
+        <view style="position: absolute;" class="course-image-popup-header">
+            <view class="course-image-popup-label">课程图片</view>
+            <view catchtap="hideCourseImagePopup" class="course-image-popup-closeable">
+                <image class="close" mode="aspectFill" src="../static/icon_close.svg"></image>
+            </view>
+        </view>
+        <scroll-view scroll-y="true" style="height: calc(100vh - {{popupOffsetTop}}px);padding-top: 50px;box-sizing: border-box;">
+            <view class="course-image-full-wrap">
+                <block wx:for="{{course.imageFull}}" wx:key="id">
+                    <view class="course-image-item" style="padding-bottom: 30rpx;" catchtap="previewImage" data-size="{{item.old_size}}" data-src="{{item.url}}" data-index="{{index}}">
+                        <view class="image-wrap">
+                            <van-image fit="cover" width="122rpx" height="122rpx" lazy-load radius="8rpx" src="{{item.url + '!upyun520/fw/320'}}"> </van-image>
+                        </view>
+                        <view class="content-wrap">
+                            <view class="content-name">{{item.name}}</view>
+                            <view class="content-size">{{item.size}}</view>
+                        </view>
+                        <image class="more_see" mode="aspectFill" src="../static/icon-right-corner.svg"></image>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>
+
+<van-popup show="{{ courseVideoPopupShow }}" position="bottom" overlay="{{false}}" custom-class="course-image-popup">
+    <view style="height: calc(100vh - {{popupOffsetTop}}px); position: relative;" catchtouchmove="preventTouchMove">
+        <view style="position: absolute;" class="course-image-popup-header">
+            <view class="course-image-popup-label">课程视频</view>
+            <view catchtap="hideCourseVideoPopup" class="course-image-popup-closeable">
+                <image class="close" mode="aspectFill" src="../static/icon_close.svg"></image>
+            </view>
+        </view>
+        <scroll-view scroll-y="true" style="height: calc(100vh - {{popupOffsetTop}}px);padding-top: 50px;box-sizing: border-box;">
+            <view class="course-image-full-wrap">
+                <block wx:for="{{course.videoFull}}" wx:key="id">
+                    <view class="course-video-item" style="padding-bottom: 30rpx;" catchtap="handleOnCourseVideo" data-index="{{index}}">
+                        <view class="image-wrap">
+                            <van-image fit="cover" width="328rpx" height="184rpx" lazy-load radius="8rpx" src="{{item.thumbnail}}"> </van-image>
+                            <view class="video-play" wx:if="{{item.url==bannerUrl}}"></view>
+                            <view class="video-play-content" wx:if="{{item.url==bannerUrl}}">播放中</view>
+                        </view>
+                        <view class="content-wrap">
+                            <view class="content-name">{{item.title}}</view>
+                            <view class="content-size">{{item.size}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>
+
+<van-dialog
+    message="请完善您的名片，学生们可以在团作中查看哦~"
+    show="{{ contactCardConfirm }}"
+    width="600rpx"
+    custom-style="--dialog-border-radius: 16rpx;--dialog-message-padding: 66rpx 124rpx;font-size: 16px;font-weight: 500;line-height: 22px;"
+    confirm-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+    cancel-button-color="var(--primary-color-text) !important; font-weight: 500 !important;font-size: 28rpx !important; --button-large-height:88rpx;width: 100% !important;"
+    close-on-click-overlay="{{true}}"
+    show-cancel-button
+    bind:close="onConfirmDialogClose"
+    bind:confirm="handleOnConfirm"
+    bind:cancel="handleOnCancel"
+    confirm-button-text="去完善"
+    cancel-button-text="下次再说"
+/>
+<!-- 弹窗 -->
+<van-dialog
+    use-slot
+    title=""
+    show-cancel-button
+    width="600rpx"
+    customStyle="border-radius: 16rpx"
+    show="{{ showDialog }}"
+    show-confirm-button="{{true}}"
+    showCancelButton="{{false}}"
+    confirmButtonText="知道了"
+    catchtouchmove="preventTouchMove"
+    bind:close="onDialogClose"
+    confirm-button-color="var(--primary-color-text) !important"
+>
+    <view class="dialog-wrap">
+        <view class="dialog-title">{{dialogTitle}}</view>
+        <view class="dialog-content" wx:if="{{dialogContent&&dialogContent.length<12}}">理由：{{dialogContent}}</view>
+        <view class="dialog-content mutil" wx:if="{{dialogContent&&dialogContent.length>=12}}">理由：{{dialogContent}}</view>
+    </view>
+</van-dialog>

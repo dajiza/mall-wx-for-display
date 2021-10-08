@@ -1,0 +1,9 @@
+{
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": true,
+    "navigationBarTitleText": "我的",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "authorize-popup": "../../components/authorize/authorize"
+    }
+}

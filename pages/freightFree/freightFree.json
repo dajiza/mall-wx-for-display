@@ -1,0 +1,12 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 100,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "spec": "../../components/spec/spec"
+    }
+}

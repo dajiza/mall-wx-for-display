@@ -1,0 +1,51 @@
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="{{title}}" border="{{false}}" custom-class="nav" title-class="title"
+    z-index="{{100}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+
+  <view class="points-wrap">
+    <view class="points-input">所需积分</view>
+    <input model:value="{{ points }}" placeholder="请输入数量" border="{{ false }}" show-confirm-bar="{{false}}"
+      adjust-position="{{false}}" type="number" contenteditable="{{true}}" style="width:200rpx;text-align: right;"
+      class="points-input" placeholder-class="points-input-placeholder" bindinput="handleInputPoints"></input>
+  </view>
+
+  <view class="coupon-wrap">
+    <view class="coupon-label">
+      <view class="points-input">优惠券</view>
+      <view class="coupon-pick-wrap" catchtap="handleCouponPick">
+        <view class="{{couponName.length==0?'points-input-placeholder':'points-input'}}">
+          {{couponName.length>0?couponName:'请选择'}}</view>
+        <image src="../static/ic_arrow_right.svg" style="width:14rpx;height:24rpx;margin-left:20rpx;"></image>
+      </view>
+    </view>
+    <view class="coupon-detail-div" wx:if="{{couponName.length>0}}"></view>
+    <view class="coupon-detail-info-wrap" wx:if="{{couponName.length>0}}">
+      <view wx:for="{{couponDetailInfo}}" wx:key="index" class="coupon-info-item">
+        <view class="coupon-info-label">{{item.name}}</view>
+        <view class="coupon-info-value">{{item.value}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-button-container"
+    style="padding-bottom:{{(40+safeAreaInsetBottom)+''}}rpx;padding-top: 32rpx;background: {{tabGoodsList.length>0?'#ffffff':'var(--divider-border-color)'}};">
+    <view wx:if="{{isEdit}}" class="edit-buttons-wrap">
+      <button class="bottom-button delete-bottom-button" hover-class="botton-hover" bindtap="handleDelete">
+          <text class="bottom-button-container-label">删除</text>
+        </button>
+        <button class="bottom-button off-bottom-button" hover-class="botton-hover" bindtap="handleOnOff">
+          <text class="bottom-button-container-label">{{status==1?'上架':'下架'}}</text>
+        </button>
+        <button class="bottom-button save-bottom-button {{(couponId==0 || points.length==0 || points=='0')?'bottom-button-disable':''}}" hover-class="botton-hover" bindtap="handleSave">
+          <text class="bottom-button-container-label">保存修改</text>
+        </button>
+    </view>
+    <button wx:else class="bottom-button {{(couponId==0 || points.length==0 || points=='0')?'bottom-button-disable':''}}" hover-class="botton-hover" bindtap="handleSave">
+      <text class="bottom-button-container-label">确认</text>
+    </button>
+  </view>
+</view>

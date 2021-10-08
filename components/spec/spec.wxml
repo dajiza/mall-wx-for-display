@@ -1,0 +1,130 @@
+<!-- component/stepper/stepper.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<!-- 主容器 -->
+<van-popup
+    bind:after-enter="onAfterEnter"
+    bind:before-enter="onBeforeEnter"
+    bind:close="close"
+    bind:enter="onEnter"
+    custom-class="custom-pop-spec"
+    custom-style="padding-bottom: {{safeAreaInsetBottom}}px;"
+    position="bottom"
+    show="{{ isShow }}"
+>
+    <view class="spec" catchtouchmove="preventTouchMove">
+        <view class="spec-main">
+            <view class="header">
+                <!-- <view wx:for="{{previewList}}" bindtap="checkSku" data-skuid="{{item.sku_id}}">{{item.sku_id}}-</view> -->
+                <view class="close" catchtap="close">
+                    <text class="iconfont icon-guanbi"></text>
+                </view>
+                <view class="timg">
+                    <image class="fullimg" src="{{checkedSku.img + '!upyun520/fw/300'}}" bindtap="openPreview" />
+                </view>
+                <view class="info">
+                    <view class="price">
+                        <span class="symbol">¥</span>
+                        <span class="price-num" wx:if="{{skuIdChecked}}">{{fn.formatMoney(checkedSku.price)}}</span>
+                        <span class="price-num" wx:else>{{fn.formatMoney(minPrice)}}<block wx:if="{{minPrice!=maxPrice}}">-{{fn.formatMoney(maxPrice)}}</block></span>
+                    </view>
+                    <!--<view class="stock">库存{{checkedSku.stock}}{{checkedSku.unit}}</view>-->
+                    <view class="discount-box-spec text-ellipsis" wx:if="{{memberDiscountValue > 0 && maxDiscount > 0 && maxDiscount < 1}}">
+                        <image class="member-icon" src="../../assets/images/memberIcon.png"></image>
+                        <view class="discount-text margin-left-12">
+                            <text>批发享{{(maxDiscount * 1000) / 100}}折 </text>
+                            <text>预计省￥{{fn.formatMoney(checkedSku.price * (1-maxDiscount))}}</text>
+                        </view>
+                    </view>
+                    <!-- <view class="title">{{goods.name}}</view> -->
+                    <view class="tags" wx:if="{{sizeText.length>0}}" wx:key="*this">
+                        已选 {{ fn.join(sizeText) }}
+                        <text decode="{{true}}" wx:for="{{sizeCustomText}}" wx:key="*this">&nbsp;/ {{item.key}}</text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class="scroll"> -->
+            <scroll-view class="scroll" scroll-y="{{ true }}">
+                <!-- 规格 -->
+                <!-- <view class="size" wx:for="{{ specList }}" wx:for-item="spec" wx:key="index">
+                    <view class="sub-title">{{spec.title}}</view>
+                    <view class="tags">
+                        <span
+                            bindtap="singleTag"
+                            class="{{ [listChecked[index] == indexSon ? 'checked' : '',fn.indexOf(specOption,tag)?'':'disable', 'tag'] }}"
+                            data-index-father="{{ index }}"
+                            data-index-son="{{ indexSon }}"
+                            data-tag="{{ tag }}"
+                            wx:for="{{ spec.list }}"
+                            wx:for-index="indexSon"
+                            wx:for-item="tag"
+                            wx:key="indexSon"
+                        >
+                            {{ tag }}
+                        </span>
+                    </view>
+                </view> -->
+                <view class="size-title">分类</view>
+                <view class="size" wx:if="{{sku.length<=6}}">
+                    <view
+                        class="new-size-img {{skuIdChecked==item.sku_id?'active':''}} {{item.stock_value==0?'disabled':''}}"
+                        wx:for="{{sku}}"
+                        wx:key="{{sku_id}}"
+                        bindtap="chooseSku"
+                        data-skuid="{{item.sku_id}}"
+                    >
+                        <image class="size-img" src="{{item.sku_img + '!upyun520/fw/300'}}" />
+                        <view class="info">
+                            <view class="title">{{fn.formatGoodsSkuName(item.sku_attr)}}</view>
+                            <view class="price">￥ {{fn.formatMoney(item.sku_price)}}</view>
+                        </view>
+                        <view class="zoom" catchtap="openPreview" data-skuid="{{item.sku_id}}">
+                            <text class="iconfont icon-fangda"></text>
+                        </view>
+                    </view>
+                </view>
+                <view class="size" wx:else>
+                    <view
+                        class="new-size-text {{skuIdChecked==item.sku_id?'active':''}} {{item.stock_value==0?'disabled':''}}"
+                        wx:for="{{sku}}"
+                        wx:key="{{sku_id}}"
+                        bindtap="chooseSku"
+                        data-skuid="{{item.sku_id}}"
+                    >
+                        <image class="size-img" src="{{item.sku_img + '!upyun520/fw/300'}}" />
+                        <view class="title">{{fn.formatGoodsSkuName(item.sku_attr)}}</view>
+                        <view class="price">￥ {{fn.formatMoney(item.sku_price)}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="statistic">
+                <view class="label">数量</view>
+                <text class="stock-num">库存{{checkedSku.stock}}{{checkedSku.unit}}</text>
+                <van-stepper id="stepper" class="custom-stepper" integer="{{true}}" value="{{ quantity }}" bind:change="onChangeStep" max="{{checkedSku.stock}}"></van-stepper>
+                <view class="quantifier">{{checkedSku.unit}}</view>
+            </view>
+            <block wx:if="{{mark=='default'}}">
+                <view class="custom-btn-spec-wrap">
+                    <van-button
+                        custom-class="middle-btn btn-common custom-btn-spec custom-btn-spec-cart"
+                        disabled="{{ isAddCard }}"
+                        bind:click="confirmSpec"
+                        data-mark="cart"
+                        round
+                        type="primary"
+                        size="large"
+                    >
+                        加入购物车
+                    </van-button>
+                    <van-button custom-class="middle-btn btn-common custom-btn-spec" disabled="{{ isAddCard }}" bind:click="confirmSpec" data-mark="buy" round type="warning" size="large">
+                        立即购买
+                    </van-button>
+                </view>
+            </block>
+            <van-button wx:else custom-class="big-btn btn-common custom-btn-spec" disabled="{{ isAddCard }}" bind:click="confirmSpec" round type="primary" size="large">
+                确定
+            </van-button>
+            <!-- </view> -->
+        </view>
+    </view>
+    <img-preview id="preview" imgList="{{previewList}}" previewIndex="{{previewIndex}}" bind:closePreview="getPreviewData"></img-preview>
+</van-popup>

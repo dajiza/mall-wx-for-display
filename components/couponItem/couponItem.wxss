@@ -1,0 +1,138 @@
+/* components/couponItem/couponItem.wxss */
+.coupon-item {
+    position: relative;
+    margin-bottom: 24rpx;
+    width: 710rpx;
+    height: 200rpx;
+    /* background: var(--background-color); */
+    box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.02), 0px -12px 24px 0px rgba(0, 0, 0, 0.02) inset;
+}
+.coupon-item .bg {
+    position: absolute;
+    width: 710rpx;
+    height: 200rpx;
+}
+.coupon-item .selected {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 68rpx;
+    height: 68rpx;
+}
+.coupon-item .fullimg {
+    width: 100%;
+    height: 100%;
+}
+.coupon-item .touse {
+    position: absolute;
+    top: 0;
+    right: 30rpx;
+    bottom: 0;
+    margin: auto;
+    width: 120rpx;
+    height: 50rpx;
+    border-radius: 25rpx;
+    background: var(--primary-gradual-color);
+    /* box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.02), 0px 2px 4px 0px rgba(215, 50, 101, 0.3); */
+    /* background: var(--primary-gradual-color); */
+    /* box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.02), 0px 2px 4px 0px var(--secondary-background); */
+    color: #ffffff;
+    text-align: center;
+    /* text-shadow: 0px 2px 4px rgba(215, 50, 101, 0.3); */
+    font-weight: 400;
+    font-size: 24rpx;
+    line-height: 50rpx;
+}
+
+.coupon-item .touse.touse-type6 {
+    border: 2rpx solid var(--primary-color);
+    border-radius: 25rpx;
+    background: #ffffff;
+    color: var(--primary-color);
+}
+.coupon-item .touse.not-start {
+    background: var(--secondary-color-text);
+}
+.coupon-item .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 710rpx;
+    height: 200rpx;
+}
+.coupon-item .title {
+    display: flex;
+    align-items: center;
+    flex-basis: 220rpx;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-top: 22rpx; */
+    height: 200rpx;
+    color: #ffffff;
+}
+
+.coupon-item .title.active {
+    color: var(--features-color-text);
+}
+.coupon-item .describe {
+    flex-basis: 490rpx;
+    box-sizing: border-box;
+    padding-left: 42rpx;
+    height: 200rpx;
+    color: var(--primary-color-text);
+}
+.coupon-item .title .tip {
+    font-weight: 500;
+    font-size: 24rpx;
+}
+.coupon-item .title .limitation {
+    font-weight: 300;
+    font-size: 20rpx;
+}
+.coupon-item .discount {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 16rpx;
+}
+.coupon-item .discount .symbol {
+    font-weight: bold;
+    font-size: 40rpx;
+}
+.coupon-item .discount .num {
+    font-weight: bold;
+    font-size: 80rpx;
+    line-height: 80rpx;
+}
+.coupon-item .amount {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 20rpx;
+}
+.coupon-item .amount .num {
+    font-weight: bold;
+    font-size: 80rpx;
+    line-height: 68rpx;
+}
+.coupon-item .amount .unit {
+    font-weight: 600;
+    font-size: 32rpx;
+}
+
+.coupon-item .describe .name {
+    margin-top: 30rpx;
+    margin-bottom: 20rpx;
+    font-weight: 500;
+    font-size: 32rpx;
+}
+.coupon-item .describe .limit {
+    font-weight: 400;
+    font-size: 24rpx;
+}
+.coupon-item .describe .time {
+    margin-top: 8rpx;
+    color: var(--primary-color-text);
+    font-weight: 400;
+    font-size: 24rpx;
+}

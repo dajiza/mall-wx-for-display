@@ -1,0 +1,11 @@
+{
+    "navigationStyle":"custom",
+    "navigationBarTitleText": "",
+    "disableScroll": true,
+    "enablePullDownRefresh":false,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "authorize-popup": "../../components/authorize/authorize"
+    }
+}

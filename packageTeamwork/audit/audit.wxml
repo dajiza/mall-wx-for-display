@@ -1,0 +1,77 @@
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="审核" border="{{false}}" custom-class="nav" title-class="title" z-index="{{100}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+
+  <view class="coures-desc">
+    <view class="coures-poster">
+      <van-image fit="cover" width="128rpx" height="128rpx" lazy-load radius="8rpx" src="{{coures.couresPoster}}" />
+    </view>
+    <view class="coures-info-wrap">
+      <view class="coures-title">{{coures.couresTitle}}</view>
+      <view class="coures-time">课程时间：{{coures.couresTime}}</view>
+      <view class="coures-sign-and-type-wrap">
+        <view class="coures-sign">报名人数：{{coures.couresSign}}</view>
+        <view class="coures-type">{{coures.couresType}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="certificate-wrap">
+    <view class="user-wrap">
+      <view class="user-avatar">
+        <van-image fit="cover" width="120rpx" height="120rpx" lazy-load radius="60rpx" src="{{user.avatar}}" />
+      </view>
+      <view class="user-info-wrap">
+        <view class="user-name">{{user.name}}</view>
+        <view class="user-wx-name">{{user.wxNick}}</view>
+        <view class="user-phone">{{user.phone}}</view>
+      </view>
+    </view>
+    <view class="certificate-image-wrap">
+      <view class="certificate-image" wx:for="{{certificate}}" wx:key="*this" catchtap="previewImage" data-index="{{index}}">
+        <van-image fit="cover" width="200rpx" height="200rpx" lazy-load radius="6rpx" src="{{item}}" />
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-btn-wrap">
+    <van-button custom-class="middle-btn" bind:click="handleOnReject" round type="info" size="large">
+      拒绝
+    </van-button>
+    <van-button custom-class="middle-btn" bind:click="handleOnPass" round type="primary" size="large">
+      {{backMoney>0?('返现'+backMoney/100+'元'):'通过'}}
+    </van-button>
+  </view>
+</view>
+
+<van-dialog
+    message="是否确认返现10元"
+    show="{{ showConfirmDialog }}"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    confirm-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+    cancel-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+    show-cancel-button
+    bind:close="handleOnConfirmClose"
+    bind:confirm="handleOnCashBackConfirm"
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+/>
+
+<van-dialog use-slot show="{{ showRejectDialog }}" show-cancel-button custom-style="--dialog-border-radius: 16rpx;"
+  confirm-button-color="var(--primary-color) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+  cancel-button-color="var(--primary-color-text) !important; font-weight: 400 !important;font-size: 32rpx !important; --button-large-height:88rpx;width: 100% !important;"
+  close-on-click-overlay="{{false}}" bind:confirm="handleOnRejectConfirm" bind:cancel="handleOnRejectCancel"
+  asyncClose="{{true}}">
+
+  <view class="reject-dialog-content-wrap">
+    <view class="reject-dialog-title">拒绝理由</view>
+    <textarea value="{{rejectReason}}" class="reject-reason-content" placeholder="请输入理由"
+      placeholder-style="font-size: 28rpx;font-weight: 400;color: #B2B2B2 !important;"
+      bindinput="bindRejectReasonInput" placeholder-class="reject-reason-placeholder"></textarea>
+  </view>
+
+</van-dialog>

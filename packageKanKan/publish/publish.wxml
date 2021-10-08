@@ -1,0 +1,128 @@
+<page-meta scroll-top="{{pageMetaScrollTop}}"></page-meta>
+
+<view class="container publish">
+  <van-nav-bar placeholder title="发布看看" fixed border="{{false}}" z-index="{{14}}"
+    custom-style="--nav-bar-background-color: #f5f5f5;">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <view class="publish-box audit-status-box" wx:if="{{approveStatus!=0}}">
+    <view class="publish-label">状态</view>
+    <view class="audit-status-wrap">
+      <!-- 审核中 -->
+      <image class="audit-status-icon" src="/packageKanKan/static/ic_audit_pending.png" wx:if="{{approveStatus == 1}}">
+      </image>
+      <!-- 通过 -->
+      <image class="audit-status-icon" src="/packageKanKan/static/ic_audit_pass.png" wx:if="{{approveStatus == 2}}">
+      </image>
+      <!-- 拒绝 -->
+      <image class="audit-status-icon" src="/packageKanKan/static/ic_audit_reject.png" wx:if="{{approveStatus == 3}}">
+      </image>
+      <!-- <icon class="iconfont icon-clear audit-reject" wx:if="{{approveStatus == 3}}" /> -->
+      <view class="audit-status" wx:if="{{approveStatus == 1}}">审核中</view>
+      <view class="audit-status audit-pass" wx:if="{{approveStatus == 2}}">审核通过</view>
+      <view class="audit-status" wx:if="{{approveStatus == 3}}">已拒绝</view>
+    </view>
+  </view>
+  <!-- 拒绝 -->
+  <view wx:if="{{approveStatus == 3}}" class="publish-box audit-reject-reason">
+    <view class="publish-label">拒绝理由</view>
+    <view class="publish-content" style="margin-top: 50rpx;">{{approveReason}}</view>
+  </view>
+
+  <view class="publish-box finished-picture-wrap"
+    style="z-index:{{guideStep==1?200:1}};padding: 30rpx 28rpx 40rpx 28rpx;">
+    <view class="publish-label">成品图（{{images.length}}/9)</view>
+    <view style="padding-top:10rpx;">
+      <drag id="drag-image" generic:item="drag-item" bind:click="itemClick" bind:delete="itemDelete"
+        bind:change="change" bind:sortend="sortEnd" bind:scroll="scroll" list-data="{{images}}" columns="{{size}}"
+        scroll-top="{{scrollTop}}" item-height="{{634/size}}" extra-nodes="{{extraNodes}}"
+        delete-icon="/packageKanKan/static/ic_del_red.svg">
+        <view slot="plus" class="plus-wrap">
+          <view class="plus-item">
+            <view class="picture-add" bindtap="handelImageAdd">
+              <text class="iconfont icon-jiahao" style="font-size: 66rpx;color: var(--primary-color);"></text>
+            </view>
+          </view>
+        </view>
+      </drag>
+    </view>
+    <view class="drag-tip">拖拽移动顺序</view>
+  </view>
+  <view class="publish-box introduction-content" style="z-index:{{guideStep==2?200:1}};">
+    <view class="publish-label">正文</view>
+    <view class="publish-content-wrap" catchtap="handleEditIntroductionContent">
+      <view class="publish-content {{introduceContent==''?'publish-content-placeholder':''}}">
+        {{introduceContent==''?'快来介绍下你要分享的内容~':introduceContent}}</view>
+      <text class="iconfont icon-right-corner2 operate-icon"></text>
+    </view>
+  </view>
+  <view class="publish-box material-wrap" style="z-index:{{guideStep==3?200:1}};">
+    <view class="publish-label-wrap">
+      <view class="publish-label">材料清单（{{materialList.length}}）</view>
+      <view class="publish-operate" catchtap="handleMaterialManage">管理</view>
+    </view>
+    <view class="publish-content-wrap" catchtap="handleMaterialManage">
+      <view class="publish-content">挑选购买过的商品</view>
+      <text class="iconfont icon-right-corner2 operate-icon"></text>
+    </view>
+  </view>
+  <view id="courseAdd" class="publish-box course-wrap" style="z-index:{{guideStep==4?200:1}};">
+    <view class="publish-label-wrap">
+      <view class="publish-label">制作教程</view>
+      <view class="publish-operate" catchtap="handleCourseEdit">添加</view>
+    </view>
+    <view class="publish-content-wrap" catchtap="handleCourseEdit">
+      <view class="publish-content">请添加教程</view>
+      <text class="iconfont icon-right-corner2 operate-icon"></text>
+    </view>
+  </view>
+  <view class="bottom-button-container">
+    <view class="mutli-bottom-button-wrap" wx:if="{{isEdit}}">
+      <button class="bottom-button mutli-btn"
+        style="margin-bottom: 40rpx; background: linear-gradient(90deg, #D6DEE9 0%, #B3BAC1 100%);"
+        hover-class="botton-hover" bindtap="handleDelete">
+        <text class="bottom-button-container-label">删除</text>
+      </button>
+      <button class="bottom-button mutli-btn" style="margin-bottom: 40rpx;" hover-class="botton-hover"
+        bindtap="handleSave">
+        <text class="bottom-button-container-label">重新发布</text>
+      </button>
+    </view>
+    <button class="bottom-button" style="margin-bottom: {{showGuide?116:40}}rpx;" hover-class="botton-hover"
+      bindtap="handleSave" wx:else>
+      <text class="bottom-button-container-label">发布</text>
+    </button>
+  </view>
+</view>
+<van-overlay show="{{ showGuide }}" z-index="{{100}}">
+  <view wx:if="{{guideStep==2}}" class="guide-tip" style="top:{{navHeight+880}}rpx;">好的文案更加吸引人哦~</view>
+  <view wx:if="{{guideStep==1}}" class="guide-tip" style="top:{{navHeight+650}}rpx;">成品图片，用于展示给用户制作完成后的效果</view>
+  <view wx:if="{{guideStep==3}}" class="guide-tip" style="top:{{navHeight+370}}rpx;">
+    <view>材料清单，其他用户在您分享的页面中加购商品</view>
+    <view>并下单完结后您可获得相应的奖励金</view>
+  </view>
+  <view wx:if="{{guideStep==4}}" class="guide-tip" style="top:{{courseAddTop-206-104}}rpx;">
+    <view>制作教程，完善且详细的制作教程可以提高用户</view>
+    <view>购买商品的欲望</view>
+  </view>
+  <image wx:if="{{guideStep==1}}" style="top:{{navHeight+404}}rpx;" src="/packageKanKan/static/ic_guide_arrow_down.svg"
+    class="guide-tip-img"></image>
+
+  <image wx:if="{{guideStep==2}}" style="top:{{navHeight+640}}rpx;" src="/packageKanKan/static/ic_guide_arrow_down.svg"
+    class="guide-tip-img"></image>
+
+  <image wx:if="{{guideStep==3}}" style="top:{{navHeight+474}}rpx;" src="/packageKanKan/static/ic_guide_arrow_up.svg"
+    class="guide-tip-img"></image>
+
+  <image wx:if="{{guideStep==4}}" style="top:{{courseAddTop-206}}rpx;" src="/packageKanKan/static/ic_guide_arrow_up.svg"
+    class="guide-tip-img"></image>
+
+  <!-- courseAddOffset -->
+  <view class="btn-next-wrap">
+    <view class="btn-next" catchtap="handleGuideNext">
+      <view>下一步</view>
+    </view>
+  </view>
+</van-overlay>

@@ -1,0 +1,32 @@
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="生成团作海报" border="{{false}}" custom-class="nav" title-class="title"
+    z-index="{{100}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+  <view style="height:calc(100vh - {{statusBarHeight+46}}px - {{safeAreaInsetBottom}}rpx - 128rpx)"
+    class="content-image-box">
+    <view class="image-box">
+      <van-image fit="cover" width="690rpx" height="1006rpx" lazy-load radius="20rpx" src="{{posterUrl}}" />
+    </view>
+  </view>
+  <view class="bottom-button-container" style="bottom: {{safeAreaInsetBottom}}rpx;">
+    <button class="bottom-button" hover-class="botton-hover" bindtap="save">
+      <text class="bottom-button-container-label">保存到相册</text>
+    </button>
+  </view>
+</view>
+<van-dialog
+    message="保存团作海报需要相册访问权限"
+    width="600rpx"
+    custom-style="--dialog-message-padding: 88rpx; --button-large-height: 88rpx; --dialog-border-radius: 16rpx;"
+    show-cancel-button
+    confirm-button-open-type="openSetting"
+    bindopensetting="onOpenSetting"
+    confirm-button-text="去授权"
+    show="{{ showSaveImageToPhotosAlbumDialog }}"
+    bind:close="onClose"
+    confirm-button-color="var(--primary-color-text) !important"
+    cancel-button-color="var(--primary-color-text) !important"
+/>

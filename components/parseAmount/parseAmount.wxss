@@ -1,0 +1,25 @@
+@import '../../app.wxss';
+.money {
+    color: #333333;
+    font-weight: 500;
+    text-indent: -1rpx;
+}
+.dollar {
+    font-size: 24rpx;
+}
+.integer {
+    font-size: 32rpx;
+}
+.decimal {
+    font-size: 24rpx;
+}
+
+.dollar.large {
+    font-size: 32rpx;
+}
+.integer.large {
+    font-size: 56rpx;
+}
+.decimal.large {
+    font-size: 32rpx;
+}

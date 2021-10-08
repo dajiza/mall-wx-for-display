@@ -1,0 +1,125 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container">
+    <!-- 自定义nav -->
+    <van-nav-bar fixed placeholder title="我的收藏" border="{{false}}" custom-class="nav" title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box">
+        <view class="favorites-tabs" style="top: {{navHeight}};">
+            <view class="{{tabsShow?'tabsShow':'tabsHide'}}">
+                <van-tabs swipe-threshold="{{7}}" bind:change="onChange">
+                    <van-tab title="商品" name="{{1}}"></van-tab>
+                    <van-tab title="看看" name="{{2}}"></van-tab>
+                </van-tabs>
+            </view>
+        </view>
+        <view class="favorites-list {{isEditModel?'favorites-list-padding':''}}" wx:if="{{tabIndex==1}}">
+            <view class="list-header">
+                <view>共 {{total}} 件商品</view>
+                <view class="favorites-list-manage {{isEditModel?'edit_model':''}}" catchtap="handleEdit"> {{isEditModel?'完成':'管理'}}</view>
+            </view>
+            <block wx:for="{{list}}" wx:key="id">
+                <view class="list-content" style="padding-left: {{!isEditModel?'30rpx':'0'}};">
+                    <view class="checkbox" catchtap="toggle" wx:if="{{isEditModel}}" data-item-index="{{index}}" data-goods-id="{{item.favoriteId}}">
+                        <van-checkbox
+                            value="{{ item.checked }}"
+                            id="checkbox_{{item.favoriteId}}"
+                            catchtap="catchTapDummy"
+                            bind:change="checkedItem"
+                            icon-size="40rpx"
+                            data-item-index="{{index}}"
+                            use-icon-slot="{{item.checked}}"
+                        >
+                            <icon class="custom-check-box-icon iconfont checked icon-checked" slot="icon" />
+                        </van-checkbox>
+                    </view>
+                    <!-- 状态 1下架 2上架 -->
+                    <view class="goods-info" data-id="{{item.goodsId}}" bindtap="gotoDetail">
+                        <view class="img-box">
+                            <van-image fit="cover" width="200rpx" height="200rpx" radius="8rpx" lazy-load src="{{item.goodsImg+ '!upyun520/fw/500'}}" />
+                        </view>
+                        <view class="text-box">
+                            <view class="goods-title {{item.status==1?'color-invalid':''}}">{{item.goodsTitle}}</view>
+                            <view class="text-box-bottom-wrap">
+                                <view class="goods-price">
+                                    <view class="price-now-unit {{item.status==1?'color-invalid':''}}">￥</view>
+                                    <text class="price-now {{item.status==1?'color-invalid':''}}">{{fn.formatMoney(item.goodsNewPrice)}}</text>
+                                </view>
+                                <view class="price-cut" wx:if="{{item.status==2&&item.goodsOldPrice-item.goodsNewPrice>0}}">
+                                    比收藏时降价{{fn.formatMoney(item.goodsOldPrice-item.goodsNewPrice)}}元
+                                </view>
+                                <view class="invalid" wx:if="{{item.status==1}}">
+                                    商品已下架
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <!-- <van-loading custom-class="bottom-loading" size="24rpx" text-size="24rpx" wx:if="{{loading}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{page >= pageTotal&&pageTotal>0}}">人家也是有底线的～</view> -->
+        </view>
+        <view class="kk-list" wx:else>
+            <view class="item-wrap">
+                <block wx:for="{{listKKL}}">
+                    <view class="item">
+                        <navigator hover-class="none" url="/packageKanKan/detail/detail?id={{item.tutorial.id}}">
+                            <image class="timg" src="{{item.tutorial.cover_img_url + '!upyun520/fw/320'}}" />
+                            <view class="info">
+                                <view class="title">{{item.tutorial.summary}}</view>
+                                <view class="author">
+                                    <image class="avator" src="{{item.author.avatar_url }}" />
+                                    <view class="name">{{item.author.nick_name}}</view>
+                                </view>
+                            </view>
+                            <view class="num">
+                                {{item.tutorial.like_count}}
+                                <text class="iconfont icon-favorites-fill"></text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </view>
+            <view class="item-wrap">
+                <block wx:for="{{listKKR}}">
+                    <view class="item">
+                        <navigator hover-class="none" url="/packageKanKan/detail/detail?id={{item.tutorial.id}}">
+                            <image class="timg" src="{{item.tutorial.cover_img_url + '!upyun520/fw/320'}}" />
+                            <view class="info">
+                                <view class="title">{{item.tutorial.summary}}</view>
+                                <view class="author">
+                                    <image class="avator" src="{{item.author.avatar_url }}" />
+                                    <view class="name">{{item.author.nick_name}}</view>
+                                </view>
+                            </view>
+                            <view class="num">
+                                {{item.tutorial.like_count}}
+                                <text class="iconfont icon-favorites-fill"></text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </view>
+            <view class="no-more" wx:if="{{page >= pageTotal}}">人家也是有底线的～</view>
+        </view>
+    </view>
+    <view class="del-submit-bar" wx:if="{{isEditModel}}">
+        <view style="height: 100rpx; display: flex; align-items: center;" catchtap="onAllCheckBoxChangeToggle" data-component-id="delSubmitCheckbox">
+            <van-checkbox
+                id="delSubmitCheckbox"
+                catchtap="catchTapDummy"
+                value="{{ checkedGoodsCount ==total }}"
+                bind:change="onAllCheckBoxChange"
+                use-icon-slot="{{checkedGoodsCount ==total}}"
+                icon-size="40rpx"
+                style="margin-left: 54rpx;"
+            >
+                全选
+                <icon class="custom-check-box-icon iconfont checked icon-checked" slot="icon" />
+            </van-checkbox>
+        </view>
+        <van-button round type="primary" custom-class="del-submit-bar-button" bindtap="deleteConfirm">删除{{checkedGoodsCount>0?('('+checkedGoodsCount+')'):''}}</van-button>
+    </view>
+</view>

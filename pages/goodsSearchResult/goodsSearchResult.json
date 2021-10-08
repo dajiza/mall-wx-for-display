@@ -1,0 +1,15 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "van-field": "@vant/weapp/field/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-uploader": "@vant/weapp/uploader/index",
+        "search-fillter":"../../components/searchFilter/searchFilter"
+    }
+}

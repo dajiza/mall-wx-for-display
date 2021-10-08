@@ -1,0 +1,125 @@
+/**app.wxss**/
+page {
+    /* 背景-颜色 */
+    --background-color: #f5f4f5;
+    /* 主色 */
+
+    --primary-color: #ee7093;
+    /* 主色 适用透明度*/
+    --primary-color-opacity: 251, 96, 144;
+    /* 辅助色 蓝色 */
+    --secondary-color-blue: #c5b4e5;
+    /* 辅助色 蓝色 适用透明度 */
+    --secondary-color-blue-opacity: 96, 151, 251;
+    /* 辅助色 */
+    --secondary-color: #ffe8ef;
+    /* 文字-主色-主标题 */
+    --primary-color-text: #564b4e;
+    /* 主文字-主色-主标题  适用透明度*/
+    --primary-color-text-opacity: 86, 75, 78;
+    /* 文字-辅助色-副标题 */
+    --secondary-color-text: #c3c3c3;
+    /* 文字-辅助色-弱文案 */
+    --tip-color-text: #888888;
+    /* 文字-辅助色-弱文案 1 */
+    --tip-color-text-a2: #888888;
+    /* 文字-辅助色-弱文案 2 */
+    --tip-color-text-d8: #c3c3c3;
+    /* 文字-辅助色-弱文案 3 */
+    --tip-color-text-88: #888888;
+    /* 图标-箭头-设置中心 */
+    --icon-arrow-color: #c3c3c3;
+    /* 文字-功能 */
+    --features-color-text: #ee7093;
+    /* 渐变 1*/
+    --primary-gradual-color: linear-gradient(135deg, #ffa0bb 0%, #ee7093 100%);
+    /* 渐变 2*/
+    --secondary-gradual-color: linear-gradient(315deg, #ff7979 0%, #f05858 100%);
+    /* 按钮-主色 */
+    --primary-color-btn: #ee7093;
+    /* 按钮-辅助色 */
+    --secondary-color-btn: #f05858;
+    /* 辅助色半透明背景 */
+    --secondary-background: rgba(255, 222, 223, 0.5);
+    /* 按钮-禁止 */
+    --disabled-color-btn: #c3c3c3;
+    /* 按钮-线框-黄 */
+    --liner-color-btn-yellow: #ee7093;
+    /* 按钮-线框-灰 */
+    --liner-color-btn-grey: #b2b2b2;
+    /* 按钮-线框-灰-文字 */
+    --liner-color-btn-text-grey: #b2b2b2;
+    /* 分割线颜色 */
+    --divider-border-color: #f5f4f5;
+    /* 背景色 */
+    --divider-background-color: #ededef;
+    /* 分割线高度 */
+    --divider-line-height: 1rpx;
+    /* 辅助色半透明背景 */
+    --shop-info-authorize-background: rgba(255, 222, 223, 0.5);
+    /* 商品分类-筛选选中项背景&sku选择框选中项 */
+    --selected-round-background: rgba(255, 222, 223, 0.3);
+    --search-input: rgba(0, 0, 0, 0.04);
+    /* 自定义tabbar文字选中颜色 */
+    --tabbar-text-active: #ee7093;
+    /* 扫码按钮背景色 */
+    --scan-btn-background: #ff91b3;
+    /* 阴影颜色 */
+    --box-shadow-color: rgba(255, 91, 142, 0.3);
+}
+
+.van-button.van-button--default {
+    border: 2rpx solid var(--liner-color-btn-grey) !important;
+    color: var(--liner-color-btn-text-grey) !important;
+}
+/* 修复dialog按钮边框问题 */
+.van-dialog__footer .van-button.van-button--default {
+    border: 0 !important;
+}
+/* 圆形 normal */
+.van-button--round.van-button--normal {
+    /* padding: 0 40rpx !important; */
+    /* width: auto !important; */
+    height: 76rpx !important;
+    /* border: 0 !important;
+    color: #fff !important;
+    font-size: 28rpx !important; */
+}
+/* 圆形 normal primary */
+.van-button--round.van-button--normal.van-button--primary {
+    background: var(--primary-color-btn) !important;
+}
+/* 圆形 normal warning */
+.van-button--round.van-button--normal.van-button--warning {
+    background: var(--secondary-color-btn);
+}
+
+/* 圆形 normal danger */
+.van-button--round.van-button--normal.van-button--danger {
+    background: #f05858;
+}
+/* 圆形 normal info */
+/* .van-button--round.van-button--normal.van-button--info {
+    background: linear-gradient(to right, #FF7979, #F05858) !important;
+} */
+/* 圆形 large */
+.van-button--round.van-button--large {
+    height: 88rpx !important;
+}
+/* 圆形 large primary */
+.van-button--round.van-button--large.van-button--primary {
+    background: var(--primary-color-btn) !important;
+}
+/* 圆形 large warning */
+.van-button--round.van-button--large.van-button--warning {
+    background: var(--secondary-color-btn);
+}
+/* 圆形 large info */
+.van-button--round.van-button--large.van-button--info {
+    background: var(--disabled-color-btn);
+}
+/* 圆形 禁用 */
+.van-button.van-button--round.van-button--disabled {
+    background: var(--disabled-color-btn) !important;
+    opacity: 1;
+}

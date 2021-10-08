@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>分享店铺icon</title>
+    <defs>
+        <linearGradient x1="12.7955252%" y1="30.0854358%" x2="87.6652511%" y2="72.863169%" id="linearGradient-1">
+            <stop stop-color="#FAC3BA" offset="0%"></stop>
+            <stop stop-color="#FF9C85" offset="99.9262456%"></stop>
+        </linearGradient>
+        <linearGradient x1="39.7359266%" y1="89.6985743%" x2="60.4090991%" y2="14.8288483%" id="linearGradient-2">
+            <stop stop-color="#FAC3BA" offset="0%"></stop>
+            <stop stop-color="#FF9C85" offset="99.9262456%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="分享店铺icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <rect id="矩形" x="0" y="0" width="34" height="34"></rect>
+            <g id="编组" transform="translate(1.000000, 2.000000)">
+                <path d="M28.4951385,24.8642462 L15.3948308,22.1947077 L21.7874462,12.6513231 L11.7652923,21.4537846 L3.08590769,19.6839385 C2.13083077,19.6150154 1.25698462,19.1202462 0.706830769,18.3350154 C0.455753846,17.7614769 0.490215385,17.1005538 0.800369231,16.5553231 L27.5376,1.22978462 C28.2108308,0.684553846 28.9923692,0.288246154 29.8305231,0.0691692308 C30.4077538,0.0125538462 30.9677538,0.282092308 31.2816,0.770707692 L29.9560615,21.2765538 C29.9388308,21.7220923 29.9339077,22.1159385 29.9339077,22.4605538 C29.9240615,24.0827077 29.9203692,24.6944 28.4951385,24.8704 L28.4951385,24.8642462 Z" id="Fill-1" fill="url(#linearGradient-1)"></path>
+                <polygon id="Fill-3" fill="url(#linearGradient-2)" points="11.7684923 24.3534769 22.2866462 11.7393231 16.3949538 30.4876308"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

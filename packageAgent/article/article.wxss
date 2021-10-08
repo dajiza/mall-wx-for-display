@@ -1,0 +1,19 @@
+/* pages/article/article.wxss */
+
+/* @import '../wxParse/wxParse.wxss'; */
+.container {
+    background: var(--background-color);
+}
+.nav {
+    background: #fff !important;
+}
+.nav-title {
+    color: #333 !important;
+    font-weight: 500;
+    font-size: 38rpx !important;
+}
+
+.article {
+    min-height: 100vh;
+    width: 100vw;
+}

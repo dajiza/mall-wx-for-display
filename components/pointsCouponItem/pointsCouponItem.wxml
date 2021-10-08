@@ -1,0 +1,33 @@
+<!--components/couponItem/couponItem.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="coupon-item">
+    <image class="bg" src="{{bg}}" />
+    <view class="content" bindtap="gotoDetail">
+        <view class="title">
+            <view class="discount" wx:if="{{info.type==1}}">
+                <view class="symbol">￥</view>
+                <view class="num">{{info.coupon_amount/100}}</view>
+            </view>
+            <view class="amount" wx:else>
+                <view class="num">{{info.coupon_amount/10}}</view>
+                <view class="unit">折</view>
+            </view>
+            <view class="tip" wx:if="{{info.with_amount>0}}">满{{info.with_amount/100}}元可用</view>
+            <view class="tip" wx:else>无门槛</view>
+            <view class="limitation" wx:if="{{info.discount_top>0}}">封顶优惠{{fn.formatMoney(info.discount_top)}}元</view>
+        </view>
+        <view class="describe">
+            <view class="name">{{info.type==1?'满减优惠券':'折扣优惠券'}}</view>
+            <view class="limit" wx:if="{{info.use_goods_type==1}}">全场通用</view>
+            <view class="limit" wx:if="{{info.use_goods_type==2}}">指定商品可用</view>
+            <view class="limit" wx:if="{{info.use_goods_type==3}}">指定标签可用</view>
+            <view class="time" wx:if="{{info.valid_type==1}}">领取后{{info.valid_days}}天内有效</view>
+            <view class="time" wx:if="{{info.valid_type==2}}">{{info.start}} <block wx:if="{{info.start&&info.end}}">-</block> {{info.end}} </view>
+        </view>
+        <view class="points touse">
+            <image class="coin" mode="aspectFill" src="/assets/images/coin.svg"></image>
+            {{detail.points}}
+        </view>
+    </view>
+</view>

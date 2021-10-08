@@ -1,0 +1,46 @@
+<view class="container" style="padding-bottom: 0px;">
+  <van-nav-bar fixed placeholder title="积分明细" border="{{false}}" custom-class="nav" title-class="title"
+    z-index="{{100}}">
+    <view slot="left" class="leftIcon" bindtap="ClickBack">
+      <text class="iconfont icon-fanhuiiblack"></text>
+    </view>
+  </van-nav-bar>
+
+  <view class="header-fixed" style="top: {{navHeight}}">
+    <van-tabs swipe-threshold="{{7}}" bind:change="onTabChange">
+      <van-tab title="收入"></van-tab>
+      <van-tab title="支出"></van-tab>
+    </van-tabs>
+  </view>
+
+  <view class="content-wrap" style="min-height: calc(100vh - {{navHeight}});">
+    <view class="list-wrap" style="min-height: calc(100% - {{safeAreaInsetBottom}}rpx);">
+      <view style="width: 100%;height: 124rpx"></view>
+      <!-- 列表 -->
+      <view class="points-detail-list-wrap" style="padding-bottom:{{safeAreaInsetBottom}}rpx; background: {{list.length > 0?'#FFFFFF':'#00000000'}};">
+        <view class="points-detail-item" wx:for="{{list}}" wx:key="id">
+          <view class="points-detail-label">
+            <view class="points-detail-label-desc">{{item.desc}}</view>
+            <view class="points-detail-label-time">{{item.time}}</view>
+          </view>
+          <view class="coupon-points">
+            <image class="ic-points" src="../static/ic_points.svg"></image>
+            <view class="points-goods-points {{item.type==1?'income':''}}">{{item.points}}</view>
+          </view>
+          <view class="div" wx:if="{{list.length > 0 && index+1 != list.length}}"></view>
+        </view>
+        <van-loading class="bottom-loading" size="36rpx" text-size="24rpx"
+          wx:if="{{list.length > 0 && bottomLoadingShow}}">
+          加载中...</van-loading>
+        <view class="no-more" wx:if="{{list.length > 10 && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～</view>
+      </view>
+      <!-- 缺省 -->
+      <view class="empty-list-box" wx:if="{{(list!=null && list.length==0) && loaded}}">
+        <view class="empty-image-wrap">
+          <image class="empty-image" src="/assets/images/icon_list_empty.png"></image>
+        </view>
+        <view class="empty-list-tip">暂无明细</view>
+      </view>
+    </view>
+  </view>
+</view>

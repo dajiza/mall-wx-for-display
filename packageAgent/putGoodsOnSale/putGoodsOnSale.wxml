@@ -1,0 +1,153 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="container {{searchModel?'container-white':'background-F5F5F5'}}">
+    <van-nav-bar fixed placeholder title="上架商品" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="sticky-box" style="top: {{navHeight}}">
+        <view class="search-box">
+            <view class="search-bar {{searchModel?'search-bar-activity':''}}">
+                <view class="search-input-box" catch:tap="searchInputCapture">
+                    <input
+                        class="search-input"
+                        value="{{ name }}"
+                        placeholder-class="search-input-placeholder"
+                        confirm-type="search"
+                        focus="{{searchModel}}"
+                        disabled="{{!searchModel}}"
+                        bindinput="bindSearchInput"
+                        bindconfirm="handleOnSearch"
+                        bindfocus="handleOnFocus"
+                        placeholder="输入商品名称搜索"
+                    />
+                </view>
+                <text class="iconfont icon-glass"></text>
+                <van-icon class="close-icon" wx:if="{{name}}" name="close" size="40rpx" color="var(--tip-color-text)" bind:tap="bindClearSearch" />
+            </view>
+            <view class="search-cancel {{searchModel?'':'hide'}}" bind:tap="onSearchCancel">取消</view>
+        </view>
+        <view class="filter-nav {{searchModel?'hide':''}}">
+            <view class="filter-nav-item {{filterNavIndex === 0?'filter-nav-selected':''}}" data-index="0" bind:tap="onClickTab">
+                <view class="filter-nav-text"
+                    >最新
+                    <image class="sort-is-selected" src="../../assets/images/is-selected.svg" alt="" wx:if="{{filterNavIndex === 0}}"></image>
+                </view>
+                <view class="sort-arrow">
+                    <text class="iconfont icon-up pack-up" slot="icon" wx:if="{{order_time === 0 || order_time === 2}}"></text>
+                    <text class="iconfont icon-down show-more" slot="icon" wx:if="{{order_time === 0 || order_time === 1}}"></text>
+                </view>
+            </view>
+            <view class="filter-nav-item {{filterNavIndex === 1?'filter-nav-selected':''}}" data-index="1" bind:tap="onClickTab">
+                <view class="filter-nav-text"
+                    >销量
+                    <image class="sort-is-selected" src="../../assets/images/is-selected.svg" alt="" wx:if="{{filterNavIndex === 1}}"></image>
+                </view>
+                <view class="sort-arrow">
+                    <text class="iconfont icon-up pack-up" slot="icon" wx:if="{{order_sales === 0 || order_sales === 2}}"></text>
+                    <text class="iconfont icon-down show-more" slot="icon" wx:if="{{order_sales === 0 || order_sales === 1}}"></text>
+                </view>
+            </view>
+            <view class="filter-nav-item" data-index="3" bind:tap="onClickFilter">
+                <view class="filter-nav-text {{(searchList.list.length > 0 || searchList.otherCateId !==-1)?'filter-selected':'no-selected'}}">筛选</view>
+                <text class="iconfont icon-shaixuan filter-nav-icon {{(searchList.list.length > 0 || searchList.otherCateId !==-1) > 0?'filter-selected':'no-selected'}}"></text>
+            </view>
+        </view>
+        <view class="batch-shelves {{searchModel?'hide':''}}">
+            <text>快挑选你想要上架的商品吧~</text>
+            <van-button round type="warning" custom-class="btn-batch-shelves" bind:tap="onBatchShelves">{{isBatch?'完成':'批量上架'}}</van-button>
+        </view>
+    </view>
+    <view class="sticky-placeholder-box {{searchModel?'h88':''}}"></view>
+    <view class="content-box" style="padding-bottom: {{safeAreaInsetBottom}}rpx;">
+        <view class="goods-list {{searchModel?'hide':''}} {{isBatch?'bottom-box-show':''}}">
+            <view class="empty-list" wx:if="{{goodsList.length < 1 && loading_finish}}">
+                <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+                <text class="empty-text">暂无相关商品</text>
+            </view>
+            <view class="goods-list-content">
+                <block wx:for="{{ goodsList }}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="goods_id">
+                    <!-- showAttr 是否展示商品属性 默认 true-->
+                    <!-- showInventory 是否显示库存 默认 false-->
+                    <!-- showSales 是否显示销量 默认 true-->
+                    <!-- showPrice 是否显示价格 默认 true-->
+                    <!-- paddingStr 默认'30rpx' 可能用到 paddingStr="{{'20rpx 30rpx 40rpx'}}"-->
+                    <agent-goods style="width: 100%" goods="{{ goods }}" showAttr="{{ !isBatch }}" paddingStr="{{isBatch?'30rpx 30rpx 30rpx 0':'30rpx'}}" data-index="{{goodsIndex}}" bind:onClick="goGoodsDetail">
+                        <!--插槽 checkBox-->
+                        <view slot="checkBox" class="check-box" data-item-index="{{goodsIndex}}" wx:if="{{isBatch}}" catchtap="toggle">
+                            <van-checkbox
+                                id="checkbox_{{goodsIndex}}"
+                                value="{{ goods.checked }}"
+                                icon-size="28rpx"
+                                data-item-index="{{ goodsIndex }}"
+                                data-item-valid="{{false}}"
+                                data-goods-item="{{goods}}"
+                                use-icon-slot="{{goods.checked}}"
+                                catchtap="catchTapDummy"
+                                bind:change="checkedItem"
+                            >
+                                <image class="custom-check-box-icon" slot="icon" src="/assets/images/oval_nor.svg" />
+                            </van-checkbox>
+                        </view>
+                        <view slot="bottom" wx:if="{{!isBatch}}" class="goods-btn-box">
+                            <van-button round type="warning" data-goods-name="{{goods.title}}" data-goods-id="{{goods.goods_id}}" data-index="{{goodsIndex}}" custom-class="operation-btn w128" bind:tap="onShelves">上架</van-button>
+                        </view>
+                    </agent-goods>
+                </block>
+            </view>
+            <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{bottomLoadingShow && goodsList.length > 0}}">加载中...</van-loading>
+            <view class="no-more" wx:if="{{is_all && goodsList.length > 0}}">人家也是有底线的～</view>
+        </view>
+        <search-history id="history" wx:if="{{searchModel}}" bind:goSearch="goSearch" style="margin-top: 88rpx;"></search-history>
+    </view>
+    <!--批量上架底部按钮-->
+    <view class="bottom-box" wx:if="{{isBatch}}" style="padding-bottom: {{safeAreaInsetBottom}}rpx;">
+        <view class="bottom-content">
+            <view class="select-all" catchtap="selectedAll">
+                <van-checkbox id="checkbox_all" value="{{ selectedAll }}" icon-size="40rpx" use-icon-slot="{{ selectedAll}}" catchtap="catchTapDummy" bind:change="checkedAll">
+                    <image class="all-check-box-icon" slot="icon" src="/assets/images/oval_nor.svg" />
+                </van-checkbox>
+                <text class="selected-all-text">全选</text>
+            </view>
+            <van-button round type="warning" custom-class="btn-sure-batch-shelves" bind:tap="sureBatchShelves">上架<block wx:if="{{selectedNum > 0}}">({{selectedNum}})</block> </van-button>
+        </view>
+    </view>
+
+    <search-fillter
+            popup-show="{{popupShow}}" fillter-list="{{searchList}}" goods-cate="{{goodsCate}}"
+            current-attr="{{currentFilterAttr}}" current-label="{{currentFilterLabel}}"
+            bind:confirm="getFilter"
+            bind:close="filterPopupClose"
+            bind:reset="filterReset"
+            bind:transfer="filterTransfer"
+    ></search-fillter>
+    <shelves show="{{shelves}}" goods-skus="{{goodsSkus}}" bind:confirm="handleOnShelvesConfirm"></shelves>
+    <van-popup show="{{ batchPopupShow }}" custom-class="batch-shelves-popup" bind:click-overlay="handleOnCancel">
+        <view class="shelves-container">
+            <view class="popup-title">商品售价</view>
+            <view class="batch-price-stepper">
+                <price-stepper
+                    id="price-stepper_batch"
+                    percentage="{{true}}"
+                    step="{{ 5 }}"
+                    value="{{ pricePercent }}"
+                    decimal-length="{{ 0 }}"
+                    input-width="{{'300rpx'}}"
+                    min="{{ 0 }}"
+                    bind:change="onBatchPriceChange"
+                    bind:overlimit="onOverLimit"
+                    bind:plus="stepperPlus"
+                    bind:minus="stepperMinus"
+                ></price-stepper>
+            </view>
+            <view class="shelves-bottom-box">
+                <view class="shelves-bottom-tip">基于官方指导价统一上调 5% 取整数</view>
+                <view class="shelves-bottom-button-box">
+                    <van-button round custom-class="shelves-btn-cancel" bind:tap="handleOnCancel">取消</van-button>
+                    <van-button round type="warning" custom-class="shelves-btn-confirm" bind:tap="handleOnConfirm">确认上架 </van-button>
+                </view>
+            </view>
+        </view>
+    </van-popup>
+</view>

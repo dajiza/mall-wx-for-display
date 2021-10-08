@@ -1,0 +1,20 @@
+{
+    "name": "mall-wx",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "dependencies": {
+        "@vant/weapp": "1.5.1",
+        "moment": "^2.29.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "switch:dev": "node switch.js --dev",
+        "switch:prod": "node switch.js --prod",
+        "switch:inlet": "node switch.js --inlet",
+        "switch:mmj": "node switch.js --mmj"
+    },
+    "author": "",
+    "license": "ISC"
+}

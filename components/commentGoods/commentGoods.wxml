@@ -1,0 +1,17 @@
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<view class="comment-goods-info">
+  <view class="img-box">
+<!--    <van-image fit="cover" width="136rpx" height="136rpx" radius="8rpx" lazy-load src="{{sku_img}}" />-->
+    <image class="goods-img" mode="aspectFill" src="{{ sku_img }}"></image>
+  </view>
+  <view class="text-box">
+    <view class="goods-title">{{goods_name}}</view>
+    <view class="text-box-bottom-wrap">
+      <view class="goods-label">{{label}}</view>
+      <view class="goods-price">
+        <view class="price-now-unit">￥</view>
+        <text class="price-now">{{fn.formatMoney(sku_price)}}</text>
+      </view>
+    </view>
+  </view>
+</view>

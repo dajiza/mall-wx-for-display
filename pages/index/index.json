@@ -1,0 +1,11 @@
+{
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "authorize-popup": "../../components/authorize/authorize",
+        "van-uploader": "@vant/weapp/uploader/index",
+        "home-module": "../../components/homeModule/homeModule"
+    }
+}

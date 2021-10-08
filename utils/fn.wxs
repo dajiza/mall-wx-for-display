@@ -1,0 +1,373 @@
+/**
+ * 常用方法
+ */
+
+module.exports = {
+    /**
+     * split
+     */
+    split: function (str, mark = ', ') {
+        if (str == '' || str == undefined) {
+            return []
+        }
+        return str.split(mark)
+    },
+    /**
+     * join
+     */
+    join: function (arr, mark = ', ') {
+        if (arr == undefined || arr == '' || arr.length == 0) {
+            return ''
+        }
+        return arr.join(mark)
+    },
+    /**
+     * indexOf
+     */
+    indexOf: function (arr, value) {
+        if (arr.indexOf(value) < 0) {
+            return false
+        } else {
+            return true
+        }
+    },
+    /**
+     * filter
+     */
+    // filterChecked: function (arr, param) {
+    //     if (arr == undefined || arr == '' || arr.length == 0) {
+    //         return []
+    //     }
+    //     return arr.filter(function (item) {
+    //         return item[param]
+    //     })
+    // },
+    /**
+     * 图片预览 生成sku
+     */
+    formatPreviewSku: function (arr) {
+        if (arr == undefined || arr == '' || arr.length == 0) {
+            return ''
+        }
+        return arr
+            .map(function (item) {
+                return item.value
+            })
+            .join(',')
+    },
+    /**
+     * 订单详情 格式化规格显示
+     */
+    formatSpecValue: function (str) {
+        if (str == '' || str == undefined) {
+            return ''
+        }
+        return str.split(',').join(' / ')
+    },
+    /**
+     * 判断空对象
+     */
+    judgeEmptyObject: function (obj) {
+        return JSON.stringify(obj) == '{}'
+    },
+    /**
+     * 生成自定义规格显示文字
+     */
+    customSpecText: function (arr) {
+        if (arr == undefined || arr == '' || arr.length == 0) {
+            return ''
+        }
+        var text = ''
+        for (var i = 0; i < arr.length; i++) {
+            var spec = arr[i]
+            text += spec.key + ': ' + spec.value + '.'
+        }
+        return text
+    },
+    /**
+     * 格式化金额
+     */
+    formatMoney: function (val) {
+        if (val == 0) {
+            return '0.00'
+        }
+        if (!val) {
+            return ''
+        }
+        //金额转换 分->元 保留2位小数
+        var str = (val / 100).toFixed(2) + ''
+        // var intSum = str.substring(0, str.indexOf('.')).replace(/\B(?=(?:\d{3})+$)/g, ',') //取到整数部分
+        var intSum = str.substring(0, str.indexOf('.')).replace(getRegExp('/B(?=(?:d{3})+$)', 'g'), '.')
+        var dot = str.substring(str.length, str.indexOf('.')) //取到小数部分搜索
+        var ret = intSum + dot
+        return ret
+    },
+
+    formatToFixed: function (val) {
+        if (val == 0) {
+            return '0.00'
+        }
+        if (!val) {
+            return ''
+        }
+        var str = val.toFixed(2) + ''
+        // var intSum = str.substring(0, str.indexOf('.')).replace(/\B(?=(?:\d{3})+$)/g, ',') //取到整数部分
+        var intSum = str.substring(0, str.indexOf('.')).replace(getRegExp('/B(?=(?:d{3})+$)', 'g'), '.')
+        var dot = str.substring(str.length, str.indexOf('.')) //取到小数部分搜索
+        var ret = intSum + dot
+        return ret
+    },
+
+    /**
+     * 订单列表状态
+     */
+    orderListStatus: function (val, blo) {
+        var status_str = ''
+        if (val === 0) {
+            status_str = '待付款'
+            if (blo) {
+                status_str = '待客户付款'
+            }
+        } else if (val === 1 || val === 2) {
+            status_str = '待发货'
+            if (blo) {
+                status_str = '待商家发货'
+            }
+        } else if (val === 3) {
+            status_str = '待收货'
+            if (blo) {
+                status_str = '待客户收货'
+            }
+        } else if (val === 9) {
+            status_str = '交易关闭'
+        } else if (val === 10) {
+            status_str = '交易完成'
+        }
+        return status_str
+    },
+
+    /**
+     * 售后列表状态
+     */
+    applyListStatus: function (val, type) {
+        var status_str = ''
+        if (val === 0 || val === 1) {
+            if (type === 0) {
+                status_str = '退款处理中'
+            } else if (type === 1) {
+                status_str = '退货中'
+            } else {
+                status_str = '换货中'
+            }
+        } else if (val === 2) {
+            if (type === 0) {
+                status_str = '退款失败'
+            } else if (type === 1) {
+                status_str = '退货失败'
+            } else {
+                status_str = '换货失败'
+            }
+        } else if (val === 3) {
+            status_str = '已撤销'
+        } else if (val === 4) {
+            status_str = '退货中'
+        } else if (val === 5) {
+            status_str = '退货中'
+        } else if (val === 6) {
+            status_str = '换货中'
+        } else if (val === 7) {
+            status_str = '退款成功'
+            if (type === 0) {
+                status_str = '退款成功'
+            } else if (type === 1) {
+                status_str = '退货成功'
+            }
+        } else if (val === 8) {
+            if (type === 1) {
+                status_str = '退货失败'
+            } else {
+                status_str = '换货失败'
+            }
+        } else if (val === 9) {
+            status_str = '换货成功'
+        }
+        return status_str
+    },
+
+    /**
+     * 订单详情状态  -- 单个商品状态
+     */
+    goodsStatus: function (val) {
+        var status_str = ''
+        if (val === 0) {
+            status_str = '待付款'
+        } else if (val === 1 || val === 2) {
+            status_str = '待发货'
+        } else if (val === 3) {
+            status_str = '待收货'
+        } else if (val === 4) {
+            status_str = '交易取消'
+        } else if (val === 5) {
+            status_str = '退款中'
+        } else if (val === 6) {
+            status_str = '换货中'
+        } else if (val === 10) {
+            status_str = '交易成功'
+        } else if (val === 11) {
+            status_str = '退款成功'
+        }
+        return status_str
+    },
+
+    /**
+     * 订单商品规格属性
+     */
+    orderGoodsAttr: function (arr) {
+        if (arr === undefined || arr === '' || arr === null || arr.length === 0) {
+            return ''
+        }
+        var _arr = JSON.parse(arr)
+        var attr_arr = []
+        var attr_str = ''
+        for (var i = 0; i < _arr.length; i++) {
+            var spec = _arr[i]
+            attr_arr.push(spec.Value)
+        }
+        attr_str = attr_arr.join('；')
+        return attr_str
+    },
+
+    /**
+     * 图片大小限制
+     */
+    limitImgSize: function (url) {
+        var newUrl = ''
+        console.log('url', url)
+        if (url) {
+            if (url.indexOf('!upyun520/fw') > -1) {
+                newUrl = url
+            } else {
+                newUrl = url + '!upyun520/fw/500'
+            }
+        }
+        return newUrl
+    },
+    /**
+     * 日期格式 -- 年月日
+     */
+    formatDateYTM: function (date, str) {
+        var newDate = '',
+            YTM = ''
+        if (date) {
+            if (date.indexOf(' ') > -1) {
+                YTM = date.split(' ')[0]
+            } else {
+                YTM = date
+            }
+            if (str === '年月日') {
+                if (YTM.indexOf('-') > -1) {
+                    newDate = YTM.replace('-', '年').replace('-', '月').replace('-', '日')
+                }
+            } else if (str === '.') {
+                if (YTM.indexOf('-') > -1) {
+                    newDate = YTM.split('-').join('.')
+                }
+            }
+        }
+        return newDate
+    },
+    /**
+     * 判断商品是否在列表内
+     * list列表
+     * id要判断的值
+     * paramName列表里要判断的参数名
+     */
+    judgeInList: function (list, id, paramName) {
+        if (!list) {
+            return false
+        }
+        return list.some(function (item) {
+            return item[paramName] == id
+        })
+    },
+
+    /**
+     * 计算购物车还差多少包邮
+     * data.freight_info.free_type 1 按件包邮 2按金额包邮
+     * data.freight_info.free_need_num 包邮所需件数 || 包邮所需金额
+     * type 1 返回 还需凑的数量金额 2 返回是否满足
+     */
+    freight_num: function (data, type) {
+        // console.log('freight_info===========>', data.freight_info.free_type)
+        // console.log('freight_info===========>', data.freight_info.free_need_num)
+        // console.log('valid_goods_info===========>', data.valid_goods_info)
+        if (!data) {
+            return false
+        }
+        var now_num = 0
+        for (var i = 0; i < data.valid_goods_info.length; i++) {
+            var item = data.valid_goods_info[i]
+            if (data.freight_info.free_type === 1) {
+                // 1 按件包邮
+                now_num += item.sku_count
+            } else if (data.freight_info.free_type === 2) {
+                // 2按金额包邮
+                now_num += item.sku_price * item.sku_count
+            }
+        }
+        var need_amount = data.freight_info.free_need_num - now_num
+        if (need_amount <= 0) {
+            // console.log('已满足包邮条件')
+            if (type === 1) {
+                return 0
+            } else if (type === 2) {
+                return true
+            }
+        } else {
+            // console.log('不满足包邮条件,还需要'+ need_amount + '金额')
+            if (type === 1) {
+                return need_amount
+            } else if (type === 2) {
+                return false
+            }
+        }
+    },
+
+    /**
+     * 比较数字大小
+     */
+    maxNum: function (num1, num2) {
+        var max_num = Math.max(num1, num2)
+        return max_num
+    },
+
+    /**
+     * 返回作业评级 1.示范作业 2.优秀 3.良好 4.及格 5.不及格
+     */
+    backGrade: function (num) {
+        var grade_cn = ''
+        if (num == 1) {
+            grade_cn = '示范作业'
+        } else if (num == 2) {
+            grade_cn = '优秀作业'
+        } else if (num == 3) {
+            grade_cn = '良好'
+        } else if (num == 4) {
+            grade_cn = '及格'
+        } else if (num == 5) {
+            grade_cn = '不及格'
+        }
+        return grade_cn
+    },
+    /**
+     * 生成sku名称显示
+     */
+    formatGoodsSkuName: function (attr) {
+        console.log('输出 ~ attr', attr)
+        return attr
+            .map(function (e) {
+                return e.value
+            })
+            .join(' ')
+    },
+}

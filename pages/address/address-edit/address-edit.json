@@ -1,0 +1,17 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "新增地址",
+    "disableScroll": false,
+    "backgroundColor": "#FFFFFF",
+    "usingComponents": {
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-switch": "@vant/weapp/switch/index",
+        "van-area": "@vant/weapp/area/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "pop-textarea": "../../../components/popTextarea/popTextarea"
+    }
+}

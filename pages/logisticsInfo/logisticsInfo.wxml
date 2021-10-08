@@ -1,0 +1,103 @@
+<!--pages/cart/cart.wxml-->
+<view class="container">
+    <!-- view包裹 -->
+    <van-nav-bar fixed
+                 placeholder
+                 title="{{navTitle}}"
+                 border="{{false}}"
+                 z-index="{{21}}"
+                 custom-class="nav"
+                 title-class="title" >
+
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <!--<van-icon name="arrow-left" color="white" size="25px"  />-->
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+    <view class="content-box" style="min-height: {{'calc(100vh - ' + navHeight + ')'}};">
+        <view class="logistics-status-box" style="top: {{navHeight}}">
+            <view class="status-icon-box">
+                <text class="iconfont icon-dingdan"></text>
+            </view>
+            <view class="logistics-status-no">
+                <view class="logistics-status">{{logistics_status}}</view>
+                <view class="logistics-no" wx:if="{{logistics_company_name || logistics_no}}">
+                    <text>{{logistics_company_name}}：{{logistics_no}}</text>
+                    <button class="copy-button" hover-class="button-hover" bindtap="handleCopy">
+                        <text>复制</text>
+                    </button>
+                </view>
+            </view>
+            <view class="express-car-box">
+                <image class="express-car" src="../../assets/images/express-car.png"></image>
+            </view>
+        </view>
+        <view class="logistics-info-box" style="min-height: {{'calc(100vh - 190rpx - ' + navHeight + ')'}};">
+            <view class='express-container'>
+
+                <view class="express-item">
+                    <!-- 左边日期时间容器 -->
+                    <view class='express-left-date'></view>
+                    <!-- 中间图标子容器 -->
+                    <view class='express-middle-axis'>
+                        <!-- 显示顶部收的圆点 -->
+                        <view class="dot-shou dot-received">收</view>
+                        <!-- 正在进行的时间轴下半个时间线 -->
+                        <view class='online-dotted' wx:if="{{stepsList.length > 0}}"></view>
+                    </view>
+                    <!-- 右边子容器 -->
+                    <view class='express-right'>
+                        <view class='express-status'>{{item.type}}</view>
+                        <view class='express-status-address'>{{shipping_address}}</view>
+                    </view>
+                </view>
+                <view class='express-item' wx:for="{{stepsList}}" wx:key="*this">
+                    <!-- 左边容器 -->
+                    <view class='express-left-date'>
+                        <view class="express-date">{{item.currentDate}}</view>
+                        <view class="express-time">{{item.currentTime}}</view>
+                    </view>
+
+                    <!-- 中间容器 -->
+                    <view class='express-middle-axis'>
+                        <!-- 正在进行的时间轴点 dot-processing -->
+                        <view
+                            class="dot-transporting {{index === 0 ? 'dot-processing':''}}"
+                            wx:if="{{index === 0 }}"
+                        >
+                        </view>
+                        <view
+                            class="dot-transporting"
+                            wx:if="{{index !== 0 }}"
+                        ></view>
+                        <!-- 正在进行的时间轴下半个时间线 -->
+                        <view class='online-solid' wx:if="{{index!==stepsList.length - 1}}"></view>
+                    </view>
+
+                    <!-- 右边子容器 -->
+                    <view class='express-right'>
+                        <view
+                            class="express-status {{index === 0 ? 'text-processing':''}}"
+                            >{{item.type}}</view>
+                        <view class="express-status-address {{index === 0 ? 'text-processing':''}}">
+                            <view>
+                                <text wx:if="{{!item.hasTel}}">{{item.content}}</text>
+                                <block wx:if="{{item.hasTel}}">
+                                    <text
+                                        wx:for="{{item.TelContArr}}"
+                                        wx:key
+                                        class="{{item.type==='phone'?'color-FB6090':''}}"
+                                        catch:tap="{{item.type==='phone'?'callCourier':''}}"
+                                        data-phone="{{item.type==='phone'?item.val:''}}">{{item.val}}</text>
+                                </block>
+
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+        </view>
+    </view>
+    <van-dialog id="van-dialog" className="delete-dialog"/>
+</view>

@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "drag": "../../components/drag/index",
+    "drag-item": "../../components/pictureDragItem/index",
+    "van-overlay": "@vant/weapp/overlay/index"
+  }
+}

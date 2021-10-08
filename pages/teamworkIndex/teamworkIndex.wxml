@@ -1,0 +1,97 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <view class="new-user" bindtap="closeNewTip" wx:if="{{hiddenSub&&isShopAdmin==2&&subState==1}}">点击订阅，有新团将在微信通知您<span class="iconfont icon-close"></span> </view>
+    <van-nav-bar title="团作" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <!-- <view slot="left" class="leftIcon" bindtap="onPop">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view> -->
+        <view slot="left" class="vav-btn" bindtap="gotoCreat" wx:if="{{isShopAdmin==1}}">发布团作</view>
+        <block wx:if="{{isShopAdmin==2}}">
+            <view slot="left" class="vav-subscription" wx:if="{{subState==1}}" bindtap="updateSubState">
+                <text class="iconfont icon-ring"></text>
+                新团提醒
+            </view>
+            <view slot="left" class="vav-subscription" wx:if="{{subState==2}}" bindtap="updateSubState">
+                <text class="iconfont icon-tick"></text>
+                已订阅
+            </view>
+        </block>
+    </van-nav-bar>
+    <!-- 订单状态 tabs -->
+    <view class="order-tabs" style="top: {{navHeight}};">
+        <view class="tabs-wrap" wx:if="{{isShopAdmin==1}}">
+            <text class="tabs-item tabs-index-1 {{active==2?'tabs-active':''}}">全部</text>
+            <text class="tabs-item tabs-index-2 {{active==1?'tabs-active':''}}">{{isShopAdmin==1?'草稿箱':'我的'}}</text>
+            <text class="tabs-item tabs-index-3 {{active==3?'tabs-active':''}}">审核</text>
+            <view class="to-do-num" wx:if="{{toAuditNum > 0}}">{{toAuditNum}}</view>
+            <view class="line {{(active==1)?'line-2':''}} {{(active==3)?'line-3':''}}"></view>
+            <view class="click-wrap">
+                <view class="click-item" data-name="2" catch:tap="onChange"></view>
+                <view class="click-item" data-name="1" catch:tap="onChange"></view>
+                <view class="click-item" data-name="3" catch:tap="onChange"></view>
+            </view>
+        </view>
+        <van-tabs id="tabs" wx:else active="{{ active }}" swipe-threshold="{{5}}" bind:change="onTapChange">
+            <van-tab title="全部" name="2"></van-tab>
+            <van-tab title="{{isShopAdmin==1?'草稿箱':'我的'}}" name="1"></van-tab>
+        </van-tabs>
+    </view>
+    <view class="list">
+        <view class="empty" wx:if="{{list.length==0}}">暂无数据</view>
+        <block wx:if="{{active==3}}">
+            <view
+                class="audit-item-wrap"
+                wx:for="{{list}}"
+                wx:key="course_apply_id"
+                style="margin-top:{{index == 0?24:0}}rpx;"
+                catchtap="gotoAudit"
+                data-id="{{item.course_id}}"
+                data-apply-id="{{item.course_apply_id}}"
+            >
+                <image class="audit-item-img" mode="aspectFill" src="{{ item.avatar_url }}"></image>
+                <view class="audit-item-nick-name">{{item.nick_name}}</view>
+                <view class="audit-item-status">待审核</view>
+            </view>
+        </block>
+        <block wx:else>
+            <view
+                class="item"
+                wx:for="{{list}}"
+                wx:key="id"
+                data-id="{{item.id}}"
+                data-apply="{{item.apply_id}}"
+                data-status="{{item.apply_status}}"
+                data-price="{{item.apply_payment_money}}"
+                data-orderno="{{item.apply_payment_order_no}}"
+                data-attachment="{{item.apply_attachment_status}}"
+                data-type="{{item.type}}"
+                catchtap="gotoDetail"
+            >
+                <view class="img">
+                    <view class="label" wx:if="{{item.processing&&active==2}}">课程进行中</view>
+                    <view class="label label-check" wx:if="{{item.apply_attachment_status==1&&active==2}}">审核中</view>
+                    <image class="fullimg" mode="aspectFill" src="{{item.poster_link + '!upyun520/fw/500'}}"></image>
+                </view>
+                <view class="title">
+                    <view class="name">{{item.title}}</view>
+                    <view class="tag" wx:if="{{item.type==1}}">免费</view>
+                    <view class="tag" wx:if="{{item.type==2}}">付费</view>
+                    <view class="tag" wx:if="{{item.type==3}}">押金</view>
+                </view>
+                <view class="info time">课程时间：{{item.start_time_txt}}～{{item.end_time_txt}}</view>
+                <view class="info number">
+                    报名人数：{{item.join_num}}<block wx:if="{{item.limit_num>0}}">/{{item.limit_num}}</block>
+                    <view class="commit" wx:if="{{item.comment_count || item.my_comment_count}}" data-id="{{item.id}}" catchtap="gotoCircle">
+                        <text class="iconfont icon-xiaoxi"></text>
+                        <text style="margin-left: 8rpx" wx:if="{{item.my_comment_count > 0}}">{{item.my_comment_count}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <van-loading class="bottom-loading" size="24px" text-size="24rpx" wx:if="{{loading}}">加载中...</van-loading>
+    <view class="no-more" wx:if="{{page >= pageTotal&&pageTotal>0}}">人家也是有底线的～</view>
+</view>
+<view class="mask" wx:if="{{hiddenSub&&isShopAdmin==2&&subState==1}}">></view>

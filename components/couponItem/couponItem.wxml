@@ -1,0 +1,34 @@
+<!--components/couponItem/couponItem.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="coupon-item">
+    <image class="bg" src="{{bg}}" />
+    <view class="content">
+        <view class="{{type>2&&type<5?'':'active'}} title">
+            <view class="discount" wx:if="{{info.type==1}}">
+                <view class="symbol">￥</view>
+                <view class="num">{{info.coupon_amount/100}}</view>
+            </view>
+            <view class="amount" wx:else>
+                <view class="num">{{info.coupon_amount/10}}</view>
+                <view class="unit">折</view>
+            </view>
+            <view class="tip" wx:if="{{info.with_amount>0}}">满{{info.with_amount/100}}元可用</view>
+            <view class="tip" wx:else>无门槛</view>
+            <view class="limitation" wx:if="{{info.discount_top>0}}">封顶优惠{{fn.formatMoney(info.discount_top)}}元</view>
+        </view>
+        <view class="describe">
+            <view class="name">{{info.type==1?'满减优惠券':'折扣优惠券'}}</view>
+            <view class="limit" wx:if="{{info.use_goods_type==1}}">全场通用</view>
+            <view class="limit" wx:if="{{info.use_goods_type==2}}">指定商品可用</view>
+            <view class="limit" wx:if="{{info.use_goods_type==3}}">指定标签可用</view>
+            <view class="time">{{info.start}} <block wx:if="{{info.start&&info.end}}">-</block> {{info.end}} </view>
+        </view>
+        <view class="{{notStart?'not-start':''}} touse" wx:if="{{type==1}}" bindtap="touse">{{listType==1?'去使用':'去凑单'}}</view>
+        <view class="touse" wx:if="{{type==5}}" bindtap="receive">立即领取</view>
+        <view class="touse touse-type6" wx:if="{{type==6}}" bindtap="touse">去使用</view>
+        <view class="selected" wx:if="{{ selected }}">
+            <image class="fullimg" src="/assets/images/coupon-selected.png" />
+        </view>
+    </view>
+</view>

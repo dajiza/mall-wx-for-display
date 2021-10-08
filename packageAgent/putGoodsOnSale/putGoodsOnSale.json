@@ -1,0 +1,21 @@
+{
+    "navigationStyle":"custom",
+    "navigationBarTitleText": "",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance":100,
+    "usingComponents": {
+        "agent-goods": "../../components/agentGoods/agentGoods",
+        "search-history":"../../components/searchHistory/searchHistory",
+        "search-fillter":"../../components/searchFilter/searchFilter",
+        "price-stepper":"../../components/priceStepper/priceStepper",
+        "shelves":"../../components/shelves/shelves",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-loading": "@vant/weapp/loading/index"
+    }
+}

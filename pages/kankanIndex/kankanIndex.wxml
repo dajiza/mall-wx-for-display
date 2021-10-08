@@ -1,0 +1,53 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+
+<view class="container">
+    <van-nav-bar title="看看" border="{{ false }}" z-index="{{ 21 }}" custom-class="nav" class="van-nav" placeholder fixed title-class="nav-title">
+        <view slot="left" class="leftIcon" bindtap="handlePublish">
+            <view>发布</view>
+        </view>
+    </van-nav-bar>
+    <view class="list">
+        <view class="item-wrap">
+            <block wx:for="{{listL}}">
+                <view class="item">
+                    <navigator hover-class="none" url="/packageKanKan/detail/detail?id={{item.tutorial.id}}">
+                        <image class="timg" src="{{item.tutorial.cover_img_url + '!upyun520/fw/320'}}" />
+                        <view class="info">
+                            <view class="title">{{item.tutorial.summary}}</view>
+                            <view class="author" catchtap="handleAuthorDetail" data-item="{{item}}">
+                                <image class="avator" src="{{item.author.avatar_url }}" />
+                                <view class="name">{{item.author.nick_name}}</view>
+                            </view>
+                        </view>
+                        <view class="num">
+                            {{item.tutorial.like_count}}
+                            <text class="iconfont icon-favorites-fill"></text>
+                        </view>
+                    </navigator>
+                </view>
+            </block>
+        </view>
+        <view class="item-wrap">
+            <block wx:for="{{listR}}">
+                <view class="item">
+                    <navigator hover-class="none" url="/packageKanKan/detail/detail?id={{item.tutorial.id}}">
+                        <image class="timg" src="{{item.tutorial.cover_img_url + '!upyun520/fw/320'}}" />
+                        <view class="info">
+                            <view class="title">{{item.tutorial.summary}}</view>
+                            <view class="author" catchtap="handleAuthorDetail" data-item="{{item}}">
+                                <image class="avator" src="{{item.author.avatar_url }}" />
+                                <view class="name">{{item.author.nick_name}}</view>
+                            </view>
+                        </view>
+                        <view class="num">
+                            {{item.tutorial.like_count}}
+                            <text class="iconfont icon-favorites-fill"></text>
+                        </view>
+                    </navigator>
+                </view>
+            </block>
+        </view>
+        <!-- <view class="no-more" wx:if="{{page >= pageTotal}}">人家也是有底线的～</view> -->
+    </view>
+</view>

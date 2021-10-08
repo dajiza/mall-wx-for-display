@@ -1,0 +1,32 @@
+<!--pages/goodsManager/goodsManager.wxml-->
+<view class="container {{searchModel?'container-white':''}}">
+    <van-nav-bar fixed placeholder title="推荐商品" border="{{false}}" z-index="{{21}}" custom-class="nav" title-class="title">
+        <view slot="left" class="leftIcon" bindtap="ClickBack">
+            <text class="iconfont icon-fanhuiiblack"></text>
+        </view>
+    </van-nav-bar>
+
+    <view class="content-body-box" style="padding-bottom: {{safeAreaInsetBottom+160}}rpx;">
+        <view wx:for="{{ goodsList }}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="goodsIndex" style="padding-top: {{goodsIndex == 0?24:0}}rpx;">
+            <agent-goods goods="{{ goods }}" showAttr="{{false}}" bind:onClick="navigateTo" data-index="{{goodsIndex}}">
+                <view class="delete" slot="delete" bindtap="deleteGodds" data-id="{{goods.id}}">
+                    <view class="delete-wrap">
+                        <text class="iconfont icon-del"></text>
+                    </view>
+                </view>
+            </agent-goods>
+        </view>
+        <van-loading class="bottom-loading" size="36rpx" text-size="24rpx" wx:if="{{goodsList.length > 0 && bottomLoadingShow}}">加载中...</van-loading>
+        <view class="no-more" wx:if="{{goodsList.length > 2 && isAllLoaded && !bottomLoadingShow}}">人家也是有底线的～</view>
+        <view class="empty-list" wx:if="{{(goodsList.length==0 )}}">
+            <image class="empty-img" src="../../assets/images/empty-list.png"></image>
+            <view class="empty-text">
+                <view>还没有商品哦~</view>
+                <view style="margin-top: 12rpx;">快去挑选上架吧</view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-bar">
+        <van-button custom-class="add-btn" round type="primary" bindtap="addGoods" size="large">新增</van-button>
+    </view>
+</view>

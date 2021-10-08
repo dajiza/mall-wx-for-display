@@ -1,0 +1,12 @@
+<!-- components/couponItem/couponPop.wxml -->
+<wxs module="fn" src="../../utils/fn.wxs"></wxs>
+<van-popup bind:after-enter="onAfterEnter" bind:before-enter="onBeforeEnter" bind:close="close" bind:enter="onEnter" custom-class="custom-pop-preview" position="center" show="{{ isShow }}">
+    <swiper indicator-dots="{{ true }}" class="swiper-preview" current="{{ swiperCurrent }}" bindchange="onChangeSwiper" indicator-color="#dbdbdb" indicator-active-color="#00ae61">
+        <block wx:for="{{ imgList }}" wx:for-item="img" wx:key="*this">
+            <swiper-item class="swiper-item" catchtap="close">
+                <image class="fullimg" data-skuid="{{img.sku_id}}" mode="widthFix" src="{{ img.sku_img + '!upyun520/fw/500' }}"></image>
+                <view class="skuname">{{fn.formatPreviewSku(img.sku_attr) }}</view>
+            </swiper-item>
+        </block>
+    </swiper>
+</van-popup>
